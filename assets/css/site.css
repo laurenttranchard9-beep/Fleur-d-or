@@ -27,7 +27,6 @@
 :root {
   --brique: #ac4429;
   --brique-sombre: #8c3520;
-  --tuile: #b5553a;
   --ardoise: #23272b;
   --ardoise-2: #2d3237;
   --ardoise-3: #3b4147;
@@ -114,13 +113,13 @@ input { caret-color: var(--or); }
 
 /* Titres de façade : Archivo étroit, graisse 800, capitales */
 .halle-titre, .section-titre, .emporter-titre, .etal-titre, .quartier-titre, .formules-groupe-titre,
-.ardoise-nom, .travee-nom, .volet-texte, .carnet-titre, .infos-titre, .plan-titre, .ilot-nom, .marque-nom,
+.ardoise-nom, .travee-nom, .volet-texte, .carnet-titre, .infos-titre, .marque-nom,
 .bouton, .barre, .infos-tel, .ardoise-prix, .plat-prix, .vin-prix data {
   font-stretch: 68%;
   font-weight: 800;
 }
 .halle-titre, .section-titre, .emporter-titre, .etal-titre, .quartier-titre, .formules-groupe-titre,
-.ardoise-nom span, .travee-nom, .volet-texte, .carnet-titre, .infos-titre, .plan-titre, .ilot-nom, .marque-nom {
+.ardoise-nom span, .travee-nom, .volet-texte, .carnet-titre, .infos-titre, .marque-nom {
   text-transform: uppercase;
   letter-spacing: 0.01em;
   line-height: 0.95;
@@ -369,56 +368,6 @@ input { caret-color: var(--or); }
   box-shadow: inset 0 14px 22px -16px rgba(0, 0, 0, 0.8);
 }
 
-/* Le plan de la bastide */
-.plan { max-width: 1320px; margin: clamp(36px, 4vw, 56px) auto 0; }
-.plan-titre { font-size: 1.5rem; }
-.plan-legende { margin-top: 8px; color: var(--craie-2); font-size: 0.9375rem; max-width: 62ch; }
-.plan-grille {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 18px;
-  padding: 12px;
-  background: #4a4f55;
-  border-radius: 3px;
-}
-.plan-quartier { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-.plan-quartier[data-plan-quartier="cuisine"] { grid-column: 1 / span 7; grid-row: 1 / span 2; }
-.plan-quartier[data-plan-quartier="sushi"] { grid-column: 8 / span 5; grid-row: 1; }
-.ilot-halle { grid-column: 8 / span 5; grid-row: 2; }
-.plan-quartier[data-plan-quartier="douceurs"] { grid-column: 1 / span 4; grid-row: 3; }
-.plan-quartier[data-plan-quartier="bar"] { grid-column: 5 / span 8; grid-row: 3; }
-.plan-quartier-nom {
-  font-size: 0.8125rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 800; color: var(--craie);
-}
-.ilots { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; align-content: stretch; }
-.ilot {
-  flex: var(--n) 1 calc(var(--n) * 8px + 72px);
-  display: flex; flex-direction: column; justify-content: space-between; gap: 6px;
-  min-height: 74px; padding: 9px 10px 8px;
-  background: var(--tuile) repeating-linear-gradient(90deg, rgba(60, 14, 4, 0.16) 0 2px, transparent 2px 10px);
-  color: var(--craie); text-decoration: none; border-radius: 2px;
-  transition: opacity 0.3s var(--ease), filter 0.3s var(--ease), background-color 0.2s var(--ease);
-}
-.ilot:hover { background-color: #c45f42; }
-.ilot-nom { font-size: 1rem; line-height: 1; }
-.ilot-n { font-size: 0.875rem; font-variant-numeric: tabular-nums; }
-.ilot[data-vide] { opacity: 0.3; filter: saturate(0.2); pointer-events: none; }
-.ilot[data-trouve] .ilot-n { color: var(--ardoise); background: var(--or); align-self: flex-start; padding: 0 6px; border-radius: 2px; font-weight: 800; }
-.ilot-halle {
-  display: flex; flex-direction: column; justify-content: space-between;
-  min-height: 110px; padding: 12px 14px;
-  background: var(--chene-2)
-    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.22) 0 3px, transparent 3px 34px),
-    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.18) 0 3px, transparent 3px 34px);
-  color: var(--or);
-  text-decoration: none; border-radius: 2px;
-  box-shadow: inset 0 0 0 3px rgba(242, 181, 58, 0.5);
-}
-.ilot-halle .ilot-nom { font-size: 1.25rem; }
-.ilot-halle .ilot-n { color: var(--craie); }
-.ilot-halle:hover { background-color: #6b4a33; }
-
 /* Recherche */
 .recherche { max-width: 1320px; margin: clamp(40px, 5vw, 64px) auto 0; }
 .recherche-label { display: block; font-size: 0.8125rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 800; }
@@ -440,6 +389,7 @@ input { caret-color: var(--or); }
   background: none; border: 0; border-radius: 3px; color: var(--craie); cursor: pointer;
 }
 .recherche-effacer:hover { background: var(--ardoise-3); }
+.recherche-effacer[hidden] { display: none; }
 .filtres { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .filtre {
   display: inline-flex; align-items: center; gap: 6px;
@@ -550,7 +500,7 @@ input { caret-color: var(--or); }
 .etal-titre .piment .ico-piment { width: 0.9em; height: 0.9em; }
 
 .plat-vin { grid-template-columns: minmax(0, max-content) minmax(1.25rem, 1fr) auto; }
-.vin-prix-ligne { order: 2; display: grid; grid-template-columns: 7rem 7rem; }
+.vin-prix-ligne { order: 2; display: grid; grid-auto-flow: column; grid-auto-columns: 7rem; }
 .vin-prix { text-align: right; white-space: nowrap; }
 .vin-prix data { color: var(--or); font-size: 1.1875rem; }
 .vin-format { color: var(--craie-2); font-size: 0.8125rem; margin-right: 4px; }
@@ -762,9 +712,6 @@ html:not(.js) .barre { grid-template-columns: 1fr; }
 @media (max-width: 999px) {
   .halle { grid-template-columns: minmax(0, 1fr); min-height: 0; }
   .travee { height: clamp(220px, 44vw, 380px); }
-  .plan-grille { grid-template-columns: minmax(0, 1fr); }
-  .plan-quartier[data-plan-quartier], .ilot-halle { grid-column: auto; grid-row: auto; }
-  .ilot-halle { min-height: 84px; }
   .infos-grille { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .salle { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .salle-photo:last-child { grid-column: 1 / -1; }
@@ -793,14 +740,7 @@ html:not(.js) .barre { grid-template-columns: 1fr; }
   .etal { padding-bottom: 36px; }
   .plat { column-gap: 8px; }
   .plat-prix, .vin-prix data { font-size: 1.125rem; }
-  .vin-prix-ligne { grid-template-columns: 5.6rem 5.6rem; }
-  .plan-grille { gap: 10px; padding: 10px; }
-  .ilots { gap: 5px; }
-  .ilot { flex-basis: calc(var(--n) * 3px + 72px); min-height: 50px; padding: 7px 8px 6px; gap: 4px; }
-  .ilot-nom { font-size: 0.875rem; }
-  .ilot-n { font-size: 0.8125rem; }
-  .ilot-halle { min-height: 64px; }
-  .ilot-halle .ilot-nom { font-size: 1.0625rem; }
+  .vin-prix-ligne { grid-auto-columns: 5.6rem; }
   .infos-grille { grid-template-columns: minmax(0, 1fr); }
   .salle { grid-template-columns: minmax(0, 1fr); }
   .infos-tel { font-size: 2rem; }
@@ -814,7 +754,7 @@ html:not(.js) .barre { grid-template-columns: 1fr; }
 @media (max-width: 379px) {
   .plat { grid-template-columns: minmax(0, 1fr) auto auto; }
   .plat::after { display: none; }
-  .vin-prix-ligne { grid-template-columns: 4.9rem 4.9rem; }
+  .vin-prix-ligne { grid-auto-columns: 4.9rem; }
   .plat-vin { grid-template-columns: minmax(0, 1fr) auto; }
 }
 
@@ -823,7 +763,7 @@ html:not(.js) .barre { grid-template-columns: 1fr; }
 }
 
 @media print {
-  .poutre, .barre, .recherche, .rubriques, .plan, .carnet, .halle-travees, .salle, .plat-ajout, .ardoise-ajout { display: none !important; }
+  .poutre, .barre, .recherche, .rubriques, .carnet, .halle-travees, .salle, .plat-ajout, .ardoise-ajout { display: none !important; }
   body { background: #fff; color: #000; padding: 0; }
   .carte, .formules, .emporter, .infos, .pied { background: #fff; color: #000; box-shadow: none; }
   .ardoise-cadre { background: #fff; border-color: #999; box-shadow: none; }

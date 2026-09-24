@@ -4,28 +4,42 @@ Site d’une seule page pour le restaurant La Fleur d’Or (金花餐廳), 14 bi
 
 Il contient toute la carte imprimée (179 plats, 39 boissons, 11 formules), les horaires, l’accès et les moyens de paiement. Il affiche aussi en direct si le restaurant est ouvert, et une liste de commande permet de noter ses plats avant d’appeler.
 
-Le site est en HTML, CSS et JavaScript simples, sans étape de compilation. On le lance avec Node.js (`npm start`), ou on dépose les fichiers chez n’importe quel hébergeur (GitHub Pages, Netlify, OVH…).
+La page publique est en HTML, CSS et JavaScript simples. Un panneau d’administration en PHP permet de modifier les plats, les catégories et les formules, puis republie la page. On lance le tout avec XAMPP. Node.js (`npm start`) peut servir la page publique, mais pas le panneau.
 
-## Modifier la carte
+## Modifier la carte : le panneau d’administration
 
-Tout est dans `index.html`, une ligne par plat :
+Le panneau permet de modifier la carte sans toucher au code. Il demande PHP 8 ou plus récent, c’est-à-dire XAMPP ou un hébergeur Apache avec PHP. Il n’a pas besoin de MySQL.
 
-```html
-<li class="plat"><span class="plat-nom">Canard laqué</span> <data class="plat-prix" value="11.00">11,00 €</data></li>
-```
+1. Démarrer Apache dans XAMPP, puis ouvrir **http://localhost/fleur-dor/admin/**.
+2. **La première fois**, choisir le mot de passe (10 caractères au moins). Pour des raisons de sécurité, ce premier réglage n’est possible que depuis l’ordinateur qui fait tourner XAMPP (adresse `localhost`). Ensuite, on peut se connecter depuis n’importe quel appareil.
+3. Modifier ce que l’on veut, puis cliquer sur **Publier sur le site** (ou Ctrl+S).
 
-- **Changer un prix** : modifier les deux valeurs, `value="11.00"` (avec un point) et le texte `11,00 €`.
-- **Ajouter un plat** : copier une ligne dans la bonne rubrique et changer le nom et le prix. Le bouton « + » s’ajoute tout seul.
-- **Plat pimenté** : ajouter `data-piment` sur le `<li>`, par exemple `<li class="plat" data-piment>`.
-- **Supprimer un plat** : supprimer sa ligne.
+Ce que l’on peut faire :
 
-Les formules sont les blocs `<li class="ardoise">` dans la section `id="formules"`.
+- **La carte** : ajouter, renommer, déplacer ou supprimer des **catégories** (Entrées, Canard…), et les ranger dans les grandes **parties** (Cuisine chinoise et thaïlandaise, Bar à sushis…). Dans chaque catégorie, on gère les **plats** : nom, précision, prix (ou plusieurs prix, comme 37,5 cl et 75 cl pour un vin), et le marquage pimenté. On peut les monter, les descendre, les dupliquer ou les supprimer. On peut aussi ajouter des sous-titres (groupes), une mention (« 15 min d’attente »), et une photo prise parmi celles du site. La recherche retrouve un plat dans toute la carte.
+- **Les formules** : nom, prix, condition (« Midi uniquement… »), les parties (entrée, plat, dessert) avec leurs lignes, au choix ou tout compris, ainsi qu’une photo et un texte facultatifs.
+- **Sauvegardes** : chaque publication garde la version précédente, soit les 30 dernières. Un clic remet une ancienne version en ligne.
+- **Mot de passe** : pour le changer.
 
-Pour changer les horaires, il faut modifier deux endroits : le tableau dans la section `id="infos"` de `index.html`, et `SERVICES` en haut de `assets/js/site.js` (c’est lui qui calcule « Ouvert / Fermé »).
+Tant que l’on n’a pas cliqué sur « Publier », rien ne change sur le site, et « Annuler les modifications » revient à la version en ligne. Le panneau refuse de publier un plat sans prix ou avec un prix mal écrit, et indique où corriger.
+
+**Comment ça marche :** la carte et les formules sont dans `donnees/carte.json`. À chaque publication, le panneau réécrit `index.html` à partir du gabarit `admin/modele.html`. Il ne faut donc plus modifier la carte directement dans `index.html` : ces changements seraient écrasés à la publication suivante. Pour régénérer la page sans le panneau : `php admin/publier.php`.
+
+Les horaires se trouvent dans `admin/modele.html` (tableau de la section `id="infos"`) et dans `SERVICES`, en haut de `assets/js/site.js` : c’est lui qui calcule « Ouvert / Fermé ».
+
+**Sécurité :**
+
+- Le mot de passe est enregistré chiffré (`donnees/admin.json`).
+- Après 5 essais ratés, la connexion est bloquée 15 minutes.
+- Chaque modification est protégée contre les requêtes envoyées depuis un autre site.
+- Le dossier `donnees/` n’est jamais accessible depuis le navigateur.
+- En ligne, utilisez le panneau en **HTTPS**.
 
 ## Fichiers
 
-- `index.html` : la page, avec la carte complète.
+- `index.html` : la page publique, générée par le panneau (ne pas la modifier à la main).
+- `donnees/carte.json` : la carte et les formules, que le panneau modifie.
+- `admin/` : le panneau d’administration (PHP). `admin/modele.html` est le gabarit de la page.
 - `assets/css/site.css` : l’apparence.
 - `assets/js/site.js` : statut ouvert/fermé, recherche, liste de commande. Sans JavaScript, la carte reste entièrement lisible.
 - `assets/img/` : les photos, en WebP. Chaque photo a un fichier `.json` à côté qui indique sa provenance.
@@ -45,17 +59,19 @@ Puis ouvrir http://localhost:3000. Pour changer de port : `PORT=8080 npm start`.
 
 Le serveur (`server.js`) ne sert que la page et le dossier `assets/`. Les fichiers de travail (`PRODUCT.md`, `DESIGN.md`, `.impeccable/`, `.git`…) ne sont jamais accessibles depuis le navigateur. Il compresse le texte (gzip) et gère le cache des fichiers.
 
-Le site reste statique : on peut aussi déposer `index.html` et `assets/` chez n’importe quel hébergeur, sans Node.
+Le serveur Node ne fait pas tourner le panneau d’administration, qui a besoin de PHP (voir XAMPP ci-dessous). La page publique reste statique : on peut aussi déposer `index.html` et `assets/` chez n’importe quel hébergeur, sans Node.
 
 ## Lancer le site avec XAMPP (Apache)
 
-Il suffit d’Apache : ni PHP ni MySQL.
+Il suffit d’Apache et de PHP, tous deux inclus dans XAMPP. MySQL n’est pas utile.
 
-1. Copier le dossier du site dans `C:\xampp\htdocs\fleur-dor\` (sur Mac : `/Applications/XAMPP/htdocs/fleur-dor/`), en gardant le fichier `.htaccess`.
+1. Copier le dossier du site dans `C:\xampp\htdocs\fleur-dor\` (sur Mac : `/Applications/XAMPP/htdocs/fleur-dor/`), en gardant les fichiers `.htaccess`.
 2. Dans le XAMPP Control Panel, démarrer **Apache**.
-3. Ouvrir http://localhost/fleur-dor/.
+3. Ouvrir http://localhost/fleur-dor/ pour le site, et http://localhost/fleur-dor/admin/ pour le panneau.
 
-Le fichier `.htaccess` règle la compression et le cache, et renvoie une erreur 404 pour tout ce qui n’est pas le site : `.git`, `.impeccable`, fichiers `.md` et `.json`, `server.js`. On peut donc copier le dépôt entier dans `htdocs` sans rien exposer. Il fonctionne même si certains modules Apache sont désactivés. Le même `.htaccess` sert chez un hébergeur Apache (OVH, o2switch…).
+Chez un hébergeur, PHP doit pouvoir écrire dans `index.html` et dans le dossier `donnees/`.
+
+Le fichier `.htaccess` règle la compression et le cache, et renvoie une erreur 404 pour tout ce qui n’est pas le site : `.git`, `.impeccable`, fichiers `.md` et `.json`, `server.js`. Le dossier `donnees/` et les fichiers internes du panneau (`lib.php`, `modele.html`, `publier.php`) sont refusés. On peut donc copier le dépôt entier dans `htdocs` sans rien exposer. Il fonctionne même si certains modules Apache sont désactivés. Le même `.htaccess` sert chez un hébergeur Apache (OVH, o2switch…).
 
 ## À vérifier par le restaurant
 

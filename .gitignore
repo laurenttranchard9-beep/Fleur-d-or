@@ -3,3 +3,10 @@
 .impeccable/hook.cache.json
 .impeccable/config.local.json
 .DS_Store
+
+# Panneau d'administration : mot de passe, verrous et sauvegardes propres à chaque installation
+donnees/admin.json
+donnees/tentatives.json
+donnees/sauvegardes/
+donnees/.verrou
+donnees/.*.tmp

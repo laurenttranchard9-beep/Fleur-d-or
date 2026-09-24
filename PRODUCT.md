@@ -10,7 +10,7 @@ web
 
 ## Stack
 
-delegated: static HTML, CSS and a little vanilla JS, no build step. The menu is written directly in `index.html` (one line per dish), so it works without JavaScript, gets indexed by search engines, and a price change is a one-line edit. The site can be hosted anywhere (GitHub Pages, Netlify, OVH).
+delegated: a static public page (`index.html`, CSS, a little vanilla JS) that works on any host and without JavaScript. A PHP back office (`admin/`, PHP 8.0+, no database) edits `donnees/carte.json`, the single source of the menu and set menus, and regenerates `index.html` from `admin/modele.html` on every "Publier". It runs under XAMPP or any Apache + PHP host. `server.js` (Node) serves the public page only.
 
 ## Users
 
@@ -40,7 +40,8 @@ La Fleur d'Or is a Chinese, Thai and Japanese restaurant with a sushi bar in one
 ## Capabilities and Constraints
 
 - No online ordering, booking engine or payment. Every call to action is a phone call or directions.
-- The menu is the full printed A3 menu (two pages). Every dish and price must be on the site, and `index.html` is the only place it lives.
+- The menu is the full printed A3 menu (two pages). Every dish and price must be on the site. `donnees/carte.json` is the source; `index.html` is generated from it and must not be edited by hand.
+- Back office (`admin/`): password-protected (created once from localhost), edits categories, dishes (name, detail, price or several formats, spicy), groups, the large parts of the menu, and the set menus; every publish keeps the previous version (last 30) and can restore it. No photo upload yet: photos are chosen among the files in `assets/img/`.
 - Payment accepted (from the old site): cash, CB, Visa, Visa Electron, Mastercard, Maestro, and meal vouchers: Chèque Déjeuner, Chèque Restaurant, Chèque de Table, Ticket Restaurant.
 - Delivery: the old site showed an Uber Eats logo, linked only to ubereats.com/fr *(still active? to confirm)*.
 - Spicy dishes are marked on the printed menu (Salade thaï pimentée, Lap thaï au bœuf, the Thai specialities section) and keep that mark.
@@ -56,7 +57,7 @@ La Fleur d'Or is a Chinese, Thai and Japanese restaurant with a sushi bar in one
 
 ## Evidence on Hand
 
-- The full printed menu, transcribed into `index.html` (source images: the two A3 menu pages on the current Wix site).
+- The full printed menu, transcribed into `donnees/carte.json` (source images: the two A3 menu pages on the current Wix site).
 - Photos from the old site in `assets/img/`: the dining room (two views), the facade, canard laqué, bouchées vapeur, a hot-pot table (for the fondue), bowls of herbs and chillies. Some old-site photos look like stock images. One sushi photo comes from Unsplash (free licence). The owner's own photos should replace these over time.
 - There are no customer reviews, press or awards to use, so the site must not invent any.
 

@@ -36,22 +36,6 @@
           "#ffd6bf"
         ]
       },
-      "tuile": {
-        "role": "primary",
-        "displayName": "Tuile canal",
-        "canonical": "#b5553a",
-        "oklch": "oklch(56.4% 0.132 36.6)",
-        "tonalRamp": [
-          "#280000",
-          "#4e0000",
-          "#761f02",
-          "#9d4025",
-          "#c46247",
-          "#eb8569",
-          "#ffac90",
-          "#ffd5bb"
-        ]
-      },
       "or": {
         "role": "secondary",
         "displayName": "Or de la fleur",
@@ -259,6 +243,42 @@
           "#d0c7c0",
           "#f5ede6"
         ]
+      },
+      "ardoise-fond": {
+        "role": "neutral",
+        "displayName": "Ardoise sombre",
+        "canonical": "#1b1e21",
+        "tonalRamp": []
+      },
+      "ardoise-4": {
+        "role": "neutral",
+        "displayName": "Ardoise claire",
+        "canonical": "#4d545b",
+        "tonalRamp": []
+      },
+      "craie-3": {
+        "role": "neutral",
+        "displayName": "Craie éteinte",
+        "canonical": "#8f8a84",
+        "tonalRamp": []
+      },
+      "danger": {
+        "role": "tertiary",
+        "displayName": "Danger",
+        "canonical": "#ff8f70",
+        "tonalRamp": []
+      },
+      "succes": {
+        "role": "tertiary",
+        "displayName": "Succès",
+        "canonical": "#9fd49a",
+        "tonalRamp": []
+      },
+      "alerte-fond": {
+        "role": "neutral",
+        "displayName": "Fond d’alerte",
+        "canonical": "#3a2320",
+        "tonalRamp": []
       }
     },
     "typographyMeta": {
@@ -412,12 +432,12 @@
       "css": ".ds-plat{display:grid;grid-template-columns:max-content 1fr auto auto;align-items:center;gap:10px;min-height:2.75rem;background:var(--ardoise,#23272b);color:var(--craie,#fff6ec);font-family:Archivo,Arial,sans-serif;padding:5px 12px}.ds-plat i{align-self:end;margin-bottom:calc(.5em + 5px);border-bottom:2px dotted rgba(255,246,236,.3)}.ds-plat b{color:var(--or,#f2b53a);font-weight:800;font-stretch:68%;font-size:1.1875rem;font-variant-numeric:tabular-nums}.ds-plat button{width:38px;height:38px;border-radius:50%;background:transparent;color:var(--craie,#fff6ec);border:2px solid rgba(255,246,236,.35);cursor:pointer}.ds-plat button:hover{border-color:var(--or,#f2b53a);color:var(--or,#f2b53a)}"
     },
     {
-      "name": "Îlot du plan",
-      "kind": "custom",
-      "refersTo": "ilot",
-      "description": "Une rubrique de la carte vue comme un îlot de la bastide ; sa taille suit le nombre de plats.",
-      "html": "<a class=\"ds-ilot\" href=\"#canard\"><span>Canard</span><small>4</small></a>",
-      "css": ".ds-ilot{display:flex;flex-direction:column;justify-content:space-between;width:140px;min-height:74px;padding:9px 10px 8px;background:#b5553a repeating-linear-gradient(90deg,rgba(60,14,4,.16) 0 2px,transparent 2px 10px);color:var(--craie,#fff6ec);text-decoration:none;border-radius:2px;font-family:Archivo,Arial,sans-serif}.ds-ilot span{font-weight:800;font-stretch:68%;text-transform:uppercase}.ds-ilot:hover{background-color:#c45f42}"
+      "name": "Champ du panneau",
+      "kind": "input",
+      "refersTo": "admin-input",
+      "description": "Champ de saisie du panneau d’administration.",
+      "html": "<input class=\"ds-admin-input\" value=\"Canard laqué\">",
+      "css": ".ds-admin-input{min-height:42px;padding:8px 10px;background:#1b1e21;color:#fff6ec;border:2px solid #3b4147;border-radius:3px;font-family:Archivo,Arial,sans-serif;caret-color:#f2b53a}.ds-admin-input:hover{border-color:#4d545b}.ds-admin-input:focus{outline:none;border-color:#f2b53a}"
     }
   ],
   "narrative": {

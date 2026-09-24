@@ -4,7 +4,6 @@ description: Trois cuisines sous un même toit, bâties comme la halle de brique
 colors:
   brique: "#ac4429"
   brique-sombre: "#8c3520"
-  tuile: "#b5553a"
   ardoise: "#23272b"
   ardoise-2: "#2d3237"
   ardoise-3: "#3b4147"
@@ -18,6 +17,12 @@ colors:
   encre: "#1e1a17"
   encre-2: "#5d5650"
   piment: "#e8553a"
+  ardoise-fond: "#1b1e21"
+  ardoise-4: "#4d545b"
+  craie-3: "#8f8a84"
+  danger: "#ff8f70"
+  succes: "#9fd49a"
+  alerte-fond: "#3a2320"
 typography:
   display:
     fontFamily: "Archivo, Helvetica Neue, Arial, sans-serif"
@@ -114,16 +119,22 @@ components:
     textColor: "{colors.craie}"
     rounded: "{rounded.outil}"
     padding: "20px"
-  ilot:
-    backgroundColor: "{colors.tuile}"
-    textColor: "{colors.craie}"
-    rounded: "{rounded.plaque}"
-    padding: "9px 10px 8px"
   carnet:
     backgroundColor: "{colors.papier}"
     textColor: "{colors.encre}"
     rounded: "{rounded.plaque}"
     padding: "30px 22px 22px"
+  admin-input:
+    backgroundColor: "{colors.ardoise-fond}"
+    textColor: "{colors.craie}"
+    rounded: "{rounded.outil}"
+    padding: "8px 10px"
+    height: "42px"
+  admin-panneau:
+    backgroundColor: "{colors.ardoise-2}"
+    textColor: "{colors.craie}"
+    rounded: "{rounded.outil}"
+    padding: "18px"
 ---
 
 # Design System: La Fleur d'Or
@@ -152,7 +163,6 @@ A committed palette: saturated brick fields, blue-black slate, dark oak, one gol
 ### Primary
 - **Brique de Grenade** (brique): the ground of the house. Hero, set menus and infos sit on this colour under the brick-coursing tile. White chalk text reaches 5.8:1 on it.
 - **Brique d'ombre** (brique-sombre): recessed brick. Pillars between the photo bays, the quiet takeaway band, the frame around the dining-room photos.
-- **Tuile canal** (tuile): roof tiles seen from above. Used only for the blocks of the bastide plan (the carte index).
 
 ### Secondary
 - **Or de la fleur** (or): prices, the primary button, the live "open" dot, the 金 discs, the word "Or" in the name. On brick it reaches only 3.16:1, so there it is used at large sizes only.
@@ -168,6 +178,7 @@ A committed palette: saturated brick fields, blue-black slate, dark oak, one gol
 - **Craie passée** (craie-2): secondary text on slate only (counts, descriptions, placeholders): 7.6:1 on slate. Never on brick.
 - **Chêne** (chene) and **Chêne clair** (chene-2): the header beam, the footer, the bottom bar on phones, the frames of the slate boards, the sign.
 - **Papier**, **Encre**, **Encre passée** (papier, encre, encre-2): the order pad (carnet), and nowhere else.
+- **Ardoise sombre**, **Ardoise claire**, **Craie éteinte**, **Danger**, **Succès**, **Fond d’alerte** (ardoise-fond, ardoise-4, craie-3, danger, succes, alerte-fond): the admin panel only (inputs, hover borders, placeholders, errors, confirmations).
 
 ### Named Rules
 **The Brick-Is-Structure Rule.** Brick carries the house; slate carries reading. Never set a dense list (dishes, prices) directly on brick.
@@ -202,7 +213,6 @@ A 1320px maximum content width, with a fluid side gutter from 16px to 72px. Sect
 - **Photo bays:** three equal bays between 14px brick pillars under a 30px oak beam. The same bay structure frames the dining-room photos in the infos section.
 - **Set menus:** slate boards hung in CSS columns (272px minimum, 22px gutter), so short boards leave no holes.
 - **The carte:** content column plus a 340px sticky order pad from 1100px up. Stalls flow in two columns (330px minimum) and never split. Rows are one course high (2.75rem). Below 1100px the pad becomes a bottom panel, opened from a fixed bottom bar with Appeler and Ma liste.
-- **Bastide plan:** a 12-column grid of districts: the Chinese and Thai district (7 columns, 2 rows), the sushi bar (5 columns), the halle for set menus (5 columns), desserts (4 columns), the bar (8 columns). Each block's flex-grow is its number of dishes. On phones the districts stack.
 - **Sticky layers:** the oak header (64px, 56px on phones), then the section bar (52px, 48px on phones) inside the carte. Anchored stalls use a scroll margin that clears both.
 
 ## Elevation & Depth
@@ -252,11 +262,11 @@ Nearly square. Plates and photos take 2px corners, tools (buttons, inputs, chips
 ### Menu row (plat)
 A grid of name, dotted leader, gold price and a 38px round add button (44px hit area). Descriptions sit under the name in chalk-faded text. Once added, the button fills gold and shows the quantity. Wine rows carry two formatted prices (37,5 cl and 75 cl, or 1/4 and 1/2) and no add button.
 
-### Bastide plan (ilot)
-Tile-red blocks with vertical canal-tile hatching, the stall name in condensed capitals and its count. During a search every block shows "found / total" in a gold tag, and blocks with no match fade out and stop taking clicks. The halle block (set menus) is oak with a timber grid and a gold inner frame.
-
 ### Order pad (carnet)
 White paper with a perforated brick binding strip, the brick title "Ma liste", lines with a round minus and plus, a double rule over the total, and the gold call button. It is sticky on desktop and a bottom panel on phones. It is saved in the browser and absent without JavaScript.
+
+### Admin panel (admin/)
+The back office inherits the world at a calmer pitch, for long editing sessions: slate ground (ardoise) with raised slate panels (ardoise-2), inputs sunk into the darkest slate (ardoise-fond) with a 2px worn-slate border that turns gold on focus, an oak top beam and an oak publish bar fixed at the bottom. Gold stays the money colour: prices in inputs and the "Publier sur le site" button. Set-menu editors are framed in oak like the public slate boards. The login screen is a slate board on the brick wall. Errors use **Danger** (danger, 6.6:1 on slate) on a dark red ground (alerte-fond); success uses **Succès** (succes). Placeholders use **Craie éteinte** (craie-3), hover borders **Ardoise claire** (ardoise-4). Native controls follow `color-scheme: dark`.
 
 ### Roller shutters (volet)
 Flat grey slats over each photo bay. They roll up (translateY) once on load when open. When closed they sit at 44 % with "Fermé" and the reopening time painted on them. They are the only authored motion.

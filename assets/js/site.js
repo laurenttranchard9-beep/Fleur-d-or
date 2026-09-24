@@ -356,25 +356,12 @@
       var c = $(".etal-compte", etal);
       var total = parseInt(c.getAttribute("data-compte"), 10);
       c.textContent = actif ? k + " sur " + total : total + " " + c.getAttribute("data-unite");
-      var ilot = $('[data-ilot="' + etal.id + '"]');
-      if (ilot) {
-        var nEl = $("[data-ilot-n]", ilot);
-        nEl.textContent = actif ? k + " / " + total : total;
-        if (actif && k === 0) { ilot.setAttribute("data-vide", ""); ilot.setAttribute("aria-disabled", "true"); ilot.setAttribute("tabindex", "-1"); }
-        else { ilot.removeAttribute("data-vide"); ilot.removeAttribute("aria-disabled"); ilot.removeAttribute("tabindex"); }
-        if (actif && k > 0) ilot.setAttribute("data-trouve", ""); else ilot.removeAttribute("data-trouve");
-      }
       var rub = $('[data-rubrique="' + etal.id + '"]');
       if (rub) rub.parentNode.hidden = actif && k === 0;
     });
     $$(".quartier").forEach(function (q) {
       q.hidden = actif && !$$(".etal", q).some(function (e) { return !e.hidden; });
     });
-    var halle = $(".ilot-halle");
-    if (halle) {
-      if (actif) { halle.setAttribute("data-vide", ""); halle.setAttribute("tabindex", "-1"); }
-      else { halle.removeAttribute("data-vide"); halle.removeAttribute("tabindex"); }
-    }
     if (effacer) effacer.hidden = !brut;
     if (carteVide) {
       carteVide.hidden = !(actif && n === 0);

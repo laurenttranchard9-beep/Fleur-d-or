@@ -3,7 +3,7 @@
 # Chaque bloc optionnel est entouré de <IfModule> : si un module manque,
 # Apache ignore le bloc au lieu de renvoyer une erreur 500.
 
-DirectoryIndex index.html
+DirectoryIndex index.html index.php
 Options -Indexes
 AddDefaultCharset utf-8
 

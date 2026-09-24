@@ -28,6 +28,10 @@ FORM: Grenade's brick halle and bastide grid, position 6 on the ordered list (1 
 RAISES: from the particle event display (declined): isolate and dim; the search dims the plan's blocks that hold no match instead of reshuffling them. From the variable-font specimen (declined): hierarchy by scale contrast alone, no boxes around menu rows. From the brick instruction book (declined): one module rules every alignment, the brick course (row height) sets the carte's line grid. From the ikebana alcove (declined): one quiet, charged passage (the takeaway band) between the dense runs. From the sampler (declined): sections reflow as whole bands, never split mid-group. From the civic prospectus (declined): one face, two weights (400 and 800).
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 
+## Decisions after launch
+- 2026-09-24, user request: the bastide plan (carte index of blocks sized by dish count) was removed. The carte now opens directly on the search field and the sticky section bar. The "isolate and dim" raise now lives only in the search results (non-matching stalls and sections hide).
+- 2026-09-24, user request: a PHP back office (admin/) edits categories, dishes and set menus; it regenerates index.html from admin/modele.html and donnees/carte.json.
+
 ## Unresolved decisions
 - The takeaway carte (a separate flipbook on the old site) may have different prices; the -10 % is stated, never computed.
 - Whether the Uber Eats listing is still active.
