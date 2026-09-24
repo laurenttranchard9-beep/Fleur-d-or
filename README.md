@@ -4,7 +4,7 @@ Site d’une seule page pour le restaurant La Fleur d’Or (金花餐廳), 14 bi
 
 Il contient toute la carte imprimée (179 plats, 39 boissons, 11 formules), les horaires, l’accès et les moyens de paiement. Il affiche aussi en direct si le restaurant est ouvert, et une liste de commande permet de noter ses plats avant d’appeler.
 
-Le site est en HTML, CSS et JavaScript simples, sans étape de compilation : il suffit de déposer les fichiers chez n’importe quel hébergeur (GitHub Pages, Netlify, OVH…).
+Le site est en HTML, CSS et JavaScript simples, sans étape de compilation. On le lance avec Node.js (`npm start`), ou on dépose les fichiers chez n’importe quel hébergeur (GitHub Pages, Netlify, OVH…).
 
 ## Modifier la carte
 
@@ -30,15 +30,22 @@ Pour changer les horaires, il faut modifier deux endroits : le tableau dans la s
 - `assets/js/site.js` : statut ouvert/fermé, recherche, liste de commande. Sans JavaScript, la carte reste entièrement lisible.
 - `assets/img/` : les photos, en WebP. Chaque photo a un fichier `.json` à côté qui indique sa provenance.
 - `assets/fonts/` : les polices, hébergées sur le site (aucun appel à Google Fonts).
+- `server.js` et `package.json` : le serveur Node.js (`npm start`).
 - `PRODUCT.md` et `DESIGN.md` : le contexte produit et le système visuel, pour les prochaines modifications.
 
-## Voir le site en local
+## Lancer le site avec Node.js
+
+Il faut Node.js 18 ou plus récent. Il n’y a aucune dépendance à installer.
 
 ```sh
-python3 -m http.server 8000
+npm start
 ```
 
-Puis ouvrir http://localhost:8000.
+Puis ouvrir http://localhost:3000. Pour changer de port : `PORT=8080 npm start`.
+
+Le serveur (`server.js`) ne sert que la page et le dossier `assets/`. Les fichiers de travail (`PRODUCT.md`, `DESIGN.md`, `.impeccable/`, `.git`…) ne sont jamais accessibles depuis le navigateur. Il compresse le texte (gzip) et gère le cache des fichiers.
+
+Le site reste statique : on peut aussi déposer `index.html` et `assets/` chez n’importe quel hébergeur, sans Node.
 
 ## À vérifier par le restaurant
 

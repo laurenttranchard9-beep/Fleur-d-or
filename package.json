@@ -1,0 +1,13 @@
+{
+  "name": "la-fleur-dor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site du restaurant La Fleur d'Or à Grenade : toute la carte, les formules, les horaires.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
