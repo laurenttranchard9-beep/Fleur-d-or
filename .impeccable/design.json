@@ -1,0 +1,486 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-24T18:39:42+00:00",
+  "title": "Design System: La Fleur d'Or",
+  "extensions": {
+    "colorMeta": {
+      "brique": {
+        "role": "primary",
+        "displayName": "Brique de Grenade",
+        "canonical": "#ac4429",
+        "oklch": "oklch(52.3% 0.143 35.5)",
+        "tonalRamp": [
+          "#2a0000",
+          "#500000",
+          "#791a00",
+          "#a23b1f",
+          "#c95e42",
+          "#f08164",
+          "#ffa98d",
+          "#ffd2b8"
+        ]
+      },
+      "brique-sombre": {
+        "role": "primary",
+        "displayName": "Brique d’ombre",
+        "canonical": "#8c3520",
+        "oklch": "oklch(44.9% 0.123 34.8)",
+        "tonalRamp": [
+          "#270000",
+          "#4c0300",
+          "#74220d",
+          "#9a422d",
+          "#c0644e",
+          "#e7876f",
+          "#ffad95",
+          "#ffd6bf"
+        ]
+      },
+      "tuile": {
+        "role": "primary",
+        "displayName": "Tuile canal",
+        "canonical": "#b5553a",
+        "oklch": "oklch(56.4% 0.132 36.6)",
+        "tonalRamp": [
+          "#280000",
+          "#4e0000",
+          "#761f02",
+          "#9d4025",
+          "#c46247",
+          "#eb8569",
+          "#ffac90",
+          "#ffd5bb"
+        ]
+      },
+      "or": {
+        "role": "secondary",
+        "displayName": "Or de la fleur",
+        "canonical": "#f2b53a",
+        "oklch": "oklch(80.9% 0.149 80.6)",
+        "tonalRamp": [
+          "#200000",
+          "#421700",
+          "#663400",
+          "#8b5300",
+          "#af7600",
+          "#d59900",
+          "#f7bf55",
+          "#ffe68c"
+        ]
+      },
+      "or-clair": {
+        "role": "secondary",
+        "displayName": "Or clair",
+        "canonical": "#f8c95f",
+        "oklch": "oklch(85.7% 0.134 85.3)",
+        "tonalRamp": [
+          "#1d0300",
+          "#3d1c00",
+          "#603900",
+          "#835800",
+          "#a77a00",
+          "#cb9e2c",
+          "#eec361",
+          "#ffe995"
+        ]
+      },
+      "piment": {
+        "role": "tertiary",
+        "displayName": "Piment",
+        "canonical": "#e8553a",
+        "oklch": "oklch(64.2% 0.187 32.6)",
+        "tonalRamp": [
+          "#300000",
+          "#590000",
+          "#850000",
+          "#b31d00",
+          "#db492e",
+          "#ff6f53",
+          "#ff9c81",
+          "#ffc8ae"
+        ]
+      },
+      "ardoise": {
+        "role": "neutral",
+        "displayName": "Ardoise",
+        "canonical": "#23272b",
+        "oklch": "oklch(27.0% 0.009 248.2)",
+        "tonalRamp": [
+          "#080c0f",
+          "#22262a",
+          "#3e4347",
+          "#5d6266",
+          "#7e8388",
+          "#a1a6ab",
+          "#c4cacf",
+          "#eaeff5"
+        ]
+      },
+      "ardoise-2": {
+        "role": "neutral",
+        "displayName": "Ardoise levée",
+        "canonical": "#2d3237",
+        "oklch": "oklch(31.4% 0.011 248.2)",
+        "tonalRamp": [
+          "#080c10",
+          "#21262a",
+          "#3d4348",
+          "#5c6268",
+          "#7d8389",
+          "#a0a6ac",
+          "#c4cad0",
+          "#e9eff6"
+        ]
+      },
+      "ardoise-3": {
+        "role": "neutral",
+        "displayName": "Ardoise usée",
+        "canonical": "#3b4147",
+        "oklch": "oklch(37.2% 0.013 248.2)",
+        "tonalRamp": [
+          "#070c10",
+          "#20262b",
+          "#3d4349",
+          "#5c6268",
+          "#7c838a",
+          "#9fa6ad",
+          "#c3cad1",
+          "#e8eff7"
+        ]
+      },
+      "craie": {
+        "role": "neutral",
+        "displayName": "Craie",
+        "canonical": "#fff6ec",
+        "oklch": "oklch(97.7% 0.016 70.5)",
+        "tonalRamp": [
+          "#100a05",
+          "#2a241c",
+          "#484139",
+          "#676057",
+          "#898178",
+          "#aca39a",
+          "#d0c8be",
+          "#f6ede3"
+        ]
+      },
+      "craie-2": {
+        "role": "neutral",
+        "displayName": "Craie passée",
+        "canonical": "#bfb8ae",
+        "oklch": "oklch(78.6% 0.016 77.0)",
+        "tonalRamp": [
+          "#0f0a05",
+          "#2a241c",
+          "#474139",
+          "#666057",
+          "#888178",
+          "#aba49a",
+          "#cfc8be",
+          "#f5ede3"
+        ]
+      },
+      "chene": {
+        "role": "neutral",
+        "displayName": "Chêne",
+        "canonical": "#3a2a20",
+        "oklch": "oklch(30.1% 0.030 53.3)",
+        "tonalRamp": [
+          "#150702",
+          "#312117",
+          "#4f3e33",
+          "#6f5d52",
+          "#917e72",
+          "#b5a094",
+          "#d9c4b8",
+          "#ffeadd"
+        ]
+      },
+      "chene-2": {
+        "role": "neutral",
+        "displayName": "Chêne clair",
+        "canonical": "#5b3f2b",
+        "oklch": "oklch(39.4% 0.050 56.2)",
+        "tonalRamp": [
+          "#1a0400",
+          "#371e0a",
+          "#573b27",
+          "#785a45",
+          "#9a7b65",
+          "#be9e87",
+          "#e4c1aa",
+          "#ffe7cf"
+        ]
+      },
+      "papier": {
+        "role": "neutral",
+        "displayName": "Papier du carnet",
+        "canonical": "#fbf8f2",
+        "oklch": "oklch(98.0% 0.009 84.6)",
+        "tonalRamp": [
+          "#0d0b07",
+          "#272520",
+          "#44423d",
+          "#63615c",
+          "#85827d",
+          "#a7a59f",
+          "#ccc9c3",
+          "#f1eee8"
+        ]
+      },
+      "encre": {
+        "role": "neutral",
+        "displayName": "Encre",
+        "canonical": "#1e1a17",
+        "oklch": "oklch(22.1% 0.009 59.2)",
+        "tonalRamp": [
+          "#0e0a08",
+          "#282421",
+          "#46413e",
+          "#65605c",
+          "#86817d",
+          "#a9a4a0",
+          "#cdc8c4",
+          "#f3ede9"
+        ]
+      },
+      "encre-2": {
+        "role": "neutral",
+        "displayName": "Encre passée",
+        "canonical": "#5d5650",
+        "oklch": "oklch(45.8% 0.013 63.1)",
+        "tonalRamp": [
+          "#0f0a06",
+          "#2a241e",
+          "#47413b",
+          "#67605a",
+          "#88817a",
+          "#aba39d",
+          "#d0c7c0",
+          "#f5ede6"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Le nom du restaurant, une seule fois."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Titres de section et bandeau à emporter."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Titres d’étal, bandeaux de quartier, noms de formules, titre du carnet."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Noms de plats et paragraphes, 58ch max."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Groupes, services d’une formule, en-têtes de tableau. Jamais en surtitre."
+      },
+      "price": {
+        "displayName": "Price",
+        "purpose": "Tous les prix, en chiffres tabulaires et en or."
+      },
+      "enseigne": {
+        "displayName": "Enseigne",
+        "purpose": "Les quatre caractères 金花餐廳, uniquement."
+      }
+    },
+    "shadows": [
+      {
+        "name": "hung-board",
+        "value": "0 16px 26px -14px rgba(20, 6, 2, 0.75)",
+        "purpose": "Ardoises des formules accrochées au mur."
+      },
+      {
+        "name": "button-lift",
+        "value": "0 8px 18px -8px rgba(20, 8, 2, 0.6)",
+        "purpose": "Bouton or principal, plaque de statut."
+      },
+      {
+        "name": "beam",
+        "value": "0 6px 14px -6px rgba(0, 0, 0, 0.55)",
+        "purpose": "Poutre d’en-tête et solive des travées."
+      },
+      {
+        "name": "bay-opening",
+        "value": "inset 0 22px 26px -12px rgba(0, 0, 0, 0.7)",
+        "purpose": "Profondeur des travées photo."
+      },
+      {
+        "name": "pad",
+        "value": "0 18px 32px -16px rgba(0, 0, 0, 0.9)",
+        "purpose": "Carnet de commande posé sur la table."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-marche",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Toutes les transitions ; sortie exponentielle."
+      },
+      {
+        "name": "volet-leve",
+        "value": "transform 1.5s ease-marche, 0.25s / 0.4s / 0.55s delay",
+        "purpose": "Les rideaux de fer remontent une fois au chargement quand c’est ouvert."
+      },
+      {
+        "name": "volet-ferme",
+        "value": "translateY(-56%)",
+        "purpose": "Rideaux à moitié baissés, heure de réouverture peinte."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "759px"
+      },
+      {
+        "name": "tablet",
+        "value": "999px"
+      },
+      {
+        "name": "pad-panel",
+        "value": "1099px"
+      },
+      {
+        "name": "narrow",
+        "value": "429px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Bouton Appeler",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Action principale partout : appeler le restaurant.",
+      "html": "<a class=\"ds-btn-primary\" href=\"tel:+33561824356\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" aria-hidden=\"true\"><path d=\"M6.6 3.5h2.6l1.5 4.2-2 1.4a11.5 11.5 0 0 0 6.2 6.2l1.4-2 4.2 1.5v2.6a2 2 0 0 1-2.1 2A16.6 16.6 0 0 1 4.6 5.6a2 2 0 0 1 2-2.1Z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\"/></svg><span>Appeler le 05 61 82 43 56</span></a>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 22px;background:var(--or,#f2b53a);color:var(--ardoise,#23272b);border-radius:3px;text-decoration:none;font-family:Archivo,Arial,sans-serif;font-weight:800;font-stretch:68%;font-size:1.1875rem;letter-spacing:.02em;text-transform:uppercase;box-shadow:0 8px 18px -8px rgba(20,8,2,.6);transition:background-color .25s cubic-bezier(.16,1,.3,1),transform .25s cubic-bezier(.16,1,.3,1)}.ds-btn-primary:hover{background:var(--or-clair,#f8c95f);transform:translateY(-1px)}.ds-btn-primary:focus-visible{outline:3px solid var(--craie,#fff6ec);outline-offset:3px}"
+    },
+    {
+      "name": "Bouton secondaire",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Voir la carte, Itinéraire.",
+      "html": "<a class=\"ds-btn-second\" href=\"#carte\">Voir la carte · 179 plats</a>",
+      "css": ".ds-btn-second{display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 22px;background:transparent;color:var(--craie,#fff6ec);border:2px solid rgba(255,246,236,.75);border-radius:3px;text-decoration:none;font-family:Archivo,Arial,sans-serif;font-weight:800;font-stretch:68%;font-size:1.1875rem;letter-spacing:.02em;text-transform:uppercase;transition:background-color .25s}.ds-btn-second:hover{background:rgba(255,246,236,.12);border-color:var(--craie,#fff6ec)}.ds-btn-second:focus-visible{outline:3px solid var(--or,#f2b53a);outline-offset:3px}"
+    },
+    {
+      "name": "Recherche",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "Chercher un plat dans la carte.",
+      "html": "<input class=\"ds-input-search\" type=\"search\" placeholder=\"canard, crevettes, maki…\">",
+      "css": ".ds-input-search{width:100%;max-width:640px;height:58px;padding:0 20px;font-family:Archivo,Arial,sans-serif;font-size:1.1875rem;color:var(--craie,#fff6ec);background:var(--ardoise-2,#2d3237);border:2px solid var(--ardoise-3,#3b4147);border-radius:3px;caret-color:var(--or,#f2b53a)}.ds-input-search::placeholder{color:var(--craie-2,#bfb8ae)}.ds-input-search:focus{outline:none;border-color:var(--or,#f2b53a)}"
+    },
+    {
+      "name": "Filtre rapide",
+      "kind": "chip",
+      "refersTo": "chip-filter",
+      "description": "Recherches rapides : pimenté, canard, crevettes…",
+      "html": "<button class=\"ds-chip\" aria-pressed=\"false\">Canard</button> <button class=\"ds-chip\" aria-pressed=\"true\">Crevettes</button>",
+      "css": ".ds-chip{min-height:44px;padding:0 16px;background:transparent;color:var(--craie,#fff6ec);border:2px solid var(--ardoise-3,#3b4147);border-radius:3px;font-family:Archivo,Arial,sans-serif;font-size:1rem;cursor:pointer}.ds-chip:hover{border-color:var(--craie-2,#bfb8ae)}.ds-chip[aria-pressed=true]{background:var(--or,#f2b53a);border-color:var(--or,#f2b53a);color:var(--ardoise,#23272b);font-weight:800}.ds-chip:focus-visible{outline:3px solid var(--or,#f2b53a);outline-offset:3px}"
+    },
+    {
+      "name": "Poutre",
+      "kind": "nav",
+      "refersTo": "nav-poutre",
+      "description": "En-tête collant en chêne.",
+      "html": "<nav class=\"ds-poutre\"><span class=\"ds-disque\">金</span><strong>La Fleur d’Or</strong><a href=\"#carte\">La carte</a><a href=\"#infos\">Horaires</a></nav>",
+      "css": ".ds-poutre{display:flex;align-items:center;gap:18px;height:64px;padding:0 24px;background:var(--chene,#3a2a20);color:var(--craie,#fff6ec);font-family:Archivo,Arial,sans-serif;box-shadow:0 6px 14px -6px rgba(0,0,0,.55)}.ds-poutre strong{font-weight:800;font-stretch:68%;font-size:1.5rem;text-transform:uppercase;margin-right:auto}.ds-poutre a{color:inherit;text-decoration:none;line-height:44px;padding:0 10px;border-radius:3px}.ds-poutre a:hover{background:rgba(255,246,236,.1)}.ds-disque{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--or,#f2b53a);color:var(--chene,#3a2a20);font-family:\"Noto Serif TC\",serif;font-weight:900;font-size:22px}"
+    },
+    {
+      "name": "Ardoise de formule",
+      "kind": "card",
+      "refersTo": "ardoise",
+      "description": "Une formule sur son ardoise encadrée de chêne.",
+      "html": "<div class=\"ds-ardoise\"><h4><span>Menu</span><b>21,50 €</b></h4><p class=\"ds-lab\">Entrée <i>au choix</i></p><ul><li>Nems (4 pièces)</li><li>Soupe de nouilles au poulet</li></ul></div>",
+      "css": ".ds-ardoise{max-width:300px;padding:20px;background:var(--ardoise,#23272b);color:var(--craie,#fff6ec);border:10px solid var(--chene-2,#5b3f2b);border-radius:3px;box-shadow:0 16px 26px -14px rgba(20,6,2,.75);font-family:Archivo,Arial,sans-serif}.ds-ardoise h4{display:flex;justify-content:space-between;align-items:baseline;margin:0;font-weight:800;font-stretch:68%;text-transform:uppercase;font-size:1.375rem}.ds-ardoise b{color:var(--or,#f2b53a);font-size:2.125rem}.ds-lab{margin:16px 0 6px;font-size:.8125rem;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--craie-2,#bfb8ae)}.ds-lab i{font-style:normal;font-weight:400;letter-spacing:.04em;text-transform:none}.ds-ardoise ul{margin:0;padding:0 0 0 16px}"
+    },
+    {
+      "name": "Ligne de carte",
+      "kind": "custom",
+      "refersTo": "plat",
+      "description": "Un plat = un rang de brique : nom, pointillés, prix or, bouton +.",
+      "html": "<div class=\"ds-plat\"><span>Canard laqué</span><i></i><b>11,00 €</b><button aria-label=\"Noter Canard laqué\">+</button></div>",
+      "css": ".ds-plat{display:grid;grid-template-columns:max-content 1fr auto auto;align-items:center;gap:10px;min-height:2.75rem;background:var(--ardoise,#23272b);color:var(--craie,#fff6ec);font-family:Archivo,Arial,sans-serif;padding:5px 12px}.ds-plat i{align-self:end;margin-bottom:calc(.5em + 5px);border-bottom:2px dotted rgba(255,246,236,.3)}.ds-plat b{color:var(--or,#f2b53a);font-weight:800;font-stretch:68%;font-size:1.1875rem;font-variant-numeric:tabular-nums}.ds-plat button{width:38px;height:38px;border-radius:50%;background:transparent;color:var(--craie,#fff6ec);border:2px solid rgba(255,246,236,.35);cursor:pointer}.ds-plat button:hover{border-color:var(--or,#f2b53a);color:var(--or,#f2b53a)}"
+    },
+    {
+      "name": "Îlot du plan",
+      "kind": "custom",
+      "refersTo": "ilot",
+      "description": "Une rubrique de la carte vue comme un îlot de la bastide ; sa taille suit le nombre de plats.",
+      "html": "<a class=\"ds-ilot\" href=\"#canard\"><span>Canard</span><small>4</small></a>",
+      "css": ".ds-ilot{display:flex;flex-direction:column;justify-content:space-between;width:140px;min-height:74px;padding:9px 10px 8px;background:#b5553a repeating-linear-gradient(90deg,rgba(60,14,4,.16) 0 2px,transparent 2px 10px);color:var(--craie,#fff6ec);text-decoration:none;border-radius:2px;font-family:Archivo,Arial,sans-serif}.ds-ilot span{font-weight:800;font-stretch:68%;text-transform:uppercase}.ds-ilot:hover{background-color:#c45f42}"
+    }
+  ],
+  "narrative": {
+    "northStar": "La halle de Grenade",
+    "overview": "The site is built like the brick market hall at the heart of the bastide of Grenade: a roof of oak, walls and pillars of Toulouse brick, and under it stalls with slate boards and prices in chalk. Three cuisines (Chinese, Thai, Japanese) sit under that one roof the way stalls share a halle. Materials are drawn flat; the one motion is the roller shutters over the three food bays.",
+    "keyCharacteristics": [
+      "Brick fields own whole regions; slate boards carry reading; oak bars carry navigation.",
+      "One family, Archivo: condensed 800 capitals for fascia-style display, normal-width 400 for reading.",
+      "Gold is spent only on prices, the call to action, the live \"open\" state and the brand discs.",
+      "Menu rows are brick courses: one row per course (2.75rem), never boxed.",
+      "The 金花餐廳 sign (four characters in gold discs) is the brand mark."
+    ],
+    "rules": [
+      {
+        "name": "The Brick-Is-Structure Rule",
+        "body": "Brick carries the house; slate carries reading. Never set a dense list (dishes, prices) directly on brick.",
+        "section": "colors"
+      },
+      {
+        "name": "The Gold-Is-Money Rule",
+        "body": "Gold marks prices, the call action and \"open\". It is never decoration, and never body-size text on brick.",
+        "section": "colors"
+      },
+      {
+        "name": "The Paper-Is-The-Pad Rule",
+        "body": "The warm paper colour exists only on the order pad. It never becomes a page ground.",
+        "section": "colors"
+      },
+      {
+        "name": "The One-Face Rule",
+        "body": "Archivo only, weights 400 and 800 only. The CJK face appears only in the 金花餐廳 mark.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular-Money Rule",
+        "body": "Every price, total and phone number uses tabular figures.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hung-Not-Floating Rule",
+        "body": "Shadows fall downward from where an object hangs. No zero-offset glows, no hard offset block shadows.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Square-Market Rule",
+        "body": "Market objects have square corners. Nothing is rounded beyond 3px except discs and badges.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do put every list of dishes or prices on slate (ardoise) with chalk text and gold prices.",
+      "Do keep one row per brick course (2.75rem minimum) with a dotted leader between name and price.",
+      "Do draw icons from the SVG sprite (2px strokes, round caps), with the chilli always paired with the text \"pimenté\".",
+      "Do keep shadows offset and blurred, hanging downward.",
+      "Do keep the live status and the shutters wired to the real hours (lunch 12h–14h, dinner 18h–22h, closed Sunday lunch and Monday)."
+    ],
+    "donts": [
+      "Don't use red lanterns, gold dragons, cherry blossom or brush-stroke ornaments as decoration.",
+      "Don't fall back to zen-white minimalism for the sushi bar; it lives under the same brick roof.",
+      "Don't add bevels, wood grain, embossing or chalk textures. The materials stay flat.",
+      "Don't box menu rows or nest cards inside the slate boards.",
+      "Don't set gold text below 18.66px bold on brick (3.16:1 only).",
+      "Don't put a kicker or eyebrow label above a heading."
+    ]
+  }
+}

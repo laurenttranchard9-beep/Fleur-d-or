@@ -1,0 +1,5 @@
+# Captures de revue et cache du détecteur de design (régénérés à chaque passe)
+.impeccable/review/
+.impeccable/hook.cache.json
+.impeccable/config.local.json
+.DS_Store
