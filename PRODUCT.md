@@ -16,7 +16,7 @@ delegated: a static public page (`index.html`, CSS, a little vanilla JS) that wo
 
 - People from Grenade (Haute-Garonne, 31330) and the villages north of Toulouse deciding where to eat or what to order tonight. Mostly on a phone *(inferred)*.
 - Weekday lunch customers looking for the midweek set menus (Menu Express 14 €, Menu 16,90 €, Menu Express japonais 17,90 €).
-- Takeaway customers who read the menu, then phone in an order (-10 % on takeaway orders from the carte).
+- Takeaway customers who read the menu, then phone in an order.
 - Families and groups picking between the set menus (21,50 €, 26,90 €, sushi platters, the 2-person fondue made to order).
 
 ## Product Purpose
@@ -33,7 +33,7 @@ La Fleur d'Or is a Chinese, Thai and Japanese restaurant with a sushi bar in one
 - Phone: 05 61 82 43 56 (the only ordering and booking channel shown today).
 - Service hours: lunch 12h–14h, dinner 18h–22h.
 - Weekly closing: Sunday lunch, and all day Monday.
-- Takeaway: set menus are available to take away at lunch and dinner and made when you order; -10 % on takeaway orders from the carte.
+- Takeaway: set menus are available to take away at lunch and dinner and made when you order. The owner asked to remove the old site's "-10 % à emporter" mention (2026-09-24): do not show a takeaway discount.
 - Weekday lunch set menus are not served on weekends or public holidays.
 - Steamed dishes need about 15 minutes' wait; the 2-person fondue is made to order only.
 
@@ -54,6 +54,7 @@ La Fleur d'Or is a Chinese, Thai and Japanese restaurant with a sushi bar in one
 - The old site's title also says "Restaurant Thaï" and "Bar à sushis".
 - Three cuisines named together: chinoises, thaïlandaises, japonaises.
 - Facebook page: https://www.facebook.com/restaurantlafleurdorgrenade/
+- Site credit, requested by the owner: "Création du site : Laurent TRANCHARD · laurenttranchard9@gmail.com" in the footer and on the admin login page. The footer also links to the admin login ("Se connecter").
 
 ## Evidence on Hand
 

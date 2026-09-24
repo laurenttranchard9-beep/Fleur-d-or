@@ -332,6 +332,7 @@ body.a-porte { background: var(--brique) var(--brique-motif); min-height: 100vh;
 .a-form-porte .a-bouton { align-self: stretch; }
 .a-info { color: var(--succes); }
 .a-retour { font-size: 0.9375rem; color: var(--craie-2); }
+.a-credit { font-size: 0.875rem; color: var(--craie-2); padding-top: 12px; border-top: 1px solid rgba(255, 246, 236, 0.12); overflow-wrap: anywhere; }
 
 /* ---------- Petits écrans ---------- */
 @media (max-width: 1000px) {

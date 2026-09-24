@@ -10,7 +10,7 @@ La page publique est en HTML, CSS et JavaScript simples. Un panneau d’administ
 
 Le panneau permet de modifier la carte sans toucher au code. Il demande PHP 8 ou plus récent, c’est-à-dire XAMPP ou un hébergeur Apache avec PHP. Il n’a pas besoin de MySQL.
 
-1. Démarrer Apache dans XAMPP, puis ouvrir **http://localhost/fleur-dor/admin/**.
+1. Démarrer Apache dans XAMPP, puis ouvrir **http://localhost/fleur-dor/admin/**, ou cliquer sur **Se connecter** en bas du site.
 2. **La première fois**, choisir le mot de passe (10 caractères au moins). Pour des raisons de sécurité, ce premier réglage n’est possible que depuis l’ordinateur qui fait tourner XAMPP (adresse `localhost`). Ensuite, on peut se connecter depuis n’importe quel appareil.
 3. Modifier ce que l’on veut, puis cliquer sur **Publier sur le site** (ou Ctrl+S).
 
@@ -77,6 +77,6 @@ Le fichier `.htaccess` règle la compression et le cache, et renvoie une erreur 
 
 - Le texte d’un dessert, « Colonel chinois (glace citron vert et saké) » : la carte imprimée écrit « saté », que j’ai pris pour une coquille.
 - La livraison Uber Eats : l’ancien site en montrait le logo. Est-elle toujours proposée ?
-- La carte « à emporter » de l’ancien site (un livret feuilleté séparé) n’a pas été reprise. La remise de −10 % est mentionnée, mais sans calcul.
+- La carte « à emporter » de l’ancien site (un livret feuilleté séparé) n’a pas été reprise.
 - Photos : le plateau de sushis vient d’Unsplash, et deux photos de l’ancien site (fondue, bols d’herbes) ressemblent à des photos de banque d’images. Des photos des vrais plats du restaurant seraient plus parlantes.
 - Mentions légales : à ajouter (éditeur du site, hébergeur), car ces informations n’étaient pas disponibles.

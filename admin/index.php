@@ -149,6 +149,7 @@ $csrf = fd_csrf();
       </form>
     <?php endif; ?>
     <p class="a-retour"><a href="../">Retour au site</a></p>
+    <p class="a-credit">Création du site : Laurent TRANCHARD · <a href="mailto:laurenttranchard9@gmail.com">laurenttranchard9@gmail.com</a></p>
   </div>
 </main>
 <?php endif; ?>

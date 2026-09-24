@@ -53,6 +53,12 @@ const serveur = http.createServer((req, res) => {
     return;
   }
 
+  if (/^\/admin(?:[/?#]|$)/.test(req.url || "")) {
+    res.writeHead(501, { "Content-Type": "text/plain; charset=utf-8" });
+    res.end("Le panneau d'administration a besoin de PHP : lancez le site avec XAMPP (http://localhost/fleur-dor/admin/).\n");
+    return;
+  }
+
   const fichier = fichierDemande(req.url);
   if (!fichier) return pasTrouve(res);
 

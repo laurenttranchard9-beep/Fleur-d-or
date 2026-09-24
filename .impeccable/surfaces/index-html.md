@@ -32,6 +32,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 - 2026-09-24, user request: the bastide plan (carte index of blocks sized by dish count) was removed. The carte now opens directly on the search field and the sticky section bar. The "isolate and dim" raise now lives only in the search results (non-matching stalls and sections hide).
 - 2026-09-24, user request: a PHP back office (admin/) edits categories, dishes and set menus; it regenerates index.html from admin/modele.html and donnees/carte.json.
 
+- 2026-09-24, user request: the "-10 %" takeaway mention was removed; the footer gains a "Se connecter" link to admin/ and the credit "Création du site : Laurent TRANCHARD · laurenttranchard9@gmail.com".
+
 ## Unresolved decisions
-- The takeaway carte (a separate flipbook on the old site) may have different prices; the -10 % is stated, never computed.
+- The takeaway carte (a separate flipbook on the old site) may have different prices.
 - Whether the Uber Eats listing is still active.
