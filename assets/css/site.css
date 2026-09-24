@@ -17,7 +17,7 @@
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
-  font-family: "Jinhua";
+  font-family: "Noto Serif TC";
   src: url("../fonts/noto-serif-tc-jinhua.woff2") format("woff2");
   font-weight: 900;
   font-display: swap;
@@ -155,12 +155,12 @@ input { caret-color: var(--or); }
   box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.55);
 }
 .marque { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; justify-self: start; }
-[lang="zh-Hant"] { font-family: "Jinhua", "Noto Serif TC", "Songti TC", serif; font-weight: 900; }
+[lang="zh-Hant"] { font-family: "Noto Serif TC", "Songti TC", serif; font-weight: 900; }
 .disque {
   display: inline-grid; place-items: center;
   width: 38px; height: 38px; border-radius: 50%;
   background: var(--or); color: var(--chene);
-  font-family: "Jinhua", "Noto Serif TC", "Songti TC", serif; font-weight: 900; font-size: 22px; line-height: 1;
+  font-family: "Noto Serif TC", "Songti TC", serif; font-weight: 900; font-size: 22px; line-height: 1;
 }
 .marque-nom { font-size: 1.5rem; }
 .nav ul { display: flex; gap: 4px; }
@@ -235,7 +235,7 @@ input { caret-color: var(--or); }
   display: grid; place-items: center;
   width: 46px; height: 46px; border-radius: 50%;
   background: var(--or); color: var(--chene);
-  font-family: "Jinhua", "Noto Serif TC", "Songti TC", serif; font-weight: 900; font-size: 27px; line-height: 1;
+  font-family: "Noto Serif TC", "Songti TC", serif; font-weight: 900; font-size: 27px; line-height: 1;
 }
 .travees-toit { min-width: 0; }
 .solive {
@@ -706,8 +706,7 @@ html:not(.js) .barre { grid-template-columns: 1fr; }
   font-size: 0.9375rem;
 }
 .pied-marque { display: flex; align-items: center; gap: 14px; }
-.pied-marque [lang="zh-Hant"] { font-family: "Jinhua", "Noto Serif TC", "Songti TC", serif; font-weight: 900; }
-.disque { width: 52px; height: 52px; font-size: 30px; }
+.pied-marque .disque { flex: none; width: 52px; height: 52px; font-size: 30px; }
 .pied-marque strong { font-size: 1.25rem; font-stretch: 68%; text-transform: uppercase; }
 .pied-infos a { font-variant-numeric: tabular-nums; }
 .pied-credits { color: var(--craie-2); }
@@ -776,8 +775,7 @@ html:not(.js) .barre { grid-template-columns: 1fr; }
   .poutre { gap: 12px; grid-template-columns: auto 1fr auto; }
   .nav { justify-self: end; }
   .marque-nom { font-size: 1.3125rem; }
-  [lang="zh-Hant"] { font-family: "Jinhua", "Noto Serif TC", "Songti TC", serif; font-weight: 900; }
-.disque { width: 34px; height: 34px; font-size: 20px; }
+  .disque { width: 34px; height: 34px; font-size: 20px; }
   .nav-large { display: none; }
   .nav a { padding: 0 8px; font-size: 0.9375rem; }
   .bouton-tel { padding: 0; width: 44px; justify-content: center; }

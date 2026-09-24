@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "border-accent-on-rounded",
+        "value": "*",
+        "files": [
+          "assets/css/site.css"
+        ],
+        "createdAt": "2026-09-24T18:42:42.261Z",
+        "reason": "Claude, from the built CSS: the flagged 4px rule is the full-width mortar-joint underline of .etal-tete, an element with no border-radius; it is not a side accent on a rounded card"
+      }
+    ]
+  }
+}
