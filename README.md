@@ -47,6 +47,16 @@ Le serveur (`server.js`) ne sert que la page et le dossier `assets/`. Les fichie
 
 Le site reste statique : on peut aussi déposer `index.html` et `assets/` chez n’importe quel hébergeur, sans Node.
 
+## Lancer le site avec XAMPP (Apache)
+
+Il suffit d’Apache : ni PHP ni MySQL.
+
+1. Copier le dossier du site dans `C:\xampp\htdocs\fleur-dor\` (sur Mac : `/Applications/XAMPP/htdocs/fleur-dor/`), en gardant le fichier `.htaccess`.
+2. Dans le XAMPP Control Panel, démarrer **Apache**.
+3. Ouvrir http://localhost/fleur-dor/.
+
+Le fichier `.htaccess` règle la compression et le cache, et renvoie une erreur 404 pour tout ce qui n’est pas le site : `.git`, `.impeccable`, fichiers `.md` et `.json`, `server.js`. On peut donc copier le dépôt entier dans `htdocs` sans rien exposer. Il fonctionne même si certains modules Apache sont désactivés. Le même `.htaccess` sert chez un hébergeur Apache (OVH, o2switch…).
+
 ## À vérifier par le restaurant
 
 - Le texte d’un dessert, « Colonel chinois (glace citron vert et saké) » : la carte imprimée écrit « saté », que j’ai pris pour une coquille.

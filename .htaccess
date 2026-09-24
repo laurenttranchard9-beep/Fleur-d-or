@@ -1,0 +1,52 @@
+# La Fleur d'Or : configuration Apache (XAMPP ou hébergeur sous Apache).
+# Le site est statique : ni PHP ni MySQL ne sont nécessaires.
+# Chaque bloc optionnel est entouré de <IfModule> : si un module manque,
+# Apache ignore le bloc au lieu de renvoyer une erreur 500.
+
+DirectoryIndex index.html
+Options -Indexes
+AddDefaultCharset utf-8
+
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+  AddType image/svg+xml .svg
+  AddCharset utf-8 .html .css .js .svg
+</IfModule>
+
+# Les fichiers de travail ne sont jamais servis (réponse 404) :
+# dossiers et fichiers cachés (.git, .impeccable, .claude, .htaccess…),
+# notes Markdown, JSON (package.json, provenance des photos), serveur Node, notice.
+<IfModule mod_alias.c>
+  RedirectMatch 404 "/\.[^/]*(/|$)"
+  RedirectMatch 404 "(?i)\.(md|json|lock|sh|log)$"
+  RedirectMatch 404 "/(server\.js|LISEZMOI\.txt)$"
+</IfModule>
+<IfModule !mod_alias.c>
+  <FilesMatch "(^\.|\.(md|json|lock|sh|log)$|^server\.js$|^LISEZMOI\.txt$)">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+
+# Compression du texte
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript image/svg+xml
+</IfModule>
+
+# Cache : la page se revalide à chaque visite, les fichiers d'assets sont gardés un moment.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 hour"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType image/webp "access plus 1 week"
+  ExpiresByType image/svg+xml "access plus 1 week"
+  ExpiresByType font/woff2 "access plus 1 month"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
