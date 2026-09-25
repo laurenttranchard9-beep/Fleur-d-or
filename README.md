@@ -100,7 +100,7 @@ curl -fsSL https://raw.githubusercontent.com/laurenttranchard9-beep/Fleur-d-or/c
 sudo -u apache php /var/www/fleur-dor/admin/mot-de-passe.php
 ```
 
-La deuxième ligne crée le mot de passe du panneau (au moins 10 caractères). Ouvrez aussi le port 80 (HTTP) dans le groupe de sécurité de l’instance.
+La deuxième ligne crée le mot de passe du panneau (au moins 10 caractères). Le script installe aussi le site du Monorom, à l’adresse `/le-monorom/` ; son mot de passe se crée avec `sudo -u apache php /var/www/fleur-dor/le-monorom/admin/mot-de-passe.php`. Pour lui donner son propre nom de domaine (déjà dirigé vers le serveur) : `sudo MONOROM_DOMAINE=www.restaurantlemonorom.com bash /var/www/fleur-dor/deploy/amazon-linux.sh`. Ouvrez aussi le port 80 (HTTP) dans le groupe de sécurité de l’instance.
 
 **Mettre à jour** après un changement sur GitHub :
 

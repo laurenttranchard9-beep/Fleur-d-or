@@ -1,17 +1,22 @@
 #!/usr/bin/env bash
-# La Fleur d'Or : installe ou met à jour le site sur un serveur Amazon Linux (2023 ou 2).
+# La Fleur d'Or et Le Monorom : installe ou met à jour les deux sites sur un serveur Amazon Linux (2023 ou 2).
 #
 #   Première fois :  curl -fsSL https://raw.githubusercontent.com/laurenttranchard9-beep/Fleur-d-or/claude/practical-mendel-dpj572/deploy/amazon-linux.sh | sudo bash
 #   Mises à jour  :  sudo bash /var/www/fleur-dor/deploy/amazon-linux.sh
 #
-# Le site est installé dans /var/www/fleur-dor et servi par Apache sur le port 80.
-# Une mise à jour prend la carte de GitHub ; la carte du serveur (modifiée dans le panneau)
-# est d'abord gardée dans les sauvegardes du panneau, onglet « Sauvegardes ».
+# Les sites sont installés dans /var/www/fleur-dor et servis par Apache sur le port 80 :
+#   La Fleur d'Or : http://adresse-du-serveur/        Le Monorom : http://adresse-du-serveur/le-monorom/
+# Pour donner au Monorom son propre nom de domaine (déjà dirigé vers ce serveur) :
+#   sudo MONOROM_DOMAINE=www.restaurantlemonorom.com bash /var/www/fleur-dor/deploy/amazon-linux.sh
+# Une mise à jour prend les cartes de GitHub ; la carte de chaque site modifiée dans son panneau
+# est d'abord gardée dans les sauvegardes de ce panneau, onglet « Sauvegardes ».
 set -euo pipefail
 
 DEPOT="${DEPOT:-https://github.com/laurenttranchard9-beep/Fleur-d-or.git}"
 BRANCHE="${BRANCHE:-claude/practical-mendel-dpj572}"
 DOSSIER="${DOSSIER:-/var/www/fleur-dor}"
+MONOROM_DOMAINE="${MONOROM_DOMAINE:-}"
+SITES=". le-monorom"
 
 if [ "$(id -u)" -ne 0 ]; then
   echo "Lancez ce script avec sudo." >&2
@@ -36,12 +41,14 @@ if [ -d "$DOSSIER/.git" ]; then
   cd "$DOSSIER"
   git config --global --add safe.directory "$DOSSIER"
   git fetch --depth 1 origin "$BRANCHE"
-  # La carte modifiée sur le serveur est gardée dans les sauvegardes du panneau
-  if ! git diff --quiet -- donnees/carte.json; then
-    mkdir -p donnees/sauvegardes
-    cp donnees/carte.json "donnees/sauvegardes/carte-$(date +%Y%m%d-%H%M%S).json"
-    echo "La carte du serveur a été gardée dans le panneau, onglet « Sauvegardes »."
-  fi
+  # La carte modifiée sur le serveur est gardée dans les sauvegardes de son panneau
+  for s in $SITES; do
+    if [ -f "$s/donnees/carte.json" ] && ! git diff --quiet -- "$s/donnees/carte.json"; then
+      mkdir -p "$s/donnees/sauvegardes"
+      cp "$s/donnees/carte.json" "$s/donnees/sauvegardes/carte-$(date +%Y%m%d-%H%M%S).json"
+      echo "La carte du serveur ($s) a été gardée dans son panneau, onglet « Sauvegardes »."
+    fi
+  done
   git reset --hard FETCH_HEAD
 else
   echo "Première installation dans $DOSSIER…"
@@ -51,10 +58,13 @@ fi
 
 # ---------- Page du site et droits ----------
 cd "$DOSSIER"
-php admin/publier.php
-mkdir -p donnees/sauvegardes
-chown -R apache:apache donnees index.html
-chmod -R u+rwX,g+rwX donnees
+for s in $SITES; do
+  [ -f "$s/admin/publier.php" ] || continue
+  (cd "$s" && php admin/publier.php)
+  mkdir -p "$s/donnees/sauvegardes"
+  chown -R apache:apache "$s/donnees" "$s/index.html"
+  chmod -R u+rwX,g+rwX "$s/donnees"
+done
 
 # ---------- Apache : ce site sur le port 80, .htaccess actifs ----------
 cat > /etc/httpd/conf.d/fleur-dor.conf <<CONF
@@ -70,6 +80,22 @@ cat > /etc/httpd/conf.d/fleur-dor.conf <<CONF
     </DirectoryMatch>
 </VirtualHost>
 CONF
+if [ -n "$MONOROM_DOMAINE" ]; then
+  # Le Monorom sur son propre nom de domaine (avec et sans www)
+  NU="${MONOROM_DOMAINE#www.}"
+  cat >> /etc/httpd/conf.d/fleur-dor.conf <<CONF
+<VirtualHost *:80>
+    ServerName $NU
+    ServerAlias www.$NU
+    DocumentRoot $DOSSIER/le-monorom
+    <Directory $DOSSIER/le-monorom>
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+CONF
+fi
 
 # PHP tourne à côté d'Apache (php-fpm) sur Amazon Linux
 if systemctl list-unit-files php-fpm.service >/dev/null 2>&1; then
@@ -83,9 +109,9 @@ IP=$(curl -fsS -m 2 http://checkip.amazonaws.com 2>/dev/null || hostname -I | aw
 IP=${IP:-adresse-du-serveur}
 echo
 echo "C'est prêt."
-echo "  Le site    : http://$IP/"
-echo "  Le panneau : http://$IP/admin/"
-if [ ! -f donnees/admin.json ]; then
-  echo "Créez le mot de passe du panneau :  sudo -u apache php $DOSSIER/admin/mot-de-passe.php"
-fi
+echo "  La Fleur d'Or : http://$IP/            panneau : http://$IP/admin/"
+echo "  Le Monorom    : http://$IP/le-monorom/  panneau : http://$IP/le-monorom/admin/"
+[ -n "$MONOROM_DOMAINE" ] && echo "  Le Monorom aussi sur : http://${MONOROM_DOMAINE#www.}/ et http://www.${MONOROM_DOMAINE#www.}/"
+[ -f donnees/admin.json ] || echo "Mot de passe du panneau Fleur d'Or :  sudo -u apache php $DOSSIER/admin/mot-de-passe.php"
+[ -f le-monorom/donnees/admin.json ] || echo "Mot de passe du panneau Monorom    :  sudo -u apache php $DOSSIER/le-monorom/admin/mot-de-passe.php"
 echo "Pensez à ouvrir le port 80 dans le groupe de sécurité de l'instance EC2."
