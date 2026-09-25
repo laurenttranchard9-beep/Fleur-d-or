@@ -75,6 +75,14 @@ Chez un hébergeur, PHP doit pouvoir écrire dans `index.html` et dans le dossie
 
 Le fichier `.htaccess` règle la compression et le cache, et renvoie une erreur 404 pour tout ce qui n’est pas le site : `.git`, `.impeccable`, fichiers `.md` et `.json`, `server.js`. Le dossier `donnees/` et les fichiers internes du panneau (`lib.php`, `modele.html`, `publier.php`) sont refusés. On peut donc copier le dépôt entier dans `htdocs` sans rien exposer. Il fonctionne même si certains modules Apache sont désactivés. Le même `.htaccess` sert chez un hébergeur Apache (OVH, o2switch…).
 
+**Autres modèles à imprimer :** depuis la page Carte A3, « Autres modèles » ouvre trois cartes de plus, générées elles aussi depuis les données du site, avec une grande police (13 à 15 pt) :
+
+- **Livret A4, 8 pages** (`modeles.php?modele=livret`) : couverture en briques, formules sur deux pages, la carte sur deux colonnes. Pour un protège-menu, ou un livret agrafé chez un imprimeur.
+- **4 cartes A4 recto-verso** (`modeles.php?modele=cartes`) : papier gris clair, bandeaux ardoise. Formules ; cuisine chinoise et thaïlandaise ; sa suite et les sushis ; desserts et bar.
+- **Grand format A3, 2 cartes sans pli** (`modeles.php?modele=grand`) : les formules sous un bandeau de briques, puis la carte sur trois colonnes.
+
+Les PDF du 25 septembre 2026 sont dans `impression/` (`modele-livret-a4.pdf`, `modele-cartes-a4.pdf`, `modele-grand-format-a3.pdf`).
+
 ## Mettre en ligne sur un serveur Amazon Linux (EC2)
 
 Le script `deploy/amazon-linux.sh` installe Apache, PHP et git, télécharge le site depuis GitHub dans `/var/www/fleur-dor` et le met en ligne sur le port 80. Il marche sur Amazon Linux 2023 et Amazon Linux 2.

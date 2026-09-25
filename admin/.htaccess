@@ -1,6 +1,6 @@
 # Panneau d'administration : seuls index.php, api.php, admin.css et admin.js sont accessibles.
 DirectoryIndex index.php
-<FilesMatch "^(lib\.php|publier\.php|mot-de-passe\.php|modele\.html)$">
+<FilesMatch "^(lib\.php|impression\.php|publier\.php|mot-de-passe\.php|modele\.html)$">
   Require all denied
 </FilesMatch>
 <IfModule mod_headers.c>
