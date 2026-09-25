@@ -1,87 +1,37 @@
-/* La Fleur d'Or : trois modèles de carte à imprimer. S'appuie sur carte-a3.css
-   (polices, couleurs, plats, formules) et ne change que la mise en page. */
+/* La Fleur d'Or : trois autres modèles de la carte A3 pliée (3 volets), chargés en plus de carte-a3.css.
+   Même format, même contenu et même palette ; seuls le style et l'habillage changent.
+   carte-a3.php?modele=livret | ardoise | bistrot */
 
-@page a4 { size: 210mm 297mm; margin: 0; }
-@page a3p { size: 420mm 297mm; margin: 0; }
+/* ---------- Modèle Livret : papier crème, cadre or, titres soulignés d'un double filet ---------- */
+.modele-livret .c-marque {
+  padding: 3.5mm 3mm 3mm;
+  border: 0.6mm solid var(--or);
+  outline: 0.3mm solid rgba(242, 181, 58, 0.55);
+  outline-offset: 0.9mm;
+}
+.modele-livret .c-ardoise {
+  margin-top: 3.8mm; padding: 2.6mm 3.4mm;
+  border: 0; border-radius: 0;
+  box-shadow: 0 3mm 5mm -3mm rgba(20, 6, 2, 0.6);
+}
+.modele-livret .c-ardoise-titre {
+  text-align: left; font-size: 14pt;
+  margin-bottom: 1.8mm; padding-bottom: 1mm;
+  border-bottom: 0.9mm double var(--brique);
+}
+.modele-livret .c-bloc-formule { padding-bottom: 0.35em; border-bottom: 0.3mm dotted var(--pointilles); }
+.modele-livret .c-bloc-formule:last-child { border-bottom: 0; }
+/* Grandes parties : titre centré entre deux filets, sans bandeau */
+.modele-livret .c-partie {
+  display: flex; align-items: center; gap: 0.35em;
+  padding: 0; background: none; color: var(--brique);
+  font-size: 1.45em;
+}
+.modele-livret .c-partie::before, .modele-livret .c-partie::after { content: ""; flex: 1; border-top: 0.5mm solid var(--brique); }
+.modele-livret .c-etal-titre { border-bottom: 0.9mm double var(--brique); padding-bottom: 0.1em; }
 
-.m-page {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: var(--papier);
-  color: var(--texte);
-  break-after: page;
-}
-.m-page:last-child { break-after: auto; }
-.m-a4 { width: 210mm; height: 297mm; page: a4; }
-.m-a3 { width: 420mm; height: 297mm; page: a3p; }
-
-.m-corps { flex: 1; min-height: 0; display: grid; grid-template-rows: minmax(0, 1fr); }
-.m-deux-col { grid-template-columns: 1fr 1fr; column-gap: 9mm; }
-.m-trois-col { grid-template-columns: repeat(3, 1fr); }
-.m-page .c-flux { line-height: 1.18; }
-.m-page .c-flux-formules { line-height: 1.24; }
-.m-page .c-flux-formules .c-service, .m-page .c-flux-formules .c-formule-condition { font-stretch: 100%; }
-.m-page .c-bloc-formule + .c-bloc-formule { margin-top: calc(0.75em + var(--respire, 0px)); }
-/* Colonnes étroites : les prix à plusieurs formats (vins) passent sous le nom */
-.m-deux-col .c-plat-formats { grid-template-columns: minmax(0, 1fr); }
-.m-deux-col .c-plat-formats::after { display: none; }
-.m-deux-col .c-plat-formats .c-formats { justify-self: end; }
-
-.m-pied {
-  display: flex; justify-content: space-between; gap: 4mm;
-  margin-top: 4mm; padding-top: 2mm;
-  border-top: 0.4mm solid var(--filet);
-  color: var(--texte-2); font-size: 9pt;
-}
-.m-pied b { color: var(--accent); font-variant-numeric: tabular-nums; }
-.m-folio { font-weight: 800; color: var(--texte); }
-.m-accroche { font-size: 15pt; }
-
-/* ---------- Modèle 1 : livret ---------- */
-.m-livret-couv {
-  color: var(--craie);
-  background: var(--brique) var(--brique-motif);
-  background-size: 68mm auto;
-}
-.m-cadre {
-  flex: 1;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  margin: 12mm; padding: 16mm 10mm;
-  border: 0.8mm solid var(--or);
-  text-align: center;
-}
-.m-enseigne-grande { gap: 4mm; }
-.m-enseigne-grande span { width: 17mm; height: 17mm; font-size: 27pt; }
-.m-nom-geant {
-  margin-top: 9mm;
-  font-weight: 800; font-stretch: 62%; text-transform: uppercase;
-  font-size: 74pt; line-height: 0.86; letter-spacing: 0;
-  text-shadow: 0 0.8mm 0 rgba(60, 16, 6, 0.25);
-}
-.m-nom-geant span, .m-grand-nom span { color: var(--or); }
-.m-livret-couv .m-accroche { margin-top: 6mm; font-size: 16pt; }
-.m-couv-tel {
-  margin-top: 16mm; padding: 2mm 7mm;
-  background: var(--ardoise); border-radius: 1.5mm;
-  font-weight: 800; font-stretch: 68%; font-size: 32pt; line-height: 1.1; font-variant-numeric: tabular-nums;
-}
-.m-couv-infos { margin-top: 7mm; font-size: 12.5pt; line-height: 1.6; }
-.m-couv-infos b { font-weight: 800; }
-
-.m-livret-page { padding: 14mm 14mm 9mm; }
-.m-entete {
-  display: flex; align-items: baseline; gap: 4mm;
-  margin-bottom: 6mm; padding-bottom: 2mm;
-  border-bottom: 0.8mm solid var(--brique);
-}
-.m-entete h2 { font-weight: 800; font-stretch: 68%; text-transform: uppercase; font-size: 28pt; line-height: 1; }
-.m-entete span { color: var(--texte-2); font-size: 11pt; }
-.m-livret .c-bloc-formule { padding-bottom: 0.6em; border-bottom: 0.35mm dotted var(--pointilles); }
-
-/* ---------- Modèle 2 : cartes A4 par thème (papier gris clair, bandeaux ardoise) ---------- */
-.m-cartes {
+/* ---------- Modèle Ardoise : papier gris clair, bandeau et titres en ardoise, lignes de tableau ---------- */
+.modele-ardoise {
   --papier: #e8e9ea;
   --texte: #1f2326;
   --texte-2: #4f555a;
@@ -89,84 +39,53 @@
   --filet: rgba(31, 35, 38, 0.24);
   --pointilles: rgba(31, 35, 38, 0.4);
 }
-.m-carte-face { padding: 0 0 7mm; }
-.m-bandeau {
-  display: flex; align-items: center; gap: 6mm;
-  padding: 7mm 11mm 6mm;
-  background: var(--ardoise); color: var(--craie);
-  border-bottom: 2.5mm solid var(--brique);
+.modele-ardoise .c-couv::before { background: var(--papier); }
+.modele-ardoise .c-marque, .modele-bistrot .c-marque { position: relative; padding-bottom: 4mm; }
+.modele-ardoise .c-nom-resto, .modele-bistrot .c-nom-resto { font-size: 35pt; margin-top: 2mm; }
+/* Bandeau en haut de la couverture, jusqu'aux bords (fonds perdus compris) */
+.modele-ardoise .c-marque::before, .modele-bistrot .c-marque::before {
+  content: ""; position: absolute; z-index: -1;
+  top: calc(-6mm - var(--fond)); bottom: 0;
+  left: calc(-1 * var(--marge-h)); right: calc(-1 * var(--marge-h) - var(--fond));
 }
-.m-bandeau .c-enseigne { display: grid; grid-template-columns: repeat(2, 8mm); gap: 1.4mm; }
-.m-bandeau .c-enseigne span { width: 8mm; height: 8mm; font-size: 13pt; }
-.m-bandeau-nom { font-weight: 800; font-stretch: 68%; text-transform: uppercase; font-size: 14pt; letter-spacing: 0.04em; }
-.m-bandeau-nom span { color: var(--or); }
-.m-bandeau h2 { margin-top: 0.5mm; color: var(--or); font-weight: 800; font-stretch: 66%; text-transform: uppercase; font-size: 28pt; line-height: 0.95; }
-.m-bandeau-sous { margin-top: 1.5mm; color: var(--craie-2); font-size: 11pt; }
-.m-bandeau-sous b { color: var(--craie); }
-.m-bandeau-mince { display: block; padding: 4.5mm 11mm 3.5mm; border-bottom-width: 1.6mm; }
-.m-bandeau-mince h2 { margin: 0; font-size: 17pt; }
-.m-bandeau-mince .m-bandeau-sous { margin-top: 0.8mm; font-size: 9.5pt; }
-.m-carte-face .m-corps { margin: 6mm 11mm 0; column-gap: 7mm; }
-.m-carte-face .m-pied { margin: 3mm 11mm 0; }
-/* Lignes de tableau plutôt que pointillés */
-.m-cartes .c-plat { padding: 0.08em 0; border-bottom: 0.25mm solid rgba(31, 35, 38, 0.13); }
-.m-cartes .c-plat::after { border-bottom-color: transparent; }
-.m-cartes .c-etal-titre {
-  padding: 0.3em 0.4em 0.22em; margin-bottom: 0.2em;
+.modele-ardoise .c-marque::before { background: var(--ardoise); border-bottom: 2.2mm solid var(--brique); }
+.modele-ardoise .c-enseigne { display: grid; grid-template-columns: repeat(4, 9mm); justify-content: center; }
+.modele-ardoise .c-horaires { color: var(--craie-2); }
+.modele-ardoise .c-horaires b { color: var(--craie); }
+.modele-ardoise .c-ardoise, .modele-bistrot .c-ardoise {
+  margin-top: 4.5mm; padding: 0;
+  background: none; border: 0; border-radius: 0; box-shadow: none;
+}
+.modele-ardoise .c-ardoise-titre { text-align: left; font-size: 14pt; margin-bottom: 2mm; }
+.modele-ardoise .c-bloc-formule {
+  padding: 0.3em 0.45em 0.38em;
+  background: rgba(255, 255, 255, 0.6);
+  border-left: 1.2mm solid var(--brique);
+}
+.modele-ardoise .c-etal-titre {
+  padding: 0.22em 0.4em 0.15em; margin-bottom: 0.15em;
   background: var(--ardoise); color: var(--craie); border-bottom: 0;
 }
-.m-cartes .c-etal-note { color: var(--or); }
-.m-cartes .c-partie { font-size: 1.3em; }
-.m-cartes .c-bloc-formule {
-  padding: 0.45em 0.6em 0.55em;
-  background: rgba(255, 255, 255, 0.55);
-  border-left: 1.3mm solid var(--brique);
-}
-.m-cartes .c-fgroupe-titre { margin-bottom: 0.3em; }
+.modele-ardoise .c-etal-note { color: var(--or); }
+.modele-ardoise .c-plat { padding: 0.01em 0; border-bottom: 0.2mm solid rgba(31, 35, 38, 0.14); }
+.modele-ardoise .c-plat::after { border-bottom-color: transparent; }
 
-/* ---------- Modèle 3 : grand format A3 (ardoise de bistrot sur papier crème) ---------- */
-.m-grand-face { padding: 11mm 14mm 10mm; }
-.m-grand-tete {
-  display: flex; align-items: center; gap: 8mm;
-  margin: -11mm -14mm 7mm; padding: 8mm 14mm;
-  color: var(--craie);
+/* ---------- Modèle Bistrot : papier crème, bandeau de briques, parties sur ardoise, losanges or ---------- */
+.modele-bistrot .c-couv::before { background: var(--papier); }
+.modele-bistrot .c-marque::before {
   background: var(--brique) var(--brique-motif);
   background-size: 68mm auto;
+  border-bottom: 1.6mm solid var(--ardoise);
 }
-.m-grand-tete .c-enseigne span { width: 12mm; height: 12mm; font-size: 19pt; }
-.m-grand-nom {
-  font-weight: 800; font-stretch: 62%; text-transform: uppercase;
-  font-size: 58pt; line-height: 0.86; white-space: nowrap;
-  text-shadow: 0 0.6mm 0 rgba(60, 16, 6, 0.25);
-}
-.m-grand-infos { margin-left: auto; text-align: right; font-size: 11pt; line-height: 1.45; }
-.m-grand-infos .m-accroche { font-size: 15pt; font-weight: 700; }
-.m-grand-tel { font-stretch: 72%; font-size: 17pt; font-variant-numeric: tabular-nums; }
-.m-grand-titre {
-  margin-bottom: 5mm; padding-bottom: 1.5mm;
+.modele-bistrot .c-ardoise-titre {
+  text-align: left; font-size: 17pt;
+  margin-bottom: 2mm; padding-bottom: 1mm;
   border-bottom: 1mm solid var(--brique);
-  font-weight: 800; font-stretch: 66%; text-transform: uppercase; font-size: 26pt; line-height: 1;
 }
-.m-grand-bande {
-  display: flex; justify-content: space-between; align-items: baseline;
-  margin-bottom: 6mm; padding-bottom: 2.5mm;
-  border-bottom: 1mm solid var(--brique);
-  color: var(--texte-2); font-size: 11pt;
-}
-.m-grand-bande p:first-child { color: var(--texte); font-weight: 800; font-stretch: 66%; text-transform: uppercase; font-size: 19pt; line-height: 1; }
-.m-grand-bande span { color: var(--accent); }
-.m-grand .m-trois-col > .c-flux { padding: 0 6.5mm; }
-.m-grand .m-trois-col > .c-flux:first-child { padding-left: 0; }
-.m-grand .m-trois-col > .c-flux:last-child { padding-right: 0; }
-.m-grand .m-trois-col > .c-flux + .c-flux { border-left: 0.35mm solid var(--filet); }
-.m-grand .c-etal-titre { font-size: 1.4em; border-bottom-width: 0.9mm; }
-.m-grand .c-etal-titre::before {
-  content: ""; flex: none; width: 0.4em; height: 0.4em; margin-right: 0.1em;
+.modele-bistrot .c-bloc-formule { padding-top: 0.35em; border-top: 0.55mm solid var(--brique); }
+.modele-bistrot .c-partie { color: var(--or); background: var(--ardoise); }
+.modele-bistrot .c-etal-titre { border-bottom-width: 0.9mm; }
+.modele-bistrot .c-etal-titre::before {
+  content: ""; flex: none; width: 0.38em; height: 0.38em; margin: 0 0.12em 0 0.06em;
   background: var(--or); transform: rotate(45deg);
-}
-.m-grand .c-bloc-formule { padding-top: 0.45em; border-top: 0.7mm solid var(--brique); }
-
-/* ---------- Écran ---------- */
-@media screen {
-  .m-apercu .m-page { margin-bottom: 12mm; box-shadow: 0 4mm 10mm rgba(0, 0, 0, 0.45); }
 }

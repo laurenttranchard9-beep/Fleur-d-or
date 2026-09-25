@@ -1,6 +1,6 @@
 <?php
 /*
- * La Fleur d'Or : morceaux communs aux cartes à imprimer (carte-a3.php, modeles.php).
+ * La Fleur d'Or : morceaux de la carte A3 à imprimer (carte-a3.php).
  * Chaque plat, catégorie ou formule devient un bloc que la mise en page répartit ensuite.
  */
 declare(strict_types=1);
@@ -109,26 +109,22 @@ function a3_section(array $s, string $avant = '', string $apres = ''): string
 
 /**
  * Blocs de la carte : le titre d'une partie reste collé à sa première catégorie.
- * $ids limite aux parties voulues (ex. ['cuisine']) ; $parties affiche leurs bandeaux ;
- * $legende termine par la ligne « pimenté · paiements ».
+ * Horaires et adresse sont sur la couverture ; la légende termine la carte.
  */
-function a3_blocs(array $d, ?array $ids = null, bool $legende = true, bool $parties = true): string
+function a3_blocs(array $d): string
 {
-    $quartiers = array_values(array_filter(
-        $d['quartiers'],
-        fn($q) => ($ids === null || in_array($q['id'], $ids, true)) && fd_sections_visibles($q)
-    ));
+    $quartiers = array_values(array_filter($d['quartiers'], fn($q) => (bool) fd_sections_visibles($q)));
     $o = '';
     foreach ($quartiers as $n => $q) {
         $sections = fd_sections_visibles($q);
         foreach ($sections as $i => $s) {
-            $avant = ($parties && $i === 0) ? '<h2 class="c-partie">' . fd_e($q['titre']) . '</h2>' : '';
+            $avant = $i === 0 ? '<h2 class="c-partie">' . fd_e($q['titre']) . '</h2>' : '';
             $apres = '';
             if ($i === count($sections) - 1) {
                 if ($q['boissons']) {
                     $apres .= '<p class="c-alcool">L’abus d’alcool est dangereux pour la santé, à consommer avec modération.</p>';
                 }
-                if ($legende && $n === count($quartiers) - 1) {
+                if ($n === count($quartiers) - 1) {
                     $apres .= '<p class="c-legende">' . trim(a3_piment()) . ' pimenté · espèces, cartes bancaires, titres-restaurant.</p>';
                 }
             }
@@ -138,19 +134,16 @@ function a3_blocs(array $d, ?array $ids = null, bool $legende = true, bool $part
     return $o;
 }
 
-/** Une formule = un bloc ; le titre de son groupe reste collé à la première. $ids limite aux groupes voulus. */
-function a3_formules(array $d, string $prefixe = 'Formules · ', ?array $ids = null): string
+/** Une formule = un bloc ; le titre de son groupe reste collé à la première. */
+function a3_formules(array $d): string
 {
     $o = '';
     foreach ($d['formules'] as $g) {
-        if ($ids !== null && !in_array($g['id'], $ids, true)) {
-            continue;
-        }
         $menus = array_values(array_filter($g['menus'], fn($m) => $m['imprimer'] !== false));
         foreach ($menus as $i => $m) {
             $o .= '<div class="c-bloc c-bloc-formule">';
             if ($i === 0) {
-                $o .= '<h3 class="c-fgroupe-titre">' . fd_e($prefixe . $g['titre']) . '</h3>';
+                $o .= '<h3 class="c-fgroupe-titre">Formules · ' . fd_e($g['titre']) . '</h3>';
             }
             $o .= '<div class="c-formule"><p class="c-formule-tete"><span>' . fd_e($m['nom']) . '</span><b>' . a3_prix($m['prix']) . '</b></p>';
             if ($m['condition'] !== '') {

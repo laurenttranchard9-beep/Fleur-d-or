@@ -6,6 +6,7 @@
  *   Navigateur : admin/carte-a3.php            (format A3, pour une imprimante de bureau)
  *                admin/carte-a3.php?format=imprimeur   (fonds perdus de 3 mm, pour un imprimeur)
  *   Teinte du papier : crème par défaut, ou &teinte=gris pour un fond gris clair.
+ *   Autres modèles, même format et même palette : &modele=livret | ardoise | bistrot (styles dans modeles.css).
  */
 declare(strict_types=1);
 require __DIR__ . '/lib.php';
@@ -20,24 +21,34 @@ fd_entetes_securite();
 
 $format = ($_GET['format'] ?? '') === 'imprimeur' ? 'imprimeur' : 'a3';
 $teinte = ($_GET['teinte'] ?? '') === 'gris' ? 'gris' : 'creme';
+const A3_MODELES = ['' => 'Carte actuelle', 'livret' => 'Modèle Livret', 'ardoise' => 'Modèle Ardoise', 'bistrot' => 'Modèle Bistrot'];
+$modele = array_key_exists($_GET['modele'] ?? '', A3_MODELES) ? (string) $_GET['modele'] : '';
+if ($modele !== '') {
+    $teinte = 'creme'; // chaque modèle a son papier
+}
 [$d] = fd_valider(fd_lire_carte());
 
-/** Lien vers la carte dans un format et une teinte donnés. */
-function a3_lien(string $format, string $teinte): string
+/** Lien vers la carte dans un format, une teinte et un modèle donnés. */
+function a3_lien(string $format, string $teinte, string $modele = ''): string
 {
-    $q = array_filter(['format' => $format === 'imprimeur' ? 'imprimeur' : null, 'teinte' => $teinte === 'gris' ? 'gris' : null]);
+    $q = array_filter([
+        'modele' => $modele !== '' ? $modele : null,
+        'format' => $format === 'imprimeur' ? 'imprimeur' : null,
+        'teinte' => $teinte === 'gris' ? 'gris' : null,
+    ]);
     return 'carte-a3.php' . ($q ? '?' . http_build_query($q, '', '&amp;') : '');
 }
 
 ?>
 <!DOCTYPE html>
-<html lang="fr" class="<?= $format ?> teinte-<?= $teinte ?>">
+<html lang="fr" class="<?= $format ?> teinte-<?= $teinte ?><?= $modele !== '' ? " modele-$modele" : '' ?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Carte A3 · La Fleur d’Or</title>
+<title><?= $modele !== '' ? fd_e(A3_MODELES[$modele]) . ' · ' : '' ?>Carte A3 · La Fleur d’Or</title>
 <link rel="stylesheet" href="carte-a3.css">
+<?php if ($modele !== ''): ?><link rel="stylesheet" href="modeles.css"><?php endif; ?>
 <script src="carte-a3.js" defer></script>
 </head>
 <body>
@@ -45,13 +56,17 @@ function a3_lien(string $format, string $teinte): string
 <div class="c-outils">
   <p><b>Carte A3, pli roulé en 3 volets</b> · recto : couverture et formules · verso : l’intérieur. Imprimez en <b>A3 paysage, recto-verso (bord court)</b>, sans marges, avec les <b>graphiques d’arrière-plan</b>.</p>
   <p class="c-outils-actions">
-    <a href="<?= a3_lien('a3', $teinte) ?>"<?= $format === 'a3' ? ' aria-current="true"' : '' ?>>Format A3 (bureau)</a>
-    <a href="<?= a3_lien('imprimeur', $teinte) ?>"<?= $format === 'imprimeur' ? ' aria-current="true"' : '' ?>>Format imprimeur (fonds perdus 3 mm)</a>
+    <?php foreach (A3_MODELES as $cle => $nom): ?>
+    <a href="<?= a3_lien($format, $cle === '' ? $teinte : 'creme', $cle) ?>"<?= $cle === $modele ? ' aria-current="true"' : '' ?>><?= fd_e($nom) ?></a>
+    <?php endforeach; ?>
   </p>
   <p class="c-outils-actions">
+    <a href="<?= a3_lien('a3', $teinte, $modele) ?>"<?= $format === 'a3' ? ' aria-current="true"' : '' ?>>Format A3 (bureau)</a>
+    <a href="<?= a3_lien('imprimeur', $teinte, $modele) ?>"<?= $format === 'imprimeur' ? ' aria-current="true"' : '' ?>>Format imprimeur (fonds perdus 3 mm)</a>
+    <?php if ($modele === ''): ?>
     <a href="<?= a3_lien($format, 'creme') ?>"<?= $teinte === 'creme' ? ' aria-current="true"' : '' ?>>Fond crème</a>
     <a href="<?= a3_lien($format, 'gris') ?>"<?= $teinte === 'gris' ? ' aria-current="true"' : '' ?>>Fond gris clair</a>
-    <a href="modeles.php">Autres modèles (livret, cartes A4, grand format)</a>
+    <?php endif; ?>
   </p>
   <p class="c-outils-actions">
     <button type="button" data-imprimer>Imprimer ou enregistrer en PDF</button>
