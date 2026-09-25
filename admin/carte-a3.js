@@ -23,6 +23,13 @@
     var i = 0;
     for (var k = 0; k < flux.length; k++) {
       var f = flux[k];
+      // Rabat et dos : une catégorie n'y est jamais coupée, elle passe entière au volet suivant
+      if (k > 0 && f.hasAttribute("data-sans-coupe")) {
+        while (i < blocs.length && blocs[i].classList.contains("c-bloc-suite") && flux[k - 1].children.length > 1) {
+          i--;
+          flux[k - 1].removeChild(blocs[i]);
+        }
+      }
       while (i < blocs.length) {
         f.appendChild(blocs[i]);
         if (deborde(f)) {
@@ -64,11 +71,14 @@
 
   /** Répartit l'espace libre d'un volet entre ses blocs, sans dépasser un écart raisonnable. */
   function respirer(conteneur, selecteur, variable, plafond) {
-    var n = conteneur.querySelectorAll(selecteur).length;
+    // Les écarts vont au-dessus de chaque bloc, sauf le premier du volet
+    var n = Array.prototype.filter.call(conteneur.querySelectorAll(selecteur), function (b) {
+      return b !== conteneur.firstElementChild;
+    }).length;
     conteneur.style.setProperty(variable, "0px");
     var place = libre(conteneur);
-    if (n < 2 || place <= 0) return;
-    conteneur.style.setProperty(variable, Math.min(place / (n - 1), plafond) + "px");
+    if (n < 1 || place <= 0) return;
+    conteneur.style.setProperty(variable, Math.min(place / n, plafond) + "px");
     if (deborde(conteneur) || libre(conteneur) < 0) conteneur.style.setProperty(variable, "0px");
   }
 
@@ -83,7 +93,7 @@
     respirer(ardoise, ".c-bloc-formule", "--respire", 3 * mm);
     flux.forEach(function (f) {
       // Le bloc « Horaires et contact » descend en bas de son volet : pas de respiration là.
-      if (!f.querySelector(".c-infos")) respirer(f, ".c-bloc", "--respire", 7 * mm);
+      if (!f.querySelector(".c-infos")) respirer(f, ".c-bloc:not(.c-bloc-coupe)", "--respire", 7 * mm);
     });
 
     var restant = reserve.children.length + (ef === null ? 1 : 0);

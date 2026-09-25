@@ -55,36 +55,61 @@ function a3_titre(array $s, bool $suite): string
     return $o . '</h3>';
 }
 
-function a3_groupe(array $g): string
+function a3_groupe(array $g, array $plats, bool $repris = false): string
 {
     $o = '<div class="c-groupe">';
     if ($g['titre'] !== '') {
-        $o .= '<h4 class="c-groupe-titre">' . fd_e($g['titre']) . '</h4>';
+        // Morceau repris : le sous-titre ne s'affiche que s'il ouvre un volet
+        $o .= '<h4 class="c-groupe-titre' . ($repris ? ' c-repris' : '') . '">' . fd_e($g['titre']) . '</h4>';
     }
-    if ($g['note'] !== '') {
+    if (!$repris && $g['note'] !== '') {
         $o .= '<p class="c-groupe-note">' . fd_e($g['note']) . '</p>';
     }
     $o .= '<ul class="c-plats">';
-    foreach ($g['plats'] as $p) {
+    foreach ($plats as $p) {
         $o .= a3_plat($p);
     }
     return $o . '</ul></div>';
 }
 
+/** Coupe une longue liste en morceaux d'au moins 3 plats, pour mieux remplir les volets. */
+function a3_morceaux(array $plats): array
+{
+    $n = count($plats);
+    $k = intdiv($n, 3);
+    if ($n <= 5 || $k < 2) {
+        return [$plats];
+    }
+    $morceaux = [];
+    $debut = 0;
+    for ($i = 0; $i < $k; $i++) {
+        $taille = intdiv($n, $k) + ($i < $n % $k ? 1 : 0);
+        $morceaux[] = array_slice($plats, $debut, $taille);
+        $debut += $taille;
+    }
+    return $morceaux;
+}
+
 /**
- * Une catégorie donne un bloc par groupe : elle peut se couper entre deux sous-titres.
- * Le premier bloc porte le titre ; les suivants affichent « (suite) » s'ils ouvrent un volet.
+ * Une catégorie donne un bloc par groupe, et les longues listes se coupent en morceaux :
+ * elle peut ainsi continuer sur le volet suivant. Le premier bloc porte le titre ;
+ * les suivants affichent « (suite) » s'ils ouvrent un volet.
  */
 function a3_section(array $s, string $avant = '', string $apres = ''): string
 {
     $groupes = array_values(array_filter($s['groupes'], fn($g) => (bool) $g['plats']));
     $o = '';
     foreach ($groupes as $i => $g) {
-        $dernier = $i === count($groupes) - 1;
-        if ($i === 0) {
-            $o .= '<div class="c-bloc">' . $avant . a3_titre($s, false) . a3_groupe($g) . ($dernier ? $apres : '') . '</div>';
-        } else {
-            $o .= '<div class="c-bloc c-bloc-suite">' . a3_titre($s, true) . a3_groupe($g) . ($dernier ? $apres : '') . '</div>';
+        $morceaux = a3_morceaux($g['plats']);
+        foreach ($morceaux as $j => $plats) {
+            $fin = ($i === count($groupes) - 1 && $j === count($morceaux) - 1) ? $apres : '';
+            if ($i === 0 && $j === 0) {
+                $o .= '<div class="c-bloc">' . $avant . a3_titre($s, false) . a3_groupe($g, $plats) . $fin . '</div>';
+            } elseif ($j === 0) {
+                $o .= '<div class="c-bloc c-bloc-suite">' . a3_titre($s, true) . a3_groupe($g, $plats) . $fin . '</div>';
+            } else {
+                $o .= '<div class="c-bloc c-bloc-suite c-bloc-coupe">' . a3_titre($s, true) . a3_groupe($g, $plats, true) . $fin . '</div>';
+            }
         }
     }
     return $o;
@@ -163,8 +188,8 @@ $sprite = '<svg class="c-sprite" aria-hidden="true" xmlns="http://www.w3.org/200
 </div>
 <div class="c-apercu" data-apercu>
   <section class="c-feuille c-recto" aria-label="Recto : extérieur de la carte">
-    <div class="c-volet c-v1"><div class="c-flux" data-flux="4"></div></div>
-    <div class="c-volet c-v2"><div class="c-flux" data-flux="5"></div></div>
+    <div class="c-volet c-v1"><div class="c-flux" data-flux="4" data-sans-coupe></div></div>
+    <div class="c-volet c-v2"><div class="c-flux" data-flux="5" data-sans-coupe></div></div>
     <div class="c-volet c-v3 c-couv">
       <div class="c-marque">
         <p class="c-enseigne" lang="zh-Hant" aria-label="金花餐廳"><span>金</span><span>花</span><span>餐</span><span>廳</span></p>
