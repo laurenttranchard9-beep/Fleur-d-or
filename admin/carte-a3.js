@@ -60,6 +60,22 @@
     return bon;
   }
 
+  /**
+   * La coupe entre volets change avec la taille : une taille un peu plus grande peut tenir
+   * alors qu'une plus petite ne tient pas. On essaie donc aussi, pas à pas, au-dessus du résultat.
+   */
+  function affiner(variable, essai, depart) {
+    if (depart === null) return null;
+    var bon = depart;
+    for (var v = depart + 0.004; v <= depart * 1.12; v += 0.004) {
+      racine.style.setProperty(variable, String(v));
+      if (essai()) bon = v;
+    }
+    racine.style.setProperty(variable, String(bon));
+    essai();
+    return bon;
+  }
+
   /** Espace vide sous le dernier élément d'un conteneur. */
   function libre(conteneur) {
     var dernier = conteneur.lastElementChild;
@@ -84,17 +100,14 @@
 
   function miseEnPage() {
     var mm = 96 / 25.4;
-    var e = chercher("--e", remplir, 0.7, 1.4);
+    var e = affiner("--e", remplir, chercher("--e", remplir, 0.7, 1.4));
     var ef = chercher("--ef", function () {
       ardoise.textContent = "";
       formules.forEach(function (f) { ardoise.appendChild(f); });
       return !deborde(ardoise);
     }, 0.6, 1.4);
     respirer(ardoise, ".c-bloc-formule", "--respire", 3 * mm);
-    flux.forEach(function (f) {
-      // Le bloc « Horaires et contact » descend en bas de son volet : pas de respiration là.
-      if (!f.querySelector(".c-infos")) respirer(f, ".c-bloc:not(.c-bloc-coupe)", "--respire", 7 * mm);
-    });
+    flux.forEach(function (f) { respirer(f, ".c-bloc:not(.c-bloc-coupe)", "--respire", 7 * mm); });
 
     var restant = reserve.children.length + (ef === null ? 1 : 0);
     if (etat) {

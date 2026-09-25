@@ -2575,30 +2575,6 @@
               ]
             }
           ]
-        },
-        {
-          "id": "champagne",
-          "titre": "Champagne",
-          "note": "",
-          "prefixe": "",
-          "piment": false,
-          "photo": "",
-          "photo_alt": "",
-          "groupes": [
-            {
-              "titre": "",
-              "note": "",
-              "plats": [
-                {
-                  "nom": "Maison Gyéjacquot (75 cl)",
-                  "desc": "",
-                  "piment": false,
-                  "prix": 45.0,
-                  "formats": []
-                }
-              ]
-            }
-          ]
         }
       ]
     }

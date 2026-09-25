@@ -124,25 +124,30 @@ function a3_section(array $s, string $avant = '', string $apres = ''): string
     return $o;
 }
 
-/** Blocs de la carte : le titre d'une partie reste collé à sa première catégorie. */
+/**
+ * Blocs de la carte : le titre d'une partie reste collé à sa première catégorie.
+ * Horaires et adresse sont sur la couverture ; la légende termine la carte.
+ */
 function a3_blocs(array $d): string
 {
+    $quartiers = array_values(array_filter($d['quartiers'], fn($q) => (bool) fd_sections_visibles($q)));
     $o = '';
-    foreach ($d['quartiers'] as $q) {
+    foreach ($quartiers as $n => $q) {
         $sections = fd_sections_visibles($q);
         foreach ($sections as $i => $s) {
             $avant = $i === 0 ? '<h2 class="c-partie">' . fd_e($q['titre']) . '</h2>' : '';
-            $apres = ($q['boissons'] && $i === count($sections) - 1)
-                ? '<p class="c-alcool">L’abus d’alcool est dangereux pour la santé, à consommer avec modération.</p>' : '';
+            $apres = '';
+            if ($i === count($sections) - 1) {
+                if ($q['boissons']) {
+                    $apres .= '<p class="c-alcool">L’abus d’alcool est dangereux pour la santé, à consommer avec modération.</p>';
+                }
+                if ($n === count($quartiers) - 1) {
+                    $apres .= '<p class="c-legende">' . trim(a3_piment()) . ' pimenté · espèces, cartes bancaires, titres-restaurant.</p>';
+                }
+            }
             $o .= a3_section($s, $avant, $apres);
         }
     }
-    $o .= '<div class="c-bloc c-infos">'
-        . '<p class="c-infos-tel">05 61 82 43 56</p>'
-        . '<p><b>Du mardi au samedi</b> 12h – 14h et 18h – 22h · <b>Dimanche</b> 18h – 22h · fermé le dimanche midi et le lundi.</p>'
-        . '<p>14 bis, avenue du Président Kennedy, 31330 Grenade · sur place ou à emporter.</p>'
-        . '<p class="c-infos-legende">' . trim(a3_piment()) . ' pimenté · espèces, cartes bancaires, titres-restaurant.</p>'
-        . '</div>';
     return $o;
 }
 
@@ -210,7 +215,8 @@ $sprite = '<svg class="c-sprite" aria-hidden="true" xmlns="http://www.w3.org/200
         <p class="c-enseigne" lang="zh-Hant" aria-label="金花餐廳"><span>金</span><span>花</span><span>餐</span><span>廳</span></p>
         <h1 class="c-nom-resto">La Fleur d’<span>Or</span></h1>
         <p class="c-accroche">Cuisine asiatique · Bar à sushis</p>
-        <p class="c-contact">Sur place ou à emporter · <b>05 61 82 43 56</b> · Grenade</p>
+        <p class="c-contact">Sur place ou à emporter · <b>05 61 82 43 56</b></p>
+        <p class="c-horaires"><b>Du mardi au samedi</b> 12h – 14h et 18h – 22h · <b>dimanche</b> 18h – 22h<br>Fermé le dimanche midi et le lundi · 14 bis, av. du Président Kennedy, Grenade</p>
       </div>
       <div class="c-ardoise">
         <h2 class="c-ardoise-titre">Les formules</h2>
