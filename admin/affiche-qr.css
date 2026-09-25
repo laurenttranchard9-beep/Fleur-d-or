@@ -77,6 +77,30 @@
 }
 .q-pied b { color: var(--accent); font-variant-numeric: tabular-nums; }
 
+/* ---------- Étiquettes format carte de visite : 85 × 55 mm, 2 × 5 sur A4 ---------- */
+.q-etiquettes .q-feuille {
+  grid-template-columns: repeat(2, 85mm); grid-template-rows: repeat(5, 55mm);
+  justify-content: center; align-content: center;
+}
+.q-etiquette {
+  --u: 1mm;
+  display: flex; align-items: center; gap: 4mm;
+  padding: 0 4mm 0 5mm;
+  overflow: hidden;
+  background: var(--papier) linear-gradient(var(--brique), var(--brique)) left / 2mm 100% no-repeat;
+  color: var(--texte);
+  outline: 0.2mm dashed rgba(34, 38, 42, 0.3); /* traits de coupe */
+}
+.q-etiquette .q-cadre { flex: none; margin: 0; padding: 0.8mm; border-width: 1.2mm; border-radius: 1mm; box-shadow: none; }
+.q-etiquette .q-code, .q-etiquette .q-code svg { width: 35mm; height: 35mm; }
+.q-etiquette-texte { flex: 1; min-width: 0; text-align: left; }
+.q-etiquette .q-enseigne { justify-content: flex-start; gap: 1mm; }
+.q-etiquette .q-enseigne span { width: 5.4mm; height: 5.4mm; font-size: 3.4mm; }
+.q-etiquette .q-nom { margin-top: 1.6mm; color: var(--texte); font-size: 5.9mm; text-shadow: none; white-space: nowrap; }
+.q-etiquette .q-nom span { color: var(--accent); }
+.q-etiquette .q-titre { margin-top: 2mm; color: var(--accent); font-size: 4.6mm; line-height: 1; }
+.q-etiquette .q-pied { margin: 2mm 0 0; padding: 1.4mm 0 0; border-top: 0.4mm solid var(--brique); font-size: 3.4mm; }
+
 /* ---------- Écran ---------- */
 @media screen {
   .q-form { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; }
