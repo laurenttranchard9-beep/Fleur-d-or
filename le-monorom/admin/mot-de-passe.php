@@ -27,6 +27,7 @@ function demander(string $question): string
     return $reponse;
 }
 
+echo "Les caractères ne s'affichent pas pendant la saisie : c'est normal. Validez avec Entrée.\n";
 $mdp = demander('Nouveau mot de passe : ');
 if (($refus = fd_mot_de_passe_acceptable($mdp)) !== null) {
     fwrite(STDERR, $refus . "\n");
