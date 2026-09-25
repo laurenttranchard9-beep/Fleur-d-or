@@ -135,6 +135,13 @@
   font-family: "Noto Serif TC", "Songti TC", serif; font-weight: 900; font-stretch: 100%; font-size: 2.9mm; text-transform: none;
 }
 
+/* 12 étiquettes carrées sur A4 (3 × 4), traits de coupe en pointillés */
+.q-carres .q-feuille {
+  grid-template-columns: repeat(3, 60mm); grid-template-rows: repeat(4, 60mm);
+  justify-content: center; align-content: center;
+}
+.q-carres .q-carre { outline: 0.2mm dashed rgba(34, 38, 42, 0.3); }
+
 /* ---------- Écran ---------- */
 @media screen {
   .q-form { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; }
