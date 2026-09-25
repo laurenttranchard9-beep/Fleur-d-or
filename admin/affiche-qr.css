@@ -106,6 +106,35 @@
 .q-une .q-feuille { width: 85mm; height: 55mm; page: etiquette; display: block; }
 .q-une .q-feuille > .q-etiquette { width: 85mm; height: 55mm; outline: 0; }
 
+/* Étiquette carrée : page de 60 × 60 mm */
+@page carre { size: 60mm 60mm; margin: 0; }
+.q-page-carree .q-feuille { width: 60mm; height: 60mm; page: carre; display: block; }
+.q-carre {
+  --u: 1mm;
+  width: 60mm; height: 60mm;
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  padding: 3.2mm 3mm 2.8mm;
+  background: var(--papier);
+  border-top: 2.4mm solid var(--brique);
+  color: var(--texte); text-align: center;
+}
+.q-carre .q-titre { color: var(--accent); font-size: 4.4mm; line-height: 0.98; }
+.q-carre .q-cadre { margin: 0; padding: 0.6mm; border-width: 1mm; border-radius: 0.8mm; box-shadow: none; }
+.q-carre .q-code, .q-carre .q-code svg { width: 34mm; height: 34mm; }
+.q-carre .q-nom {
+  display: flex; align-items: center; gap: 1.2mm;
+  margin: 0; color: var(--texte); font-size: 3.9mm; line-height: 1; text-shadow: none; white-space: nowrap;
+}
+.q-carre .q-nom span { color: var(--texte); }
+.q-carre .q-nom .q-disque { color: var(--chene); }
+.q-carre .q-nom i { font-style: normal; color: var(--accent); }
+.q-carre .q-nom b { font-stretch: 72%; color: var(--accent); font-variant-numeric: tabular-nums; }
+.q-disque {
+  display: grid; place-items: center; width: 4.6mm; height: 4.6mm; border-radius: 50%;
+  background: var(--or); color: var(--chene);
+  font-family: "Noto Serif TC", "Songti TC", serif; font-weight: 900; font-stretch: 100%; font-size: 2.9mm; text-transform: none;
+}
+
 /* ---------- Écran ---------- */
 @media screen {
   .q-form { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; }
