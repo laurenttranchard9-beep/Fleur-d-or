@@ -1,0 +1,96 @@
+/* La Fleur d'Or : affiche QR code. S'appuie sur carte-a3.css (polices, couleurs, barre d'outils).
+   Toutes les tailles sont en --u : 1 mm pour l'affiche A4, 0,5 mm pour une carte A6. */
+
+@page { size: 210mm 297mm; margin: 0; }
+
+.q-feuille {
+  width: 210mm; height: 297mm;
+  display: grid;
+  background: #fff;
+  overflow: hidden;
+}
+.q-chevalets .q-feuille { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+
+.q-affiche {
+  --u: 1mm;
+  position: relative;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  background: var(--papier);
+  color: var(--texte);
+  text-align: center;
+}
+.q-a6 { --u: 0.5mm; }
+/* Traits de coupe discrets entre les cartes A6 */
+.q-a6:nth-child(odd) { border-right: 0.2mm dashed rgba(34, 38, 42, 0.3); }
+.q-a6:nth-child(-n + 2) { border-bottom: 0.2mm dashed rgba(34, 38, 42, 0.3); }
+
+.q-tete {
+  padding: calc(14 * var(--u)) calc(10 * var(--u)) calc(11 * var(--u));
+  color: var(--craie);
+  background: var(--brique) var(--brique-motif);
+  background-size: calc(68 * var(--u)) auto;
+  border-bottom: calc(2.2 * var(--u)) solid var(--ardoise);
+}
+.q-enseigne { display: flex; justify-content: center; gap: calc(3 * var(--u)); }
+.q-enseigne span {
+  display: grid; place-items: center;
+  width: calc(14 * var(--u)); height: calc(14 * var(--u)); border-radius: 50%;
+  background: var(--or); color: var(--chene);
+  font-family: "Noto Serif TC", "Songti TC", serif; font-weight: 900; font-size: calc(8.6 * var(--u)); line-height: 1;
+}
+.q-nom {
+  margin-top: calc(6 * var(--u));
+  font-weight: 800; font-stretch: 62%; text-transform: uppercase;
+  font-size: calc(26 * var(--u)); line-height: 0.86;
+  text-shadow: 0 calc(0.7 * var(--u)) 0 rgba(60, 16, 6, 0.25);
+}
+.q-nom span { color: var(--or); }
+.q-accroche { margin-top: calc(4 * var(--u)); font-size: calc(5.6 * var(--u)); }
+
+.q-corps {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: calc(8 * var(--u)) calc(12 * var(--u));
+}
+.q-titre {
+  font-weight: 800; font-stretch: 66%; text-transform: uppercase;
+  font-size: calc(17 * var(--u)); line-height: 0.95; letter-spacing: 0.01em;
+}
+.q-cadre {
+  margin-top: calc(9 * var(--u));
+  padding: calc(2.2 * var(--u));
+  border: calc(2.2 * var(--u)) solid var(--chene-2);
+  border-radius: calc(1.5 * var(--u));
+  background: #fff;
+  box-shadow: 0 calc(3 * var(--u)) calc(5 * var(--u)) calc(-3 * var(--u)) rgba(20, 6, 2, 0.45);
+}
+.q-code, .q-code svg { display: block; width: calc(78 * var(--u)); height: calc(78 * var(--u)); }
+.q-aide { margin-top: calc(7 * var(--u)); color: var(--texte-2); font-size: calc(5.2 * var(--u)); }
+.q-adresse { margin-top: calc(1.5 * var(--u)); color: var(--accent); font-weight: 700; font-size: calc(5.2 * var(--u)); }
+
+.q-pied {
+  padding: calc(5 * var(--u)) calc(10 * var(--u)) calc(9 * var(--u));
+  border-top: calc(0.6 * var(--u)) solid var(--brique);
+  margin: 0 calc(12 * var(--u));
+  font-size: calc(5.4 * var(--u));
+}
+.q-pied b { color: var(--accent); font-variant-numeric: tabular-nums; }
+
+/* ---------- Écran ---------- */
+@media screen {
+  .q-form { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; }
+  .q-form input {
+    min-width: min(420px, 70vw); min-height: 40px; padding: 0 10px;
+    border: 2px solid rgba(255, 246, 236, 0.4); border-radius: 3px;
+    background: rgba(0, 0, 0, 0.2); color: var(--craie); font: inherit;
+  }
+  .q-apercu { display: flex; justify-content: center; padding: 24px 16px; }
+  .q-feuille { box-shadow: 0 4mm 10mm rgba(0, 0, 0, 0.45); }
+}
+@media screen and (max-width: 860px) {
+  .q-feuille { zoom: 0.45; }
+}
+@media print {
+  .q-apercu { padding: 0; }
+}

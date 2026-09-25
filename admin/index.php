@@ -94,6 +94,7 @@ $csrf = fd_csrf();
   <nav class="a-poutre-actions" aria-label="Liens">
     <a class="a-lien-site" href="../" target="_blank" rel="noopener"><svg class="a-ico" aria-hidden="true"><use href="#i-oeil"></use></svg><span>Voir le site</span></a>
     <a class="a-lien-site" href="carte-a3.php" target="_blank" rel="noopener"><svg class="a-ico" aria-hidden="true"><use href="#i-imprimer"></use></svg><span>Carte A3</span></a>
+    <a class="a-lien-site" href="affiche-qr.php" target="_blank" rel="noopener"><svg class="a-ico" aria-hidden="true"><use href="#i-imprimer"></use></svg><span>Affiche QR code</span></a>
     <form method="post" action="./" class="a-deconnexion">
       <input type="hidden" name="csrf" value="<?= fd_e($csrf) ?>">
       <input type="hidden" name="action" value="deconnexion">

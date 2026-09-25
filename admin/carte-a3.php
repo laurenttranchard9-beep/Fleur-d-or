@@ -59,6 +59,7 @@ function a3_lien(string $format, string $teinte, string $modele = ''): string
     <?php foreach (A3_MODELES as $cle => $nom): ?>
     <a href="<?= a3_lien($format, $cle === '' ? $teinte : 'creme', $cle) ?>"<?= $cle === $modele ? ' aria-current="true"' : '' ?>><?= fd_e($nom) ?></a>
     <?php endforeach; ?>
+    <a href="affiche-qr.php">Affiche QR code</a>
   </p>
   <p class="c-outils-actions">
     <a href="<?= a3_lien('a3', $teinte, $modele) ?>"<?= $format === 'a3' ? ' aria-current="true"' : '' ?>>Format A3 (bureau)</a>

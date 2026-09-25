@@ -83,6 +83,8 @@ Le fichier `.htaccess` règle la compression et le cache, et renvoie une erreur 
 
 La taille du texte s’ajuste comme pour la carte actuelle (plats 10 à 10,5 pt, formules environ 8 pt). Les PDF sont dans `impression/` (`carte-a3-livret.pdf`, `carte-a3-ardoise.pdf`, `carte-a3-bistrot.pdf`, et leurs versions `-imprimeur`).
 
+**Affiche QR code :** le lien « Affiche QR code » du panneau ouvre l’affiche « Scannez pour accéder au menu », en affiche A4 ou en 4 cartes de table A6 à découper. Le QR code mène aux formules et à la carte du site (`/#formules`) ; saisissez l’adresse du site en haut de la page (par défaut, celle du serveur), puis testez le code avec un téléphone avant d’imprimer. Le code est calculé dans la page par `admin/vendor/qrcode.js` (qrcode-generator, licence MIT), sans service extérieur. Les PDF du 25 septembre 2026 (`impression/affiche-qr-a4.pdf`, `impression/affiche-qr-cartes-a6.pdf`) pointent vers https://www.restaurant-lafleurdor.com/.
+
 ## Mettre en ligne sur un serveur Amazon Linux (EC2)
 
 Le script `deploy/amazon-linux.sh` installe Apache, PHP et git, télécharge le site depuis GitHub dans `/var/www/fleur-dor` et le met en ligne sur le port 80. Il marche sur Amazon Linux 2023 et Amazon Linux 2.
