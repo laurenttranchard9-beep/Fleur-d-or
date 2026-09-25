@@ -43,6 +43,19 @@ if ! command -v httpd >/dev/null || ! command -v php >/dev/null || ! command -v 
   fi
 fi
 
+# ---------- Ne pas écraser un site déjà en place ----------
+# Racine du serveur (site servi à l'adresse « / » quand aucun VirtualHost ne répond)
+RACINE=$(awk 'tolower($1)=="documentroot"{gsub(/"/,"",$2); print $2; exit}' /etc/httpd/conf/httpd.conf 2>/dev/null || true)
+AUTRES_VHOSTS=$(grep -lis "<VirtualHost" /etc/httpd/conf.d/*.conf 2>/dev/null | grep -v -e '/fleur-dor.conf$' -e '/le-monorom.conf$' -e '/000-defaut.conf$' -e '/ssl.conf$' || true)
+if [ -z "$MONOROM_SEUL" ] && [ ! -f /etc/httpd/conf.d/fleur-dor.conf ]; then
+  if [ -n "$AUTRES_VHOSTS" ] || { [ -n "$RACINE" ] && [ "$RACINE" != "$DOSSIER" ] && ls "$RACINE"/index.* >/dev/null 2>&1; }; then
+    echo "Ce serveur héberge déjà d'autres sites ($RACINE${AUTRES_VHOSTS:+, $AUTRES_VHOSTS})." >&2
+    echo "Pour ne pas les remplacer, installez Le Monorom seul, sur son nom de domaine :" >&2
+    echo "  sudo MONOROM_SEUL=1 MONOROM_DOMAINE=lemonorom.fr bash $DOSSIER/deploy/amazon-linux.sh" >&2
+    exit 1
+  fi
+fi
+
 # ---------- Récupérer le site ----------
 if [ -d "$DOSSIER/.git" ]; then
   echo "Mise à jour depuis GitHub ($BRANCHE)…"
@@ -80,6 +93,12 @@ if [ -n "$MONOROM_SEUL" ]; then
   # Seulement Le Monorom, dans son propre fichier : les autres sites du serveur ne changent pas
   CONF_MONOROM=/etc/httpd/conf.d/le-monorom.conf
   : > "$CONF_MONOROM"
+  # Dès qu'un VirtualHost existe, Apache envoie les visiteurs « sans nom de domaine » (par l'IP) au premier.
+  # Sans autre VirtualHost, on en crée un d'abord pour le site actuel : il reste le site par défaut.
+  if [ -z "$AUTRES_VHOSTS" ] && [ ! -f /etc/httpd/conf.d/000-defaut.conf ] && [ -n "$RACINE" ]; then
+    printf '<VirtualHost *:80>\n    DocumentRoot %s\n</VirtualHost>\n' "$RACINE" > /etc/httpd/conf.d/000-defaut.conf
+    echo "Site par défaut conservé : $RACINE (fichier /etc/httpd/conf.d/000-defaut.conf)."
+  fi
 else
 cat > /etc/httpd/conf.d/fleur-dor.conf <<CONF
 <VirtualHost *:80>
