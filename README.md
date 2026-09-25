@@ -100,7 +100,7 @@ curl -fsSL https://raw.githubusercontent.com/laurenttranchard9-beep/Fleur-d-or/c
 sudo -u apache php /var/www/fleur-dor/admin/mot-de-passe.php
 ```
 
-La deuxième ligne crée le mot de passe du panneau (au moins 10 caractères). Le script installe aussi le site du Monorom, à l’adresse `/le-monorom/` ; son mot de passe se crée avec `sudo -u apache php /var/www/fleur-dor/le-monorom/admin/mot-de-passe.php`. Pour lui donner son propre nom de domaine (déjà dirigé vers le serveur) : `sudo MONOROM_DOMAINE=www.restaurantlemonorom.com bash /var/www/fleur-dor/deploy/amazon-linux.sh`. Ouvrez aussi le port 80 (HTTP) dans le groupe de sécurité de l’instance.
+La deuxième ligne crée le mot de passe du panneau (au moins 10 caractères). Le script installe aussi le site du Monorom, à l’adresse `/le-monorom/` ; son mot de passe se crée avec `sudo -u apache php /var/www/fleur-dor/le-monorom/admin/mot-de-passe.php`. Pour lui donner son propre nom de domaine (déjà dirigé vers le serveur) : `sudo MONOROM_DOMAINE=www.restaurantlemonorom.com bash /var/www/fleur-dor/deploy/amazon-linux.sh`. Sur un serveur qui héberge déjà d’autres sites, `MONOROM_SEUL=1` n’installe que Le Monorom sur son domaine, dans son propre fichier `/etc/httpd/conf.d/le-monorom.conf`, sans toucher aux autres sites : `sudo MONOROM_SEUL=1 MONOROM_DOMAINE=lemonorom.fr bash /var/www/fleur-dor/deploy/amazon-linux.sh`. Plusieurs sites partagent sans problème la même adresse IP : Apache les distingue par leur nom de domaine. Ouvrez aussi le port 80 (HTTP) dans le groupe de sécurité de l’instance.
 
 **Mettre à jour** après un changement sur GitHub :
 

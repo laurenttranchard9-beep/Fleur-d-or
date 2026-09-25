@@ -8,6 +8,9 @@
 #   La Fleur d'Or : http://adresse-du-serveur/        Le Monorom : http://adresse-du-serveur/le-monorom/
 # Pour donner au Monorom son propre nom de domaine (déjà dirigé vers ce serveur) :
 #   sudo MONOROM_DOMAINE=www.restaurantlemonorom.com bash /var/www/fleur-dor/deploy/amazon-linux.sh
+# Serveur qui héberge déjà d'autres sites : n'installer que Le Monorom, sur son nom de domaine,
+# sans toucher aux sites existants ni devenir le site par défaut :
+#   sudo MONOROM_SEUL=1 MONOROM_DOMAINE=lemonorom.fr bash /var/www/fleur-dor/deploy/amazon-linux.sh
 # Une mise à jour prend les cartes de GitHub ; la carte de chaque site modifiée dans son panneau
 # est d'abord gardée dans les sauvegardes de ce panneau, onglet « Sauvegardes ».
 set -euo pipefail
@@ -16,7 +19,12 @@ DEPOT="${DEPOT:-https://github.com/laurenttranchard9-beep/Fleur-d-or.git}"
 BRANCHE="${BRANCHE:-claude/practical-mendel-dpj572}"
 DOSSIER="${DOSSIER:-/var/www/fleur-dor}"
 MONOROM_DOMAINE="${MONOROM_DOMAINE:-}"
+MONOROM_SEUL="${MONOROM_SEUL:-}"
 SITES=". le-monorom"
+if [ -n "$MONOROM_SEUL" ] && [ -z "$MONOROM_DOMAINE" ]; then
+  echo "MONOROM_SEUL demande aussi MONOROM_DOMAINE (ex. MONOROM_DOMAINE=lemonorom.fr)." >&2
+  exit 1
+fi
 
 if [ "$(id -u)" -ne 0 ]; then
   echo "Lancez ce script avec sudo." >&2
@@ -67,6 +75,12 @@ for s in $SITES; do
 done
 
 # ---------- Apache : ce site sur le port 80, .htaccess actifs ----------
+CONF_MONOROM=/etc/httpd/conf.d/fleur-dor.conf
+if [ -n "$MONOROM_SEUL" ]; then
+  # Seulement Le Monorom, dans son propre fichier : les autres sites du serveur ne changent pas
+  CONF_MONOROM=/etc/httpd/conf.d/le-monorom.conf
+  : > "$CONF_MONOROM"
+else
 cat > /etc/httpd/conf.d/fleur-dor.conf <<CONF
 <VirtualHost *:80>
     DocumentRoot $DOSSIER
@@ -80,10 +94,11 @@ cat > /etc/httpd/conf.d/fleur-dor.conf <<CONF
     </DirectoryMatch>
 </VirtualHost>
 CONF
+fi
 if [ -n "$MONOROM_DOMAINE" ]; then
   # Le Monorom sur son propre nom de domaine (avec et sans www)
   NU="${MONOROM_DOMAINE#www.}"
-  cat >> /etc/httpd/conf.d/fleur-dor.conf <<CONF
+  cat >> "$CONF_MONOROM" <<CONF
 <VirtualHost *:80>
     ServerName $NU
     ServerAlias www.$NU
@@ -103,15 +118,21 @@ if systemctl list-unit-files php-fpm.service >/dev/null 2>&1; then
   systemctl restart php-fpm
 fi
 systemctl enable httpd >/dev/null 2>&1
-systemctl restart httpd
+if ! apachectl configtest; then
+  echo "La configuration d'Apache contient une erreur : rien n'a été redémarré." >&2
+  exit 1
+fi
+systemctl reload httpd 2>/dev/null || systemctl restart httpd
 
 IP=$(curl -fsS -m 2 http://checkip.amazonaws.com 2>/dev/null || hostname -I | awk '{print $1}')
 IP=${IP:-adresse-du-serveur}
 echo
 echo "C'est prêt."
-echo "  La Fleur d'Or : http://$IP/            panneau : http://$IP/admin/"
-echo "  Le Monorom    : http://$IP/le-monorom/  panneau : http://$IP/le-monorom/admin/"
-[ -n "$MONOROM_DOMAINE" ] && echo "  Le Monorom aussi sur : http://${MONOROM_DOMAINE#www.}/ et http://www.${MONOROM_DOMAINE#www.}/"
-[ -f donnees/admin.json ] || echo "Mot de passe du panneau Fleur d'Or :  sudo -u apache php $DOSSIER/admin/mot-de-passe.php"
+if [ -z "$MONOROM_SEUL" ]; then
+  echo "  La Fleur d'Or : http://$IP/            panneau : http://$IP/admin/"
+  echo "  Le Monorom    : http://$IP/le-monorom/  panneau : http://$IP/le-monorom/admin/"
+fi
+[ -n "$MONOROM_DOMAINE" ] && echo "  Le Monorom sur son domaine : http://${MONOROM_DOMAINE#www.}/ et http://www.${MONOROM_DOMAINE#www.}/"
+[ -n "$MONOROM_SEUL" ] || [ -f donnees/admin.json ] || echo "Mot de passe du panneau Fleur d'Or :  sudo -u apache php $DOSSIER/admin/mot-de-passe.php"
 [ -f le-monorom/donnees/admin.json ] || echo "Mot de passe du panneau Monorom    :  sudo -u apache php $DOSSIER/le-monorom/admin/mot-de-passe.php"
 echo "Pensez à ouvrir le port 80 dans le groupe de sécurité de l'instance EC2."
