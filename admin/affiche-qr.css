@@ -101,6 +101,11 @@
 .q-etiquette .q-titre { margin-top: 2mm; color: var(--accent); font-size: 4.6mm; line-height: 1; }
 .q-etiquette .q-pied { margin: 2mm 0 0; padding: 1.4mm 0 0; border-top: 0.4mm solid var(--brique); font-size: 3.4mm; }
 
+/* Une seule étiquette : la page fait 85 × 55 mm */
+@page etiquette { size: 85mm 55mm; margin: 0; }
+.q-une .q-feuille { width: 85mm; height: 55mm; page: etiquette; display: block; }
+.q-une .q-feuille > .q-etiquette { width: 85mm; height: 55mm; outline: 0; }
+
 /* ---------- Écran ---------- */
 @media screen {
   .q-form { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; }

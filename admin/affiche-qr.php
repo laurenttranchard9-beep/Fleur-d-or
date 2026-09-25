@@ -3,6 +3,7 @@
  * La Fleur d'Or : affiche « Scannez pour accéder au menu » avec un QR code vers la carte du site.
  *   admin/affiche-qr.php                  affiche A4
  *   admin/affiche-qr.php?format=chevalets 4 cartes de table A6 sur une feuille A4 (à découper)
+ *   admin/affiche-qr.php?format=etiquette  une seule étiquette carte de visite, page de 85 × 55 mm
  *   admin/affiche-qr.php?format=etiquettes 10 étiquettes format carte de visite (85 × 55 mm) sur A4, à coller au bord des tables
  *   &adresse=https://…                    adresse du site (par défaut : celle de ce serveur)
  * Le QR code est calculé dans la page (admin/vendor/qrcode.js), sans service extérieur.
@@ -17,7 +18,7 @@ if (!fd_connecte()) {
 }
 fd_entetes_securite();
 
-$format = in_array($_GET['format'] ?? '', ['chevalets', 'etiquettes'], true) ? $_GET['format'] : 'affiche';
+$format = in_array($_GET['format'] ?? '', ['chevalets', 'etiquettes', 'etiquette'], true) ? $_GET['format'] : 'affiche';
 
 // Adresse du site : celle saisie, sinon la racine du site sur ce serveur
 $https = ($_SERVER['HTTPS'] ?? '') !== '' && $_SERVER['HTTPS'] !== 'off';
@@ -67,7 +68,7 @@ $lienFormat = fn(string $f) => 'affiche-qr.php?' . http_build_query(array_filter
 ]), '', '&amp;');
 ?>
 <!DOCTYPE html>
-<html lang="fr" class="q-<?= $format ?>">
+<html lang="fr" class="q-<?= $format === 'etiquette' ? 'une' : $format ?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,6 +91,7 @@ $lienFormat = fn(string $f) => 'affiche-qr.php?' . http_build_query(array_filter
   <p class="c-outils-actions">
     <a href="<?= $lienFormat('affiche') ?>"<?= $format === 'affiche' ? ' aria-current="true"' : '' ?>>Affiche A4</a>
     <a href="<?= $lienFormat('chevalets') ?>"<?= $format === 'chevalets' ? ' aria-current="true"' : '' ?>>4 cartes de table A6</a>
+    <a href="<?= $lienFormat('etiquette') ?>"<?= $format === 'etiquette' ? ' aria-current="true"' : '' ?>>1 étiquette carte de visite</a>
     <a href="<?= $lienFormat('etiquettes') ?>"<?= $format === 'etiquettes' ? ' aria-current="true"' : '' ?>>10 étiquettes carte de visite</a>
     <button type="button" data-imprimer>Imprimer ou enregistrer en PDF</button>
   </p>
@@ -99,6 +101,8 @@ $lienFormat = fn(string $f) => 'affiche-qr.php?' . http_build_query(array_filter
   <section class="q-feuille">
     <?php if ($format === 'affiche'): ?>
       <?= qr_affiche($lien, $visible, 'q-a4') ?>
+    <?php elseif ($format === 'etiquette'): ?>
+      <?= qr_etiquette($lien, $visible) ?>
     <?php elseif ($format === 'etiquettes'): ?>
       <?php for ($i = 0; $i < 10; $i++): ?><?= qr_etiquette($lien, $visible) ?><?php endfor; ?>
     <?php else: ?>
