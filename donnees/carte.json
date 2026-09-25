@@ -2145,6 +2145,78 @@
           ]
         },
         {
+          "id": "cocktails",
+          "titre": "Cocktails",
+          "note": "",
+          "prefixe": "",
+          "piment": false,
+          "photo": "",
+          "photo_alt": "",
+          "groupes": [
+            {
+              "titre": "Sans alcool",
+              "note": "",
+              "plats": [
+                {
+                  "nom": "Virgin Mojito",
+                  "desc": "",
+                  "piment": false,
+                  "prix": 5.9,
+                  "formats": []
+                },
+                {
+                  "nom": "Cocolada",
+                  "desc": "",
+                  "piment": false,
+                  "prix": 5.9,
+                  "formats": []
+                },
+                {
+                  "nom": "Passion",
+                  "desc": "",
+                  "piment": false,
+                  "prix": 5.9,
+                  "formats": []
+                },
+                {
+                  "nom": "Tropic",
+                  "desc": "",
+                  "piment": false,
+                  "prix": 5.9,
+                  "formats": []
+                }
+              ]
+            },
+            {
+              "titre": "Avec alcool",
+              "note": "",
+              "plats": [
+                {
+                  "nom": "Mojito",
+                  "desc": "",
+                  "piment": false,
+                  "prix": 6.9,
+                  "formats": []
+                },
+                {
+                  "nom": "Piña Colada",
+                  "desc": "",
+                  "piment": false,
+                  "prix": 6.9,
+                  "formats": []
+                },
+                {
+                  "nom": "Zombie",
+                  "desc": "",
+                  "piment": false,
+                  "prix": 6.9,
+                  "formats": []
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "boissons",
           "titre": "Boissons",
           "note": "",

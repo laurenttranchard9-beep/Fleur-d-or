@@ -2,7 +2,7 @@
 
 Site d’une seule page pour le restaurant La Fleur d’Or (金花餐廳), 14 bis, avenue du Président Kennedy, 31330 Grenade.
 
-Il contient toute la carte imprimée (179 plats, 39 boissons, 11 formules), les horaires, l’accès et les moyens de paiement. Il affiche aussi en direct si le restaurant est ouvert, et une liste de commande permet de noter ses plats avant d’appeler.
+Il contient toute la carte imprimée (179 plats, 46 boissons, 11 formules), les horaires, l’accès et les moyens de paiement. Il affiche aussi en direct si le restaurant est ouvert, et une liste de commande permet de noter ses plats avant d’appeler.
 
 La page publique est en HTML, CSS et JavaScript simples. Un panneau d’administration en PHP permet de modifier les plats, les catégories et les formules, puis republie la page. On lance le tout avec XAMPP. Node.js (`npm start`) peut servir la page publique, mais pas le panneau.
 
