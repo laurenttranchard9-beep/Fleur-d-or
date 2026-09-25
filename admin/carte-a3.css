@@ -47,6 +47,15 @@
   --brique-motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='272' height='52'%3E%3Crect width='272' height='52' fill='%23b0583f'/%3E%3Crect x='0' y='0' width='132' height='22' fill='%23ac4429'/%3E%3Crect x='136' y='0' width='132' height='22' fill='%23b1492d'/%3E%3Crect x='0' y='26' width='64' height='22' fill='%23a9432a'/%3E%3Crect x='68' y='26' width='132' height='22' fill='%23b04a2e'/%3E%3Crect x='204' y='26' width='68' height='22' fill='%23a9432a'/%3E%3C/svg%3E");
 }
 html.imprimeur { --fond: 3mm; }
+/* Variante gris clair (?teinte=gris) : mêmes rôles, papier gris neutre */
+html.teinte-gris {
+  --papier: #e8e9ea;
+  --texte: #1f2326;
+  --texte-2: #4f555a;
+  --accent: #923519;
+  --filet: rgba(31, 35, 38, 0.24);
+  --pointilles: rgba(31, 35, 38, 0.4);
+}
 
 @page { size: 420mm 297mm; margin: 0; }
 @page imprimeur { size: 426mm 303mm; margin: 0; }

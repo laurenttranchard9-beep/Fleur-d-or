@@ -5,6 +5,7 @@
  * Les formules dont « Imprimer sur la carte A3 » est décoché (la fondue) n'y figurent pas.
  *   Navigateur : admin/carte-a3.php            (format A3, pour une imprimante de bureau)
  *                admin/carte-a3.php?format=imprimeur   (fonds perdus de 3 mm, pour un imprimeur)
+ *   Teinte du papier : crème par défaut, ou &teinte=gris pour un fond gris clair.
  */
 declare(strict_types=1);
 require __DIR__ . '/lib.php';
@@ -17,7 +18,15 @@ if (!fd_connecte()) {
 fd_entetes_securite();
 
 $format = ($_GET['format'] ?? '') === 'imprimeur' ? 'imprimeur' : 'a3';
+$teinte = ($_GET['teinte'] ?? '') === 'gris' ? 'gris' : 'creme';
 [$d] = fd_valider(fd_lire_carte());
+
+/** Lien vers la carte dans un format et une teinte donnés. */
+function a3_lien(string $format, string $teinte): string
+{
+    $q = array_filter(['format' => $format === 'imprimeur' ? 'imprimeur' : null, 'teinte' => $teinte === 'gris' ? 'gris' : null]);
+    return 'carte-a3.php' . ($q ? '?' . http_build_query($q, '', '&amp;') : '');
+}
 
 function a3_prix(?float $p): string
 {
@@ -166,7 +175,7 @@ function a3_formules(array $d): string
 $sprite = '<svg class="c-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><symbol id="i-piment" viewBox="0 0 24 24"><path d="M15.6 7.4c2.9 1.4 3.1 5.3-.3 8.9-3 3.2-7.8 4.7-11.1 4.3 3.4-1.7 6.3-5.1 7.2-9 .7-2.9 2.2-4.8 4.2-4.2Z" fill="currentColor"/><path d="M15.4 7.6c.1-2.1 1.2-3.6 3.3-4.1M13.3 8.3c1.1-1.4 3-1.7 4.5-.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol></svg>';
 ?>
 <!DOCTYPE html>
-<html lang="fr" class="<?= $format ?>">
+<html lang="fr" class="<?= $format ?> teinte-<?= $teinte ?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -180,8 +189,14 @@ $sprite = '<svg class="c-sprite" aria-hidden="true" xmlns="http://www.w3.org/200
 <div class="c-outils">
   <p><b>Carte A3, pli roulé en 3 volets</b> · recto : couverture et formules · verso : l’intérieur. Imprimez en <b>A3 paysage, recto-verso (bord court)</b>, sans marges, avec les <b>graphiques d’arrière-plan</b>.</p>
   <p class="c-outils-actions">
-    <a href="carte-a3.php"<?= $format === 'a3' ? ' aria-current="true"' : '' ?>>Format A3 (bureau)</a>
-    <a href="carte-a3.php?format=imprimeur"<?= $format === 'imprimeur' ? ' aria-current="true"' : '' ?>>Format imprimeur (fonds perdus 3 mm)</a>
+    <a href="<?= a3_lien('a3', $teinte) ?>"<?= $format === 'a3' ? ' aria-current="true"' : '' ?>>Format A3 (bureau)</a>
+    <a href="<?= a3_lien('imprimeur', $teinte) ?>"<?= $format === 'imprimeur' ? ' aria-current="true"' : '' ?>>Format imprimeur (fonds perdus 3 mm)</a>
+  </p>
+  <p class="c-outils-actions">
+    <a href="<?= a3_lien($format, 'creme') ?>"<?= $teinte === 'creme' ? ' aria-current="true"' : '' ?>>Fond crème</a>
+    <a href="<?= a3_lien($format, 'gris') ?>"<?= $teinte === 'gris' ? ' aria-current="true"' : '' ?>>Fond gris clair</a>
+  </p>
+  <p class="c-outils-actions">
     <button type="button" data-imprimer>Imprimer ou enregistrer en PDF</button>
   </p>
   <p class="c-outils-etat" data-etat>Mise en page…</p>
