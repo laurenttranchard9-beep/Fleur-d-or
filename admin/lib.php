@@ -239,6 +239,7 @@ function fd_valider($brut): array
                 'photo' => $v->photo($m['photo'] ?? '', $ou),
                 'photo_alt' => '',
                 'texte' => $v->texte($m['texte'] ?? '', "$ou : texte", 300),
+                'imprimer' => !array_key_exists('imprimer', $m) || !empty($m['imprimer']),
                 'services' => [],
             ];
             $M['photo_alt'] = $M['photo'] === '' ? '' : ($v->texte($m['photo_alt'] ?? '', "$ou : description de la photo", 160) ?: $nom);

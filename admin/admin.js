@@ -714,7 +714,7 @@
         ]),
         h("div", { class: "a-formules" }, menus),
         boutonAjout("Ajouter une formule", function () {
-          g.menus.push({ nom: "Nouvelle formule", prix: null, condition: "", photo: "", photo_alt: "", texte: "",
+          g.menus.push({ nom: "Nouvelle formule", prix: null, condition: "", photo: "", photo_alt: "", texte: "", imprimer: true,
             services: [{ titre: "Entrée", type: "choix", choix: [] }, { titre: "Plat", type: "choix", choix: [] }] });
           etat.focus = "f-" + gi + "-" + (g.menus.length - 1) + "-nom";
           sale();
@@ -779,6 +779,10 @@
           oninput: function (e) { m.nom = e.target.value; sale(); }
         })),
         champ("Prix (€)", inputPrix(m, "prix", true, base + "-prix", "Prix de la formule"))
+      ]),
+      h("label", { class: "a-case" }, [
+        h("input", { type: "checkbox", checked: m.imprimer !== false, onchange: function (e) { m.imprimer = e.target.checked; sale(); } }),
+        h("span", { text: "Imprimer sur la carte A3" })
       ]),
       champ("Condition", h("input", {
         class: "a-input", value: m.condition, maxlength: "120", placeholder: "ex. Midi uniquement, hors week-end et jours fériés",

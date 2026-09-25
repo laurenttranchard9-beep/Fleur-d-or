@@ -84,6 +84,7 @@ $csrf = fd_csrf();
   <symbol id="i-coche" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-alerte" viewBox="0 0 24 24"><path d="M12 4 2.8 19.5h18.4L12 4Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4.5M12 17.2v.3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
   <symbol id="i-piment" viewBox="0 0 24 24"><path d="M15.6 7.4c2.9 1.4 3.1 5.3-.3 8.9-3 3.2-7.8 4.7-11.1 4.3 3.4-1.7 6.3-5.1 7.2-9 .7-2.9 2.2-4.8 4.2-4.2Z" fill="currentColor"/><path d="M15.4 7.6c.1-2.1 1.2-3.6 3.3-4.1M13.3 8.3c1.1-1.4 3-1.7 4.5-.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-imprimer" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17.5H4.5v-7A1.5 1.5 0 0 1 6 9h12a1.5 1.5 0 0 1 1.5 1.5v7H17M7 14h10v6.5H7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
   <symbol id="i-fleche" viewBox="0 0 24 24"><path d="M5 12h13m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
@@ -92,6 +93,7 @@ $csrf = fd_csrf();
   <?php if ($etat === 'app'): ?>
   <nav class="a-poutre-actions" aria-label="Liens">
     <a class="a-lien-site" href="../" target="_blank" rel="noopener"><svg class="a-ico" aria-hidden="true"><use href="#i-oeil"></use></svg><span>Voir le site</span></a>
+    <a class="a-lien-site" href="carte-a3.php" target="_blank" rel="noopener"><svg class="a-ico" aria-hidden="true"><use href="#i-imprimer"></use></svg><span>Carte A3</span></a>
     <form method="post" action="./" class="a-deconnexion">
       <input type="hidden" name="csrf" value="<?= fd_e($csrf) ?>">
       <input type="hidden" name="action" value="deconnexion">

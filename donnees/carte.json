@@ -21,7 +21,8 @@
                 "Bœuf luc-lac"
               ]
             }
-          ]
+          ],
+          "imprimer": true
         },
         {
           "nom": "Menu",
@@ -63,7 +64,8 @@
                 "Nougatine"
               ]
             }
-          ]
+          ],
+          "imprimer": true
         },
         {
           "nom": "Menu",
@@ -110,7 +112,8 @@
                 "Beignets de pomme, banane ou ananas"
               ]
             }
-          ]
+          ],
+          "imprimer": true
         },
         {
           "nom": "Menu",
@@ -158,7 +161,8 @@
                 "Coupe Himalaya (litchis, glace vanille, coco avec chantilly)"
               ]
             }
-          ]
+          ],
+          "imprimer": true
         },
         {
           "nom": "Fondue 2 personnes",
@@ -167,7 +171,8 @@
           "photo": "fondue",
           "photo_alt": "Table de fondue chinoise : bouillon, bouchées et sauces",
           "texte": "Pour deux personnes, préparée uniquement sur commande : appelez à l’avance pour la réserver.",
-          "services": []
+          "services": [],
+          "imprimer": false
         }
       ]
     },
@@ -200,7 +205,8 @@
                 "Riz nature"
               ]
             }
-          ]
+          ],
+          "imprimer": true
         },
         {
           "nom": "Sushi 12 pièces",
@@ -234,7 +240,8 @@
                 "Salade de fruits"
               ]
             }
-          ]
+          ],
+          "imprimer": true
         },
         {
           "nom": "Menu Sashimi 21 pièces",
@@ -268,7 +275,8 @@
                 "Salade de fruits"
               ]
             }
-          ]
+          ],
+          "imprimer": true
         },
         {
           "nom": "Menu Maki 32 pièces",
@@ -302,7 +310,8 @@
                 "Salade de fruits"
               ]
             }
-          ]
+          ],
+          "imprimer": true
         },
         {
           "nom": "Menu Mix 20 pièces",
@@ -337,7 +346,8 @@
                 "Salade de fruits ou ananas frais"
               ]
             }
-          ]
+          ],
+          "imprimer": true
         },
         {
           "nom": "Assortiment 44 pièces",
@@ -377,7 +387,8 @@
                 "Ananas frais ou salade de fruits"
               ]
             }
-          ]
+          ],
+          "imprimer": true
         }
       ]
     }

@@ -23,6 +23,8 @@ Ce que l’on peut faire :
 
 Tant que l’on n’a pas cliqué sur « Publier », rien ne change sur le site, et « Annuler les modifications » revient à la version en ligne. Le panneau refuse de publier un plat sans prix ou avec un prix mal écrit, et indique où corriger.
 
+**Carte A3 à imprimer :** le lien **Carte A3** du panneau ouvre la carte papier (A3 paysage, recto-verso, pli roulé en 3 volets de 141 / 141 / 138 mm), générée à partir des mêmes données que le site. Elle se met à jour toute seule. Cliquez sur « Imprimer ou enregistrer en PDF », en A3 paysage, recto-verso bord court, sans marges et avec les graphiques d’arrière-plan. Le format « imprimeur » ajoute 3 mm de fonds perdus. Une formule dont la case « Imprimer sur la carte A3 » est décochée (la fondue) n’y figure pas. Les PDF du 25 septembre 2026 sont dans `impression/`.
+
 **Comment ça marche :** la carte et les formules sont dans `donnees/carte.json`. À chaque publication, le panneau réécrit `index.html` à partir du gabarit `admin/modele.html`. Il ne faut donc plus modifier la carte directement dans `index.html` : ces changements seraient écrasés à la publication suivante. Pour régénérer la page sans le panneau : `php admin/publier.php`.
 
 Les horaires se trouvent dans `admin/modele.html` (tableau de la section `id="infos"`) et dans `SERVICES`, en haut de `assets/js/site.js` : c’est lui qui calcule « Ouvert / Fermé ».

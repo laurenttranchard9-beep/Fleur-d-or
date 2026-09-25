@@ -41,7 +41,7 @@ La Fleur d'Or is a Chinese, Thai and Japanese restaurant with a sushi bar in one
 
 - No online ordering, booking engine or payment. Every call to action is a phone call or directions.
 - The menu is the full printed A3 menu (two pages). Every dish and price must be on the site. `donnees/carte.json` is the source; `index.html` is generated from it and must not be edited by hand.
-- Back office (`admin/`): password-protected (created once from localhost), edits categories, dishes (name, detail, price or several formats, spicy), groups, the large parts of the menu, and the set menus; every publish keeps the previous version (last 30) and can restore it. No photo upload yet: photos are chosen among the files in `assets/img/`.
+- Back office (`admin/`): password-protected (created once from localhost), edits categories, dishes (name, detail, price or several formats, spicy), groups, the large parts of the menu, and the set menus; every publish keeps the previous version (last 30) and can restore it. Printed A3 menu (admin/carte-a3.php): roll fold, 3 panels per side, generated from the same data; set menus unticked "Imprimer sur la carte A3" (the fondue) are left out. No photo upload yet: photos are chosen among the files in `assets/img/`.
 - Payment accepted (from the old site): cash, CB, Visa, Visa Electron, Mastercard, Maestro, and meal vouchers: Chèque Déjeuner, Chèque Restaurant, Chèque de Table, Ticket Restaurant.
 - Delivery: the old site showed an Uber Eats logo, linked only to ubereats.com/fr *(still active? to confirm)*.
 - Spicy dishes are marked on the printed menu (Salade thaï pimentée, Lap thaï au bœuf, the Thai specialities section) and keep that mark.
