@@ -52,7 +52,7 @@ La Fleur d'Or is a Chinese, Thai and Japanese restaurant with a sushi bar in one
 
 - Name: "La Fleur d'Or", with the Chinese name 金花餐廳 ("restaurant Fleur d'Or"). The old sign sets these four characters vertically, each in a disc, and a banner reads "Fleur d'Or, restaurant chinois, thaïlandais".
 - The old site's title also says "Restaurant Thaï" and "Bar à sushis".
-- Three cuisines named together: chinoises, thaïlandaises, japonaises.
+- Three cuisines named together: chinoises, thaïlandaises, japonaises. Under the name, the owner wants "Cuisine asiatique" instead of listing them (2026-09-25), on the site and on the printed A3 cover; the meta descriptions still name the three for search.
 - Facebook page: https://www.facebook.com/restaurantlafleurdorgrenade/
 - Site credit, requested by the owner: "Création du site : Laurent TRANCHARD · laurenttranchard9@gmail.com" in the footer and on the admin login page. The footer also links to the admin login ("Se connecter").
 

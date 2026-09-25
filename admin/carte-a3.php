@@ -169,7 +169,7 @@ $sprite = '<svg class="c-sprite" aria-hidden="true" xmlns="http://www.w3.org/200
       <div class="c-marque">
         <p class="c-enseigne" lang="zh-Hant" aria-label="金花餐廳"><span>金</span><span>花</span><span>餐</span><span>廳</span></p>
         <h1 class="c-nom-resto">La Fleur d’<span>Or</span></h1>
-        <p class="c-accroche">Cuisines chinoise, thaïlandaise et japonaise · Bar à sushis</p>
+        <p class="c-accroche">Cuisine asiatique · Bar à sushis</p>
         <p class="c-contact">Sur place ou à emporter · <b>05 61 82 43 56</b> · Grenade</p>
       </div>
       <div class="c-ardoise">

@@ -1581,6 +1581,13 @@
                   "piment": false,
                   "prix": 6.9,
                   "formats": []
+                },
+                {
+                  "nom": "Avocat cheese",
+                  "desc": "",
+                  "piment": false,
+                  "prix": 6.9,
+                  "formats": []
                 }
               ]
             }
@@ -1600,14 +1607,14 @@
               "note": "",
               "plats": [
                 {
-                  "nom": "Foie gras",
+                  "nom": "Saumon cheese",
                   "desc": "",
                   "piment": false,
-                  "prix": 9.9,
+                  "prix": 8.9,
                   "formats": []
                 },
                 {
-                  "nom": "Saumon cheese",
+                  "nom": "Saumon avocat cheese",
                   "desc": "",
                   "piment": false,
                   "prix": 8.9,
@@ -1785,20 +1792,6 @@
                   "desc": "",
                   "piment": false,
                   "prix": 14.9,
-                  "formats": []
-                },
-                {
-                  "nom": "Thon mi-cuit",
-                  "desc": "",
-                  "piment": false,
-                  "prix": 17.9,
-                  "formats": []
-                },
-                {
-                  "nom": "Saumon mi-cuit",
-                  "desc": "",
-                  "piment": false,
-                  "prix": 16.9,
                   "formats": []
                 }
               ]
@@ -2021,23 +2014,16 @@
               "plats": [
                 {
                   "nom": "Glace 1 boule",
-                  "desc": "",
+                  "desc": "chantilly +1 €",
                   "piment": false,
                   "prix": 3.5,
                   "formats": []
                 },
                 {
                   "nom": "Glace 2 boules",
-                  "desc": "",
+                  "desc": "chantilly +1 €",
                   "piment": false,
                   "prix": 6.5,
-                  "formats": []
-                },
-                {
-                  "nom": "Glace 2 boules avec chantilly",
-                  "desc": "",
-                  "piment": false,
-                  "prix": 7.5,
                   "formats": []
                 },
                 {
@@ -2159,28 +2145,28 @@
               "plats": [
                 {
                   "nom": "Virgin Mojito",
-                  "desc": "",
+                  "desc": "citron vert, menthe, sucre de canne et limonade",
                   "piment": false,
                   "prix": 5.9,
                   "formats": []
                 },
                 {
                   "nom": "Cocolada",
-                  "desc": "",
+                  "desc": "arôme vanille, crème de banane, jus d’ananas et lait",
                   "piment": false,
                   "prix": 5.9,
                   "formats": []
                 },
                 {
                   "nom": "Passion",
-                  "desc": "",
+                  "desc": "jus multifruit et sirop de fraise",
                   "piment": false,
                   "prix": 5.9,
                   "formats": []
                 },
                 {
                   "nom": "Tropic",
-                  "desc": "",
+                  "desc": "sirop de pêche, jus d’ananas et lait",
                   "piment": false,
                   "prix": 5.9,
                   "formats": []
@@ -2193,21 +2179,21 @@
               "plats": [
                 {
                   "nom": "Mojito",
-                  "desc": "",
+                  "desc": "rhum, citron vert, sucre de canne et feuilles de menthe",
                   "piment": false,
                   "prix": 6.9,
                   "formats": []
                 },
                 {
                   "nom": "Piña Colada",
-                  "desc": "",
+                  "desc": "rhum, coco, arôme vanille, jus d’ananas et lait",
                   "piment": false,
                   "prix": 6.9,
                   "formats": []
                 },
                 {
                   "nom": "Zombie",
-                  "desc": "",
+                  "desc": "rhum, vodka, jus d’orange et jus d’ananas",
                   "piment": false,
                   "prix": 6.9,
                   "formats": []
@@ -2272,13 +2258,6 @@
                 },
                 {
                   "nom": "Tsingtao, bière chinoise (33 cl)",
-                  "desc": "",
-                  "piment": false,
-                  "prix": 4.9,
-                  "formats": []
-                },
-                {
-                  "nom": "Singha, bière thaïlandaise (33 cl)",
                   "desc": "",
                   "piment": false,
                   "prix": 4.9,
@@ -2374,22 +2353,6 @@
               "note": "",
               "plats": [
                 {
-                  "nom": "Corbières",
-                  "desc": "",
-                  "piment": false,
-                  "prix": null,
-                  "formats": [
-                    {
-                      "libelle": "37,5 cl",
-                      "prix": null
-                    },
-                    {
-                      "libelle": "75 cl",
-                      "prix": 19.0
-                    }
-                  ]
-                },
-                {
                   "nom": "Gaillac",
                   "desc": "",
                   "piment": false,
@@ -2402,22 +2365,6 @@
                     {
                       "libelle": "75 cl",
                       "prix": 21.0
-                    }
-                  ]
-                },
-                {
-                  "nom": "Madiran",
-                  "desc": "",
-                  "piment": false,
-                  "prix": null,
-                  "formats": [
-                    {
-                      "libelle": "37,5 cl",
-                      "prix": 14.0
-                    },
-                    {
-                      "libelle": "75 cl",
-                      "prix": 22.0
                     }
                   ]
                 },
@@ -2508,22 +2455,6 @@
                   ]
                 },
                 {
-                  "nom": "Listel gris de gris",
-                  "desc": "",
-                  "piment": false,
-                  "prix": null,
-                  "formats": [
-                    {
-                      "libelle": "37,5 cl",
-                      "prix": null
-                    },
-                    {
-                      "libelle": "75 cl",
-                      "prix": 21.0
-                    }
-                  ]
-                },
-                {
                   "nom": "Côtes de Provence",
                   "desc": "",
                   "piment": false,
@@ -2540,7 +2471,7 @@
                   ]
                 },
                 {
-                  "nom": "Pichet",
+                  "nom": "Pichet Rosé, Rouge, Blanc",
                   "desc": "",
                   "piment": false,
                   "prix": null,
