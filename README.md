@@ -75,6 +75,29 @@ Chez un hébergeur, PHP doit pouvoir écrire dans `index.html` et dans le dossie
 
 Le fichier `.htaccess` règle la compression et le cache, et renvoie une erreur 404 pour tout ce qui n’est pas le site : `.git`, `.impeccable`, fichiers `.md` et `.json`, `server.js`. Le dossier `donnees/` et les fichiers internes du panneau (`lib.php`, `modele.html`, `publier.php`) sont refusés. On peut donc copier le dépôt entier dans `htdocs` sans rien exposer. Il fonctionne même si certains modules Apache sont désactivés. Le même `.htaccess` sert chez un hébergeur Apache (OVH, o2switch…).
 
+## Mettre en ligne sur un serveur Amazon Linux (EC2)
+
+Le script `deploy/amazon-linux.sh` installe Apache, PHP et git, télécharge le site depuis GitHub dans `/var/www/fleur-dor` et le met en ligne sur le port 80. Il marche sur Amazon Linux 2023 et Amazon Linux 2.
+
+**Première fois**, dans la console de l’instance :
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/laurenttranchard9-beep/Fleur-d-or/claude/practical-mendel-dpj572/deploy/amazon-linux.sh | sudo bash
+sudo -u apache php /var/www/fleur-dor/admin/mot-de-passe.php
+```
+
+La deuxième ligne crée le mot de passe du panneau (au moins 10 caractères). Ouvrez aussi le port 80 (HTTP) dans le groupe de sécurité de l’instance.
+
+**Mettre à jour** après un changement sur GitHub :
+
+```bash
+sudo bash /var/www/fleur-dor/deploy/amazon-linux.sh
+```
+
+La mise à jour prend la carte de GitHub. Si la carte avait été changée sur le serveur, dans le panneau, cette version est d’abord gardée : elle apparaît dans l’onglet « Sauvegardes » du panneau et peut être remise en ligne d’un clic. Le mot de passe du panneau est conservé.
+
+Si le dépôt GitHub est privé, la première commande doit être remplacée par un `git clone` avec un jeton d’accès GitHub : `sudo git clone --branch claude/practical-mendel-dpj572 https://<jeton>@github.com/laurenttranchard9-beep/Fleur-d-or.git /var/www/fleur-dor`, puis `sudo bash /var/www/fleur-dor/deploy/amazon-linux.sh`.
+
 ## À vérifier par le restaurant
 
 - Le texte d’un dessert, « Colonel chinois (glace citron vert et saké) » : la carte imprimée écrit « saté », que j’ai pris pour une coquille.
