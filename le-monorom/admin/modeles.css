@@ -1,0 +1,91 @@
+/* Le Monorom : trois autres modèles de la carte A3 pliée (3 volets), chargés en plus de carte-a3.css.
+   Même format, même contenu et même palette ; seuls le style et l'habillage changent.
+   carte-a3.php?modele=livret | ardoise | bistrot */
+
+/* ---------- Modèle Livret : papier crème, cadre or, titres soulignés d'un double filet ---------- */
+.modele-livret .c-marque {
+  padding: 3.5mm 3mm 3mm;
+  border: 0.6mm solid var(--or);
+  outline: 0.3mm solid rgba(242, 181, 58, 0.55);
+  outline-offset: 0.9mm;
+}
+.modele-livret .c-ardoise {
+  margin-top: 3.8mm; padding: 2.6mm 3.4mm;
+  border: 0; border-radius: 0;
+  box-shadow: 0 3mm 5mm -3mm rgba(20, 6, 2, 0.6);
+}
+.modele-livret .c-ardoise-titre {
+  text-align: left; font-size: 14pt;
+  margin-bottom: 1.8mm; padding-bottom: 1mm;
+  border-bottom: 0.9mm double var(--brique);
+}
+.modele-livret .c-bloc-formule { padding-bottom: 0.35em; border-bottom: 0.3mm dotted var(--pointilles); }
+.modele-livret .c-bloc-formule:last-child { border-bottom: 0; }
+/* Grandes parties : titre centré entre deux filets, sans bandeau */
+.modele-livret .c-partie {
+  display: flex; align-items: center; gap: 0.35em;
+  padding: 0; background: none; color: var(--brique);
+  font-size: 1.45em;
+}
+.modele-livret .c-partie::before, .modele-livret .c-partie::after { content: ""; flex: 1; border-top: 0.5mm solid var(--brique); }
+.modele-livret .c-etal-titre { border-bottom: 0.9mm double var(--brique); padding-bottom: 0.1em; }
+
+/* ---------- Modèle Ardoise : papier gris clair, bandeau et titres en ardoise, lignes de tableau ---------- */
+.modele-ardoise {
+  --papier: #e8e9ea;
+  --texte: #1f2326;
+  --texte-2: #4f555a;
+  --accent: #923519;
+  --filet: rgba(31, 35, 38, 0.24);
+  --pointilles: rgba(31, 35, 38, 0.4);
+}
+.modele-ardoise .c-couv::before { background: var(--papier); }
+.modele-ardoise .c-marque, .modele-bistrot .c-marque { position: relative; padding-bottom: 4mm; }
+.modele-ardoise .c-nom-resto, .modele-bistrot .c-nom-resto { font-size: 35pt; margin-top: 2mm; }
+/* Bandeau en haut de la couverture, jusqu'aux bords (fonds perdus compris) */
+.modele-ardoise .c-marque::before, .modele-bistrot .c-marque::before {
+  content: ""; position: absolute; z-index: -1;
+  top: calc(-6mm - var(--fond)); bottom: 0;
+  left: calc(-1 * var(--marge-h)); right: calc(-1 * var(--marge-h) - var(--fond));
+}
+.modele-ardoise .c-marque::before { background: var(--ardoise); border-bottom: 2.2mm solid var(--brique); }
+.modele-ardoise .c-enseigne { display: grid; grid-template-columns: repeat(4, 9mm); justify-content: center; }
+.modele-ardoise .c-horaires { color: var(--craie-2); }
+.modele-ardoise .c-horaires b { color: var(--craie); }
+.modele-ardoise .c-ardoise, .modele-bistrot .c-ardoise {
+  margin-top: 4.5mm; padding: 0;
+  background: none; border: 0; border-radius: 0; box-shadow: none;
+}
+.modele-ardoise .c-ardoise-titre { text-align: left; font-size: 14pt; margin-bottom: 2mm; }
+.modele-ardoise .c-bloc-formule {
+  padding: 0.3em 0.45em 0.38em;
+  background: rgba(255, 255, 255, 0.6);
+  border-left: 1.2mm solid var(--brique);
+}
+.modele-ardoise .c-etal-titre {
+  padding: 0.22em 0.4em 0.15em; margin-bottom: 0.15em;
+  background: var(--ardoise); color: var(--craie); border-bottom: 0;
+}
+.modele-ardoise .c-etal-note { color: var(--or); }
+.modele-ardoise .c-plat { padding: 0.01em 0; border-bottom: 0.2mm solid rgba(31, 35, 38, 0.14); }
+.modele-ardoise .c-plat::after { border-bottom-color: transparent; }
+
+/* ---------- Modèle Bistrot : papier crème, bandeau de briques, parties sur ardoise, losanges or ---------- */
+.modele-bistrot .c-couv::before { background: var(--papier); }
+.modele-bistrot .c-marque::before {
+  background: var(--brique) var(--brique-motif);
+  background-size: 68mm auto;
+  border-bottom: 1.6mm solid var(--ardoise);
+}
+.modele-bistrot .c-ardoise-titre {
+  text-align: left; font-size: 17pt;
+  margin-bottom: 2mm; padding-bottom: 1mm;
+  border-bottom: 1mm solid var(--brique);
+}
+.modele-bistrot .c-bloc-formule { padding-top: 0.35em; border-top: 0.55mm solid var(--brique); }
+.modele-bistrot .c-partie { color: var(--or); background: var(--ardoise); }
+.modele-bistrot .c-etal-titre { border-bottom-width: 0.9mm; }
+.modele-bistrot .c-etal-titre::before {
+  content: ""; flex: none; width: 0.38em; height: 0.38em; margin: 0 0.12em 0 0.06em;
+  background: var(--or); transform: rotate(45deg);
+}

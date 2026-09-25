@@ -10,3 +10,8 @@ donnees/tentatives.json
 donnees/sauvegardes/
 donnees/.verrou
 donnees/.*.tmp
+le-monorom/donnees/admin.json
+le-monorom/donnees/tentatives.json
+le-monorom/donnees/sauvegardes/
+le-monorom/donnees/.verrou
+le-monorom/donnees/.*.tmp

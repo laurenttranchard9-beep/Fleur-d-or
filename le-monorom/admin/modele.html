@@ -1,0 +1,334 @@
+<!-- Gabarit de la page publique : le panneau d’administration remplit les {{…}} et écrit index.html. Ne pas ouvrir directement. -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le Monorom · Restaurant japonais et thaïlandais, bar à sushis à Castelsarrasin</title>
+<meta name="description" content="Restaurant Le Monorom à Castelsarrasin (82100) : spécialités japonaises et thaïlandaises, bar à sushis, salle zen. Toute la carte et les formules, sur place ou à emporter. 05 63 29 23 81.">
+<meta name="theme-color" content="#3a2a20">
+<meta property="og:type" content="restaurant.restaurant">
+<meta property="og:title" content="Le Monorom · Castelsarrasin">
+<meta property="og:description" content="Le goût et la qualité des spécialités japonaises et thaïlandaises. Bar à sushis, sur place ou à emporter.">
+<meta property="og:image" content="assets/img/facade-1200.webp">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.className += " js";</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Le Monorom",
+  "description": "Restaurant japonais et thaïlandais, bar à sushis, sur place et à emporter à Castelsarrasin (Tarn-et-Garonne).",
+  "servesCuisine": [
+    "Japonaise",
+    "Thaïlandaise",
+    "Chinoise",
+    "Sushi"
+  ],
+  "telephone": "+33 5 63 29 23 81",
+  "email": "contact.darachan@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "12 chemin de Benis, lieu-dit Rouzeau",
+    "postalCode": "82100",
+    "addressLocality": "Castelsarrasin",
+    "addressRegion": "Occitanie",
+    "addressCountry": "FR"
+  },
+  "hasMenu": "#carte",
+  "image": "assets/img/facade-1200.webp",
+  "paymentAccepted": "Espèces, carte bancaire (dès 10 €), Chèque Déjeuner, Ticket Restaurant",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "10:00",
+      "closes": "14:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "18:00",
+      "closes": "22:00"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-moins" viewBox="0 0 24 24"><path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><path d="M6.6 3.5h2.6l1.5 4.2-2 1.4a11.5 11.5 0 0 0 6.2 6.2l1.4-2 4.2 1.5v2.6a2 2 0 0 1-2.1 2A16.6 16.6 0 0 1 4.6 5.6a2 2 0 0 1 2-2.1Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-loupe" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="m15 15 5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-epingle" viewBox="0 0 24 24"><path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-horloge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-carnet" viewBox="0 0 24 24"><path d="M6 3.5h12v17H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 8.5h6M9 12h6M9 15.5h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-croix" viewBox="0 0 24 24"><path d="m6.5 6.5 11 11m0-11-11 11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-fleche" viewBox="0 0 24 24"><path d="M5 12h13m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cadenas" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3M12 14.5v2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-lune" viewBox="0 0 24 24"><path d="M14.6 3.1a9.2 9.2 0 1 0 6.3 14.4 7.6 7.6 0 0 1-6.3-14.4Z" fill="currentColor"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3.5 6h17v12h-17z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4a21 21 0 0 0-2.3-.1c-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21Z" fill="currentColor"/></symbol>
+  <symbol id="i-piment" viewBox="0 0 24 24"><path d="M15.6 7.4c2.9 1.4 3.1 5.3-.3 8.9-3 3.2-7.8 4.7-11.1 4.3 3.4-1.7 6.3-5.1 7.2-9 .7-2.9 2.2-4.8 4.2-4.2Z" fill="currentColor"/><path d="M15.4 7.6c.1-2.1 1.2-3.6 3.3-4.1M13.3 8.3c1.1-1.4 3-1.7 4.5-.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+</svg>
+<a class="evitement" href="#carte">Aller directement à la carte</a>
+
+<header class="poutre">
+  <a class="marque" href="#haut" aria-label="Le Monorom, haut de page">
+    <span class="disque" aria-hidden="true"><svg class="lune" aria-hidden="true" focusable="false"><use href="#i-lune"></use></svg></span>
+    <span class="marque-nom">Le Monorom</span>
+  </a>
+  <nav class="nav" aria-label="Sections du site">
+    <ul role="list">
+      <li class="nav-large"><a href="#formules">Formules</a></li>
+      <li><a href="#carte">La carte</a></li>
+      <li><a href="#infos">Horaires<span class="nav-large"> et accès</span></a></li>
+    </ul>
+  </nav>
+  <a class="bouton-tel" href="tel:+33563292381">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tel"></use></svg>
+    <span class="bouton-tel-num">05&nbsp;63&nbsp;29&nbsp;23&nbsp;81</span>
+    <span class="sr-only bouton-tel-sr">Appeler le 05&nbsp;63&nbsp;29&nbsp;23&nbsp;81</span>
+  </a>
+</header>
+
+<main id="haut">
+  <section class="halle" aria-labelledby="titre">
+    <div class="halle-texte">
+      <h1 id="titre" class="halle-titre">Le Mono<span class="or">rom</span></h1>
+      <p class="halle-accroche">Le goût et la qualité des spécialités japonaises et thaïlandaises. Bar à&nbsp;sushis et salle zen, sur place ou à emporter, à&nbsp;Castelsarrasin.</p>
+      <p class="statut" data-statut>
+        <span class="statut-point" aria-hidden="true"></span>
+        <span class="statut-texte" data-statut-texte>Du mardi au dimanche, 10h–14h et 18h–22h. Fermé le lundi.</span>
+      </p>
+      <div class="halle-actions">
+        <a class="bouton bouton-principal" href="tel:+33563292381">
+          <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tel"></use></svg>
+          <span>Appeler le 05&nbsp;63&nbsp;29&nbsp;23&nbsp;81</span>
+        </a>
+        <a class="bouton bouton-second" href="#carte">
+          <span>Voir la carte · {{N_CUISINE}} plats</span>
+          <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-fleche"></use></svg>
+        </a>
+      </div>
+      <p class="halle-adresse">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-epingle"></use></svg>
+        <span>12 chemin de Benis, croisement route de Toulouse, 82100&nbsp;Castelsarrasin</span>
+      </p>
+    </div>
+
+    <div class="halle-travees" data-halle>
+      <p class="enseigne enseigne-mot" title="Le Monorom">
+        <span aria-hidden="true"><svg class="lune" aria-hidden="true" focusable="false"><use href="#i-lune"></use></svg></span>
+        <b class="enseigne-lettres" aria-hidden="true">Monorom</b>
+        <span class="sr-only">Enseigne : Le Monorom</span>
+      </p>
+      <div class="travees-toit">
+        <div class="solive" aria-hidden="true"></div>
+        <div class="travees">
+<figure class="travee travee-chine"><img src="assets/img/baie-salle-360.webp" srcset="assets/img/baie-salle-360.webp 360w, assets/img/baie-salle-720.webp 720w" sizes="(min-width: 1100px) 13vw, 30vw" width="360" height="600" alt="La salle zen : bassin, fleurs de lotus et paroi blanche" fetchpriority="high" decoding="async"><span class="volet" aria-hidden="true"><span class="volet-texte"></span></span><figcaption class="travee-nom">Salle zen</figcaption></figure>
+<figure class="travee travee-thailande"><img src="assets/img/baie-facade-360.webp" srcset="assets/img/baie-facade-360.webp 360w, assets/img/baie-facade-720.webp 720w" sizes="(min-width: 1100px) 13vw, 30vw" width="360" height="600" alt="L’entrée du restaurant sous l’enseigne Le Monorom" fetchpriority="high" decoding="async"><span class="volet" aria-hidden="true"><span class="volet-texte"></span></span><figcaption class="travee-nom">Cuisine thaï</figcaption></figure>
+<figure class="travee travee-japon"><img src="assets/img/baie-sushi-360.webp" srcset="assets/img/baie-sushi-360.webp 360w, assets/img/baie-sushi-720.webp 720w" sizes="(min-width: 1100px) 13vw, 30vw" width="360" height="600" alt="Le comptoir lumineux « Sushi bar »" fetchpriority="high" decoding="async"><span class="volet" aria-hidden="true"><span class="volet-texte"></span></span><figcaption class="travee-nom">Bar à sushis</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="emporter" aria-labelledby="emporter-titre">
+    <h2 class="emporter-titre" id="emporter-titre">À emporter, midi et soir</h2>
+    <p class="emporter-texte">Commandez par téléphone dès 10h pour le midi et dès 18h pour le soir, puis venez retirer votre commande.</p>
+  </section>
+
+  <section class="formules" id="formules" aria-labelledby="formules-titre">
+    <div class="section-tete">
+      <h2 class="section-titre" id="formules-titre">Les formules</h2>
+      <p class="section-intro">Du menu express du midi à l’assortiment de 44 pièces. Les menus « midi uniquement » ne sont servis ni le week-end ni les jours fériés.</p>
+    </div>
+{{FORMULES}}
+  </section>
+
+  <section class="carte" id="carte" aria-labelledby="carte-titre">
+    <div class="section-tete">
+      <h2 class="section-titre" id="carte-titre">La carte</h2>
+      <p class="section-intro">{{N_CUISINE}} plats et {{N_BAR}} boissons, aux prix de la carte sur place. Touchez + pour noter un plat sur votre liste, puis appelez.</p>
+    </div>
+
+
+    <div class="recherche" role="search">
+      <label class="recherche-label" for="q">Chercher un plat</label>
+      <div class="recherche-champ">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-loupe"></use></svg>
+        <input id="q" type="search" placeholder="canard, crevettes, maki…" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-describedby="resultat">
+        <button class="recherche-effacer" type="button" data-effacer hidden>
+          <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-croix"></use></svg>
+          <span class="sr-only">Effacer la recherche</span>
+        </button>
+      </div>
+      <div class="filtres" role="group" aria-label="Recherches rapides">
+        <button type="button" class="filtre" data-filtre="pimenté" aria-pressed="false"><svg class="ico ico-piment" aria-hidden="true" focusable="false"><use href="#i-piment"></use></svg>Pimenté</button>
+        <button type="button" class="filtre" data-filtre="canard" aria-pressed="false">Canard</button>
+        <button type="button" class="filtre" data-filtre="crevettes" aria-pressed="false">Crevettes</button>
+        <button type="button" class="filtre" data-filtre="bœuf" aria-pressed="false">Bœuf</button>
+        <button type="button" class="filtre" data-filtre="saumon" aria-pressed="false">Saumon</button>
+        <button type="button" class="filtre" data-filtre="soupe" aria-pressed="false">Soupes</button>
+      </div>
+      <p class="recherche-resultat" id="resultat" aria-live="polite" data-resultat></p>
+    </div>
+
+    <nav class="rubriques" aria-label="Rubriques de la carte" data-rubriques>
+      <ul role="list">
+{{RUBRIQUES}}
+      </ul>
+    </nav>
+
+    <div class="carte-corps">
+      <div class="carte-etals">
+{{CARTE}}
+        <div class="carte-vide" data-vide hidden>
+          <p class="carte-vide-titre">Aucun plat ne correspond à « <span data-vide-terme></span> ».</p>
+          <p>Essayez « canard », « crevettes » ou « maki », ou <button type="button" class="lien" data-reinit>affichez toute la carte</button>.</p>
+        </div>
+      </div>
+
+      <aside class="carnet" id="carnet" aria-labelledby="carnet-titre" data-carnet>
+        <div class="carnet-papier">
+          <div class="carnet-tete">
+            <h2 class="carnet-titre" id="carnet-titre" tabindex="-1">Ma liste</h2>
+            <button type="button" class="carnet-fermer" data-carnet-fermer>
+              <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-croix"></use></svg>
+              <span class="sr-only">Fermer ma liste</span>
+            </button>
+          </div>
+          <p class="carnet-vide" data-carnet-vide>Touchez <span class="carnet-plus" aria-hidden="true"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg></span><span class="sr-only">le bouton plus</span> à côté d’un plat pour le noter ici. Vous aurez votre liste sous les yeux pendant l’appel.</p>
+          <ol class="carnet-lignes" data-carnet-lignes></ol>
+          <p class="carnet-total" data-carnet-total hidden><span>Total indicatif</span> <data value="0" data-total>0,00&nbsp;€</data></p>
+          <p class="carnet-note">Prix de la carte sur place. La commande se passe par téléphone.</p>
+          <a class="bouton bouton-principal carnet-appel" href="tel:+33563292381">
+            <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tel"></use></svg>
+            <span>Appeler le 05&nbsp;63&nbsp;29&nbsp;23&nbsp;81</span>
+          </a>
+          <button type="button" class="lien carnet-vider" data-vider hidden>Effacer la liste</button>
+        </div>
+      </aside>
+    </div>
+    <p class="sr-only" aria-live="polite" data-annonce></p>
+  </section>
+
+  <section class="infos" id="infos" aria-labelledby="infos-titre">
+    <div class="section-tete">
+      <h2 class="section-titre" id="infos-titre">Horaires et accès</h2>
+    </div>
+    <div class="infos-grille">
+      <div class="infos-bloc">
+        <h3 class="infos-titre">Horaires</h3>
+        <table class="horaires">
+          <caption class="sr-only">Horaires d’ouverture, midi et soir</caption>
+          <thead><tr><th scope="col"><span class="sr-only">Jour</span></th><th scope="col">Midi</th><th scope="col">Soir</th></tr></thead>
+          <tbody>
+            <tr data-jour="1"><th scope="row">Lundi</th><td class="ferme" colspan="2">Fermé</td></tr>
+            <tr data-jour="2"><th scope="row">Mardi</th><td>10h – 14h</td><td>18h – 22h</td></tr>
+            <tr data-jour="3"><th scope="row">Mercredi</th><td>10h – 14h</td><td>18h – 22h</td></tr>
+            <tr data-jour="4"><th scope="row">Jeudi</th><td>10h – 14h</td><td>18h – 22h</td></tr>
+            <tr data-jour="5"><th scope="row">Vendredi</th><td>10h – 14h</td><td>18h – 22h</td></tr>
+            <tr data-jour="6"><th scope="row">Samedi</th><td>10h – 14h</td><td>18h – 22h</td></tr>
+            <tr data-jour="0"><th scope="row">Dimanche</th><td>10h – 14h</td><td>18h – 22h</td></tr>
+          </tbody>
+        </table>
+        <p class="infos-texte">Ventes à emporter dès 10h le midi et dès 18h le soir.</p>
+      </div>
+
+      <div class="infos-bloc">
+        <h3 class="infos-titre">Adresse</h3>
+        <address class="adresse">Le Monorom<br>12 chemin de Benis<br>Croisement route de Toulouse, lieu-dit Rouzeau<br>82100 Castelsarrasin</address>
+        <a class="bouton bouton-second" href="https://www.google.com/maps/search/?api=1&amp;query=Restaurant%20Le%20Monorom%2C%2012%20chemin%20de%20Benis%2C%2082100%20Castelsarrasin" rel="noopener" target="_blank">
+          <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-epingle"></use></svg>
+          <span>Itinéraire</span>
+        </a>
+        <h3 class="infos-titre">Téléphone</h3>
+        <p><a class="infos-tel" href="tel:+33563292381">05&nbsp;63&nbsp;29&nbsp;23&nbsp;81</a></p>
+        <p class="infos-texte">Pour une table, une commande à emporter ou la fondue (sur commande uniquement).</p>
+      </div>
+
+      <div class="infos-bloc">
+        <h3 class="infos-titre">Paiement</h3>
+        <ul class="paiement" role="list">
+          <li><strong>Espèces</strong></li>
+          <li><strong>Cartes</strong> CB, Visa, Mastercard, à partir de 10&nbsp;€</li>
+          <li><strong>Titres-restaurant</strong> Chèque Déjeuner, Ticket Restaurant</li>
+        </ul>
+        <h3 class="infos-titre">E-mail</h3>
+        <p>
+          <a class="lien-icone" href="mailto:contact.darachan@gmail.com">
+            <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg><span>contact.darachan@gmail.com</span>
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <div class="salle">
+      <figure class="salle-photo">
+        <img src="assets/img/salle-640.webp" srcset="assets/img/salle-640.webp 640w, assets/img/salle-1200.webp 1200w" sizes="(min-width: 1100px) 30vw, (min-width: 700px) 45vw, 92vw" width="640" height="426" loading="lazy" decoding="async" alt="La salle zen : un bassin traverse la salle, fleurs de lotus sur l’eau">
+        <figcaption>La salle zen</figcaption>
+      </figure>
+      <figure class="salle-photo">
+        <img src="assets/img/salle-2-640.webp" srcset="assets/img/salle-2-640.webp 640w, assets/img/salle-2-1200.webp 1200w" sizes="(min-width: 1100px) 30vw, (min-width: 700px) 45vw, 92vw" width="640" height="426" loading="lazy" decoding="async" alt="Le comptoir du bar à sushis, son enseigne lumineuse et une statue dorée">
+        <figcaption>Le bar à sushis</figcaption>
+      </figure>
+      <figure class="salle-photo">
+        <img src="assets/img/facade-640.webp" srcset="assets/img/facade-640.webp 640w, assets/img/facade-1200.webp 1200w" sizes="(min-width: 1100px) 30vw, (min-width: 700px) 45vw, 92vw" width="640" height="426" loading="lazy" decoding="async" alt="La façade : « Cuisine thaï », l’enseigne Le Monorom et « Bar à sushi », terrasse devant">
+        <figcaption>La façade et la terrasse</figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+
+<footer class="pied">
+  <div class="pied-marque">
+    <span class="disque" aria-hidden="true"><svg class="lune" aria-hidden="true" focusable="false"><use href="#i-lune"></use></svg></span>
+    <p><strong>Le Monorom</strong><br>Spécialités japonaises et thaïlandaises, bar à sushis</p>
+  </div>
+  <p class="pied-infos">12 chemin de Benis, 82100 Castelsarrasin · <a href="tel:+33563292381">05&nbsp;63&nbsp;29&nbsp;23&nbsp;81</a> · <a href="mailto:contact.darachan@gmail.com">contact.darachan@gmail.com</a></p>
+  <p class="pied-credits">Photos de la salle et de la façade : Le Monorom. Photos des plats : illustrations (plateau et ardoise de sushi : Unsplash).</p>
+  <div class="pied-bas">
+    <p class="pied-creation">Création du site : <strong>Laurent TRANCHARD</strong> · contact : <a href="mailto:laurenttranchard9@gmail.com">laurenttranchard9@gmail.com</a></p>
+    <a class="pied-connexion" href="admin/" rel="nofollow">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-cadenas"></use></svg>
+      <span>Se connecter</span>
+    </a>
+  </div>
+</footer>
+
+<div class="barre" data-barre>
+  <a class="barre-appel" href="tel:+33563292381">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tel"></use></svg>
+    <span>Appeler</span>
+  </a>
+  <button class="barre-liste" type="button" aria-controls="carnet" aria-expanded="false" data-barre-liste>
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-carnet"></use></svg>
+    <span class="barre-mot">Ma liste</span>
+    <span class="barre-compte" data-barre-compte>0</span>
+    <data class="barre-total" value="0" data-barre-total hidden></data>
+  </button>
+</div>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

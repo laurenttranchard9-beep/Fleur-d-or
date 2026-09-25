@@ -1,0 +1,798 @@
+/* Le Monorom : même habillage que le site de La Fleur d'Or (brique, ardoise, chêne, or), avec la lune dorée de l'enseigne. */
+
+@font-face {
+  font-family: "Archivo";
+  src: url("../fonts/archivo-latin.woff2") format("woff2");
+  font-weight: 400 800;
+  font-stretch: 62% 125%;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("../fonts/archivo-latin-ext.woff2") format("woff2");
+  font-weight: 400 800;
+  font-stretch: 62% 125%;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Noto Serif TC";
+  src: url("../fonts/noto-serif-tc-jinhua.woff2") format("woff2");
+  font-weight: 900;
+  font-display: swap;
+  unicode-range: U+5EF3, U+82B1, U+91D1, U+9910;
+}
+
+:root {
+  --brique: #ac4429;
+  --brique-sombre: #8c3520;
+  --ardoise: #23272b;
+  --ardoise-2: #2d3237;
+  --ardoise-3: #3b4147;
+  --craie: #fff6ec;
+  --craie-2: #bfb8ae;
+  --or: #f2b53a;
+  --or-clair: #f8c95f;
+  --chene: #3a2a20;
+  --chene-2: #5b3f2b;
+  --papier: #fbf8f2;
+  --encre: #1e1a17;
+  --encre-2: #5d5650;
+  --trait: rgba(255, 246, 236, 0.16);
+  --pointille: rgba(255, 246, 236, 0.3);
+  --piment: #e8553a;
+
+  --brique-motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='272' height='52'%3E%3Crect width='272' height='52' fill='%23b0583f'/%3E%3Crect x='0' y='0' width='132' height='22' fill='%23ac4429'/%3E%3Crect x='136' y='0' width='132' height='22' fill='%23b1492d'/%3E%3Crect x='0' y='26' width='64' height='22' fill='%23a9432a'/%3E%3Crect x='68' y='26' width='132' height='22' fill='%23b04a2e'/%3E%3Crect x='204' y='26' width='68' height='22' fill='%23a9432a'/%3E%3C/svg%3E");
+  --brique-sombre-motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='272' height='52'%3E%3Crect width='272' height='52' fill='%2398442f'/%3E%3Crect x='0' y='0' width='132' height='22' fill='%238c3520'/%3E%3Crect x='136' y='0' width='132' height='22' fill='%23903822'/%3E%3Crect x='0' y='26' width='64' height='22' fill='%2389341f'/%3E%3Crect x='68' y='26' width='132' height='22' fill='%23923923'/%3E%3Crect x='204' y='26' width='68' height='22' fill='%2389341f'/%3E%3C/svg%3E");
+
+  --texte: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --h-poutre: 64px;
+  --h-rubriques: 52px;
+  --course: 2.75rem;
+  --gouttiere: clamp(16px, 4.5vw, 72px);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 759px) {
+  :root { --h-poutre: 56px; --h-rubriques: 48px; }
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--h-poutre) + 8px);
+  scrollbar-color: var(--chene-2) var(--chene);
+  background: var(--chene);
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+body {
+  margin: 0;
+  font-family: var(--texte);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  font-weight: 400;
+  color: var(--craie);
+  background: var(--brique) var(--brique-motif);
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
+ul[role="list"], ol { list-style: none; padding: 0; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+button { font: inherit; color: inherit; }
+data { font-variant-numeric: tabular-nums; }
+strong { font-weight: 800; }
+
+::selection { background: var(--or); color: var(--ardoise); }
+:focus-visible { outline: 3px solid var(--or); outline-offset: 3px; }
+input { caret-color: var(--or); }
+
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.ico { width: 1.25em; height: 1.25em; flex: none; }
+.sr-only {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.evitement {
+  position: absolute; left: 16px; top: -100px; z-index: 100;
+  background: var(--or); color: var(--ardoise); padding: 12px 18px; font-weight: 800; text-decoration: none;
+}
+.evitement:focus { top: 12px; }
+
+.lien {
+  background: none; border: 0; padding: 0; cursor: pointer;
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em;
+}
+
+/* Titres de façade : Archivo étroit, graisse 800, capitales */
+.halle-titre, .section-titre, .emporter-titre, .etal-titre, .quartier-titre, .formules-groupe-titre,
+.ardoise-nom, .travee-nom, .volet-texte, .carnet-titre, .infos-titre, .marque-nom,
+.bouton, .barre, .infos-tel, .ardoise-prix, .plat-prix, .vin-prix data {
+  font-stretch: 68%;
+  font-weight: 800;
+}
+.halle-titre, .section-titre, .emporter-titre, .etal-titre, .quartier-titre, .formules-groupe-titre,
+.ardoise-nom span, .travee-nom, .volet-texte, .carnet-titre, .infos-titre, .marque-nom {
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  text-wrap: balance;
+}
+
+/* ---------- Boutons ---------- */
+.bouton {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 56px; padding: 0 22px;
+  font-size: 1.1875rem; letter-spacing: 0.02em; text-transform: uppercase; text-decoration: none;
+  border-radius: 3px; cursor: pointer;
+  transition: background-color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease), color 0.25s var(--ease);
+}
+.bouton-principal {
+  background: var(--or); color: var(--ardoise); border: 0;
+  box-shadow: 0 8px 18px -8px rgba(20, 8, 2, 0.6);
+}
+.bouton-principal:hover { background: var(--or-clair); transform: translateY(-1px); box-shadow: 0 12px 22px -10px rgba(20, 8, 2, 0.65); }
+.bouton-principal:active { transform: translateY(0); }
+.bouton-principal:focus-visible { outline-color: var(--craie); }
+.bouton-second { background: transparent; color: var(--craie); border: 2px solid rgba(255, 246, 236, 0.75); }
+.bouton-second:hover { background: rgba(255, 246, 236, 0.12); border-color: var(--craie); }
+
+/* ---------- Poutre (en-tête) ---------- */
+.poutre {
+  position: sticky; top: 0; z-index: 50;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px;
+  height: var(--h-poutre);
+  padding: 0 var(--gouttiere);
+  background: var(--chene);
+  box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.55);
+}
+.marque { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; justify-self: start; }
+[lang="zh-Hant"] { font-family: "Noto Serif TC", "Songti TC", serif; font-weight: 900; }
+.disque {
+  display: inline-grid; place-items: center;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--or); color: var(--chene);
+  font-family: "Noto Serif TC", "Songti TC", serif; font-weight: 900; font-size: 22px; line-height: 1;
+}
+.marque-nom { font-size: 1.5rem; }
+.nav ul { display: flex; gap: 4px; }
+.nav a {
+  display: block; line-height: 44px; padding: 0 12px;
+  text-decoration: none; font-size: 1rem; color: var(--craie);
+  border-radius: 3px; transition: background-color 0.2s var(--ease);
+}
+.nav a:hover { background: rgba(255, 246, 236, 0.1); }
+.bouton-tel {
+  justify-self: end;
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px;
+  background: var(--or); color: var(--ardoise); border-radius: 3px; text-decoration: none;
+  font-weight: 800; font-stretch: 75%; font-size: 1.125rem; letter-spacing: 0.02em; font-variant-numeric: tabular-nums;
+  transition: background-color 0.2s var(--ease);
+}
+.bouton-tel:hover { background: var(--or-clair); }
+.bouton-tel:focus-visible { outline-color: var(--craie); }
+
+/* ---------- La halle (premier écran) ---------- */
+.halle {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  align-items: center;
+  gap: clamp(28px, 4vw, 64px);
+  min-height: min(calc(100svh - var(--h-poutre)), 860px);
+  padding: clamp(32px, 5vw, 72px) var(--gouttiere) clamp(40px, 5vw, 72px);
+}
+.halle-titre {
+  font-size: clamp(3.25rem, 1.4rem + 6.2vw, 6rem);
+  font-stretch: 62%;
+  line-height: 0.86;
+  letter-spacing: 0;
+  color: var(--craie);
+  text-shadow: 0 2px 0 rgba(60, 16, 6, 0.25);
+}
+.halle-titre .or { color: var(--or); }
+.halle-accroche {
+  margin-top: clamp(18px, 2vw, 28px);
+  max-width: 30ch;
+  font-size: clamp(1.1875rem, 1rem + 0.7vw, 1.5rem);
+  line-height: 1.35;
+}
+.statut {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 24px; padding: 10px 16px 10px 14px;
+  background: var(--ardoise); color: var(--craie); border-radius: 3px;
+  font-size: 1rem; line-height: 1.3;
+  box-shadow: 0 8px 18px -10px rgba(20, 8, 2, 0.6);
+}
+.statut-point { width: 10px; height: 10px; border-radius: 50%; background: var(--craie-2); flex: none; }
+.statut[data-etat="ouvert"] .statut-point { background: var(--or); box-shadow: 0 0 0 4px rgba(242, 181, 58, 0.25); }
+.statut strong { color: var(--or); }
+.halle-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.halle-adresse { display: flex; align-items: center; gap: 8px; margin-top: 22px; font-size: 1rem; }
+
+.halle-travees {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 14px;
+}
+.enseigne {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 12px 9px 14px;
+  background: var(--chene);
+  border-radius: 2px;
+  box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.6);
+  margin-top: 34px;
+}
+.enseigne span[aria-hidden] {
+  display: grid; place-items: center;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--or); color: var(--chene);
+  font-family: "Noto Serif TC", "Songti TC", serif; font-weight: 900; font-size: 27px; line-height: 1;
+}
+.travees-toit { min-width: 0; }
+.solive {
+  height: 30px;
+  background: var(--chene);
+  border-radius: 2px 2px 0 0;
+  box-shadow: 0 8px 12px -4px rgba(0, 0, 0, 0.5);
+  position: relative; z-index: 2;
+}
+.travees {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;
+  padding: 0 14px 14px;
+  background: var(--brique-sombre) var(--brique-sombre-motif);
+}
+.travee {
+  position: relative; overflow: hidden;
+  height: clamp(300px, 56vh, 540px);
+  background: #1b1918;
+}
+.travee img { width: 100%; height: 100%; object-fit: cover; }
+.travee::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  box-shadow: inset 0 22px 26px -12px rgba(0, 0, 0, 0.7), inset 0 -40px 40px -30px rgba(0, 0, 0, 0.5);
+}
+.travee-nom {
+  position: absolute; left: 10px; bottom: 10px; z-index: 3;
+  padding: 7px 10px 6px;
+  background: var(--ardoise); color: var(--craie);
+  font-size: 1.0625rem; letter-spacing: 0.04em;
+  border-radius: 2px;
+}
+/* Rideaux de fer : remontés quand c'est ouvert, à moitié baissés quand c'est fermé */
+.volet {
+  position: absolute; left: 0; right: 0; top: 0; z-index: 2;
+  height: 100%;
+  display: grid; place-items: end center;
+  background:
+    repeating-linear-gradient(180deg, #767b80 0 10px, #575c61 10px 12px);
+  border-bottom: 6px solid #33373b;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.45);
+  transform: translateY(-101%);
+  transition: transform 1.2s var(--ease);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .travee .volet { animation: volet-leve 1.5s var(--ease) 0.25s both; }
+  .travee-thailande .volet { animation-delay: 0.4s; }
+  .travee-japon .volet { animation-delay: 0.55s; }
+}
+@keyframes volet-leve {
+  from { transform: translateY(-66%); }
+  to { transform: translateY(-101%); }
+}
+.volet-texte {
+  padding: 0 8px 10px;
+  color: var(--craie); font-size: clamp(0.9rem, 0.7rem + 0.6vw, 1.1rem); text-align: center; line-height: 1.05;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+}
+.halle-travees[data-ferme] .volet { animation: none; transform: translateY(-56%); }
+
+/* ---------- À emporter : le passage calme ---------- */
+.emporter {
+  padding: clamp(56px, 9vw, 128px) var(--gouttiere);
+  background: var(--brique-sombre) var(--brique-sombre-motif);
+  text-align: center;
+  box-shadow: inset 0 10px 18px -12px rgba(0, 0, 0, 0.55), inset 0 -10px 18px -12px rgba(0, 0, 0, 0.55);
+}
+.emporter-titre { font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4.25rem); }
+.emporter-texte { max-width: 38ch; margin: 18px auto 0; font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem); line-height: 1.45; }
+
+/* ---------- En-têtes de section ---------- */
+.section-tete { max-width: 1320px; margin: 0 auto; }
+.section-titre { font-size: clamp(2.75rem, 1.6rem + 4.4vw, 5.25rem); line-height: 0.9; }
+.section-intro { margin-top: 16px; max-width: 58ch; font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem); line-height: 1.5; }
+
+/* ---------- Formules : ardoises dans leur cadre de chêne ---------- */
+.formules { padding: clamp(64px, 8vw, 120px) var(--gouttiere); }
+.formules-groupe { max-width: 1320px; margin: clamp(40px, 5vw, 64px) auto 0; }
+.formules-groupe-titre {
+  display: flex; align-items: center; gap: 16px;
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  margin-bottom: 22px;
+}
+.formules-groupe-titre::after { content: ""; flex: 1; height: 4px; background: rgba(255, 246, 236, 0.35); }
+/* Les ardoises s'accrochent en colonnes, comme sur un mur de halle : pas de trous sous les courtes */
+.ardoises { columns: 4 272px; column-gap: 22px; }
+.ardoise { break-inside: avoid; -webkit-column-break-inside: avoid; padding-bottom: 22px; }
+.ardoise-cadre {
+  display: flex; flex-direction: column;
+  padding: 20px 20px 18px;
+  background: var(--ardoise);
+  border: 10px solid var(--chene-2);
+  border-radius: 3px;
+  box-shadow: 0 16px 26px -14px rgba(20, 6, 2, 0.75), inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+.ardoise-nom { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.ardoise-nom span { font-size: 1.375rem; }
+.ardoise-prix { color: var(--or); font-size: 2.125rem; line-height: 1; white-space: nowrap; }
+.ardoise-condition {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 10px; color: var(--or); font-size: 0.9375rem; line-height: 1.3;
+}
+.ardoise-img { margin-top: 14px; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 2px; }
+.ardoise-texte { margin-top: 12px; font-size: 1rem; }
+.service { margin-top: 16px; }
+.service-titre {
+  font-size: 0.8125rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--craie-2); font-weight: 800;
+}
+.service-titre .au-choix { font-weight: 400; letter-spacing: 0.04em; text-transform: none; font-size: 0.875rem; }
+.service-choix { margin-top: 6px; }
+.service-choix li { position: relative; padding-left: 16px; line-height: 1.4; }
+.service-choix li + li { margin-top: 4px; }
+.service-choix li::before { content: "–"; position: absolute; left: 0; color: var(--craie-2); }
+.service-et li::before { content: "+"; }
+.ardoise-ajout {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 20px; min-height: 46px; padding: 0 14px;
+  background: transparent; color: var(--craie);
+  border: 2px dashed rgba(255, 246, 236, 0.45); border-radius: 3px; cursor: pointer;
+  font-weight: 800; font-stretch: 75%; text-transform: uppercase; letter-spacing: 0.04em; font-size: 1rem;
+  transition: background-color 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+.ardoise-ajout:hover { border-color: var(--or); color: var(--or); }
+.ardoise-ajout[data-qte] { background: var(--or); color: var(--ardoise); border: 2px solid var(--or); }
+
+/* ---------- La carte : ardoise de marché ---------- */
+.carte {
+  position: relative;
+  padding: clamp(64px, 8vw, 120px) var(--gouttiere) clamp(72px, 8vw, 120px);
+  background: var(--ardoise);
+  box-shadow: inset 0 14px 22px -16px rgba(0, 0, 0, 0.8);
+}
+
+/* Recherche */
+.recherche { max-width: 1320px; margin: clamp(40px, 5vw, 64px) auto 0; }
+.recherche-label { display: block; font-size: 0.8125rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 800; }
+.recherche-champ { position: relative; margin-top: 10px; max-width: 640px; }
+.recherche-champ > .ico { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--craie-2); pointer-events: none; }
+.recherche input {
+  width: 100%; height: 58px; padding: 0 56px 0 50px;
+  font: inherit; font-size: 1.1875rem; color: var(--craie);
+  background: var(--ardoise-2); border: 2px solid var(--ardoise-3); border-radius: 3px;
+  -webkit-appearance: none; appearance: none;
+  transition: border-color 0.2s var(--ease);
+}
+.recherche input::placeholder { color: var(--craie-2); opacity: 1; }
+.recherche input:focus { outline: none; border-color: var(--or); }
+.recherche input::-webkit-search-cancel-button { display: none; }
+.recherche-effacer {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  width: 46px; height: 46px; display: grid; place-items: center;
+  background: none; border: 0; border-radius: 3px; color: var(--craie); cursor: pointer;
+}
+.recherche-effacer:hover { background: var(--ardoise-3); }
+.recherche-effacer[hidden] { display: none; }
+.filtres { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.filtre {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 44px; padding: 0 16px;
+  background: transparent; color: var(--craie);
+  border: 2px solid var(--ardoise-3); border-radius: 3px; cursor: pointer;
+  transition: background-color 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+.filtre:hover { border-color: var(--craie-2); }
+.filtre[aria-pressed="true"] { background: var(--or); border-color: var(--or); color: var(--ardoise); font-weight: 800; }
+.filtre[aria-pressed="true"] .ico-piment { color: var(--brique); }
+.recherche-resultat { min-height: 1.5em; margin-top: 12px; color: var(--craie-2); }
+.recherche-resultat strong { color: var(--craie); }
+
+/* Rubriques (barre collante) */
+.rubriques {
+  position: sticky; top: var(--h-poutre); z-index: 30;
+  margin: 24px calc(-1 * var(--gouttiere)) 0;
+  padding: 0 var(--gouttiere);
+  background: var(--ardoise);
+  border-bottom: 1px solid var(--trait);
+  box-shadow: 0 10px 16px -14px rgba(0, 0, 0, 0.9);
+}
+.rubriques ul {
+  display: flex; gap: 2px; overflow-x: auto; scroll-snap-type: x proximity;
+  max-width: 1320px; margin: 0 auto;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 28px), transparent);
+  mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 28px), transparent);
+}
+.rubriques ul::-webkit-scrollbar { display: none; }
+.rubriques li { scroll-snap-align: start; flex: none; }
+.rubriques a {
+  display: flex; align-items: center; height: var(--h-rubriques); padding: 0 14px;
+  color: var(--craie-2); text-decoration: none; white-space: nowrap; font-size: 0.9375rem;
+  transition: color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.rubriques a:hover { color: var(--craie); }
+.rubriques a[aria-current="true"] { color: var(--craie); box-shadow: inset 0 -3px 0 var(--or); }
+.rubriques li[hidden] { display: none; }
+
+/* Corps de la carte */
+.carte-corps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: clamp(32px, 4vw, 64px);
+  align-items: start;
+  max-width: 1320px; margin: 0 auto;
+}
+.quartier { padding-top: clamp(40px, 5vw, 64px); }
+.quartier[hidden] { display: none; }
+.quartier-titre {
+  margin: 0 0 32px 0;
+  padding: 14px 18px 12px;
+  font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem);
+  background: var(--brique) var(--brique-motif);
+  border-radius: 2px 0 0 2px;
+  box-shadow: 0 10px 18px -12px rgba(0, 0, 0, 0.8);
+}
+.quartier-etals { columns: 2 330px; column-gap: clamp(32px, 4vw, 56px); }
+.etal {
+  break-inside: avoid; -webkit-column-break-inside: avoid;
+  display: block;
+  padding-bottom: 44px;
+  scroll-margin-top: calc(var(--h-poutre) + var(--h-rubriques) + 16px);
+}
+.quartier { scroll-margin-top: calc(var(--h-poutre) + var(--h-rubriques)); }
+.etal[hidden] { display: none; }
+.etal-photo {
+  width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 2px;
+  margin-bottom: 16px;
+}
+.etal-tete { padding-bottom: 10px; border-bottom: 4px solid var(--trait); margin-bottom: 6px; }
+.etal-titre { font-size: clamp(1.625rem, 1.3rem + 1vw, 2rem); display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.etal-meta { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 8px; font-size: 0.9375rem; line-height: 1.3; }
+.etal-compte { color: var(--craie-2); font-variant-numeric: tabular-nums; }
+.etal-note { color: var(--or); }
+.groupe + .groupe { margin-top: 18px; }
+.groupe-titre {
+  margin-top: 14px;
+  font-size: 0.8125rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 800; color: var(--craie);
+}
+.groupe-colonnes { display: none; }
+.groupe-note { margin-top: 4px; color: var(--craie-2); font-size: 0.9375rem; line-height: 1.4; }
+.groupe[hidden] { display: none; }
+
+/* Une ligne = un rang de brique */
+.plat {
+  display: grid;
+  grid-template-columns: minmax(0, max-content) minmax(1.25rem, 1fr) auto auto;
+  align-items: center;
+  column-gap: 10px;
+  min-height: var(--course);
+  padding: 5px 0;
+}
+.plat::after {
+  content: ""; order: 1; align-self: end;
+  margin-bottom: calc(0.5em + 5px);
+  border-bottom: 2px dotted var(--pointille);
+}
+.plat-nom { order: 0; line-height: 1.3; }
+.plat-desc { display: block; color: var(--craie-2); font-size: 0.9375rem; line-height: 1.35; }
+.plat-prix { order: 2; color: var(--or); font-size: 1.1875rem; white-space: nowrap; }
+.plat-ajout { order: 3; }
+.plat[hidden] { display: none; }
+.piment { display: inline-flex; vertical-align: -0.15em; color: var(--piment); }
+.ico-piment { width: 1.1em; height: 1.1em; }
+.etal-titre .piment .ico-piment { width: 0.9em; height: 0.9em; }
+
+.plat-vin { grid-template-columns: minmax(0, max-content) minmax(1.25rem, 1fr) auto; }
+.vin-prix-ligne { order: 2; display: grid; grid-auto-flow: column; grid-auto-columns: 7rem; }
+.vin-prix { text-align: right; white-space: nowrap; }
+.vin-prix data { color: var(--or); font-size: 1.1875rem; }
+.vin-format { color: var(--craie-2); font-size: 0.8125rem; margin-right: 4px; }
+.vin-vide { color: var(--craie-2); }
+
+.plat-ajout {
+  position: relative;
+  display: grid; place-items: center;
+  width: 38px; height: 38px; padding: 0;
+  background: transparent; color: var(--craie);
+  border: 2px solid rgba(255, 246, 236, 0.35); border-radius: 50%; cursor: pointer;
+  font-weight: 800; font-size: 0.9375rem; font-variant-numeric: tabular-nums;
+  transition: background-color 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.plat-ajout::before { content: ""; position: absolute; inset: -4px; }
+.plat-ajout:hover { border-color: var(--or); color: var(--or); }
+.plat-ajout[data-qte] { background: var(--or); border-color: var(--or); color: var(--ardoise); }
+.plat-ajout > * { grid-area: 1 / 1; }
+.plat-ajout[data-qte] .ico { display: none; }
+.plat-ajout-qte:empty { display: none; }
+.plat-ajout .ico { width: 20px; height: 20px; }
+.plat-ajout.tape { transform: scale(0.88); }
+
+.mention-alcool { margin-top: 8px; color: var(--craie-2); font-size: 0.875rem; }
+.carte-vide {
+  margin-top: 40px; padding: 28px;
+  border: 2px dashed var(--ardoise-3); border-radius: 3px;
+}
+.carte-vide-titre { font-weight: 800; font-size: 1.25rem; margin-bottom: 6px; }
+.carte-vide .lien { color: var(--or); }
+
+/* ---------- Ma liste : le carnet de commande ---------- */
+.carnet {
+  position: sticky;
+  top: calc(var(--h-poutre) + var(--h-rubriques) + 24px);
+  margin-top: clamp(40px, 5vw, 64px);
+}
+.carnet-papier {
+  position: relative;
+  max-height: calc(100vh - var(--h-poutre) - var(--h-rubriques) - 48px);
+  overflow: auto;
+  padding: 30px 22px 22px;
+  background: var(--papier);
+  color: var(--encre);
+  border-radius: 2px;
+  box-shadow: 0 18px 32px -16px rgba(0, 0, 0, 0.9);
+  scrollbar-color: #cfc6ba var(--papier);
+}
+.carnet-papier::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 14px;
+  background:
+    radial-gradient(circle at 10px 7px, var(--papier) 0 3px, transparent 3.5px) 0 0 / 20px 14px repeat-x,
+    var(--brique);
+}
+.carnet :focus-visible { outline-color: var(--brique); }
+.carnet-tete { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.carnet-titre { font-size: 1.75rem; color: var(--brique); }
+.carnet-titre:focus { outline: none; }
+.carnet-fermer {
+  display: none; width: 44px; height: 44px; place-items: center;
+  background: none; border: 0; border-radius: 3px; cursor: pointer; color: var(--encre);
+}
+.carnet-fermer:hover { background: rgba(30, 26, 23, 0.08); }
+.carnet-vide { margin-top: 12px; color: var(--encre-2); font-size: 1rem; line-height: 1.5; }
+.carnet-plus {
+  display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; border-radius: 50%;
+  border: 2px solid var(--encre-2); vertical-align: -0.35em;
+}
+.carnet-plus .ico { width: 0.95em; height: 0.95em; }
+.carnet-lignes { margin-top: 10px; }
+.carnet-ligne {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd3c6;
+}
+.carnet-ligne-nom { font-size: 1rem; line-height: 1.3; }
+.carnet-ligne-prix { font-weight: 800; font-stretch: 75%; font-size: 1.0625rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.carnet-qte { grid-column: 1 / -1; display: flex; align-items: center; gap: 4px; }
+.carnet-qte button {
+  display: grid; place-items: center; width: 36px; height: 36px; padding: 0; position: relative;
+  background: transparent; border: 2px solid #cbbfb0; border-radius: 50%; color: var(--encre); cursor: pointer;
+}
+.carnet-qte button::before { content: ""; position: absolute; inset: -4px; }
+.carnet-qte button:hover { border-color: var(--brique); color: var(--brique); }
+.carnet-qte .ico { width: 18px; height: 18px; }
+.carnet-qte output { min-width: 2.2em; text-align: center; font-weight: 800; font-variant-numeric: tabular-nums; }
+.carnet-qte-pu { margin-left: auto; color: var(--encre-2); font-size: 0.875rem; font-variant-numeric: tabular-nums; }
+.carnet-total {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  margin-top: 14px; padding-top: 12px; border-top: 3px double var(--encre);
+  font-weight: 800; font-size: 1.125rem;
+}
+.carnet-total data { font-stretch: 75%; font-size: 1.625rem; color: var(--brique); }
+.carnet-note { margin-top: 12px; color: var(--encre-2); font-size: 0.875rem; line-height: 1.45; }
+.carnet-appel { width: 100%; margin-top: 16px; font-size: 1.0625rem; padding: 0 14px; }
+.carnet-appel:focus-visible { outline-color: var(--brique); }
+.carnet-vider { display: block; margin: 14px auto 0; color: var(--encre-2); font-size: 0.9375rem; min-height: 44px; }
+.carnet-vider[hidden] { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .carnet-ligne.nouvelle { animation: ligne-entre 0.5s var(--ease); }
+}
+@keyframes ligne-entre { from { background: rgba(242, 181, 58, 0.45); } to { background: transparent; } }
+
+/* ---------- Horaires et accès ---------- */
+.infos { padding: clamp(64px, 8vw, 120px) var(--gouttiere); }
+.infos-grille {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(32px, 4vw, 56px);
+  max-width: 1320px; margin: clamp(32px, 4vw, 56px) auto 0;
+}
+.infos-titre { font-size: 1.5rem; margin-bottom: 14px; }
+.infos-bloc > .infos-titre ~ .infos-titre { margin-top: 32px; }
+.horaires { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.horaires th, .horaires td { padding: 10px 8px; text-align: left; border-bottom: 2px solid rgba(255, 246, 236, 0.22); }
+.horaires thead th { font-size: 0.8125rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 800; padding-top: 0; }
+.horaires tbody th { font-weight: 400; }
+.horaires .ferme { font-weight: 800; }
+.horaires tr.aujourdhui > * { background: var(--ardoise); border-bottom-color: var(--ardoise); }
+.horaires tr.aujourdhui th { font-weight: 800; }
+.horaires tr.aujourdhui th::after {
+  content: "aujourd’hui"; display: block; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--or); font-weight: 800;
+}
+.adresse { font-style: normal; font-size: 1.1875rem; line-height: 1.45; margin-bottom: 18px; }
+.infos-tel { font-size: 2.25rem; text-decoration: none; font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.infos-tel:hover { text-decoration: underline; }
+.infos-texte { margin-top: 6px; max-width: 36ch; }
+.paiement li { line-height: 1.45; }
+.paiement li + li { margin-top: 10px; }
+.paiement strong { display: block; }
+.lien-icone { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+
+.salle {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;
+  max-width: 1320px; margin: clamp(48px, 6vw, 88px) auto 0;
+  padding: 14px;
+  background: var(--brique-sombre) var(--brique-sombre-motif);
+  box-shadow: inset 0 30px 0 0 var(--chene);
+}
+.salle-photo { position: relative; padding-top: 16px; }
+.salle-photo img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.salle-photo figcaption { margin-top: 8px; font-size: 0.9375rem; }
+
+/* Sans JavaScript, la carte reste complète mais la liste n'a pas de sens */
+html:not(.js) .carnet, html:not(.js) .barre-liste { display: none !important; }
+html:not(.js) .carte-corps { grid-template-columns: minmax(0, 1fr); }
+html:not(.js) .barre { grid-template-columns: 1fr; }
+
+/* ---------- Pied ---------- */
+.pied {
+  display: grid; gap: 14px;
+  padding: 44px var(--gouttiere) 48px;
+  background: var(--chene);
+  color: var(--craie);
+  font-size: 0.9375rem;
+}
+.pied-marque { display: flex; align-items: center; gap: 14px; }
+.pied-marque .disque { flex: none; width: 52px; height: 52px; font-size: 30px; }
+.pied-marque strong { font-size: 1.25rem; font-stretch: 68%; text-transform: uppercase; }
+.pied-infos a { font-variant-numeric: tabular-nums; }
+.pied-credits { color: var(--craie-2); }
+.pied-bas {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px;
+  margin-top: 6px; padding-top: 18px; border-top: 1px solid rgba(255, 246, 236, 0.16);
+}
+.pied-creation strong { font-weight: 800; }
+.pied-creation a { overflow-wrap: anywhere; }
+.pied-connexion {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 0 16px;
+  color: var(--craie); text-decoration: none;
+  border: 2px solid rgba(255, 246, 236, 0.4); border-radius: 3px;
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+.pied-connexion:hover { border-color: var(--or); color: var(--or); }
+
+/* ---------- Barre du bas (téléphone) ---------- */
+.barre { display: none; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1099px) {
+  .carte-corps { grid-template-columns: minmax(0, 1fr); }
+  .quartier-titre { margin-right: calc(-1 * var(--gouttiere)); }
+  body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
+  .barre {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 55;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+    background: var(--chene);
+    box-shadow: 0 -8px 18px -10px rgba(0, 0, 0, 0.7);
+  }
+  .barre-appel, .barre-liste {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 52px; border-radius: 3px; text-decoration: none;
+    text-transform: uppercase; letter-spacing: 0.03em; font-size: 1.0625rem; cursor: pointer;
+  }
+  .barre-appel { background: var(--or); color: var(--ardoise); }
+  .barre-appel:focus-visible { outline-color: var(--craie); }
+  .barre-liste { background: transparent; color: var(--craie); border: 2px solid rgba(255, 246, 236, 0.5); }
+  .barre-compte {
+    min-width: 1.6em; height: 1.6em; padding: 0 6px; display: inline-grid; place-items: center;
+    background: var(--craie); color: var(--chene); border-radius: 999px; font-size: 0.875rem; font-variant-numeric: tabular-nums;
+  }
+  .barre-liste[data-rempli] .barre-compte { background: var(--or); color: var(--ardoise); }
+  .barre-total { font-stretch: 75%; font-variant-numeric: tabular-nums; }
+  .barre-liste > span, .barre-liste > data { white-space: nowrap; }
+
+  .carnet {
+    position: fixed; left: 0; right: 0; bottom: 0; top: auto; z-index: 60;
+    margin: 0;
+    transform: translateY(105%); visibility: hidden;
+    transition: transform 0.45s var(--ease), visibility 0s linear 0.45s;
+  }
+  .carnet.ouvert { transform: none; visibility: visible; transition: transform 0.45s var(--ease), visibility 0s; }
+  .carnet-papier {
+    max-width: 560px; margin: 0 auto;
+    max-height: min(78svh, 680px);
+    padding-bottom: calc(22px + env(safe-area-inset-bottom));
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 -16px 40px -8px rgba(0, 0, 0, 0.75);
+  }
+  .carnet-fermer { display: grid; }
+}
+
+@media (max-width: 999px) {
+  .halle { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .travee { height: clamp(220px, 44vw, 380px); }
+  .infos-grille { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .salle { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .salle-photo:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 759px) {
+  body { font-size: 1rem; }
+  .poutre { gap: 12px; grid-template-columns: auto 1fr auto; }
+  .nav { justify-self: end; }
+  .marque-nom { font-size: 1.3125rem; }
+  .disque { width: 34px; height: 34px; font-size: 20px; }
+  .nav-large { display: none; }
+  .nav a { padding: 0 8px; font-size: 0.9375rem; }
+  .bouton-tel { padding: 0; width: 44px; justify-content: center; }
+  .bouton-tel-num { display: none; }
+  .halle { padding-top: 28px; gap: 28px; }
+  .halle-actions .bouton { width: 100%; }
+  .statut { display: flex; }
+  .halle-travees { gap: 10px; }
+  .enseigne { padding: 8px 6px 10px; gap: 6px; margin-top: 22px; }
+  .enseigne span[aria-hidden] { width: 32px; height: 32px; font-size: 19px; }
+  .solive { height: 20px; }
+  .travees { gap: 8px; padding: 0 8px 8px; }
+  .travee-nom { left: 6px; bottom: 6px; font-size: 0.875rem; padding: 5px 7px 4px; }
+  .quartier-etals { columns: 1; }
+  .etal { padding-bottom: 36px; }
+  .plat { column-gap: 8px; }
+  .plat-prix, .vin-prix data { font-size: 1.125rem; }
+  .vin-prix-ligne { grid-auto-columns: 5.6rem; }
+  .infos-grille { grid-template-columns: minmax(0, 1fr); }
+  .salle { grid-template-columns: minmax(0, 1fr); }
+  .infos-tel { font-size: 2rem; }
+}
+
+@media (max-width: 429px) {
+  .nav { display: none; }
+  .barre-liste[data-rempli] .barre-mot { display: none; }
+}
+
+@media (max-width: 379px) {
+  .plat { grid-template-columns: minmax(0, 1fr) auto auto; }
+  .plat::after { display: none; }
+  .vin-prix-ligne { grid-auto-columns: 4.9rem; }
+  .plat-vin { grid-template-columns: minmax(0, 1fr) auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+}
+
+@media print {
+  .poutre, .barre, .recherche, .rubriques, .carnet, .halle-travees, .salle, .plat-ajout, .ardoise-ajout { display: none !important; }
+  body { background: #fff; color: #000; padding: 0; }
+  .carte, .formules, .emporter, .infos, .pied { background: #fff; color: #000; box-shadow: none; }
+  .ardoise-cadre { background: #fff; border-color: #999; box-shadow: none; }
+  .quartier-titre { background: none; box-shadow: none; }
+  .plat-prix, .vin-prix data, .ardoise-prix, .etal-note { color: #000; }
+}
+
+/* ---------- Le Monorom : lune dorée à la place des caractères chinois ---------- */
+.disque .lune { width: 62%; height: 62%; }
+.enseigne-mot { gap: 10px; }
+.enseigne-mot span[aria-hidden] .lune { width: 64%; height: 64%; }
+.enseigne-lettres {
+  writing-mode: vertical-rl; text-orientation: upright;
+  color: var(--or); font-weight: 800; font-stretch: 75%; text-transform: uppercase;
+  font-size: 23px; line-height: 1; letter-spacing: -0.06em;
+}
+@media (max-width: 759px) {
+  .enseigne-lettres { font-size: 17px; }
+}

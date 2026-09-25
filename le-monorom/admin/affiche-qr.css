@@ -1,0 +1,164 @@
+/* Le Monorom : affiche QR code. S'appuie sur carte-a3.css (polices, couleurs, barre d'outils).
+   Toutes les tailles sont en --u : 1 mm pour l'affiche A4, 0,5 mm pour une carte A6. */
+
+@page { size: 210mm 297mm; margin: 0; }
+
+.q-feuille {
+  width: 210mm; height: 297mm;
+  display: grid;
+  background: #fff;
+  overflow: hidden;
+}
+.q-chevalets .q-feuille { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+
+.q-affiche {
+  --u: 1mm;
+  position: relative;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  background: var(--papier);
+  color: var(--texte);
+  text-align: center;
+}
+.q-a6 { --u: 0.5mm; }
+/* Traits de coupe discrets entre les cartes A6 */
+.q-a6:nth-child(odd) { border-right: 0.2mm dashed rgba(34, 38, 42, 0.3); }
+.q-a6:nth-child(-n + 2) { border-bottom: 0.2mm dashed rgba(34, 38, 42, 0.3); }
+
+.q-tete {
+  padding: calc(14 * var(--u)) calc(10 * var(--u)) calc(11 * var(--u));
+  color: var(--craie);
+  background: var(--brique) var(--brique-motif);
+  background-size: calc(68 * var(--u)) auto;
+  border-bottom: calc(2.2 * var(--u)) solid var(--ardoise);
+}
+.q-enseigne { display: flex; justify-content: center; gap: calc(3 * var(--u)); }
+.q-enseigne span {
+  display: grid; place-items: center;
+  width: calc(14 * var(--u)); height: calc(14 * var(--u)); border-radius: 50%;
+  background: var(--or); color: var(--chene);
+  font-family: "Noto Serif TC", "Songti TC", serif; font-weight: 900; font-size: calc(8.6 * var(--u)); line-height: 1;
+}
+.q-nom {
+  margin-top: calc(6 * var(--u));
+  font-weight: 800; font-stretch: 62%; text-transform: uppercase;
+  font-size: calc(26 * var(--u)); line-height: 0.86;
+  text-shadow: 0 calc(0.7 * var(--u)) 0 rgba(60, 16, 6, 0.25);
+}
+.q-nom span { color: var(--or); }
+.q-accroche { margin-top: calc(4 * var(--u)); font-size: calc(5.6 * var(--u)); }
+
+.q-corps {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: calc(8 * var(--u)) calc(12 * var(--u));
+}
+.q-titre {
+  font-weight: 800; font-stretch: 66%; text-transform: uppercase;
+  font-size: calc(17 * var(--u)); line-height: 0.95; letter-spacing: 0.01em;
+}
+.q-cadre {
+  margin-top: calc(9 * var(--u));
+  padding: calc(2.2 * var(--u));
+  border: calc(2.2 * var(--u)) solid var(--chene-2);
+  border-radius: calc(1.5 * var(--u));
+  background: #fff;
+  box-shadow: 0 calc(3 * var(--u)) calc(5 * var(--u)) calc(-3 * var(--u)) rgba(20, 6, 2, 0.45);
+}
+.q-code, .q-code svg { display: block; width: calc(78 * var(--u)); height: calc(78 * var(--u)); }
+.q-aide { margin-top: calc(7 * var(--u)); color: var(--texte-2); font-size: calc(5.2 * var(--u)); }
+.q-adresse { margin-top: calc(1.5 * var(--u)); color: var(--accent); font-weight: 700; font-size: calc(5.2 * var(--u)); }
+
+.q-pied {
+  padding: calc(5 * var(--u)) calc(10 * var(--u)) calc(9 * var(--u));
+  border-top: calc(0.6 * var(--u)) solid var(--brique);
+  margin: 0 calc(12 * var(--u));
+  font-size: calc(5.4 * var(--u));
+}
+.q-pied b { color: var(--accent); font-variant-numeric: tabular-nums; }
+
+/* ---------- Étiquettes format carte de visite : 85 × 55 mm, 2 × 5 sur A4 ---------- */
+.q-etiquettes .q-feuille {
+  grid-template-columns: repeat(2, 85mm); grid-template-rows: repeat(5, 55mm);
+  justify-content: center; align-content: center;
+}
+.q-etiquette {
+  --u: 1mm;
+  display: flex; align-items: center; gap: 4mm;
+  padding: 0 4mm 0 5mm;
+  overflow: hidden;
+  background: var(--papier) linear-gradient(var(--brique), var(--brique)) left / 2mm 100% no-repeat;
+  color: var(--texte);
+  outline: 0.2mm dashed rgba(34, 38, 42, 0.3); /* traits de coupe */
+}
+.q-etiquette .q-cadre { flex: none; margin: 0; padding: 0.8mm; border-width: 1.2mm; border-radius: 1mm; box-shadow: none; }
+.q-etiquette .q-code, .q-etiquette .q-code svg { width: 35mm; height: 35mm; }
+.q-etiquette-texte { flex: 1; min-width: 0; text-align: left; }
+.q-etiquette .q-enseigne { justify-content: flex-start; gap: 1mm; }
+.q-etiquette .q-enseigne span { width: 5.4mm; height: 5.4mm; font-size: 3.4mm; }
+.q-etiquette .q-nom { margin-top: 1.6mm; color: var(--texte); font-size: 5.9mm; text-shadow: none; white-space: nowrap; }
+.q-etiquette .q-nom span { color: var(--accent); }
+.q-etiquette .q-titre { margin-top: 2mm; color: var(--accent); font-size: 4.6mm; line-height: 1; }
+.q-etiquette .q-pied { margin: 2mm 0 0; padding: 1.4mm 0 0; border-top: 0.4mm solid var(--brique); font-size: 3.4mm; }
+
+/* Une seule étiquette : la page fait 85 × 55 mm */
+@page etiquette { size: 85mm 55mm; margin: 0; }
+.q-une .q-feuille { width: 85mm; height: 55mm; page: etiquette; display: block; }
+.q-une .q-feuille > .q-etiquette { width: 85mm; height: 55mm; outline: 0; }
+
+/* Étiquette carrée : page de 60 × 60 mm */
+@page carre { size: 60mm 60mm; margin: 0; }
+.q-page-carree .q-feuille { width: 60mm; height: 60mm; page: carre; display: block; }
+.q-carre {
+  --u: 1mm;
+  width: 60mm; height: 60mm;
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  padding: 3.2mm 3mm 2.8mm;
+  background: var(--papier);
+  border-top: 2.4mm solid var(--brique);
+  color: var(--texte); text-align: center;
+}
+.q-carre .q-titre { color: var(--accent); font-size: 4.4mm; line-height: 0.98; }
+.q-carre .q-cadre { margin: 0; padding: 0.6mm; border-width: 1mm; border-radius: 0.8mm; box-shadow: none; }
+.q-carre .q-code, .q-carre .q-code svg { width: 34mm; height: 34mm; }
+.q-carre .q-nom {
+  display: flex; align-items: center; gap: 1.2mm;
+  margin: 0; color: var(--texte); font-size: 3.9mm; line-height: 1; text-shadow: none; white-space: nowrap;
+}
+.q-carre .q-nom span { color: var(--texte); }
+.q-carre .q-nom .q-disque { color: var(--chene); }
+.q-carre .q-nom i { font-style: normal; color: var(--accent); }
+.q-carre .q-nom b { font-stretch: 72%; color: var(--accent); font-variant-numeric: tabular-nums; }
+.q-disque {
+  display: grid; place-items: center; width: 4.6mm; height: 4.6mm; border-radius: 50%;
+  background: var(--or); color: var(--chene);
+  font-family: "Noto Serif TC", "Songti TC", serif; font-weight: 900; font-stretch: 100%; font-size: 2.9mm; text-transform: none;
+}
+
+/* 12 étiquettes carrées sur A4 (3 × 4), traits de coupe en pointillés */
+.q-carres .q-feuille {
+  grid-template-columns: repeat(3, 60mm); grid-template-rows: repeat(4, 60mm);
+  justify-content: center; align-content: center;
+}
+.q-carres .q-carre { outline: 0.2mm dashed rgba(34, 38, 42, 0.3); }
+
+/* ---------- Écran ---------- */
+@media screen {
+  .q-form { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; }
+  .q-form input {
+    min-width: min(420px, 70vw); min-height: 40px; padding: 0 10px;
+    border: 2px solid rgba(255, 246, 236, 0.4); border-radius: 3px;
+    background: rgba(0, 0, 0, 0.2); color: var(--craie); font: inherit;
+  }
+  .q-apercu { display: flex; justify-content: center; padding: 24px 16px; }
+  .q-feuille { box-shadow: 0 4mm 10mm rgba(0, 0, 0, 0.45); }
+}
+@media screen and (max-width: 860px) {
+  .q-feuille { zoom: 0.45; }
+}
+@media print {
+  .q-apercu { padding: 0; }
+}
+
+/* Le Monorom : lune dorée dans les disques */
+.q-enseigne .lune, .q-disque .lune { width: 64%; height: 64%; }
