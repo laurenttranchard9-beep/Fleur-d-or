@@ -24,7 +24,7 @@ const FD_PAGE = FD_RACINE . '/index.html';
 const FD_IMAGES = FD_RACINE . '/assets/img';
 const FD_NB_SAUVEGARDES = 30;
 /** Adresse publique du site (avec https:// et / final) : sert aux balises canoniques, au sitemap et aux données Google. */
-const FD_URL_SITE = 'https://www.fleurdor31.fr/le-monorom/'; // à remplacer par son propre domaine quand il pointera vers ce serveur
+const FD_URL_SITE = 'https://www.lemonorom.fr/';
 const FD_SITEMAP = FD_RACINE . '/sitemap.xml';
 
 /* ---------- Outils ---------- */
@@ -721,7 +721,11 @@ function fd_publier(array $propre, bool $sauvegarder = true): array
         }
         fd_ecrire_json(FD_CARTE, $propre);
         fd_ecrire_atomique(FD_PAGE, $page['html']);
-        fd_ecrire_atomique(FD_SITEMAP, fd_generer_sitemap());
+        try {
+            fd_ecrire_atomique(FD_SITEMAP, fd_generer_sitemap());
+        } catch (Throwable $e) {
+            // le sitemap ne doit jamais empêcher de publier la carte
+        }
         return ['plats' => $page['plats'], 'boissons' => $page['boissons'], 'formules' => $page['formules']];
     } finally {
         flock($verrou, LOCK_UN);

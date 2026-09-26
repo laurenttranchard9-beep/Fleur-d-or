@@ -723,7 +723,11 @@ function fd_publier(array $propre, bool $sauvegarder = true): array
         }
         fd_ecrire_json(FD_CARTE, $propre);
         fd_ecrire_atomique(FD_PAGE, $page['html']);
-        fd_ecrire_atomique(FD_SITEMAP, fd_generer_sitemap());
+        try {
+            fd_ecrire_atomique(FD_SITEMAP, fd_generer_sitemap());
+        } catch (Throwable $e) {
+            // le sitemap ne doit jamais empêcher de publier la carte
+        }
         return ['plats' => $page['plats'], 'boissons' => $page['boissons'], 'formules' => $page['formules']];
     } finally {
         flock($verrou, LOCK_UN);

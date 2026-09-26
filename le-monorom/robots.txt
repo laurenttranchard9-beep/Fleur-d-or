@@ -1,5 +1,4 @@
 User-agent: *
 Disallow: /admin/
 
-# Utilisé seulement quand Le Monorom a son propre nom de domaine
-Sitemap: https://www.fleurdor31.fr/le-monorom/sitemap.xml
+Sitemap: https://www.lemonorom.fr/sitemap.xml

@@ -3,4 +3,3 @@ Disallow: /admin/
 Disallow: /le-monorom/admin/
 
 Sitemap: https://www.fleurdor31.fr/sitemap.xml
-Sitemap: https://www.fleurdor31.fr/le-monorom/sitemap.xml

@@ -15,6 +15,7 @@
 set -euo pipefail
 
 DOMAINE="${1:-${MONOROM_DOMAINE:-}}"
+DOMAINE_DONNE="$DOMAINE"
 # Mise à jour sans domaine : on garde celui de l'installation précédente
 if [ -z "$DOMAINE" ] && [ -f /etc/httpd/conf.d/le-monorom.conf ]; then
   DOMAINE=$(awk '$1=="ServerName"{print $2; exit}' /etc/httpd/conf.d/le-monorom.conf)
@@ -76,10 +77,14 @@ cp -a "$NEUF/donnees/.htaccess" "$DOSSIER/donnees/"
 
 cd "$DOSSIER"
 php admin/publier.php
-chown -R apache:apache donnees index.html
+chown -R apache:apache donnees index.html sitemap.xml
 chmod -R u+rwX,g+rwX donnees
 
 # ---------- Apache : un seul fichier à nous, les autres sites ne changent pas ----------
+# Mise à jour sans domaine donné : la configuration en place est gardée (HTTPS de certbot compris).
+if [ -f "$CONF" ] && [ -z "$DOMAINE_DONNE" ]; then
+  echo "Configuration Apache existante conservée ($CONF)."
+else
 {
   echo "# Le Monorom (installé par installer-monorom.sh)"
   echo "Alias /le-monorom $DOSSIER"
@@ -107,6 +112,7 @@ if [ -n "$DOMAINE" ]; then
     DocumentRoot $DOSSIER
 </VirtualHost>
 CONF
+fi
 fi
 
 if systemctl list-unit-files php-fpm.service >/dev/null 2>&1; then
