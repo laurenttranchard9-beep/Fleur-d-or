@@ -796,3 +796,57 @@ html:not(.js) .barre { grid-template-columns: 1fr; }
 @media (max-width: 759px) {
   .enseigne-lettres { font-size: 17px; }
 }
+
+/* ---------- Mentions légales ---------- */
+/* Le mur de brique porte des ardoises encadrées de chêne, comme les formules. */
+.poutre-legale { grid-template-columns: 1fr auto; }
+.legal { padding: clamp(40px, 6vw, 88px) var(--gouttiere) clamp(64px, 8vw, 120px); }
+.legal-tete { max-width: 1320px; margin: 0 auto clamp(32px, 4vw, 56px); }
+.legal-tete .section-titre { text-shadow: 0 2px 0 rgba(60, 16, 6, 0.25); }
+.legal-intro { margin-top: 18px; max-width: 46ch; font-size: 1.1875rem; }
+.legal-retour { margin-top: 26px; }
+.legal-retour-ico { transform: scaleX(-1); }
+.legal-mur {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px;
+  max-width: 1320px; margin: 0 auto; align-items: start;
+}
+.legal-ardoise {
+  padding: 24px 24px 22px;
+  background: var(--ardoise);
+  border: 10px solid var(--chene-2);
+  border-radius: 3px;
+  box-shadow: 0 16px 26px -14px rgba(20, 6, 2, 0.75), inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+.legal-titre {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 16px;
+  font-size: clamp(1.625rem, 1.3rem + 1vw, 2rem); font-stretch: 68%; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.95;
+}
+.legal-titre::after { content: ""; flex: 1; height: 4px; background: rgba(255, 246, 236, 0.18); }
+.legal-ardoise p { max-width: 58ch; }
+.legal-ardoise p + p { margin-top: 10px; }
+.legal-ardoise a { overflow-wrap: anywhere; }
+.legal-ardoise a:hover { color: var(--or); }
+.legal-societe strong { display: block; font-size: 1.25rem; }
+.legal-societe span { color: var(--craie-2); }
+.legal-note { color: var(--craie-2); font-size: 0.9375rem; }
+.legal-fiche { margin: 18px 0 0; }
+.legal-fiche > div {
+  display: grid; grid-template-columns: 10.5rem minmax(0, 1fr); gap: 4px 20px;
+  padding: 12px 0; border-top: 1px solid var(--trait);
+}
+.legal-fiche dt {
+  font-size: 0.8125rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--craie-2); padding-top: 3px;
+}
+.legal-fiche dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.chiffres { font-variant-numeric: tabular-nums; }
+@media (max-width: 899px) {
+  .legal-mur { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 559px) {
+  .legal-ardoise { padding: 18px 16px 16px; border-width: 8px; }
+  .legal-fiche > div { grid-template-columns: minmax(0, 1fr); }
+  .legal-fiche dt { padding-top: 0; }
+}
