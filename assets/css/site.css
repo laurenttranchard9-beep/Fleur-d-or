@@ -783,3 +783,21 @@ html:not(.js) .barre { grid-template-columns: 1fr; }
   .quartier-titre { background: none; box-shadow: none; }
   .plat-prix, .vin-prix data, .ardoise-prix, .etal-note { color: #000; }
 }
+
+/* ---------- Mentions légales ---------- */
+.page-legale { background: var(--ardoise); min-height: 100vh; }
+.legal { max-width: 860px; margin: 0 auto; padding: clamp(40px, 6vw, 88px) var(--gouttiere) clamp(64px, 8vw, 120px); }
+.legal .section-titre { margin: 18px 0 clamp(28px, 4vw, 48px); font-size: clamp(2.25rem, 1.4rem + 3.6vw, 4.5rem); overflow-wrap: anywhere; }
+.legal section + section { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--trait); }
+.legal-titre { font-size: 1.5rem; margin-bottom: 12px; }
+.legal p { max-width: 68ch; line-height: 1.55; }
+.legal p + p { margin-top: 10px; }
+.legal a { overflow-wrap: anywhere; }
+.legal-retour a { color: var(--or); }
+.legal-liste { display: grid; grid-template-columns: max-content 1fr; gap: 8px 20px; margin-top: 14px; }
+.legal-liste dt { font-weight: 800; }
+.legal-liste dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 559px) {
+  .legal-liste { grid-template-columns: 1fr; gap: 2px; }
+  .legal-liste dd + dt { margin-top: 10px; }
+}

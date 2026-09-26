@@ -23,8 +23,12 @@ const TYPES = {
   ".jpg": "image/jpeg",
   ".woff2": "font/woff2",
   ".md": "text/markdown; charset=utf-8",
+  ".txt": "text/plain; charset=utf-8",
+  ".xml": "application/xml; charset=utf-8",
 };
-const COMPRESSIBLES = new Set([".html", ".css", ".js", ".json", ".svg", ".md"]);
+// Pages et fichiers publics servis à la racine, en plus de index.html et de assets/
+const PUBLICS = new Set(["/mentions-legales.html", "/robots.txt", "/sitemap.xml"]);
+const COMPRESSIBLES = new Set([".html", ".css", ".js", ".json", ".svg", ".md", ".txt", ".xml"]);
 
 function fichierDemande(url) {
   let chemin;
@@ -34,6 +38,7 @@ function fichierDemande(url) {
     return null;
   }
   if (chemin === "/" || chemin === "/index.html") return path.join(RACINE, "index.html");
+  if (PUBLICS.has(chemin)) return path.join(RACINE, chemin.slice(1));
   if (!chemin.startsWith("/assets/")) return null;
   const complet = path.normalize(path.join(RACINE, chemin));
   // Refuse toute sortie du dossier assets (../, liens, etc.)

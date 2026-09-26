@@ -637,6 +637,8 @@ function fd_generer_sitemap(): string
     return '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
         . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n"
         . '  <url><loc>' . FD_URL_SITE . '</loc><lastmod>' . date('Y-m-d') . '</lastmod></url>' . "\n"
+        . (is_file(FD_RACINE . '/mentions-legales.html')
+            ? '  <url><loc>' . FD_URL_SITE . 'mentions-legales.html</loc></url>' . "\n" : '')
         . '</urlset>' . "\n";
 }
 
