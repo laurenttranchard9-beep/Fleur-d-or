@@ -3,6 +3,7 @@
 #
 #   Première fois :  curl -fsSL https://raw.githubusercontent.com/laurenttranchard9-beep/Fleur-d-or/claude/practical-mendel-dpj572/deploy/amazon-linux.sh | sudo bash
 #   Mises à jour  :  sudo bash /var/www/fleur-dor/deploy/amazon-linux.sh
+#                    (garde la configuration Apache en place : HTTPS, noms de domaine)
 #
 # Les sites sont installés dans /var/www/fleur-dor et servis par Apache sur le port 80 :
 #   La Fleur d'Or : http://adresse-du-serveur/        Le Monorom : http://adresse-du-serveur/le-monorom/
@@ -88,8 +89,17 @@ for s in $SITES; do
 done
 
 # ---------- Apache : ce site sur le port 80, .htaccess actifs ----------
+# Mise à jour simple (sans MONOROM_DOMAINE ni MONOROM_SEUL) d'un serveur déjà configuré :
+# la configuration Apache en place est gardée telle quelle (HTTPS de certbot, noms de domaine…).
+GARDER_CONF=""
+if [ -z "$MONOROM_DOMAINE" ] && [ -z "$MONOROM_SEUL" ] && { [ -f /etc/httpd/conf.d/fleur-dor.conf ] || [ -f /etc/httpd/conf.d/le-monorom.conf ]; }; then
+  GARDER_CONF=1
+  echo "Configuration Apache existante conservée (HTTPS et noms de domaine inchangés)."
+fi
 CONF_MONOROM=/etc/httpd/conf.d/fleur-dor.conf
-if [ -n "$MONOROM_SEUL" ]; then
+if [ -n "$GARDER_CONF" ]; then
+  :
+elif [ -n "$MONOROM_SEUL" ]; then
   # Seulement Le Monorom, dans son propre fichier : les autres sites du serveur ne changent pas
   CONF_MONOROM=/etc/httpd/conf.d/le-monorom.conf
   : > "$CONF_MONOROM"
@@ -114,7 +124,7 @@ cat > /etc/httpd/conf.d/fleur-dor.conf <<CONF
 </VirtualHost>
 CONF
 fi
-if [ -n "$MONOROM_DOMAINE" ]; then
+if [ -z "$GARDER_CONF" ] && [ -n "$MONOROM_DOMAINE" ]; then
   # Le Monorom sur son propre nom de domaine (avec et sans www)
   NU="${MONOROM_DOMAINE#www.}"
   cat >> "$CONF_MONOROM" <<CONF

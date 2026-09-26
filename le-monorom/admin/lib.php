@@ -24,7 +24,7 @@ const FD_PAGE = FD_RACINE . '/index.html';
 const FD_IMAGES = FD_RACINE . '/assets/img';
 const FD_NB_SAUVEGARDES = 30;
 /** Adresse publique du site (avec https:// et / final) : sert aux balises canoniques, au sitemap et aux données Google. */
-const FD_URL_SITE = 'https://www.restaurantlemonorom.com/';
+const FD_URL_SITE = 'https://www.fleurdor31.fr/le-monorom/'; // à remplacer par son propre domaine quand il pointera vers ce serveur
 const FD_SITEMAP = FD_RACINE . '/sitemap.xml';
 
 /* ---------- Outils ---------- */
