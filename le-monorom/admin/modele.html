@@ -6,11 +6,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Le Monorom · Restaurant japonais et thaïlandais, bar à sushis à Castelsarrasin</title>
 <meta name="description" content="Restaurant Le Monorom à Castelsarrasin (82100) : spécialités japonaises et thaïlandaises, bar à sushis, salle zen. Toute la carte et les formules, sur place ou à emporter. 05 63 29 23 81.">
+<link rel="canonical" href="{{URL}}">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#3a2a20">
 <meta property="og:type" content="restaurant.restaurant">
 <meta property="og:title" content="Le Monorom · Castelsarrasin">
 <meta property="og:description" content="Le goût et la qualité des spécialités japonaises et thaïlandaises. Bar à sushis, sur place ou à emporter.">
-<meta property="og:image" content="assets/img/facade-1200.webp">
+<meta property="og:url" content="{{URL}}">
+<meta property="og:site_name" content="Le Monorom">
+<meta property="og:image" content="{{URL}}assets/img/facade-1200.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="800">
+<meta property="og:image:alt" content="La façade du restaurant Le Monorom à Castelsarrasin">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:locale" content="fr_FR">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -20,6 +28,7 @@
 {
   "@context": "https://schema.org",
   "@type": "Restaurant",
+  "@id": "{{URL}}#restaurant",
   "name": "Le Monorom",
   "description": "Restaurant japonais et thaïlandais, bar à sushis, sur place et à emporter à Castelsarrasin (Tarn-et-Garonne).",
   "servesCuisine": [
@@ -38,8 +47,16 @@
     "addressRegion": "Occitanie",
     "addressCountry": "FR"
   },
-  "hasMenu": "#carte",
-  "image": "assets/img/facade-1200.webp",
+  "hasMenu": { "@id": "{{URL}}#menu" },
+  "url": "{{URL}}",
+  "image": [
+    "{{URL}}assets/img/facade-1200.webp",
+    "{{URL}}assets/img/salle-1200.webp",
+    "{{URL}}assets/img/salle-2-1200.webp"
+  ],
+  "geo": { "@type": "GeoCoordinates", "latitude": 44.0264468, "longitude": 1.1416605 },
+  "hasMap": "https://www.google.com/maps/search/?api=1&query=Restaurant%20Le%20Monorom%2C%2012%20chemin%20de%20Benis%2C%2082100%20Castelsarrasin",
+  "acceptsReservations": true,
   "paymentAccepted": "Espèces, carte bancaire (dès 10 €), Chèque Déjeuner, Ticket Restaurant",
   "openingHoursSpecification": [
     {
@@ -71,6 +88,7 @@
   ]
 }
 </script>
+<script type="application/ld+json">{{MENU_JSONLD}}</script>
 </head>
 <body>
 <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">

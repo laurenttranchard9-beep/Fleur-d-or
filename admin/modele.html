@@ -6,11 +6,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>La Fleur d’Or · Restaurant chinois, thaï et japonais à Grenade</title>
 <meta name="description" content="Restaurant La Fleur d’Or à Grenade (31330) : cuisines chinoise, thaïlandaise et japonaise, bar à sushis. Toute la carte et les formules, sur place ou à emporter. 05 61 82 43 56.">
+<link rel="canonical" href="{{URL}}">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#3a2a20">
 <meta property="og:type" content="restaurant.restaurant">
 <meta property="og:title" content="La Fleur d’Or · Grenade">
 <meta property="og:description" content="Cuisines chinoise, thaïlandaise et japonaise, bar à sushis. Sur place ou à emporter, midi et soir.">
-<meta property="og:image" content="assets/img/facade-1200.webp">
+<meta property="og:url" content="{{URL}}">
+<meta property="og:site_name" content="La Fleur d’Or">
+<meta property="og:image" content="{{URL}}assets/img/facade-1200.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="800">
+<meta property="og:image:alt" content="La façade du restaurant La Fleur d’Or à Grenade">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:locale" content="fr_FR">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -20,6 +28,7 @@
 {
   "@context": "https://schema.org",
   "@type": "Restaurant",
+  "@id": "{{URL}}#restaurant",
   "name": "La Fleur d'Or",
   "alternateName": "金花餐廳",
   "description": "Restaurant chinois, thaïlandais et japonais, bar à sushis, sur place et à emporter à Grenade (Haute-Garonne).",
@@ -38,12 +47,20 @@
     "addressRegion": "Occitanie",
     "addressCountry": "FR"
   },
-  "hasMenu": "#carte",
-  "image": "assets/img/facade-1200.webp",
+  "hasMenu": { "@id": "{{URL}}#menu" },
+  "url": "{{URL}}",
+  "image": [
+    "{{URL}}assets/img/facade-1200.webp",
+    "{{URL}}assets/img/salle-1200.webp",
+    "{{URL}}assets/img/salle-2-1200.webp"
+  ],
+  "geo": { "@type": "GeoCoordinates", "latitude": 43.7631007, "longitude": 1.299198 },
+  "hasMap": "https://www.google.com/maps/search/?api=1&query=La%20Fleur%20d%27Or%2C%2014%20bis%20avenue%20du%20Pr%C3%A9sident%20Kennedy%2C%2031330%20Grenade",
+  "acceptsReservations": true,
   "sameAs": [
     "https://www.facebook.com/restaurantlafleurdorgrenade/"
   ],
-  "paymentAccepted": "Espèces, carte bancaire, titres-restaurant",
+  "paymentAccepted": "Espèces, carte bancaire (à partir de 10 €), titres-restaurant",
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
@@ -73,6 +90,7 @@
   ]
 }
 </script>
+<script type="application/ld+json">{{MENU_JSONLD}}</script>
 </head>
 <body>
 <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
@@ -114,7 +132,7 @@
   <section class="halle" aria-labelledby="titre">
     <div class="halle-texte">
       <h1 id="titre" class="halle-titre">La Fleur d’<span class="or">Or</span></h1>
-      <p class="halle-accroche">Cuisine asiatique, bar à&nbsp;sushis. Sur place ou à emporter, à&nbsp;Grenade.</p>
+      <p class="halle-accroche">Restaurant de cuisine asiatique et bar à&nbsp;sushis à&nbsp;Grenade. Sur place ou à emporter, midi et soir.</p>
       <p class="statut" data-statut>
         <span class="statut-point" aria-hidden="true"></span>
         <span class="statut-texte" data-statut-texte>Midi 12h–14h, soir 18h–22h. Fermé le dimanche midi et le lundi.</span>
@@ -269,8 +287,9 @@
         <h3 class="infos-titre">Paiement</h3>
         <ul class="paiement" role="list">
           <li><strong>Espèces</strong></li>
-          <li><strong>Cartes</strong> CB, Visa, Visa Electron, Mastercard, Maestro</li>
+          <li><strong>Cartes</strong> CB, Visa, Visa Electron, Mastercard, Maestro, à&nbsp;partir de 10&nbsp;€</li>
           <li><strong>Titres-restaurant</strong> Chèque Déjeuner, Chèque Restaurant, Chèque de Table, Ticket Restaurant</li>
+          <li>Les chèques bancaires ne sont pas acceptés</li>
         </ul>
         <h3 class="infos-titre">Aussi</h3>
         <ul class="paiement" role="list">

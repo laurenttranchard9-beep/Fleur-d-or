@@ -37,6 +37,14 @@ Les horaires se trouvent dans `admin/modele.html` (tableau de la section `id="in
 - Le dossier `donnees/` n’est jamais accessible depuis le navigateur.
 - En ligne, utilisez le panneau en **HTTPS**.
 
+## Référencement (Google)
+
+- **Adresse du site** : la constante `FD_URL_SITE`, en haut de `admin/lib.php` (`https://www.restaurant-lafleurdor.com/`) et de `le-monorom/admin/lib.php` (`https://www.restaurantlemonorom.com/`). Elle sert à l’adresse canonique, aux aperçus de partage (Facebook, WhatsApp…) et au `sitemap.xml`. Si le nom de domaine change, modifiez-la puis republiez.
+- **Données structurées** : la page décrit le restaurant (adresse, coordonnées GPS, horaires, téléphone, paiement, réservation) et **toute la carte** (chaque plat, formule et vin avec son prix), au format schema.org. Elles sont recalculées à chaque « Publier ». Pour vérifier : https://search.google.com/test/rich-results
+- **`robots.txt` et `sitemap.xml`** : à la racine de chaque site. Le sitemap est daté du jour à chaque publication ; le panneau `admin/` n’est pas indexé.
+- **HTTPS** : les adresses canoniques sont en `https://`. Installez le certificat (`sudo certbot --apache -d … -d www.…`) pour que ces adresses répondent.
+- **À faire hors du site** : revendiquer et compléter la fiche Google Business Profile de chaque restaurant (même nom, adresse et téléphone que sur le site, lien vers le site, photos, horaires), puis déclarer le site dans Google Search Console et y envoyer le `sitemap.xml`.
+
 ## Fichiers
 
 - `index.html` : la page publique, générée par le panneau (ne pas la modifier à la main).

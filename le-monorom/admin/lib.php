@@ -23,6 +23,9 @@ const FD_MODELE = __DIR__ . '/modele.html';
 const FD_PAGE = FD_RACINE . '/index.html';
 const FD_IMAGES = FD_RACINE . '/assets/img';
 const FD_NB_SAUVEGARDES = 30;
+/** Adresse publique du site (avec https:// et / final) : sert aux balises canoniques, au sitemap et aux données Google. */
+const FD_URL_SITE = 'https://www.restaurantlemonorom.com/';
+const FD_SITEMAP = FD_RACINE . '/sitemap.xml';
 
 /* ---------- Outils ---------- */
 
@@ -541,6 +544,102 @@ function fd_rendre_formules(array $d, array $photos): string
     return implode("\n", $sortie);
 }
 
+/* ---------- Référencement ---------- */
+
+/** Offre schema.org pour un prix en euros. */
+function fd_offre(float $prix, string $nom = ''): array
+{
+    $o = ['@type' => 'Offer', 'price' => number_format($prix, 2, '.', ''), 'priceCurrency' => 'EUR'];
+    if ($nom !== '') {
+        $o['name'] = $nom;
+    }
+    return $o;
+}
+
+/**
+ * La carte complète en données structurées (schema.org Menu), pour que Google
+ * connaisse chaque plat, sa description et son prix.
+ */
+function fd_jsonld_menu(array $d): string
+{
+    $sections = [];
+    $formules = [];
+    foreach ($d['formules'] as $g) {
+        foreach ($g['menus'] as $m) {
+            $details = [];
+            if ($m['condition'] !== '') {
+                $details[] = $m['condition'];
+            }
+            foreach ($m['services'] as $sv) {
+                $details[] = $sv['titre'] . ($sv['type'] === 'choix' ? ' au choix' : '') . ' : ' . implode(', ', $sv['choix']);
+            }
+            $item = ['@type' => 'MenuItem', 'name' => $m['nom'], 'offers' => fd_offre((float) $m['prix'])];
+            if ($details) {
+                $item['description'] = implode('. ', $details);
+            }
+            $formules[] = $item;
+        }
+    }
+    if ($formules) {
+        $sections[] = ['@type' => 'MenuSection', 'name' => 'Formules', 'url' => FD_URL_SITE . '#formules', 'hasMenuItem' => $formules];
+    }
+    foreach ($d['quartiers'] as $q) {
+        foreach (fd_sections_visibles($q) as $s) {
+            $items = [];
+            foreach ($s['groupes'] as $g) {
+                foreach ($g['plats'] as $p) {
+                    $nom = trim(($s['prefixe'] !== '' ? $s['prefixe'] . ' ' : '') . $p['nom']);
+                    $item = ['@type' => 'MenuItem', 'name' => $nom];
+                    $desc = trim(($g['titre'] !== '' ? $g['titre'] . '. ' : '') . $p['desc']);
+                    if ($p['piment'] || $s['piment']) {
+                        $desc = trim($desc . ' Pimenté.');
+                    }
+                    if ($desc !== '') {
+                        $item['description'] = $desc;
+                    }
+                    if ($p['formats']) {
+                        $offres = [];
+                        foreach ($p['formats'] as $f) {
+                            if ($f['prix'] !== null) {
+                                $offres[] = fd_offre((float) $f['prix'], (string) $f['libelle']);
+                            }
+                        }
+                        if (!$offres) {
+                            continue;
+                        }
+                        $item['offers'] = count($offres) === 1 ? $offres[0] : $offres;
+                    } else {
+                        $item['offers'] = fd_offre((float) $p['prix']);
+                    }
+                    $items[] = $item;
+                }
+            }
+            if ($items) {
+                $sections[] = ['@type' => 'MenuSection', 'name' => $s['titre'], 'url' => FD_URL_SITE . '#' . $s['id'], 'hasMenuItem' => $items];
+            }
+        }
+    }
+    $menu = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Menu',
+        '@id' => FD_URL_SITE . '#menu',
+        'name' => 'La carte · Le Monorom',
+        'url' => FD_URL_SITE . '#carte',
+        'inLanguage' => 'fr',
+        'hasMenuSection' => $sections,
+    ];
+    return (string) json_encode($menu, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG);
+}
+
+/** sitemap.xml : une seule page, datée du jour de la publication. */
+function fd_generer_sitemap(): string
+{
+    return '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
+        . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n"
+        . '  <url><loc>' . FD_URL_SITE . '</loc><lastmod>' . date('Y-m-d') . '</lastmod></url>' . "\n"
+        . '</urlset>' . "\n";
+}
+
 /** @return array{html: string, plats: int, boissons: int, formules: int} */
 function fd_generer_page(array $d): array
 {
@@ -571,6 +670,8 @@ function fd_generer_page(array $d): array
         '{{CARTE}}' => fd_rendre_carte($d, $photos),
         '{{N_CUISINE}}' => (string) $plats,
         '{{N_BAR}}' => (string) $boissons,
+        '{{URL}}' => FD_URL_SITE,
+        '{{MENU_JSONLD}}' => fd_jsonld_menu($d),
     ]);
     return ['html' => $html, 'plats' => $plats, 'boissons' => $boissons, 'formules' => $formules];
 }
@@ -620,6 +721,7 @@ function fd_publier(array $propre, bool $sauvegarder = true): array
         }
         fd_ecrire_json(FD_CARTE, $propre);
         fd_ecrire_atomique(FD_PAGE, $page['html']);
+        fd_ecrire_atomique(FD_SITEMAP, fd_generer_sitemap());
         return ['plats' => $page['plats'], 'boissons' => $page['boissons'], 'formules' => $page['formules']];
     } finally {
         flock($verrou, LOCK_UN);
