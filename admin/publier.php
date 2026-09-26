@@ -21,6 +21,7 @@ try {
     $page = fd_generer_page($propre);
     fd_ecrire_atomique(FD_PAGE, $page['html']);
     fd_ecrire_atomique(FD_SITEMAP, fd_generer_sitemap());
+    fd_versionner_pages_fixes();
     printf("index.html publié : %d plats, %d boissons, %d formules.\n", $page['plats'], $page['boissons'], $page['formules']);
 } catch (Throwable $e) {
     fwrite(STDERR, 'Erreur : ' . $e->getMessage() . "\n");

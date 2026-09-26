@@ -631,6 +631,39 @@ function fd_jsonld_menu(array $d): string
     return (string) json_encode($menu, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG);
 }
 
+/** Ajoute ?v=<empreinte> au style et au script : un navigateur ne garde jamais une ancienne version. */
+function fd_versionner(string $html): string
+{
+    foreach (['assets/css/site.css', 'assets/js/site.js'] as $f) {
+        $chemin = FD_RACINE . '/' . $f;
+        if (is_file($chemin)) {
+            $v = substr((string) md5_file($chemin), 0, 8);
+            $html = (string) preg_replace('#' . preg_quote($f, '#') . '(\?v=[0-9a-f]+)?"#', $f . '?v=' . $v . '"', $html);
+        }
+    }
+    return $html;
+}
+
+/** Même chose pour les pages fixes (mentions légales) ; une erreur ici n'empêche jamais de publier. */
+function fd_versionner_pages_fixes(): void
+{
+    foreach (['mentions-legales.html'] as $page) {
+        $chemin = FD_RACINE . '/' . $page;
+        if (!is_file($chemin)) {
+            continue;
+        }
+        try {
+            $html = (string) file_get_contents($chemin);
+            $neuf = fd_versionner($html);
+            if ($neuf !== $html) {
+                fd_ecrire_atomique($chemin, $neuf);
+            }
+        } catch (Throwable $e) {
+            // page laissée telle quelle
+        }
+    }
+}
+
 /** sitemap.xml : une seule page, datée du jour de la publication. */
 function fd_generer_sitemap(): string
 {
@@ -673,6 +706,7 @@ function fd_generer_page(array $d): array
         '{{URL}}' => FD_URL_SITE,
         '{{MENU_JSONLD}}' => fd_jsonld_menu($d),
     ]);
+    $html = fd_versionner($html);
     return ['html' => $html, 'plats' => $plats, 'boissons' => $boissons, 'formules' => $formules];
 }
 
@@ -726,6 +760,7 @@ function fd_publier(array $propre, bool $sauvegarder = true): array
         } catch (Throwable $e) {
             // le sitemap ne doit jamais empêcher de publier la carte
         }
+        fd_versionner_pages_fixes();
         return ['plats' => $page['plats'], 'boissons' => $page['boissons'], 'formules' => $page['formules']];
     } finally {
         flock($verrou, LOCK_UN);

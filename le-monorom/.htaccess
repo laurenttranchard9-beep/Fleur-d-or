@@ -33,11 +33,15 @@ AddDefaultCharset utf-8
   AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript image/svg+xml
 </IfModule>
 
-# Cache : la page se revalide à chaque visite, les fichiers d'assets sont gardés un moment.
+# Cache : la page, le style et le script se revalident à chaque visite (une mise à jour se voit tout de suite) ;
+# images et polices sont gardées un moment.
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresDefault "access plus 1 hour"
   ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 0 seconds"
+  ExpiresByType text/javascript "access plus 0 seconds"
+  ExpiresByType application/javascript "access plus 0 seconds"
   ExpiresByType image/webp "access plus 1 week"
   ExpiresByType image/svg+xml "access plus 1 week"
   ExpiresByType font/woff2 "access plus 1 month"
@@ -46,7 +50,7 @@ AddDefaultCharset utf-8
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  <FilesMatch "\.html$">
+  <FilesMatch "\.(html|css|js)$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
 </IfModule>
