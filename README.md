@@ -45,6 +45,37 @@ Les horaires se trouvent dans `admin/modele.html` (tableau de la section `id="in
 - **HTTPS** : les adresses canoniques sont en `https://`. Installez le certificat (`sudo certbot --apache -d … -d www.…`) pour que ces adresses répondent.
 - **À faire hors du site** : revendiquer et compléter la fiche Google Business Profile de chaque restaurant (même nom, adresse et téléphone que sur le site, lien vers le site, photos, horaires), puis déclarer le site dans Google Search Console et y envoyer le `sitemap.xml`.
 
+## Installer les deux sites sur un serveur Ubuntu (OVH)
+
+`deploy/installer-ubuntu.sh` installe La Fleur d’Or et Le Monorom sur un serveur Ubuntu 22.04 ou 24.04 neuf (VPS OVH par exemple), chacun sur son nom de domaine : Apache, PHP-FPM, certbot, un site Apache par domaine (`/var/www/fleur-dor` et `/var/www/le-monorom`), versions d’Apache et de PHP masquées. Relancé plus tard, il met les sites à jour en gardant la carte, le mot de passe, les sauvegardes et la configuration Apache (HTTPS compris).
+
+1. **Sur l’ancien serveur**, rassembler les données des deux panneaux (carte, mot de passe, sauvegardes), puis copier l’archive vers le nouveau serveur :
+
+   ```sh
+   sudo tar czf /tmp/donnees-sites.tar.gz -C /var/www/html fleur-dor/donnees -C /var/www le-monorom/donnees
+   scp /tmp/donnees-sites.tar.gz ubuntu@ADRESSE-IP-OVH:/tmp/
+   ```
+
+2. **Sur le serveur Ubuntu** :
+
+   ```sh
+   curl -fsSL https://raw.githubusercontent.com/laurenttranchard9-beep/Fleur-d-or/claude/practical-mendel-dpj572/deploy/installer-ubuntu.sh | sudo IMPORT=/tmp/donnees-sites.tar.gz bash
+   ```
+
+   Sans archive (installation à neuf), omettez `IMPORT=…` : le script demande alors le mot de passe de chaque panneau.
+
+3. **Tester avant de changer les DNS** : `curl -s -H 'Host: fleurdor31.fr' http://localhost/ | grep -o '<title>[^<]*'` (idem avec `lemonorom.fr`).
+4. **Faire pointer les domaines** (`@` et `www`) vers l’adresse IP du serveur OVH, puis activer le HTTPS :
+
+   ```sh
+   sudo certbot --apache --redirect -d fleurdor31.fr -d www.fleurdor31.fr
+   sudo certbot --apache --redirect -d lemonorom.fr -d www.lemonorom.fr
+   ```
+
+   (Ou relancez le script avec `EMAIL=vous@exemple.fr` : il active le HTTPS tout seul pour les domaines qui pointent déjà vers le serveur.)
+
+Mot de passe d’un panneau en ligne de commande sur Ubuntu : `cd /var/www/fleur-dor && sudo -u www-data php admin/mot-de-passe.php`.
+
 ## Mettre à jour le serveur (fleurdor31.fr et lemonorom.fr)
 
 Sur le serveur qui héberge aussi d’autres sites, chaque restaurant a son propre dossier, servi par son nom de domaine : `/var/www/html/fleur-dor` pour fleurdor31.fr et `/var/www/le-monorom` pour lemonorom.fr. Pour les mettre à jour depuis GitHub, sans toucher à Apache ni aux autres sites :
