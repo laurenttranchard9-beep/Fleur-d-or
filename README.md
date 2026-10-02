@@ -168,4 +168,4 @@ Si le dépôt GitHub est privé, la première commande doit être remplacée par
 - La livraison Uber Eats : l’ancien site en montrait le logo. Est-elle toujours proposée ?
 - La carte « à emporter » de l’ancien site (un livret feuilleté séparé) n’a pas été reprise.
 - Photos : le plateau de sushis vient d’Unsplash, et deux photos de l’ancien site (fondue, bols d’herbes) ressemblent à des photos de banque d’images. Des photos des vrais plats du restaurant seraient plus parlantes.
-- Mentions légales : page `mentions-legales.html` (éditeur DARACHAN SAS, SIREN 790 795 496 ; hébergeur Amazon Web Services EMEA SARL, succursale française ; données personnelles), liée depuis le pied de page. Page statique : à modifier directement dans le fichier.
+- Mentions légales : page `mentions-legales.html` (éditeur DARACHAN SAS, SIREN 790 795 496 ; hébergeur OVH SAS, Roubaix ; données personnelles), liée depuis le pied de page. Page statique : à modifier directement dans le fichier.
