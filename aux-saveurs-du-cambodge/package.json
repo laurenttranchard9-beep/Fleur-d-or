@@ -1,0 +1,15 @@
+{
+  "name": "aux-saveurs-du-cambodge",
+  "private": true,
+  "description": "Site statique du restaurant Aux Saveurs du Cambodge, Saint-Alban",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "dessins": "node tools/etal.mjs && node build.mjs",
+    "images": "node tools/images.mjs",
+    "apercu": "npx --yes serve public"
+  }
+}

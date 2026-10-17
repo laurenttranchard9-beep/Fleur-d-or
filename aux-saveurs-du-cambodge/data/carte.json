@@ -1,0 +1,197 @@
+{
+  "updated": "2026-10-17",
+  "riceNote": "Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + 4,50 €.",
+  "riceUpgrade": { "name": "Supplément riz cantonais (porc ou crevettes)", "price": 4.5 },
+  "sections": [
+    {
+      "id": "menu-bon-et-pas-cher",
+      "title": "Menu bon et pas cher",
+      "items": [
+        { "name": "Menu bon et pas cher au porc", "desc": "Échine de porc marinée, riz thaï et sa salade composée", "price": 10.0 },
+        { "name": "Menu bon et pas cher au poulet", "desc": "Cuisse de poulet marinée, riz thaï et sa salade composée", "price": 10.0 },
+        { "name": "Perles de coco", "desc": "2 pièces, uniquement avec le menu bon et pas cher", "price": 2.5 },
+        { "name": "Riz crousty", "desc": "Riz blanc, sauce blanche, poulet frit, sauce aigre-douce, oignons frits", "price": 11.0 }
+      ]
+    },
+    {
+      "id": "entrees",
+      "title": "Entrées",
+      "items": [
+        { "name": "Nems au porc", "desc": "5 pièces", "price": 7.0, "featured": 6, "blurb": "Le classique croustillant, à partager… ou pas." },
+        { "name": "Nems au poulet", "desc": "5 pièces", "price": 7.5 },
+        { "name": "Nems aux crevettes", "desc": "5 pièces", "price": 8.0 },
+        { "name": "Samoussas au bœuf", "desc": "5 pièces", "price": 7.5 },
+        { "name": "Raviolis frits porc et crevettes", "desc": "5 pièces", "price": 7.5 },
+        { "name": "Raviolis croustillants aux crevettes", "desc": "5 pièces", "price": 7.5 },
+        { "name": "Rouleau de printemps porc et crevettes", "desc": "1 pièce", "price": 5.0 },
+        { "name": "Rouleau de printemps porc ou crevettes", "desc": "1 pièce", "price": 4.0 },
+        { "name": "Beignets de gambas", "desc": "5 pièces", "price": 7.9 },
+        { "name": "Beignets de poulet", "desc": "Blanc de poulet", "price": 7.9 },
+        { "name": "Brioche au porc", "desc": "1 pièce", "price": 6.5 },
+        { "name": "Nem nuong porc et crevettes", "price": 13.9 },
+        { "name": "Assiette composée", "desc": "1 rouleau de printemps, 1 nem, 1 nem au poulet, 1 croissant, 1 ravioli frit, 1 ravioli frit aux crevettes, 1 papillote, 1 beignet de calamar", "price": 11.0 }
+      ]
+    },
+    {
+      "id": "salades",
+      "title": "Salades",
+      "items": [
+        { "name": "Salade de nems", "price": 7.5 },
+        { "name": "Bo bun", "desc": "Salade de bœuf et nems", "price": 8.5, "featured": 5, "blurb": "Bœuf sauté, nems et vermicelles de riz : la salade qui fait un repas." },
+        { "name": "Salade au poulet", "price": 7.5 },
+        { "name": "Salade thaïe au bœuf", "price": 10.0 },
+        { "name": "Salade thaïe aux crevettes", "price": 10.0 },
+        { "name": "Salade d’ananas", "desc": "Crabe et surimi, ou crevettes", "price": 10.0 },
+        { "name": "Lap thaï au bœuf", "price": 10.5 },
+        { "name": "Salade thaïe crevettes et seiches", "price": 10.5 }
+      ]
+    },
+    {
+      "id": "vapeurs",
+      "title": "Vapeurs",
+      "items": [
+        { "name": "Bouchées au porc", "desc": "5 pièces", "price": 7.5 },
+        { "name": "Bouchées aux crevettes", "desc": "5 pièces", "price": 7.5 },
+        { "name": "Ha kao", "desc": "Raviolis aux crevettes", "price": 7.5 },
+        { "name": "Mélange de vapeurs", "desc": "5 pièces", "price": 7.5 },
+        { "name": "Crêpes chinoises au porc", "desc": "3 pièces", "price": 8.5 }
+      ]
+    },
+    {
+      "id": "soupes",
+      "title": "Soupes",
+      "items": [
+        { "name": "Soupe pho", "desc": "Bœuf, poulet ou crevettes", "price": 11.5 },
+        { "name": "Soupe de raviolis", "desc": "Porc et crevettes", "price": 11.5 },
+        { "name": "Soupe Phnom Penh", "desc": "Porc et crevettes", "price": 11.5, "featured": 2, "blurb": "Le kuy teav de la capitale : bouillon clair, nouilles de riz, porc et crevettes." }
+      ]
+    },
+    {
+      "id": "porc",
+      "title": "Porc",
+      "withRice": true,
+      "items": [
+        { "name": "Porc au caramel", "price": 10.5, "featured": 3, "blurb": "Mijoté sucré-salé, laqué de caramel, servi avec son riz nature." },
+        { "name": "Porc laqué", "price": 10.5 },
+        { "name": "Brochettes de porc", "price": 10.5 }
+      ]
+    },
+    {
+      "id": "poulet",
+      "title": "Poulet",
+      "withRice": true,
+      "items": [
+        { "name": "Poulet frit sauce citron", "price": 11.0 },
+        { "name": "Poulet sauce curry", "price": 11.0 },
+        { "name": "Poulet sauté sauce saté", "price": 11.0 },
+        { "name": "Poulet sauce ananas", "price": 11.0 },
+        { "name": "Poulet sauce citronnelle", "price": 11.0, "featured": 4, "blurb": "La citronnelle, parfum premier de la cuisine khmère, avec son riz nature." },
+        { "name": "Poulet aux légumes", "price": 11.0 },
+        { "name": "Poulet sauce piquante", "price": 11.0, "spicy": true }
+      ]
+    },
+    {
+      "id": "boeuf",
+      "title": "Bœuf",
+      "withRice": true,
+      "items": [
+        { "name": "Lok lac", "desc": "Bœuf mariné sauté", "price": 13.5, "featured": 1, "blurb": "Le grand classique cambodgien : bœuf mariné, saisi vif, servi avec son riz." },
+        { "name": "Bœuf aux champignons noirs", "price": 13.5 },
+        { "name": "Bœuf sauce saté", "price": 13.5 },
+        { "name": "Bœuf sauce thaïe", "price": 13.5 },
+        { "name": "Bœuf sauce piquante", "price": 13.5, "spicy": true }
+      ]
+    },
+    {
+      "id": "canard",
+      "title": "Canard",
+      "withRice": true,
+      "items": [
+        { "name": "Canard sauce curry", "price": 13.0 },
+        { "name": "Canard aux champignons noirs", "price": 13.0 },
+        { "name": "Canard laqué", "price": 13.0 }
+      ]
+    },
+    {
+      "id": "crevettes",
+      "title": "Crevettes",
+      "withRice": true,
+      "items": [
+        { "name": "Crevettes sauce curry", "price": 11.5 },
+        { "name": "Crevettes sauce saté", "price": 11.5 },
+        { "name": "Crevettes sauce citronnelle", "price": 11.5 },
+        { "name": "Brochettes de crevettes", "price": 11.5 },
+        { "name": "Crevettes sauce thaïe", "price": 12.0 }
+      ]
+    },
+    {
+      "id": "seiches",
+      "title": "Seiches",
+      "withRice": true,
+      "items": [
+        { "name": "Seiche sauce curry", "price": 11.5 },
+        { "name": "Seiche sauce saté", "price": 11.5 },
+        { "name": "Seiche sauce citronnelle", "price": 11.5 },
+        { "name": "Seiche sauce piquante", "price": 11.5, "spicy": true }
+      ]
+    },
+    {
+      "id": "specialites-du-chef",
+      "title": "Spécialités du chef",
+      "withRice": true,
+      "items": [
+        { "name": "Bœuf du chef", "price": 14.9 },
+        { "name": "Crevettes du chef", "price": 14.9 },
+        { "name": "Trois délices", "price": 14.9 },
+        { "name": "Canard à l’orange", "price": 14.9 },
+        { "name": "Fruits de mer sauce thaïe", "price": 14.9 }
+      ]
+    },
+    {
+      "id": "brochettes",
+      "title": "Brochettes",
+      "withRice": true,
+      "items": [
+        { "name": "Brochettes de bœuf", "price": 13.5 },
+        { "name": "Brochettes de crevettes", "price": 13.5 },
+        { "name": "Brochettes de canard", "price": 13.5 }
+      ]
+    },
+    {
+      "id": "nouilles",
+      "title": "Nouilles et pâtes",
+      "items": [
+        { "name": "Pad thaï", "desc": "Bœuf, poulet ou crevettes", "price": 12.0 },
+        { "name": "Légumes sautés", "price": 7.0 },
+        { "name": "Nouilles sautées au bœuf", "price": 11.5 },
+        { "name": "Nouilles sautées aux crevettes", "price": 11.5 },
+        { "name": "Nouilles sautées au poulet", "price": 11.5 },
+        { "name": "Nouilles sautées aux légumes", "price": 7.0 }
+      ]
+    },
+    {
+      "id": "accompagnements",
+      "title": "Accompagnements",
+      "items": [
+        { "name": "Riz blanc", "price": 3.5 },
+        { "name": "Riz cantonais au porc", "price": 6.5 },
+        { "name": "Riz cantonais aux crevettes", "price": 6.5 },
+        { "name": "Riz piquant aux crevettes", "price": 6.5, "spicy": true },
+        { "name": "Riz piquant au poulet", "price": 6.5, "spicy": true }
+      ]
+    },
+    {
+      "id": "desserts",
+      "title": "Desserts",
+      "items": [
+        { "name": "Beignets de pomme sauce caramel", "price": 5.5 },
+        { "name": "Beignets de banane sauce caramel", "price": 5.5 },
+        { "name": "Beignets d’ananas sauce caramel", "price": 5.5 },
+        { "name": "Assortiment de beignets sauce caramel", "price": 5.5 },
+        { "name": "Ananas frais", "price": 5.5 },
+        { "name": "Perles de coco", "desc": "3 pièces", "price": 5.5 },
+        { "name": "Banane au lait de coco", "price": 5.5 }
+      ]
+    }
+  ]
+}

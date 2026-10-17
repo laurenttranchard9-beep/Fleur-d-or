@@ -1,0 +1,51 @@
+{
+  "name": "Aux Saveurs du Cambodge",
+  "nameKhmer": "រសជាតិកម្ពុជា",
+  "town": "Saint-Alban",
+  "tagline": "Cuisine cambodgienne faite maison",
+  "promise": "Chez nous, tout est fait maison, avec des produits frais… et beaucoup d’amour !",
+  "invite": "On vous garde une petite place ?",
+  "description": "Restaurant cambodgien à Saint-Alban, au nord de Toulouse : lok lac, soupe Phnom Penh, porc au caramel, nems et vapeurs faits maison, menu complet à 10 €. Commande et réservation par téléphone au 07 59 52 53 41.",
+  "url": "https://www.auxsaveursducambodge-saintalban.com",
+  "phone": {
+    "display": "07 59 52 53 41",
+    "e164": "+33759525341"
+  },
+  "address": {
+    "street": "10 avenue Salvador Allende",
+    "postalCode": "31140",
+    "city": "Saint-Alban",
+    "department": "Haute-Garonne",
+    "region": "Occitanie",
+    "country": "FR"
+  },
+  "geo": {
+    "lat": 43.688048,
+    "lng": 1.40842
+  },
+  "timezone": "Europe/Paris",
+  "hours": {
+    "1": [["12:00", "14:00"], ["18:00", "21:45"]],
+    "2": [["12:00", "14:00"], ["18:00", "21:45"]],
+    "3": [["12:00", "14:00"], ["18:00", "21:45"]],
+    "4": [["12:00", "14:00"], ["18:00", "21:45"]],
+    "5": [["12:00", "14:00"], ["18:00", "21:45"]],
+    "6": [["18:00", "21:45"]],
+    "0": [["18:00", "21:45"]]
+  },
+  "preorderLunch": {
+    "days": [6, 0],
+    "label": "Midi sur commande",
+    "rule": "Le samedi et le dimanche midi, uniquement sur commande passée la veille."
+  },
+  "closures": [],
+  "notice": null,
+  "legal": {
+    "company": "",
+    "legalForm": "",
+    "siret": "",
+    "publisher": "",
+    "host": "",
+    "hostAddress": ""
+  }
+}

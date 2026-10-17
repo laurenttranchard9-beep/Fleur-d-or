@@ -1,0 +1,21 @@
+{
+  "name": "Aux Saveurs du Cambodge",
+  "short_name": "Saveurs du Cambodge",
+  "lang": "fr",
+  "start_url": "./",
+  "display": "browser",
+  "background_color": "#F2A51C",
+  "theme_color": "#F2A51C",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

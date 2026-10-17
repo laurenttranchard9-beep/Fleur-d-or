@@ -1,0 +1,2110 @@
+/* Aux Saveurs du Cambodge — étal de marché : curcuma, feuille de bananier, piment, sucre de palme. */
+
+@font-face {
+  font-family: "Kantumruy Pro";
+  src: url("../fonts/kantumruy-pro-latin.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303, U+0308,
+    U+2000-206F, U+20AC, U+2122, U+2190-2193, U+2212, U+2215;
+}
+
+@font-face {
+  font-family: "Kantumruy Pro";
+  src: url("../fonts/kantumruy-pro-khmer.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+  unicode-range: U+1780-17FF, U+19E0-19FF, U+200B-200D, U+25CC;
+}
+
+@font-face {
+  font-family: "Kantumruy Pro Prix";
+  src: url("../fonts/kantumruy-pro-prix.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Moul";
+  src: url("../fonts/moul-enseigne.woff2") format("woff2");
+  font-display: swap;
+}
+
+:root {
+  --curcuma: #f2a51c;
+  --curcuma-clair: #f7c25a;
+  --curcuma-pale: #fde7b4;
+  --feuille: #1b5232;
+  --feuille-2: #2c7343;
+  --feuille-clair: #b9db95;
+  --feuille-encre: #16472b;
+  --piment: #c8261b;
+  --piment-fonce: #a51d14;
+  --sucre: #2a170d;
+  --sucre-doux: #5a3416;
+  --riz: #fffbf3;
+  --riz-2: #f4ead6;
+  --riz-texte: #6a5442;
+  --papier-bon: #fffdf8;
+  --pied-texte: #d9c7ad;
+  --pied-note: #cbb89c;
+
+  --texte: "Kantumruy Pro", "Segoe UI", system-ui, sans-serif;
+  --prix: "Kantumruy Pro Prix", "Kantumruy Pro", system-ui, sans-serif;
+  --enseigne: "Moul", "Kantumruy Pro", serif;
+
+  --marge: clamp(1rem, 4vw, 3rem);
+  --large: 80rem;
+  --rayon: 0.5rem;
+  --section: clamp(4rem, 3rem + 5vw, 8rem);
+  --ombre: 0 0.6rem 1.4rem -0.7rem rgb(42 23 13 / 0.55);
+  --sortie: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 5rem;
+  scrollbar-color: var(--feuille-2) var(--riz-2);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--riz);
+  color: var(--sucre);
+  font-family: var(--texte);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  caret-color: var(--feuille-2);
+}
+
+::selection {
+  background: var(--sucre);
+  color: var(--curcuma-clair);
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+figure,
+blockquote,
+address {
+  margin: 0;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+  padding: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+address {
+  font-style: normal;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid var(--sucre);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.section--feuille :focus-visible,
+.pied :focus-visible,
+.barre-action :focus-visible {
+  outline-color: var(--curcuma-clair);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.visuellement-cache {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.evitement {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--sucre);
+  color: var(--riz);
+  font-weight: 700;
+  border-radius: var(--rayon);
+  transform: translateY(-200%);
+}
+
+.evitement:focus {
+  transform: none;
+}
+
+.conteneur {
+  width: min(100% - 2 * var(--marge), var(--large));
+  margin-inline: auto;
+}
+
+.icone {
+  width: 1.25em;
+  height: 1.25em;
+  flex: none;
+}
+
+.icone--inline {
+  display: inline-block;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: -0.2em;
+  padding: 0.1em;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+}
+
+a[href^="tel:"] {
+  white-space: nowrap;
+}
+
+.prix,
+.prix-inline {
+  font-family: var(--prix);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---------- Sections ---------- */
+
+.section {
+  padding-block: var(--section);
+}
+
+.section--curcuma {
+  background: var(--curcuma);
+  color: var(--sucre);
+  --dechirure: var(--curcuma);
+}
+
+/* Trame d'impression : un semis de points à peine visible, comme sur une affiche sérigraphiée. */
+.heros,
+.section--curcuma {
+  background-image: radial-gradient(rgb(122 62 0 / 0.11) 0.9px, transparent 1.25px);
+  background-size: 6px 6px;
+}
+
+.section--feuille {
+  background: var(--feuille);
+  color: var(--riz);
+}
+
+.section--riz {
+  background: var(--riz);
+}
+
+/* ---------- Boutons et liens ---------- */
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3.25rem;
+  padding: 0.5rem 1.35rem;
+  border: 2px solid var(--sucre);
+  border-radius: var(--rayon);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 160ms ease-out,
+    color 160ms ease-out,
+    transform 160ms var(--sortie),
+    box-shadow 160ms ease-out;
+}
+
+.bouton:active {
+  transform: translateY(1px);
+}
+
+.bouton--appel {
+  background: var(--piment);
+  color: var(--riz);
+  box-shadow: var(--ombre);
+}
+
+.bouton--appel:hover {
+  background: var(--piment-fonce);
+}
+
+.bouton__num {
+  padding-left: 0.7rem;
+  border-left: 1.5px solid rgb(255 251 243 / 0.5);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.bouton--trait {
+  background: transparent;
+  color: var(--sucre);
+}
+
+.bouton--trait:hover {
+  background: var(--sucre);
+  color: var(--curcuma-clair);
+}
+
+.section--riz .bouton--trait:hover,
+.page-carte .bouton--trait:hover {
+  color: var(--riz);
+}
+
+.section--feuille .bouton--trait {
+  color: var(--riz);
+  border-color: var(--riz);
+}
+
+.section--feuille .bouton--trait:hover {
+  background: var(--riz);
+  color: var(--feuille);
+}
+
+.bouton--texte {
+  min-height: 2.75rem;
+  padding-inline: 0.5rem;
+  border-color: transparent;
+  background: none;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.bouton--texte:hover {
+  text-decoration-thickness: 0.14em;
+}
+
+.bouton--large {
+  width: 100%;
+}
+
+.lien {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+.lien:hover {
+  text-decoration-thickness: 0.16em;
+}
+
+.lien-fort {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid currentColor;
+}
+
+.lien-fort .icone {
+  transition: transform 200ms var(--sortie);
+}
+
+.lien-fort:hover .icone {
+  transform: translateX(0.25rem);
+}
+
+/* ---------- État d'ouverture ---------- */
+
+/* L'état d'ouverture est une étiquette d'étal : bout en pointe, la pastille fait le trou perforé. */
+.etat {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  max-width: calc(100% - 0.9rem);
+  margin-left: 0.9rem;
+  padding: 0.5rem 0.95rem 0.5rem 0.3rem;
+  background: var(--riz);
+  border: 2px solid var(--sucre);
+  border-left: 0;
+  border-radius: 0 var(--rayon) var(--rayon) 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.etat::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 0;
+  height: 70.71%;
+  aspect-ratio: 1;
+  background: inherit;
+  border-left: 2px solid var(--sucre);
+  border-bottom: 2px solid var(--sucre);
+  border-radius: 0 0 0 0.3rem;
+  translate: -50% -50%;
+  rotate: 45deg;
+}
+
+.etat__pastille {
+  width: 0.75rem;
+  height: 0.75rem;
+  flex: none;
+  border-radius: 50%;
+  border: 2px solid var(--sucre);
+  background: var(--curcuma);
+}
+
+.etat[data-code="ouvert"] .etat__pastille {
+  background: var(--feuille-2);
+  border-color: var(--feuille);
+  box-shadow: 0 0 0 3px rgb(44 115 67 / 0.25);
+}
+
+.etat[data-code="ferme"] .etat__pastille {
+  background: var(--riz-2);
+}
+
+.etat--compact {
+  padding: 0.3rem 0.7rem 0.3rem 0.2rem;
+  margin-left: 0.7rem;
+  font-size: 0.85rem;
+  border-width: 1.5px;
+}
+
+.etat--compact::before {
+  border-width: 1.5px;
+}
+
+.etat--grand {
+  font-size: 1.05rem;
+  padding: 0.65rem 1.05rem 0.65rem 0.35rem;
+  background: var(--curcuma-pale);
+}
+
+/* ---------- En-tête ---------- */
+
+.entete {
+  background: var(--curcuma);
+  color: var(--sucre);
+  position: relative;
+  z-index: 5;
+}
+
+.entete__barre {
+  display: flex;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  min-height: 4.75rem;
+  padding-block: 0.6rem;
+}
+
+.enseigne-mini {
+  display: grid;
+  gap: 0.1rem;
+  margin-right: auto;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.enseigne-mini__km {
+  font-family: var(--enseigne);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--feuille-encre);
+}
+
+.enseigne-mini__nom {
+  font-family: var(--enseigne);
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.entete__nav {
+  display: flex;
+  gap: 1.5rem;
+  font-weight: 600;
+}
+
+.entete__nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) left bottom 0.55rem / 0 2px no-repeat;
+  transition: background-size 220ms var(--sortie);
+}
+
+.entete__nav a:hover,
+.entete__nav a[aria-current="page"] {
+  background-size: 100% 2px;
+}
+
+.bouton--entete {
+  min-height: 2.75rem;
+  padding-inline: 1rem;
+  box-shadow: none;
+}
+
+.bouton--entete .bouton__num {
+  padding: 0;
+  border: 0;
+  font-weight: 700;
+}
+
+/* ---------- Héros ---------- */
+
+.heros {
+  background: var(--curcuma);
+  --dechirure: var(--curcuma);
+  overflow: hidden;
+}
+
+.heros__grille {
+  display: grid;
+  gap: 2rem;
+}
+
+.heros__texte {
+  display: grid;
+  justify-items: start;
+  gap: 1.25rem;
+  padding-block: 2rem 0;
+}
+
+.enseigne {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.enseigne__km {
+  font-family: var(--enseigne);
+  font-size: clamp(1.5rem, 1rem + 2.2vw, 2.75rem);
+  line-height: 1.55;
+  color: var(--feuille);
+}
+
+.enseigne__nom {
+  display: grid;
+  font-family: var(--enseigne);
+  font-size: clamp(2.2rem, 0.9rem + 5.2vw, 4.05rem);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.enseigne__du {
+  font-family: var(--texte);
+  font-weight: 600;
+  font-size: 0.4em;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  vertical-align: 0.6em;
+  margin-right: 0.15em;
+}
+
+.heros__accroche {
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.35;
+  max-width: 30ch;
+  color: var(--sucre-doux);
+}
+
+.heros__conseil {
+  max-width: 40ch;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--sucre-doux);
+}
+
+.page-accueil .enseigne-mini__km {
+  display: none;
+}
+
+.heros__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.heros__mention {
+  font-size: 0.95rem;
+  color: var(--sucre-doux);
+}
+
+.heros__etal {
+  position: relative;
+  margin-inline: calc(-1 * var(--marge));
+}
+
+.etal svg {
+  width: 100%;
+  height: 100%;
+}
+
+.etal--large {
+  display: none;
+}
+
+.etal--bande {
+  aspect-ratio: 800 / 440;
+}
+
+.etiquette {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.7rem 1.1rem 0.75rem 2.4rem;
+  background: var(--riz);
+  color: var(--sucre);
+  border: 2px solid var(--sucre);
+  border-radius: 0.45rem;
+  text-decoration: none;
+  box-shadow: var(--ombre);
+}
+
+.etiquette::before {
+  content: "";
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-top: -0.35rem;
+  border-radius: 50%;
+  background: var(--curcuma);
+  border: 2px solid var(--sucre);
+}
+
+.etiquette__titre {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.etiquette__prix {
+  font-family: var(--prix);
+  font-weight: 600;
+  font-size: 2.1rem;
+  line-height: 1;
+}
+
+.etiquette--pendue {
+  top: 1rem;
+  right: calc(var(--marge) + 0.5rem);
+  transform: rotate(4deg);
+  transform-origin: 1.2rem 50%;
+}
+
+.etiquette--pendue::after {
+  content: "";
+  position: absolute;
+  left: calc(1.2rem - 1px);
+  bottom: calc(50% + 0.2rem);
+  width: 2px;
+  height: 4rem;
+  background: var(--sucre);
+  border-radius: 1px;
+  transform-origin: 50% 100%;
+  transform: rotate(-28deg);
+}
+
+.etiquette--pendue:hover {
+  animation: balancer 1.4s var(--sortie);
+}
+
+@keyframes balancer {
+  20% {
+    transform: rotate(-3deg);
+  }
+  45% {
+    transform: rotate(7deg);
+  }
+  70% {
+    transform: rotate(2.5deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .etal .piece {
+    animation: poser 900ms var(--sortie) both;
+    animation-delay: calc(120ms + var(--i) * 40ms);
+  }
+}
+
+@keyframes poser {
+  from {
+    translate: 0 -26px;
+  }
+}
+
+/* ---------- Menu bon et pas cher ---------- */
+
+.bpc__grille {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.bpc h2 {
+  font-size: clamp(2rem, 1.3rem + 2.6vw, 3.5rem);
+  max-width: 12ch;
+}
+
+.bpc__prix {
+  margin-top: 1.25rem;
+  font-family: var(--prix);
+  font-weight: 600;
+  font-size: clamp(4rem, 2.5rem + 6vw, 6rem);
+  line-height: 0.9;
+  color: var(--curcuma-clair);
+}
+
+.bpc__texte {
+  margin-top: 1rem;
+  max-width: 34ch;
+  font-size: 1.125rem;
+  color: var(--feuille-clair);
+}
+
+.bpc__choix {
+  display: grid;
+  border-top: 2px solid rgb(255 251 243 / 0.35);
+}
+
+.bpc__plat {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.35rem 1.5rem;
+  padding-block: 1.35rem;
+  border-bottom: 1px dashed rgb(255 251 243 / 0.35);
+}
+
+.bpc__plat h3 {
+  font-size: clamp(1.35rem, 1.1rem + 0.8vw, 1.75rem);
+}
+
+.bpc__plat p:not(.prix) {
+  grid-column: 1;
+  color: var(--feuille-clair);
+  max-width: 40ch;
+}
+
+.bpc__plat .prix {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  font-size: 1.35rem;
+  color: var(--curcuma-clair);
+}
+
+.bpc__plat--extra h3 {
+  font-size: 1.15rem;
+}
+
+.bpc__plat--extra .prix {
+  font-size: 1.1rem;
+}
+
+.bpc__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+}
+
+/* ---------- Par où commencer ---------- */
+
+.classiques__grille {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.classiques__tete {
+  display: grid;
+  justify-items: start;
+  gap: 1.25rem;
+  align-content: start;
+}
+
+.classiques__tete h2 {
+  font-size: clamp(2rem, 1.3rem + 2.6vw, 3.5rem);
+}
+
+.classiques__tete p {
+  max-width: 34ch;
+  color: var(--riz-texte);
+}
+
+.classiques__liste {
+  display: grid;
+  gap: 0 3rem;
+}
+
+.classique {
+  border-top: 2px solid var(--sucre);
+}
+
+.classique__lien {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.4rem 1.25rem;
+  padding-block: 1.25rem 1.6rem;
+  text-decoration: none;
+}
+
+.classique__nom {
+  font-size: clamp(1.6rem, 1.25rem + 1.1vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 0.07em;
+  text-underline-offset: 0.16em;
+  transition: text-decoration-color 160ms ease-out;
+}
+
+.classique__lien:hover .classique__nom {
+  text-decoration-color: currentColor;
+}
+
+.classique__prix {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  padding: 0.2rem 0.55rem;
+  background: var(--curcuma);
+  border-radius: 0.3rem;
+  font-family: var(--prix);
+  font-weight: 600;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.classique__texte {
+  grid-column: 1 / -1;
+  max-width: 44ch;
+  color: var(--riz-texte);
+}
+
+/* ---------- Saveurs ---------- */
+
+.saveurs__grille {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.saveurs__texte {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+
+.saveurs__texte h2 {
+  font-size: clamp(2rem, 1.3rem + 2.6vw, 3.5rem);
+  max-width: 11ch;
+}
+
+.saveurs__texte p {
+  max-width: 40ch;
+  font-size: 1.125rem;
+}
+
+.saveurs__liste {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 1rem;
+}
+
+.saveur {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 0.1rem;
+}
+
+.saveur__dessin {
+  width: min(100%, 10.5rem);
+  aspect-ratio: 1;
+  margin-bottom: 0.35rem;
+  overflow: visible;
+}
+
+.saveur__fr {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.saveur__km {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--sucre-doux);
+}
+
+.promesse {
+  display: grid;
+  gap: 1.5rem 3rem;
+  align-items: center;
+  padding: clamp(1.75rem, 1rem + 3vw, 3rem) clamp(1.25rem, 0.5rem + 3vw, 3rem);
+  background: var(--feuille);
+  color: var(--riz);
+  border-radius: 0.75rem;
+}
+
+.promesse__tampon {
+  justify-self: start;
+  display: grid;
+  justify-items: center;
+  gap: 0.15rem;
+  padding: 0.5rem 1.4rem 0.9rem;
+  border: 3px solid var(--curcuma-clair);
+  border-radius: 1.25rem;
+  color: var(--curcuma-clair);
+  rotate: -6deg;
+}
+
+.promesse__km {
+  font-family: var(--enseigne);
+  font-size: clamp(2.6rem, 1.8rem + 3vw, 4.25rem);
+  line-height: 1.55;
+}
+
+.promesse__sens {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.promesse__citation p {
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  max-width: 28ch;
+  text-wrap: balance;
+}
+
+.promesse__citation p::before {
+  content: "«\202f";
+  color: var(--curcuma-clair);
+}
+
+.promesse__citation p::after {
+  content: "\202f»";
+  color: var(--curcuma-clair);
+}
+
+/* ---------- Infos pratiques ---------- */
+
+.infos__titre {
+  font-size: clamp(2rem, 1.2rem + 3vw, 3.75rem);
+  max-width: 16ch;
+  margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+}
+
+.infos__grille {
+  display: grid;
+  gap: 3.5rem;
+}
+
+.horaires,
+.acces {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+  justify-items: start;
+}
+
+.horaires h3,
+.acces h3 {
+  font-size: 1.5rem;
+}
+
+.semaine {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.semaine th,
+.semaine td {
+  padding: 0.7rem 0.5rem;
+  border-bottom: 1px dashed rgb(42 23 13 / 0.3);
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.semaine th {
+  font-weight: 600;
+  padding-left: 0;
+}
+
+.semaine td {
+  white-space: nowrap;
+}
+
+.semaine td.semaine__commande {
+  white-space: normal;
+}
+
+.semaine__jour {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  margin-left: -0.55rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+}
+
+.semaine .est-aujourdhui .semaine__jour {
+  border-color: var(--sucre);
+  background: var(--curcuma);
+}
+
+.semaine .est-aujourdhui th,
+.semaine .est-aujourdhui td {
+  font-weight: 700;
+}
+
+.semaine__commande {
+  color: var(--feuille-2);
+  font-weight: 600;
+}
+
+.horaires__note {
+  color: var(--riz-texte);
+  max-width: 40ch;
+}
+
+.acces__adresse {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.acces__tel a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid currentColor;
+}
+
+.plan {
+  width: 100%;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.plan__lien {
+  display: block;
+  border: 2px solid var(--sucre);
+  border-radius: 0.6rem;
+  overflow: hidden;
+  background: var(--curcuma);
+}
+
+.plan img {
+  width: 100%;
+  height: auto;
+}
+
+.plan figcaption {
+  font-size: 0.8rem;
+  color: var(--riz-texte);
+}
+
+.acces__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+}
+
+.acces__actions .lien {
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ---------- Pied de page ---------- */
+
+.pied {
+  background: var(--sucre);
+  color: var(--riz-2);
+  padding-block: clamp(3rem, 2rem + 4vw, 5.5rem) calc(6rem + env(safe-area-inset-bottom));
+}
+
+.pied__grille {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.pied__km {
+  font-family: var(--enseigne);
+  font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+  line-height: 1.5;
+  color: var(--curcuma);
+}
+
+.pied__au-revoir {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--riz);
+}
+
+.pied__titre {
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--curcuma-clair);
+}
+
+.pied__bloc p + p {
+  margin-top: 0.5rem;
+}
+
+.pied__note {
+  font-size: 0.9rem;
+  color: var(--pied-texte);
+}
+
+.pied ul {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0;
+  list-style: none;
+}
+
+.pied a {
+  display: inline-block;
+  padding-block: 0.3rem;
+  color: var(--riz);
+}
+
+.pied address a {
+  font-weight: 700;
+}
+
+.pied__credits {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgb(244 234 214 / 0.2);
+  font-size: 0.85rem;
+  color: var(--pied-note);
+}
+
+/* ---------- Barre d'actions mobile ---------- */
+
+.barre-action {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 20;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem calc(0.5rem + env(safe-area-inset-bottom));
+  background: var(--sucre);
+  color: var(--riz);
+  box-shadow: 0 -0.5rem 1.5rem -0.75rem rgb(42 23 13 / 0.6);
+  transform: translateY(110%);
+  transition: transform 320ms var(--sortie);
+}
+
+.barre-action.est-visible {
+  transform: none;
+}
+
+.barre-action a,
+.barre-action button {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0.15rem;
+  min-height: 3.5rem;
+  padding: 0.35rem;
+  border: 0;
+  border-radius: var(--rayon);
+  background: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: inherit;
+}
+
+.barre-action .icone {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.barre-action__appel {
+  background: var(--piment) !important;
+}
+
+.barre-action__bon {
+  position: relative;
+  grid-template-columns: auto auto;
+  column-gap: 0.4rem;
+}
+
+.barre-action__bon .icone {
+  grid-row: 1;
+  grid-column: 1 / -1;
+}
+
+.barre-action__compte.vient-de-changer {
+  animation: compter 420ms var(--sortie);
+}
+
+.barre-action__compte {
+  min-width: 1.5rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background: var(--curcuma);
+  color: var(--sucre);
+  font-family: var(--prix);
+  font-weight: 600;
+}
+
+/* ---------- La carte ---------- */
+
+.carte-tete {
+  padding-block: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+}
+
+.carte-tete__grille {
+  display: grid;
+  gap: 2rem;
+  align-items: end;
+}
+
+.carte-tete h1 {
+  font-size: clamp(2.75rem, 1.75rem + 4vw, 5.5rem);
+  letter-spacing: -0.03em;
+}
+
+.carte-tete__intro {
+  margin-top: 0.75rem;
+  max-width: 44ch;
+  font-size: 1.125rem;
+  color: var(--feuille-clair);
+}
+
+.carte-tete__intro a {
+  color: var(--riz);
+  font-weight: 700;
+}
+
+.recherche {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.recherche__label {
+  font-weight: 700;
+}
+
+.recherche__champ {
+  position: relative;
+}
+
+.recherche__champ .icone {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--sucre-doux);
+  pointer-events: none;
+}
+
+.recherche input {
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.5rem 1rem 0.5rem 2.9rem;
+  border: 2px solid var(--sucre);
+  border-radius: var(--rayon);
+  background: var(--riz);
+  color: var(--sucre);
+  font-size: 1.0625rem;
+}
+
+.recherche input::placeholder {
+  color: var(--riz-texte);
+  opacity: 1;
+}
+
+.recherche input:focus-visible {
+  outline: 3px solid var(--curcuma-clair);
+  outline-offset: 2px;
+}
+
+.recherche__etat {
+  min-height: 1.5em;
+  font-size: 0.95rem;
+  color: var(--feuille-clair);
+}
+
+.carte {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0 3rem;
+  padding-bottom: var(--section);
+}
+
+.rubriques {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  margin-inline: calc(-1 * var(--marge));
+  background: var(--riz);
+  border-bottom: 2px solid var(--sucre);
+}
+
+.rubriques ul {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+  list-style: none;
+  padding: 0.75rem var(--marge);
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-padding-inline: var(--marge);
+}
+
+.rubriques ul::-webkit-scrollbar {
+  display: none;
+}
+
+.rubriques a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.3rem 0.9rem;
+  border: 1.5px solid var(--sucre);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 160ms ease-out,
+    color 160ms ease-out;
+}
+
+.rubriques a:hover {
+  background: var(--curcuma-pale);
+}
+
+.rubriques a[aria-current="true"] {
+  background: var(--sucre);
+  color: var(--riz);
+}
+
+.rubriques a.est-vide {
+  opacity: 0.4;
+}
+
+.carte__liste {
+  padding-top: 2rem;
+  min-width: 0;
+}
+
+.carte__vide {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 2px dashed var(--sucre);
+  border-radius: var(--rayon);
+  font-size: 1.1rem;
+}
+
+.rubrique {
+  padding-block: 1.5rem 1rem;
+  scroll-margin-top: 5rem;
+}
+
+.rubrique__titre {
+  display: inline;
+  font-size: clamp(1.75rem, 1.35rem + 1.4vw, 2.5rem);
+  letter-spacing: -0.02em;
+  background: linear-gradient(transparent 58%, var(--curcuma) 58%, var(--curcuma) 92%, transparent 92%);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding-inline: 0.1em;
+}
+
+.rubrique__riz {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.15rem 0.6rem;
+  margin-top: 0.85rem;
+  color: var(--riz-texte);
+  font-size: 0.95rem;
+}
+
+.rubrique__riz-sup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.plats {
+  margin-top: 1rem;
+  border-top: 2px solid var(--sucre);
+}
+
+.plat {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "nom prix"
+    "desc prix";
+  column-gap: 1rem;
+  align-items: start;
+  padding-block: 0.85rem;
+  border-bottom: 1px dashed rgb(42 23 13 / 0.28);
+}
+
+.plat:has(.plat__ajout:not([hidden])) {
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-areas:
+    "nom prix ajout"
+    "desc prix ajout";
+}
+
+.plat__nom {
+  grid-area: nom;
+  font-weight: 600;
+  font-size: 1.0625rem;
+  line-height: 1.35;
+}
+
+.plat__desc {
+  grid-area: desc;
+  font-size: 0.925rem;
+  color: var(--riz-texte);
+  line-height: 1.45;
+  margin-top: 0.1rem;
+}
+
+.plat__prix {
+  grid-area: prix;
+  font-family: var(--prix);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  line-height: 1.35;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.plat__ajout {
+  grid-area: ajout;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-block: -0.45rem;
+  padding: 0;
+  border: 2px solid var(--sucre);
+  border-radius: 50%;
+  background: var(--riz);
+  color: var(--sucre);
+  transition:
+    background-color 160ms ease-out,
+    color 160ms ease-out,
+    transform 160ms var(--sortie);
+}
+
+.plat__ajout:hover {
+  background: var(--curcuma);
+}
+
+.plat__ajout:active {
+  transform: scale(0.94);
+}
+
+.plat__ajout .icone {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.plat__ajout--petit {
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-block: -0.25rem;
+}
+
+.plat.est-dans-bon .plat__ajout,
+.plat__ajout.est-dans-bon {
+  background: var(--feuille);
+  border-color: var(--feuille);
+  color: var(--riz);
+}
+
+.plat__ajout[data-quantite]::after {
+  content: attr(data-quantite);
+  position: absolute;
+  top: -0.5rem;
+  right: -0.55rem;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding-inline: 0.3rem;
+  border-radius: 999px;
+  background: var(--curcuma);
+  color: var(--sucre);
+  border: 1.5px solid var(--sucre);
+  font: 600 0.75rem/1.1rem var(--prix);
+  text-align: center;
+}
+
+.plat__ajout {
+  position: relative;
+}
+
+.carte__maj {
+  margin-top: 2.5rem;
+  font-size: 0.9rem;
+  color: var(--riz-texte);
+  max-width: 60ch;
+}
+
+/* Bon de commande */
+
+.bon {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 30;
+  max-height: min(78vh, 40rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  transform: translateY(105%);
+  transition: transform 340ms var(--sortie);
+  visibility: hidden;
+}
+
+.bon.est-ouvert {
+  transform: none;
+  visibility: visible;
+}
+
+.bon__feuille {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem 1.25rem calc(1.25rem + env(safe-area-inset-bottom));
+  background: var(--papier-bon);
+  border-top: 2px solid var(--sucre);
+  border-radius: 1rem 1rem 0 0;
+  box-shadow: 0 -1rem 2rem -1rem rgb(42 23 13 / 0.45);
+}
+
+.bon__tete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.bon__tete h2 {
+  font-size: 1.35rem;
+}
+
+.bon__fermer {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 2px solid var(--sucre);
+  border-radius: 50%;
+  background: none;
+}
+
+.bon__vide {
+  color: var(--riz-texte);
+}
+
+.bon__lignes {
+  display: grid;
+  border-top: 2px solid var(--sucre);
+}
+
+.bon__ligne {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "nom total"
+    "quantite quantite";
+  gap: 0.4rem 0.75rem;
+  padding-block: 0.75rem;
+  border-bottom: 1px dashed rgb(42 23 13 / 0.3);
+}
+
+.bon__nom {
+  grid-area: nom;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.bon__montant {
+  grid-area: total;
+  font-family: var(--prix);
+  font-weight: 600;
+}
+
+.bon__quantite {
+  grid-area: quantite;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bon__quantite button {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1.5px solid var(--sucre);
+  border-radius: 50%;
+  background: var(--riz);
+}
+
+.bon__quantite button:hover {
+  background: var(--curcuma-pale);
+}
+
+.bon__quantite button .icone {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.bon__qte {
+  min-width: 2ch;
+  text-align: center;
+  font-family: var(--prix);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.bon__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-top: 0.25rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.bon__total output {
+  font-family: var(--prix);
+  font-weight: 600;
+  font-size: 1.6rem;
+  display: inline-block;
+}
+
+.bon__total output.vient-de-changer {
+  animation: compter 420ms var(--sortie);
+}
+
+@keyframes compter {
+  from {
+    transform: translateY(0.35em);
+    opacity: 0.35;
+  }
+}
+
+.bon__note {
+  font-size: 0.85rem;
+  color: var(--riz-texte);
+}
+
+.bon .bouton--texte {
+  justify-self: center;
+}
+
+/* ---------- Pages de texte ---------- */
+
+.texte {
+  max-width: 44rem;
+}
+
+.texte h1 {
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
+  margin-bottom: 2rem;
+}
+
+.texte h2 {
+  font-size: 1.35rem;
+  margin: 2.25rem 0 0.75rem;
+}
+
+.texte p + p {
+  margin-top: 0.75rem;
+}
+
+.a-completer {
+  padding: 0.05rem 0.4rem;
+  background: var(--curcuma-pale);
+  border: 1.5px dashed var(--sucre);
+  border-radius: 0.25rem;
+  font-weight: 600;
+}
+
+.introuvable {
+  min-height: 50vh;
+  display: grid;
+  align-content: center;
+  gap: 1.25rem;
+}
+
+.introuvable h1 {
+  margin: 0;
+}
+
+.introuvable__code {
+  font-family: var(--prix);
+  font-weight: 600;
+  font-size: clamp(4rem, 3rem + 5vw, 6rem);
+  line-height: 1;
+}
+
+.introuvable__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+}
+
+/* ---------- Tablette ---------- */
+
+@media (min-width: 45rem) {
+  .barre-action {
+    display: none;
+  }
+
+  .pied {
+    padding-bottom: 2rem;
+  }
+
+  .saveurs__liste {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .classiques__liste {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .infos__grille {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: 4rem;
+  }
+
+  .pied__grille {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .pied__merci {
+    grid-column: 1 / -1;
+  }
+
+  .carte-tete__grille {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+  }
+
+  .plat {
+    padding-block: 0.95rem;
+  }
+}
+
+@media (max-width: 44.99rem) {
+  .entete__nav,
+  .bouton--entete .bouton__num {
+    display: none;
+  }
+
+  .entete__barre {
+    min-height: 4rem;
+    gap: 0.75rem;
+  }
+
+  .enseigne-mini__nom {
+    font-size: 0.95rem;
+  }
+
+  .bouton--entete {
+    width: 2.75rem;
+    padding: 0;
+  }
+
+  .heros__actions .bouton {
+    flex: 1 1 100%;
+  }
+
+  .bpc__actions .bouton {
+    width: 100%;
+  }
+
+  .etiquette--pendue {
+    top: auto;
+    bottom: 1rem;
+    right: var(--marge);
+  }
+
+  .semaine th,
+  .semaine td {
+    padding-inline: 0 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .saveur__dessin {
+    width: min(100%, 7rem);
+  }
+
+  .saveurs__liste {
+    gap: 1.25rem 0.75rem;
+  }
+}
+
+/* ---------- Bureau ---------- */
+
+@media (min-width: 64rem) {
+  .heros__grille {
+    width: 100%;
+    grid-template-columns:
+      minmax(var(--marge), 1fr)
+      minmax(0, calc(var(--large) / 2 - 1rem))
+      minmax(0, calc(var(--large) / 2 + 1rem))
+      minmax(var(--marge), 1fr);
+    gap: 0;
+    min-height: min(56rem, max(40rem, calc(100svh - 4.75rem)));
+  }
+
+  .heros__texte {
+    grid-column: 2;
+    align-content: center;
+    padding-block: 3rem 5rem;
+    padding-right: 2rem;
+    gap: 1.5rem;
+  }
+
+  .heros__etal {
+    grid-column: 3 / -1;
+    margin: 0;
+  }
+
+  .etal--large {
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+
+  .etal--bande {
+    display: none;
+  }
+
+  .etiquette--pendue {
+    top: 14%;
+    left: -1.5rem;
+    right: auto;
+    transform: rotate(-5deg);
+  }
+
+  @keyframes balancer {
+    20% {
+      transform: rotate(-9deg);
+    }
+    45% {
+      transform: rotate(-1deg);
+    }
+    70% {
+      transform: rotate(-6.5deg);
+    }
+  }
+
+  .etiquette__prix {
+    font-size: 2.6rem;
+  }
+
+  .bpc__grille {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: 5rem;
+  }
+
+  .bpc__tete {
+    grid-row: span 2;
+  }
+
+  .classiques__grille {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    column-gap: 4rem;
+  }
+
+  .classiques__tete {
+    position: sticky;
+    top: 2rem;
+    align-self: start;
+  }
+
+  .saveurs__grille {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: 4rem;
+    row-gap: 4rem;
+  }
+
+  .promesse {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .promesse__tampon {
+    justify-self: end;
+    margin-right: 1rem;
+  }
+
+  .infos__grille {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 6rem;
+  }
+
+  .pied__grille {
+    grid-template-columns: minmax(0, 5fr) repeat(3, minmax(0, 3fr));
+  }
+
+  .pied__merci {
+    grid-column: auto;
+  }
+}
+
+@media (min-width: 72rem) {
+  .carte {
+    grid-template-columns: 12rem minmax(0, 1fr) 21rem;
+    align-items: start;
+  }
+
+  .rubriques {
+    position: sticky;
+    top: 1.5rem;
+    margin: 2rem 0 0;
+    background: none;
+    border: 0;
+    max-height: calc(100vh - 3rem);
+    overflow-y: auto;
+  }
+
+  .rubriques ul {
+    display: grid;
+    gap: 0.1rem;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .rubriques a {
+    width: 100%;
+    min-height: 2.25rem;
+    padding: 0.2rem 0.75rem;
+    border-color: transparent;
+    border-radius: 0.35rem;
+  }
+
+  .rubriques a[aria-current="true"] {
+    background: var(--curcuma);
+    color: var(--sucre);
+    border-color: var(--sucre);
+  }
+
+  .bon {
+    position: sticky;
+    top: 1.5rem;
+    inset: auto;
+    margin-top: 2rem;
+    max-height: calc(100vh - 3rem);
+    transform: none;
+    visibility: visible;
+    transition: none;
+  }
+
+  .bon__feuille {
+    border: 2px solid var(--sucre);
+    border-radius: 0.75rem;
+    box-shadow: var(--ombre);
+    background:
+      radial-gradient(circle at 0.6rem -0.25rem, var(--riz) 0.45rem, transparent 0.5rem) 0 0 / 1.2rem 0.6rem repeat-x,
+      var(--papier-bon);
+    padding-top: 1.75rem;
+  }
+
+  .bon__fermer,
+  .barre-action--carte {
+    display: none;
+  }
+}
+
+/* ---------- Mouvement réduit ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+/* ---------- Impression : la carte sur une feuille ---------- */
+
+@media print {
+  @page {
+    margin: 1.2cm;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 10pt;
+  }
+
+  .evitement,
+  .entete__nav,
+  .etat,
+  .bouton,
+  .barre-action,
+  .rubriques,
+  .recherche,
+  .bon,
+  .plat__ajout,
+  .pied__merci,
+  .pied__credits,
+  .heros__etal,
+  .plan {
+    display: none !important;
+  }
+
+  .entete,
+  .section--feuille,
+  .section--curcuma,
+  .pied,
+  .heros {
+    background: none !important;
+    color: #000 !important;
+  }
+
+  .carte-tete__intro,
+  .carte-tete__intro a {
+    color: #000;
+  }
+
+  .carte {
+    display: block;
+    padding: 0;
+  }
+
+  .carte__liste {
+    columns: 2;
+    column-gap: 1cm;
+    padding: 0;
+  }
+
+  .rubrique {
+    break-inside: avoid-page;
+    padding-block: 0.3cm;
+  }
+
+  .rubrique__titre {
+    background: none;
+    font-size: 14pt;
+  }
+
+  .plat {
+    break-inside: avoid;
+    padding-block: 0.12cm;
+  }
+
+  .pied {
+    padding: 0.5cm 0 0;
+  }
+}
