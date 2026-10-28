@@ -15,6 +15,11 @@
 # de chaque panneau (dossier donnees/), ainsi que la configuration Apache déjà en place (HTTPS compris).
 set -euo pipefail
 
+# Tout le script est dans main(), appelée à la dernière ligne : avec « curl … | sudo bash »,
+# bash lit ainsi le script en entier avant de l'exécuter, même si une commande (apt, needrestart…)
+# lit l'entrée standard.
+main() {
+
 FLEUR_DOMAINE="${FLEUR_DOMAINE:-fleurdor31.fr}"
 MONOROM_DOMAINE="${MONOROM_DOMAINE:-lemonorom.fr}"
 FLEUR_DOSSIER="${FLEUR_DOSSIER:-/var/www/fleur-dor}"
@@ -49,9 +54,9 @@ service_() { # action nom
 
 # ---------- Apache, PHP-FPM et certbot ----------
 echo "Installation d'Apache, PHP et certbot…"
-export DEBIAN_FRONTEND=noninteractive
-apt-get update -qq
-apt-get install -y -qq apache2 php-fpm php-cli php-mbstring curl tar ca-certificates certbot python3-certbot-apache >/dev/null
+export DEBIAN_FRONTEND=noninteractive NEEDRESTART_SUSPEND=1 NEEDRESTART_MODE=l
+apt-get update -qq </dev/null
+apt-get install -y -qq apache2 php-fpm php-cli php-mbstring curl tar ca-certificates certbot python3-certbot-apache </dev/null >/dev/null
 PHPV=$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;')
 a2enmod -q rewrite headers expires deflate mime alias setenvif proxy_fcgi ssl >/dev/null
 a2enconf -q "php$PHPV-fpm" >/dev/null
@@ -163,7 +168,7 @@ service_ restart apache2
 # ---------- Mots de passe des panneaux ----------
 for paire in "La Fleur d'Or:$FLEUR_DOSSIER" "Le Monorom:$MONOROM_DOSSIER"; do
   nom="${paire%%:*}"; dst="${paire#*:}"
-  if [ ! -f "$dst/donnees/admin.json" ] && [ -r /dev/tty ]; then
+  if [ ! -f "$dst/donnees/admin.json" ] && ( : </dev/tty ) 2>/dev/null; then
     echo
     echo "Choisissez le mot de passe du panneau de $nom (10 caractères au moins) :"
     (cd "$dst" && sudo -u "$WEB" php admin/mot-de-passe.php < /dev/tty) || true
@@ -199,3 +204,6 @@ if [ -n "$A_FAIRE" ]; then
     echo "  sudo certbot --apache --redirect -d $dom -d www.$dom"
   done
 fi
+}
+
+main "$@"
