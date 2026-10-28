@@ -166,14 +166,19 @@ service_ restart "php$PHPV-fpm"
 service_ restart apache2
 
 # ---------- Mots de passe des panneaux ----------
-for paire in "La Fleur d'Or:$FLEUR_DOSSIER" "Le Monorom:$MONOROM_DOSSIER"; do
-  nom="${paire%%:*}"; dst="${paire#*:}"
-  if [ ! -f "$dst/donnees/admin.json" ] && ( : </dev/tty ) 2>/dev/null; then
-    echo
-    echo "Choisissez le mot de passe du panneau de $nom (10 caractères au moins) :"
-    (cd "$dst" && sudo -u "$WEB" php admin/mot-de-passe.php < /dev/tty) || true
-  fi
-done
+# Seulement si le script est lancé depuis un fichier (« sudo bash installer-ubuntu.sh ») :
+# avec « curl … | sudo bash », sudo ne transmet pas le clavier au script (use_pty), la saisie
+# resterait bloquée. Les commandes à lancer sont alors affichées à la fin.
+if [ -t 0 ]; then
+  for paire in "La Fleur d'Or:$FLEUR_DOSSIER" "Le Monorom:$MONOROM_DOSSIER"; do
+    nom="${paire%%:*}"; dst="${paire#*:}"
+    if [ ! -f "$dst/donnees/admin.json" ]; then
+      echo
+      echo "Choisissez le mot de passe du panneau de $nom (10 caractères au moins) :"
+      (cd "$dst" && runuser -u "$WEB" -- php admin/mot-de-passe.php) || true
+    fi
+  done
+fi
 
 # ---------- HTTPS ----------
 IP=$(curl -fsS -m 3 https://checkip.amazonaws.com 2>/dev/null || hostname -I | awk '{print $1}')
@@ -196,7 +201,10 @@ echo "Avant de changer les DNS, testez depuis ce serveur :"
 echo "  curl -s -H 'Host: $FLEUR_DOMAINE' http://localhost/ | grep -o '<title>[^<]*'"
 echo "  curl -s -H 'Host: $MONOROM_DOMAINE' http://localhost/ | grep -o '<title>[^<]*'"
 for dst in "$FLEUR_DOSSIER" "$MONOROM_DOSSIER"; do
-  [ -f "$dst/donnees/admin.json" ] || echo "Mot de passe à créer : cd $dst && sudo -u $WEB php admin/mot-de-passe.php"
+  if [ ! -f "$dst/donnees/admin.json" ]; then
+    echo "Mot de passe du panneau à créer ($dst) :"
+    echo "  cd $dst && sudo -u $WEB php admin/mot-de-passe.php"
+  fi
 done
 if [ -n "$A_FAIRE" ]; then
   echo "HTTPS à activer quand les DNS pointent vers ce serveur ($IP) :"
