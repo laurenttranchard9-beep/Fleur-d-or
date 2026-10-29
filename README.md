@@ -76,6 +76,14 @@ Les horaires se trouvent dans `admin/modele.html` (tableau de la section `id="in
 
 Mot de passe d’un panneau en ligne de commande sur Ubuntu : `cd /var/www/fleur-dor && sudo -u www-data php admin/mot-de-passe.php`.
 
+## Passer sur un hébergement mutualisé (IONOS Hébergement Web)
+
+Sur un hébergement mutualisé, le premier mot de passe du panneau ne peut pas être créé depuis le navigateur. On part donc des sites déjà installés sur le serveur Ubuntu, mots de passe créés :
+
+1. Sur le serveur Ubuntu : `curl -fsSL https://raw.githubusercontent.com/laurenttranchard9-beep/Fleur-d-or/claude/practical-mendel-dpj572/deploy/paquets-ionos.sh | sudo bash` crée `fleur-dor-ionos.zip` et `le-monorom-ionos.zip` (site, carte, mot de passe et sauvegardes) dans le dossier personnel, et affiche les commandes `scp` pour les récupérer.
+2. Chez IONOS (PHP 8.0 ou plus) : un dossier par site (`fleur-dor`, `le-monorom`), le ZIP envoyé et décompressé dedans, chaque domaine (et son `www`) relié à son dossier, certificat SSL activé.
+3. Chez OVH (zone DNS de chaque domaine) : enregistrements A de `@` et `www` vers l’adresse IP indiquée par IONOS ; les enregistrements MX (e-mails) ne changent pas.
+
 ## Mettre à jour le serveur (fleurdor31.fr et lemonorom.fr)
 
 Sur le serveur qui héberge aussi d’autres sites, chaque restaurant a son propre dossier, servi par son nom de domaine : `/var/www/html/fleur-dor` pour fleurdor31.fr et `/var/www/le-monorom` pour lemonorom.fr. Pour les mettre à jour depuis GitHub, sans toucher à Apache ni aux autres sites :
