@@ -1,52 +1,397 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-17T16:00:00+02:00",
+  "generatedAt": "2026-10-30T12:00:00+01:00",
   "title": "Design System: Aux Saveurs du Cambodge",
   "extensions": {
     "colorMeta": {
-      "curcuma": { "role": "primary", "displayName": "Curcuma", "canonical": "#F2A51C", "tonalRamp": ["#3D2500", "#6B4300", "#9A6200", "#C98207", "#F2A51C", "#F7C25A", "#FBD993", "#FDEECB"] },
-      "curcuma-clair": { "role": "primary", "displayName": "Curcuma clair", "canonical": "#F7C25A", "tonalRamp": ["#432C00", "#6F4C00", "#9C6D06", "#C99025", "#F7C25A", "#FAD385", "#FCE3AF", "#FEF2D9"] },
-      "curcuma-pale": { "role": "primary", "displayName": "Curcuma pâle", "canonical": "#FDE7B4", "tonalRamp": ["#4A3200", "#76561A", "#A07B3A", "#C9A35F", "#EAC98A", "#F6DCA6", "#FDE7B4", "#FFF5DE"] },
-      "feuille": { "role": "secondary", "displayName": "Feuille de bananier", "canonical": "#1B5232", "tonalRamp": ["#0A2214", "#123A23", "#1B5232", "#2C7343", "#4F9461", "#78B486", "#A7D2B0", "#D6EDDA"] },
-      "feuille-2": { "role": "secondary", "displayName": "Feuille vive", "canonical": "#2C7343", "tonalRamp": ["#0C2616", "#16402A", "#215A39", "#2C7343", "#4C9262", "#74B186", "#A3CFAE", "#D3EAD9"] },
-      "feuille-clair": { "role": "secondary", "displayName": "Feuille tendre", "canonical": "#B9DB95", "tonalRamp": ["#253512", "#3E5A21", "#5A8034", "#78A44B", "#97C26D", "#B9DB95", "#D3EABC", "#EDF6E3"] },
-      "feuille-encre": { "role": "secondary", "displayName": "Feuille encre", "canonical": "#16472B", "tonalRamp": ["#071A0F", "#0E2F1C", "#16472B", "#24663F", "#3F8659", "#68A77E", "#9CC9AA", "#D1E7D8"] },
-      "piment": { "role": "tertiary", "displayName": "Piment", "canonical": "#C8261B", "tonalRamp": ["#3B0905", "#63110A", "#8E1A10", "#C8261B", "#E2564A", "#EE8A80", "#F6BBB5", "#FCE5E2"] },
-      "piment-fonce": { "role": "tertiary", "displayName": "Piment foncé", "canonical": "#A51D14", "tonalRamp": ["#330704", "#560E08", "#7D150D", "#A51D14", "#CE3D32", "#E57A70", "#F2B2AC", "#FBE1DE"] },
-      "sucre": { "role": "neutral", "displayName": "Sucre de palme", "canonical": "#2A170D", "tonalRamp": ["#140A05", "#2A170D", "#43281A", "#5E3D2A", "#7C5843", "#A08066", "#C7AE97", "#EBDDCF"] },
-      "sucre-doux": { "role": "neutral", "displayName": "Sucre doux", "canonical": "#5A3416", "tonalRamp": ["#1E1006", "#3A200C", "#5A3416", "#7A4C27", "#9C6C44", "#BD9169", "#DAB998", "#F2E2CF"] },
-      "riz": { "role": "neutral", "displayName": "Riz", "canonical": "#FFFBF3", "tonalRamp": ["#4A4234", "#71675A", "#978C7E", "#BBB1A2", "#DAD1C2", "#EEE7D9", "#F8F3E8", "#FFFBF3"] },
-      "riz-2": { "role": "neutral", "displayName": "Riz 2", "canonical": "#F4EAD6", "tonalRamp": ["#463B26", "#6B5E46", "#908266", "#B3A587", "#D2C5A8", "#E7DCC4", "#F4EAD6", "#FBF6EC"] },
-      "riz-texte": { "role": "neutral", "displayName": "Riz texte", "canonical": "#6A5442", "tonalRamp": ["#21180F", "#3A2C20", "#524031", "#6A5442", "#8A735F", "#AC9781", "#CFBDA8", "#EEE3D6"] },
-      "papier-bon": { "role": "neutral", "displayName": "Papier du bon", "canonical": "#FFFDF8", "tonalRamp": ["#4B4636", "#736C5B", "#999180", "#BDB5A4", "#DCD5C5", "#EFEADF", "#F9F6EF", "#FFFDF8"] },
-      "pied-texte": { "role": "neutral", "displayName": "Pied texte", "canonical": "#D9C7AD", "tonalRamp": ["#33281A", "#53432E", "#746045", "#967F60", "#B8A27F", "#D9C7AD", "#EADDCB", "#F7F0E6"] },
-      "pied-note": { "role": "neutral", "displayName": "Pied note", "canonical": "#CBB89C", "tonalRamp": ["#302517", "#4E3F2A", "#6E5B40", "#8F7A5A", "#B09A79", "#CBB89C", "#E2D4C0", "#F4ECE1"] }
+      "curcuma": {
+        "role": "primary",
+        "displayName": "Curcuma",
+        "canonical": "#F2A51C",
+        "tonalRamp": [
+          "#3D2500",
+          "#6B4300",
+          "#9A6200",
+          "#C98207",
+          "#F2A51C",
+          "#F7C25A",
+          "#FBD993",
+          "#FDEECB"
+        ]
+      },
+      "curcuma-clair": {
+        "role": "primary",
+        "displayName": "Curcuma clair",
+        "canonical": "#F7C25A",
+        "tonalRamp": [
+          "#432C00",
+          "#6F4C00",
+          "#9C6D06",
+          "#C99025",
+          "#F7C25A",
+          "#FAD385",
+          "#FCE3AF",
+          "#FEF2D9"
+        ]
+      },
+      "curcuma-pale": {
+        "role": "primary",
+        "displayName": "Curcuma pâle",
+        "canonical": "#FDE7B4",
+        "tonalRamp": [
+          "#4A3200",
+          "#76561A",
+          "#A07B3A",
+          "#C9A35F",
+          "#EAC98A",
+          "#F6DCA6",
+          "#FDE7B4",
+          "#FFF5DE"
+        ]
+      },
+      "feuille": {
+        "role": "secondary",
+        "displayName": "Feuille de bananier",
+        "canonical": "#1B5232",
+        "tonalRamp": [
+          "#0A2214",
+          "#123A23",
+          "#1B5232",
+          "#2C7343",
+          "#4F9461",
+          "#78B486",
+          "#A7D2B0",
+          "#D6EDDA"
+        ]
+      },
+      "feuille-2": {
+        "role": "secondary",
+        "displayName": "Feuille vive",
+        "canonical": "#2C7343",
+        "tonalRamp": [
+          "#0C2616",
+          "#16402A",
+          "#215A39",
+          "#2C7343",
+          "#4C9262",
+          "#74B186",
+          "#A3CFAE",
+          "#D3EAD9"
+        ]
+      },
+      "feuille-clair": {
+        "role": "secondary",
+        "displayName": "Feuille tendre",
+        "canonical": "#B9DB95",
+        "tonalRamp": [
+          "#253512",
+          "#3E5A21",
+          "#5A8034",
+          "#78A44B",
+          "#97C26D",
+          "#B9DB95",
+          "#D3EABC",
+          "#EDF6E3"
+        ]
+      },
+      "feuille-encre": {
+        "role": "secondary",
+        "displayName": "Feuille encre",
+        "canonical": "#16472B",
+        "tonalRamp": [
+          "#071A0F",
+          "#0E2F1C",
+          "#16472B",
+          "#24663F",
+          "#3F8659",
+          "#68A77E",
+          "#9CC9AA",
+          "#D1E7D8"
+        ]
+      },
+      "piment": {
+        "role": "tertiary",
+        "displayName": "Piment",
+        "canonical": "#C8261B",
+        "tonalRamp": [
+          "#3B0905",
+          "#63110A",
+          "#8E1A10",
+          "#C8261B",
+          "#E2564A",
+          "#EE8A80",
+          "#F6BBB5",
+          "#FCE5E2"
+        ]
+      },
+      "piment-fonce": {
+        "role": "tertiary",
+        "displayName": "Piment foncé",
+        "canonical": "#A51D14",
+        "tonalRamp": [
+          "#330704",
+          "#560E08",
+          "#7D150D",
+          "#A51D14",
+          "#CE3D32",
+          "#E57A70",
+          "#F2B2AC",
+          "#FBE1DE"
+        ]
+      },
+      "sucre": {
+        "role": "neutral",
+        "displayName": "Sucre de palme",
+        "canonical": "#2A170D",
+        "tonalRamp": [
+          "#140A05",
+          "#2A170D",
+          "#43281A",
+          "#5E3D2A",
+          "#7C5843",
+          "#A08066",
+          "#C7AE97",
+          "#EBDDCF"
+        ]
+      },
+      "sucre-doux": {
+        "role": "neutral",
+        "displayName": "Sucre doux",
+        "canonical": "#5A3416",
+        "tonalRamp": [
+          "#1E1006",
+          "#3A200C",
+          "#5A3416",
+          "#7A4C27",
+          "#9C6C44",
+          "#BD9169",
+          "#DAB998",
+          "#F2E2CF"
+        ]
+      },
+      "riz": {
+        "role": "neutral",
+        "displayName": "Riz",
+        "canonical": "#FFFBF3",
+        "tonalRamp": [
+          "#4A4234",
+          "#71675A",
+          "#978C7E",
+          "#BBB1A2",
+          "#DAD1C2",
+          "#EEE7D9",
+          "#F8F3E8",
+          "#FFFBF3"
+        ]
+      },
+      "riz-2": {
+        "role": "neutral",
+        "displayName": "Riz 2",
+        "canonical": "#F4EAD6",
+        "tonalRamp": [
+          "#463B26",
+          "#6B5E46",
+          "#908266",
+          "#B3A587",
+          "#D2C5A8",
+          "#E7DCC4",
+          "#F4EAD6",
+          "#FBF6EC"
+        ]
+      },
+      "riz-texte": {
+        "role": "neutral",
+        "displayName": "Riz texte",
+        "canonical": "#6A5442",
+        "tonalRamp": [
+          "#21180F",
+          "#3A2C20",
+          "#524031",
+          "#6A5442",
+          "#8A735F",
+          "#AC9781",
+          "#CFBDA8",
+          "#EEE3D6"
+        ]
+      },
+      "papier-bon": {
+        "role": "neutral",
+        "displayName": "Papier du bon",
+        "canonical": "#FFFDF8",
+        "tonalRamp": [
+          "#4B4636",
+          "#736C5B",
+          "#999180",
+          "#BDB5A4",
+          "#DCD5C5",
+          "#EFEADF",
+          "#F9F6EF",
+          "#FFFDF8"
+        ]
+      },
+      "pied-texte": {
+        "role": "neutral",
+        "displayName": "Pied texte",
+        "canonical": "#D9C7AD",
+        "tonalRamp": [
+          "#33281A",
+          "#53432E",
+          "#746045",
+          "#967F60",
+          "#B8A27F",
+          "#D9C7AD",
+          "#EADDCB",
+          "#F7F0E6"
+        ]
+      },
+      "pied-note": {
+        "role": "neutral",
+        "displayName": "Pied note",
+        "canonical": "#CBB89C",
+        "tonalRamp": [
+          "#302517",
+          "#4E3F2A",
+          "#6E5B40",
+          "#8F7A5A",
+          "#B09A79",
+          "#CBB89C",
+          "#E2D4C0",
+          "#F4ECE1"
+        ]
+      }
     },
     "typographyMeta": {
-      "enseigne": { "displayName": "Enseigne", "purpose": "Nom du restaurant en capitales Moul, deux lignes, « du » en petit Kantumruy 600." },
-      "enseigne-khmer": { "displayName": "Enseigne khmère", "purpose": "Mots khmers en Moul : nom, « អរគុណ » en pied, tampon « ឆ្ងាញ់ »." },
-      "headline": { "displayName": "Titre de section", "purpose": "Titres h2 des sections et des pages." },
-      "title": { "displayName": "Titre de plat", "purpose": "Plats mis en avant et titres de rubrique de la carte." },
-      "body": { "displayName": "Texte courant", "purpose": "Paragraphes, descriptions, noms de plats dans les listes (en 600)." },
-      "label": { "displayName": "Label", "purpose": "Titre d'étiquette et titres du pied de page, en capitales espacées." },
-      "prix": { "displayName": "Prix", "purpose": "Tous les prix ; chiffres de chasse fixe pour l'alignement en colonne." }
+      "enseigne": {
+        "displayName": "Enseigne",
+        "purpose": "Nom du restaurant en capitales Moul, deux lignes, « du » en petit Kantumruy 600."
+      },
+      "enseigne-khmer": {
+        "displayName": "Enseigne khmère",
+        "purpose": "Mots khmers en Moul : nom, « អរគុណ » en pied, tampon « ឆ្ងាញ់ »."
+      },
+      "headline": {
+        "displayName": "Titre de section",
+        "purpose": "Titres h2 des sections et des pages."
+      },
+      "title": {
+        "displayName": "Titre de plat",
+        "purpose": "Plats mis en avant et titres de rubrique de la carte."
+      },
+      "body": {
+        "displayName": "Texte courant",
+        "purpose": "Paragraphes, descriptions, noms de plats dans les listes (en 600)."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Titre d'étiquette et titres du pied de page, en capitales espacées."
+      },
+      "prix": {
+        "displayName": "Prix",
+        "purpose": "Tous les prix ; chiffres de chasse fixe pour l'alignement en colonne."
+      }
     },
     "shadows": [
-      { "name": "ombre-prise", "value": "0 0.6rem 1.4rem -0.7rem rgb(42 23 13 / 0.55)", "purpose": "Sous ce qui se saisit : bouton d'appel, étiquette pendue, bon de commande sur bureau." },
-      { "name": "ombre-barre", "value": "0 -0.5rem 1.5rem -0.75rem rgb(42 23 13 / 0.6)", "purpose": "Barre d'actions mobile." },
-      { "name": "ombre-feuille", "value": "0 -1rem 2rem -1rem rgb(42 23 13 / 0.45)", "purpose": "Bon de commande ouvert en feuille basse sur mobile." }
+      {
+        "name": "ombre-prise",
+        "value": "0 0.6rem 1.4rem -0.7rem rgb(42 23 13 / 0.55)",
+        "purpose": "Sous ce qui se saisit : bouton d'appel, étiquette pendue, bon de commande sur bureau."
+      },
+      {
+        "name": "ombre-barre",
+        "value": "0 -0.5rem 1.5rem -0.75rem rgb(42 23 13 / 0.6)",
+        "purpose": "Barre d'actions mobile."
+      },
+      {
+        "name": "ombre-feuille",
+        "value": "0 -1rem 2rem -1rem rgb(42 23 13 / 0.45)",
+        "purpose": "Bon de commande ouvert en feuille basse sur mobile."
+      }
     ],
     "motion": [
-      { "name": "sortie", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Courbe de sortie exponentielle de toutes les transitions." },
-      { "name": "poser", "value": "900ms sortie, délai 120ms + 40ms par pièce, translate 0 -26px → 0", "purpose": "Les ingrédients se posent sur la feuille au chargement ; visibles dès le départ." },
-      { "name": "balancer", "value": "1.4s sortie, rotation autour du trou", "purpose": "L'étiquette pendue se balance au survol." },
-      { "name": "compter", "value": "420ms sortie, translateY 0.35em → 0", "purpose": "Le total et le compteur du bon remontent à chaque changement." },
-      { "name": "etat", "value": "160ms ease-out", "purpose": "Survol des boutons, puces et liens." }
+      {
+        "name": "sortie",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Courbe de sortie exponentielle : arrivées et transitions d'état."
+      },
+      {
+        "name": "etaler",
+        "value": "950ms sortie, translate3d(12%, 6%, 0) rotate(5deg) → 0",
+        "purpose": "La feuille de bananier glisse sur le curcuma ; calque SVG séparé, composé sur le GPU."
+      },
+      {
+        "name": "tomber",
+        "value": "720ms, délai 380ms + 36ms par pièce ; chute accélérée, rebond de 5px",
+        "purpose": "Les ingrédients tombent sur la feuille ; les ombres apparaissent en un seul groupe (ombrer, 1,1s)."
+      },
+      {
+        "name": "suspendre",
+        "value": "1,7s à 1,15s ; pendule amorti 16° → −11° → 6° → −3° → 0",
+        "purpose": "L'étiquette 10 € tombe de son clou et se balance jusqu'au repos."
+      },
+      {
+        "name": "retourner",
+        "value": "170ms ease-in puis 380ms sortie, rotateY 90° autour de l'axe vertical",
+        "purpose": "La pancarte d'état se retourne quand l'état ouvert/fermé change."
+      },
+      {
+        "name": "entourer",
+        "value": "800ms cubic-bezier(0.65, 0, 0.35, 1), stroke-dashoffset 1 → 0",
+        "purpose": "Le jour courant s'entoure au marqueur dans le tableau des horaires."
+      },
+      {
+        "name": "poser",
+        "value": "700ms sortie, décalage 70ms par vignette",
+        "purpose": "Les saveurs se posent sur la table quand la section entre à l'écran ; soulevées de 10px au survol."
+      },
+      {
+        "name": "tamponner",
+        "value": "560ms ; scale 1.9 → 0.95 → 1, rotation −18° → −6°",
+        "purpose": "Le tampon « ឆ្ងាញ់ » frappe le bandeau de la promesse."
+      },
+      {
+        "name": "voler",
+        "value": "640ms ease-in-out, parabole en 11 images",
+        "purpose": "Le jeton « +1 » relie le bouton du plat au bon de commande."
+      },
+      {
+        "name": "curseur",
+        "value": "300ms sortie sur translate, width, height",
+        "purpose": "Le curseur de rubrique glisse sous la rubrique en cours."
+      },
+      {
+        "name": "compter",
+        "value": "420ms sortie, translateY 0.35em → 0",
+        "purpose": "Total, compteur et quantité remontent à chaque changement."
+      },
+      {
+        "name": "page",
+        "value": "sortie 180ms ease-in, entrée 380ms sortie (view transitions)",
+        "purpose": "Passage d'une page à l'autre : l'en-tête reste, le contenu glisse."
+      },
+      {
+        "name": "etat",
+        "value": "160ms ease-out",
+        "purpose": "Survol des boutons, puces et liens ; téléphone qui sonne au survol (520ms)."
+      },
+      {
+        "name": "reduit",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "Plus de déplacement ; fondus (240–360ms) et changements d'état conservés."
+      }
     ],
     "breakpoints": [
-      { "name": "tablette", "value": "45rem" },
-      { "name": "bureau", "value": "64rem" },
-      { "name": "carte-large", "value": "72rem" }
+      {
+        "name": "tablette",
+        "value": "45rem"
+      },
+      {
+        "name": "bureau",
+        "value": "64rem"
+      },
+      {
+        "name": "carte-large",
+        "value": "72rem"
+      }
     ]
   },
   "components": [
@@ -116,24 +461,63 @@
       "Illustrations en cinq encres sur papier riz, contour décalé, trame de points",
       "Rouge piment réservé à l'appel téléphonique",
       "Étiquettes d'étal pour l'état d'ouverture et les prix mis en avant",
-      "Prix en chiffres tabulaires, au format « 10,00 € »"
+      "Prix en chiffres tabulaires, au format « 10,00 € »",
+      "Un seul moment fort animé : l'étal s'installe au chargement ; le reste du mouvement explique un état ou répond à un geste"
     ],
     "rules": [
-      { "name": "The One Chili Rule", "body": "Le rouge piment est l'appel téléphonique et rien d'autre dans l'interface. Les seuls autres rouges sont les piments dessinés.", "section": "colors" },
-      { "name": "The Five Inks Rule", "body": "Les illustrations n'utilisent que cinq encres (sucre, curcuma, piment, feuille, vert tendre #A9C65C) sur papier riz (#FBF5EA) ; toute autre teinte est une trame ou une surimpression de ces encres (voir tools/etal.mjs).", "section": "colors" },
-      { "name": "The Quiet Field Rule", "body": "Les longues listes se lisent sur riz ; la couleur tient les bandes, les titres soulignés au curcuma et les bords, jamais le fond d'une liste de plats.", "section": "colors" },
-      { "name": "The Bilingual Sign Rule", "body": "Moul ne sert qu'à l'enseigne et aux mots khmers. Jamais pour du français courant : sa partie latine n'a pas d'accents.", "section": "typography" },
-      { "name": "The Tabular Price Rule", "body": "Un prix s'écrit « 10,00 € » (Intl fr-FR), en Kantumruy Pro Prix, pour que les virgules s'alignent en colonne.", "section": "typography" },
-      { "name": "The Fine Space Rule", "body": "Espace fine insécable avant « ? ! : ; » et dans « « » » ; gluon U+2060 après le tiret des plages horaires pour que « 18 h – 21 h 45 » ne se coupe pas.", "section": "typography" },
-      { "name": "The Print Depth Rule", "body": "Pas d'ombre décalée dure ni de halo coloré : la profondeur d'une illustration est une silhouette plate décalée, celle d'un objet d'interface est une ombre douce sous ce que l'on peut prendre.", "section": "elevation" },
-      { "name": "The Tag Rule", "body": "Ce qui annonce un état ou une offre est une étiquette d'étal : l'état d'ouverture a un bout en pointe dont la pastille fait le trou perforé ; l'offre à 10 € pend à sa ficelle et se balance au survol.", "section": "shapes" }
+      {
+        "name": "The One Chili Rule",
+        "body": "Le rouge piment est l'appel téléphonique et rien d'autre dans l'interface. Les seuls autres rouges sont les piments dessinés.",
+        "section": "colors"
+      },
+      {
+        "name": "The Five Inks Rule",
+        "body": "Les illustrations n'utilisent que cinq encres (sucre, curcuma, piment, feuille, vert tendre #A9C65C) sur papier riz (#FBF5EA) ; toute autre teinte est une trame ou une surimpression de ces encres (voir tools/etal.mjs).",
+        "section": "colors"
+      },
+      {
+        "name": "The Quiet Field Rule",
+        "body": "Les longues listes se lisent sur riz ; la couleur tient les bandes, les titres soulignés au curcuma et les bords, jamais le fond d'une liste de plats.",
+        "section": "colors"
+      },
+      {
+        "name": "The Bilingual Sign Rule",
+        "body": "Moul ne sert qu'à l'enseigne et aux mots khmers. Jamais pour du français courant : sa partie latine n'a pas d'accents.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Price Rule",
+        "body": "Un prix s'écrit « 10,00 € » (Intl fr-FR), en Kantumruy Pro Prix, pour que les virgules s'alignent en colonne.",
+        "section": "typography"
+      },
+      {
+        "name": "The Fine Space Rule",
+        "body": "Espace fine insécable avant « ? ! : ; » et dans « « » » ; gluon U+2060 après le tiret des plages horaires pour que « 18 h – 21 h 45 » ne se coupe pas.",
+        "section": "typography"
+      },
+      {
+        "name": "The Print Depth Rule",
+        "body": "Pas d'ombre décalée dure ni de halo coloré : la profondeur d'une illustration est une silhouette plate décalée, celle d'un objet d'interface est une ombre douce sous ce que l'on peut prendre.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Stall Setup Rule",
+        "body": "L'étal s'installe une fois, au chargement de l'accueil, et le texte n'attend jamais : nom, état et bouton d'appel sont lisibles dès la première image. Une animation qui n'explique ni un état, ni un geste, ni un lien entre deux endroits n'a pas sa place.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Tag Rule",
+        "body": "Ce qui annonce un état ou une offre est une étiquette d'étal : l'état d'ouverture a un bout en pointe dont la pastille fait le trou perforé ; l'offre à 10 € pend à sa ficelle et se balance au survol.",
+        "section": "shapes"
+      }
     ],
     "dos": [
       "Do poser la couleur en aplats de section (curcuma #F2A51C, feuille #1B5232) et garder les listes sur riz (#FFFBF3).",
       "Do écrire les prix « 10,00 € » en Kantumruy Pro Prix et les aligner à droite.",
       "Do dessiner tout nouvel ingrédient avec les cinq encres de tools/etal.mjs, contour décalé et ombre plate.",
       "Do garder des cibles tactiles de 2,75rem minimum et un focus visible (3px sucre, ou curcuma clair sur fond sombre).",
-      "Do donner un mouvement par moment fort seulement : les ingrédients qui se posent au chargement (900ms, décalage 40ms), l'étiquette qui se balance, le total qui remonte."
+      "Do garder un seul moment fort par page : à l'accueil, la feuille glisse (950ms), les ingrédients tombent avec leurs ombres (720ms chacun, décalés de 36ms) et l'étiquette se balance. Le reste explique un état (pancarte, curseur, jeton) ou répond à un geste, sans boucle.",
+      "Do prévoir le mouvement réduit : plus aucun déplacement, mais les fondus et changements d'état restent lisibles."
     ],
     "donts": [
       "Don't utiliser le rouge piment pour autre chose que l'appel.",

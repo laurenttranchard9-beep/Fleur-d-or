@@ -37,7 +37,7 @@ const og = `<!doctype html><html lang="fr"><meta charset="utf-8"><style>
 @font-face{font-family:Moul;src:url(${fonts('moul-enseigne.woff2')})}
 html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#F2A51C;color:#2A170D;font-family:"Kantumruy Pro"}
 .etal{position:absolute;right:-60px;top:-40px;width:640px;height:720px}
-.etal svg{width:100%;height:100%}
+.etal svg{position:absolute;inset:0;width:100%;height:100%}
 .texte{position:absolute;left:72px;top:96px;width:620px}
 .km{font-family:Moul;font-size:52px;line-height:1.5;color:#1B5232}
 .nom{font-family:Moul;font-size:74px;line-height:1;text-transform:uppercase}

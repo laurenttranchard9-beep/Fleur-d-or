@@ -91,7 +91,7 @@ const ICONES = {
 };
 
 const icone = (nom, classe = '') =>
-  `<svg class="icone${classe ? ` ${classe}` : ''}" aria-hidden="true" focusable="false"><use href="#i-${nom}"/></svg>`;
+  `<svg class="icone icone--${nom}${classe ? ` ${classe}` : ''}" aria-hidden="true" focusable="false"><use href="#i-${nom}"/></svg>`;
 
 // Les dessins d'ingrédients ne sont embarqués que sur l'accueil ; les icônes, partout.
 const sprite = (avecDessins) => {
@@ -258,7 +258,8 @@ ${indexable ? `<link rel="canonical" href="${url}">` : '<meta name="robots" cont
 <link rel="apple-touch-icon" href="${r}apple-touch-icon.png">
 <link rel="manifest" href="${r}site.webmanifest">
 <link rel="preload" href="${r}assets/fonts/kantumruy-pro-latin.woff2" as="font" type="font/woff2" crossorigin>
-${prechargement.map((f) => `<link rel="preload" href="${r}${f}" as="font" type="font/woff2" crossorigin>\n`).join('')}<link rel="stylesheet" href="${r}${asset('assets/css/site.css')}">
+${prechargement.map((f) => `<link rel="preload" href="${r}${f}" as="font" type="font/woff2" crossorigin>\n`).join('')}<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="${r}${asset('assets/css/site.css')}">
 <script src="${r}${asset('assets/js/site.js')}" defer></script>
 ${schema ? jsonld(schema) : ''}
 </head>
@@ -346,10 +347,12 @@ const VIEWBOXES = Object.fromEntries(
   [...svg('sprite.svg').matchAll(/<symbol id="([^"]+)" viewBox="([^"]+)"/g)].map(([, id, vb]) => [id, vb.split(' ').map(Number)]),
 );
 
-const vignette = ({ sym, vb, w, x, y, r }) => {
+const vignette = ({ sym, vb, w, x, y, r }, i) => {
   const [, , vw, vh] = VIEWBOXES[sym];
   const h = (w * vh) / vw;
-  return `<svg class="saveur__dessin" viewBox="${vb}" aria-hidden="true" focusable="false"><g filter="url(#silhouette)" transform="translate(6 8)"><use href="#${sym}" x="${-w / 2}" y="${(-h / 2).toFixed(1)}" width="${w}" height="${h.toFixed(1)}" transform="translate(${x} ${y}) rotate(${r})"/></g><use href="#${sym}" x="${-w / 2}" y="${(-h / 2).toFixed(1)}" width="${w}" height="${h.toFixed(1)}" transform="translate(${x} ${y}) rotate(${r})"/></svg>`;
+  const use = (classe) =>
+    `<use${classe ? ` class="${classe}"` : ''} href="#${sym}" x="${-w / 2}" y="${(-h / 2).toFixed(1)}" width="${w}" height="${h.toFixed(1)}" transform="translate(${x} ${y}) rotate(${r})"/>`;
+  return `<svg class="saveur__dessin" style="--i:${i}" viewBox="${vb}" aria-hidden="true" focusable="false"><g class="saveur__ombre" filter="url(#silhouette)" transform="translate(6 8)">${use('')}</g>${use('saveur__piece')}</svg>`;
 };
 
 const accueil = () =>
@@ -386,10 +389,12 @@ const accueil = () =>
       <div class="heros__etal">
         <div class="etal etal--large">${svg('etal.svg')}</div>
         <div class="etal etal--bande">${svg('etal-bande.svg')}</div>
-        <a class="etiquette etiquette--pendue" href="${r}carte/#menu-bon-et-pas-cher">
-          <span class="etiquette__titre">Menu bon et pas cher</span>
-          <span class="etiquette__prix">${euroRond(bonEtPasCher.items[0].price)}</span>
-        </a>
+        <div class="accroche">
+          <a class="etiquette etiquette--pendue" href="${r}carte/#menu-bon-et-pas-cher">
+            <span class="etiquette__titre">Menu bon et pas cher</span>
+            <span class="etiquette__prix">${euroRond(bonEtPasCher.items[0].price)}</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -453,8 +458,8 @@ ${classiques
       </div>
       <ul class="saveurs__liste">
 ${SAVEURS.map(
-  (s) => `        <li class="saveur">
-          ${vignette(s)}
+  (s, i) => `        <li class="saveur">
+          ${vignette(s, i)}
           <span class="saveur__fr">${s.fr}</span>
           <span class="saveur__km" lang="km">${s.km}</span>
         </li>`,

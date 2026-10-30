@@ -35,6 +35,12 @@ RAISES:
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 
+## Motion (ajoutée le 30/10/2026, demande « ajoute des animations »)
+- Moment fort : « On installe l'étal ». Au chargement, la feuille de bananier glisse sur le curcuma, les ingrédients tombent un à un et leurs ombres se posent avec eux, puis l'étiquette 10 € tombe de son clou et se balance jusqu'au repos. Environ 1,6 s, une seule fois, en CSS seul. Le texte et les boutons d'appel restent visibles d'emblée.
+- Continuité : transition entre les pages (l'en-tête reste en place, le contenu glisse) ; sur la carte, un curseur glisse d'une rubrique à l'autre, le titre visé par l'index se surligne au marqueur, et un jeton « +1 » vole du bouton jusqu'au bon de commande.
+- Retour d'action : l'étiquette d'état se retourne comme une pancarte « ouvert / fermé » ; le jour courant est entouré au marqueur ; le tampon « ឆ្ងាញ់ » frappe le bandeau ; les ingrédients des saveurs se posent sur la table et se soulèvent au survol ; le téléphone sonne au survol des boutons d'appel ; les lignes du bon entrent et sortent.
+- Budget : rien ne tourne en boucle ; transform, opacity et stroke-dashoffset ; la feuille est un calque à part pour rester composée sur le GPU ; les ombres s'animent en un seul groupe. Mouvement réduit : plus aucun déplacement, mais fondus et changements d'état conservés.
+
 ## Unresolved
 - Identité légale (raison sociale, SIRET, directeur de publication) pour les mentions légales.
 - Service sur place confirmé ? Moyens de paiement ? Fermetures annuelles ?

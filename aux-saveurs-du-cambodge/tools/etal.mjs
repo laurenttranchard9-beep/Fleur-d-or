@@ -362,9 +362,12 @@ const compose = ({ id, viewBox, title, leafSpec, items }) => {
   const l = leaf(leafSpec);
   const shadows = items.map(([sym, x, y, w, r]) => place(sym, x, y, w, r)).join('');
   const pieces = items.map(([sym, x, y, w, r], i) => place(sym, x, y, w, r, ` class="piece" style="--i:${i}"`)).join('\n  ');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" role="img" aria-labelledby="${id}-titre" preserveAspectRatio="xMidYMid slice">
-  <title id="${id}-titre">${title}</title>${drawLeaf(id, l)}
-  <g filter="url(#silhouette)" transform="translate(9 12)">${shadows}</g>
+  // Deux calques superposés : la feuille glisse d'un bloc (composée sur le GPU), les ingrédients tombent dessus.
+  return `<svg class="etal__feuille" xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">${drawLeaf(id, l)}
+</svg>
+<svg class="etal__pieces" xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" role="img" aria-labelledby="${id}-titre" preserveAspectRatio="xMidYMid slice">
+  <title id="${id}-titre">${title}</title>
+  <g class="ombres" filter="url(#silhouette)" transform="translate(9 12)">${shadows}</g>
   ${pieces}
 </svg>
 `;

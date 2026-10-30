@@ -29,7 +29,7 @@ KHMER = "U+1780-17FF,U+19E0-19FF,U+200B-200D,U+25CC"
 # Every Khmer string the site displays in the Moul sign face.
 MOUL_TEXT = "រសជាតិកម្ពុជា" + "អរគុណ" + "ឆ្ងាញ់" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" + " -’"
 
-PRICE_TEXT = "0123456789,.€+−-   "
+PRICE_TEXT = "0123456789,.€+−-\u00a0\u202f "
 
 
 def fetch(path):

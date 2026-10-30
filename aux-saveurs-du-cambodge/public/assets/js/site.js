@@ -1,4 +1,4 @@
-/* Aux Saveurs du Cambodge — état d'ouverture en direct, barre d'actions, recherche et bon de commande. */
+/* Aux Saveurs du Cambodge — état d'ouverture en direct, barre d'actions, recherche, bon de commande et mouvement. */
 (() => {
   'use strict';
 
@@ -6,7 +6,32 @@
   if (!source) return;
   const donnees = JSON.parse(source.textContent);
 
-  const NBSP = ' ';
+  const NBSP = '\u00a0';
+  const reduit = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const anime = Boolean(document.body.animate);
+  const sousLaLigne = (el) => el.getBoundingClientRect().top > window.innerHeight;
+
+  // Exécute une seule fois quand l'élément entre dans l'écran.
+  const quandVisible = (el, faire, seuil = 0.3) => {
+    if (!('IntersectionObserver' in window)) return faire();
+    const io = new IntersectionObserver(
+      (entrees) => {
+        if (!entrees.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        faire();
+      },
+      { threshold: seuil },
+    );
+    io.observe(el);
+  };
+
+  // Relance une animation CSS de retour d'action (classe vient-de-changer).
+  const secouer = (elements) =>
+    elements.forEach((el) => {
+      el.classList.remove('vient-de-changer');
+      void el.offsetWidth;
+      el.classList.add('vient-de-changer');
+    });
   const JOURS = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
   const enMinutes = (hhmm) => {
     const [h, m] = hhmm.split(':').map(Number);
@@ -110,29 +135,115 @@
     return `Envie de déjeuner ${JOURS[demain]} midi\u202f? Commandez aujourd’hui, avant ${heure(dernier[1])}.`;
   };
 
+  // L'étiquette d'état se retourne comme la pancarte « ouvert / fermé » d'une boutique.
+  const PANCARTE = 'perspective(32rem) rotateY';
+  const retourner = (el, maj) => {
+    if (!anime) return maj();
+    if (reduit.matches) {
+      maj();
+      el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 240, easing: 'ease-out' });
+      return;
+    }
+    const montrer = () =>
+      el.animate([{ transform: `${PANCARTE}(-90deg)` }, { transform: `${PANCARTE}(0deg)` }], {
+        duration: 380,
+        easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+      });
+    if (el.hidden) {
+      maj();
+      montrer();
+      return;
+    }
+    const demi = el.animate([{ transform: `${PANCARTE}(0deg)` }, { transform: `${PANCARTE}(90deg)` }], {
+      duration: 170,
+      easing: 'cubic-bezier(0.5, 0, 0.9, 0.5)',
+      fill: 'forwards',
+    });
+    demi.onfinish = () => {
+      maj();
+      montrer();
+      demi.cancel();
+    };
+  };
+
+  // Le jour courant est entouré à la main, d'un trait de marqueur qui se referme en dépassant.
+  const CERCLE =
+    '<svg class="cercle-main" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true" focusable="false">' +
+    '<path pathLength="1" d="M15 8C35 1 79 1 93 11C104 19 96 34 69 37C43 40 11 38 5 27C0 17 13 7 33 5"/></svg>';
+  const entourer = (tr) => {
+    const jour = tr.querySelector('.semaine__jour');
+    if (!jour || jour.querySelector('.cercle-main')) return;
+    jour.insertAdjacentHTML('beforeend', CERCLE);
+    const cercle = jour.lastElementChild;
+    if (reduit.matches) return;
+    cercle.classList.add('est-pret');
+    quandVisible(tr.closest('table'), () => requestAnimationFrame(() => cercle.classList.remove('est-pret')), 0.6);
+  };
+
   const afficherHoraires = () => {
     const t = maintenant();
     const e = calculer(t);
     document.querySelectorAll('[data-etat]').forEach((el) => {
-      el.dataset.code = e.code;
-      el.querySelector('.etat__texte').textContent = el.dataset.etat === 'compact' ? e.court : e.texte;
-      el.hidden = false;
+      const texte = el.dataset.etat === 'compact' ? e.court : e.texte;
+      const zone = el.querySelector('.etat__texte');
+      if (!el.hidden && el.dataset.code === e.code && zone.textContent === texte) return;
+      retourner(el, () => {
+        el.dataset.code = e.code;
+        zone.textContent = texte;
+        el.hidden = false;
+      });
     });
     const astuce = conseil(t);
     document.querySelectorAll('[data-conseil]').forEach((el) => {
+      const apparait = el.hidden && astuce;
       el.textContent = astuce;
       el.hidden = !astuce;
+      if (apparait && anime) {
+        el.animate([{ opacity: 0, transform: reduit.matches ? 'none' : 'translateY(0.4rem)' }, { opacity: 1, transform: 'none' }], {
+          duration: 420,
+          delay: 200,
+          easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+          fill: 'backwards',
+        });
+      }
     });
     document.querySelectorAll('.semaine tr[data-jour]').forEach((tr) => {
       const estAujourdhui = Number(tr.dataset.jour) === t.jour;
       tr.classList.toggle('est-aujourdhui', estAujourdhui);
-      if (estAujourdhui) tr.setAttribute('aria-current', 'date');
-      else tr.removeAttribute('aria-current');
+      if (estAujourdhui) {
+        tr.setAttribute('aria-current', 'date');
+        entourer(tr);
+      } else {
+        tr.removeAttribute('aria-current');
+        tr.querySelector('.cercle-main')?.remove();
+      }
     });
   };
 
   afficherHoraires();
   setInterval(afficherHoraires, 60 * 1000);
+
+  /* ---------- Accueil : les saveurs se posent, le tampon frappe ---------- */
+
+  const armer = (el, pret, faire, seuil) => {
+    if (!el || reduit.matches || !('IntersectionObserver' in window) || !sousLaLigne(el)) return;
+    el.classList.add(pret);
+    quandVisible(el, faire, seuil);
+  };
+
+  const saveurs = document.querySelector('.saveurs__liste');
+  armer(saveurs, 'est-pret', () => saveurs.classList.remove('est-pret'), 0.25);
+
+  const promesse = document.querySelector('.promesse');
+  armer(
+    promesse,
+    'est-pret',
+    () => {
+      promesse.classList.remove('est-pret');
+      promesse.classList.add('est-tamponne');
+    },
+    0.7,
+  );
 
   /* ---------- Barre d'actions mobile (accueil) ---------- */
 
@@ -166,7 +277,7 @@
       .replace(/œ/g, 'oe')
       .replace(/æ/g, 'ae')
       .normalize('NFD')
-      .replace(/[̀-ͯ]/g, '')
+      .replace(/[\u0300-\u036f]/g, '')
       .replace(/[’']/g, ' ')
       .replace(/\s+/g, ' ')
       .trim();
@@ -200,6 +311,30 @@
     champ.focus();
   });
 
+  // Un curseur glisse sous la rubrique en cours, dans la bande (mobile) comme dans l'index (bureau).
+  const bandeau = document.querySelector('.rubriques');
+  const curseur = document.createElement('li');
+  curseur.className = 'rubriques__curseur sans-transition';
+  curseur.setAttribute('aria-hidden', 'true');
+  bandeau.querySelector('ul').prepend(curseur);
+  bandeau.classList.add('a-curseur');
+
+  const placerCurseur = (a, sansTransition = false) => {
+    if (!a) {
+      curseur.style.opacity = '0';
+      return;
+    }
+    if (sansTransition) curseur.classList.add('sans-transition');
+    const li = a.parentElement;
+    curseur.style.translate = `${li.offsetLeft + a.offsetLeft}px ${li.offsetTop + a.offsetTop}px`;
+    curseur.style.width = `${a.offsetWidth}px`;
+    curseur.style.height = `${a.offsetHeight}px`;
+    curseur.style.opacity = '1';
+    if (curseur.classList.contains('sans-transition')) {
+      requestAnimationFrame(() => requestAnimationFrame(() => curseur.classList.remove('sans-transition')));
+    }
+  };
+
   // Rubrique en cours : la dernière dont le titre a passé le tiers haut de l'écran.
   let courante = null;
   let attente = false;
@@ -208,17 +343,25 @@
     const seuil = window.innerHeight * 0.3;
     const visibles = rubriques.filter((r) => !r.hidden);
     const active = visibles.filter((r) => r.getBoundingClientRect().top <= seuil).at(-1) || visibles[0];
-    if (!active || active === courante) return;
+    if (!active) {
+      courante = null;
+      placerCurseur(null);
+      return;
+    }
+    if (active === courante) return;
     courante = active;
+    placerCurseur(liens.get(active.id));
     liens.forEach((a, id) => {
       if (id !== active.id) {
         a.removeAttribute('aria-current');
         return;
       }
       a.setAttribute('aria-current', 'true');
+      // Les puces sont positionnées : la position dans la bande se lit sur le <li>.
       const bande = a.closest('ul');
       if (bande && bande.scrollWidth > bande.clientWidth) {
-        bande.scrollTo({ left: a.offsetLeft - bande.clientWidth / 2 + a.clientWidth / 2, behavior: 'smooth' });
+        const gauche = a.parentElement.offsetLeft + a.offsetLeft;
+        bande.scrollTo({ left: gauche - bande.clientWidth / 2 + a.clientWidth / 2, behavior: reduit.matches ? 'auto' : 'smooth' });
       }
     });
   };
@@ -228,7 +371,10 @@
     requestAnimationFrame(marquer);
   };
   window.addEventListener('scroll', planifier, { passive: true });
-  window.addEventListener('resize', planifier);
+  window.addEventListener('resize', () => {
+    if (courante) placerCurseur(liens.get(courante.id), true);
+    planifier();
+  });
   champ.addEventListener('input', planifier);
   marquer();
 
@@ -279,16 +425,19 @@
   const icone = (nom) => `<svg class="icone" aria-hidden="true" focusable="false"><use href="#i-${nom}"/></svg>`;
   const echapper = (s) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 
-  const rendre = (changement) => {
+  const somme = () => Object.keys(bon).reduce((s, id) => s + catalogue.get(id).prix * bon[id], 0);
+
+  // Met le bon à jour et renvoie les éléments dont le changement mérite un petit signe.
+  const rendre = (changement, modifie = null, avant = 0) => {
     const ids = Object.keys(bon);
-    const somme = ids.reduce((s, id) => s + catalogue.get(id).prix * bon[id], 0);
     const nombre = ids.reduce((s, id) => s + bon[id], 0);
+    const aSecouer = [];
 
     lignes.innerHTML = ids
       .map((id) => {
         const { prix: p } = catalogue.get(id);
         const nom = echapper(catalogue.get(id).nom);
-        return `<li class="bon__ligne">
+        return `<li class="bon__ligne" data-ligne="${id}">
           <span class="bon__nom">${nom}</span>
           <span class="bon__montant">${prix(p * bon[id])}</span>
           <span class="bon__quantite">
@@ -302,26 +451,24 @@
 
     bonVide.hidden = nombre > 0;
     lignes.hidden = nombre === 0;
-    const texteTotal = prix(somme);
+    const texteTotal = prix(somme());
     if (total.textContent !== texteTotal) {
       total.textContent = texteTotal;
-      if (changement) {
-        total.classList.remove('vient-de-changer');
-        void total.offsetWidth;
-        total.classList.add('vient-de-changer');
-      }
+      if (changement) aSecouer.push(total);
     }
     compteurs.forEach((c) => {
-      const avant = c.textContent;
+      const ancien = c.textContent;
       c.textContent = nombre;
       c.hidden = nombre === 0;
-      if (changement && avant !== String(nombre)) {
-        c.classList.remove('vient-de-changer');
-        void c.offsetWidth;
-        c.classList.add('vient-de-changer');
-      }
+      if (changement && ancien !== String(nombre)) aSecouer.push(c);
     });
     vider.hidden = nombre === 0;
+
+    if (modifie && bon[modifie]) {
+      const ligne = lignes.querySelector(`[data-ligne="${modifie}"]`);
+      if (!avant) ligne?.classList.add('vient-d-arriver');
+      else if (ligne) aSecouer.push(ligne.querySelector('.bon__qte'));
+    }
 
     document.querySelectorAll('[data-ajouter]').forEach((b) => {
       const q = bon[b.dataset.ajouter] || 0;
@@ -329,17 +476,71 @@
       b.closest('.plat')?.classList.toggle('est-dans-bon', q > 0);
       if (q > 0) b.dataset.quantite = q;
       else delete b.dataset.quantite;
+      if (changement && q > 0 && b.dataset.ajouter === modifie) aSecouer.push(b);
     });
+    return aSecouer;
   };
 
-  const modifier = (id, delta) => {
-    const q = Math.max(0, (bon[id] || 0) + delta);
+  // Le jeton « +1 » vole du bouton jusqu'au bon (ou jusqu'au bouton « Mon bon » sur mobile), en parabole.
+  const voler = (depuis, apres) => {
+    const cible = bureau.matches || feuille.classList.contains('est-ouvert') ? total : ouvrir;
+    if (reduit.matches || !anime || !depuis || !cible) return apres();
+    const a = depuis.getBoundingClientRect();
+    const b = cible.getBoundingClientRect();
+    if (!a.width || !b.width) return apres();
+    const x0 = a.left + a.width / 2;
+    const y0 = a.top + a.height / 2;
+    const dx = b.left + b.width / 2 - x0;
+    const dy = b.top + b.height / 2 - y0;
+    const haut = Math.min(dy, 0) - 110;
+    const jeton = document.createElement('span');
+    jeton.className = 'jeton';
+    jeton.textContent = '+1';
+    jeton.setAttribute('aria-hidden', 'true');
+    jeton.style.left = `${x0}px`;
+    jeton.style.top = `${y0}px`;
+    document.body.append(jeton);
+    const images = Array.from({ length: 11 }, (_, k) => {
+      const t = k / 10;
+      const x = 2 * (1 - t) * t * (dx / 2) + t * t * dx;
+      const y = 2 * (1 - t) * t * haut + t * t * dy;
+      return { transform: `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${(1 - 0.5 * t).toFixed(2)})`, opacity: Math.min(1, t * 6) };
+    });
+    jeton.animate(images, { duration: 640, easing: 'cubic-bezier(0.45, 0, 0.55, 1)' }).onfinish = () => {
+      jeton.remove();
+      apres();
+    };
+  };
+
+  const annoncer = (id, q) => {
+    const { nom } = catalogue.get(id);
+    annonce.textContent = q ? `${nom} : ${q} au bon. Total ${prix(somme())}.` : `${nom} retiré du bon.`;
+  };
+
+  const modifier = (id, delta, origine = null) => {
+    const avant = bon[id] || 0;
+    const q = Math.max(0, avant + delta);
     if (q) bon[id] = q;
     else delete bon[id];
     ecrire();
-    rendre(true);
-    const { nom } = catalogue.get(id);
-    annonce.textContent = q ? `${nom} : ${q} au bon. Total ${total.textContent}.` : `${nom} retiré du bon.`;
+    annoncer(id, q);
+
+    // Une ligne retirée glisse hors du bon avant de disparaître.
+    const sortante = !q && lignes.querySelector(`[data-ligne="${id}"]`);
+    if (sortante && anime && !reduit.matches) {
+      const sortie = sortante.animate([{ opacity: 1 }, { opacity: 0, transform: 'translateX(1.5rem)' }], {
+        duration: 170,
+        easing: 'ease-in',
+        fill: 'forwards',
+      });
+      sortie.onfinish = () => secouer(rendre(true, id, avant));
+      return;
+    }
+
+    const aSecouer = rendre(true, id, avant);
+    if (!origine) return secouer(aSecouer);
+    secouer(aSecouer.filter((el) => el === origine));
+    voler(origine, () => secouer(aSecouer.filter((el) => el !== origine)));
   };
 
   const basculer = (ouvert) => {
@@ -357,14 +558,21 @@
   document.addEventListener('click', (e) => {
     const cible = e.target.closest('[data-ajouter], [data-plus], [data-moins], [data-bon-vider], [data-ouvrir-bon], [data-fermer-bon]');
     if (!cible) return;
-    if (cible.dataset.ajouter) modifier(cible.dataset.ajouter, 1);
+    if (cible.dataset.ajouter) modifier(cible.dataset.ajouter, 1, cible);
     else if (cible.dataset.plus) modifier(cible.dataset.plus, 1);
     else if (cible.dataset.moins) modifier(cible.dataset.moins, -1);
     else if (cible.hasAttribute('data-bon-vider')) {
-      bon = {};
-      ecrire();
-      rendre(true);
-      annonce.textContent = 'Bon de commande vidé.';
+      const vidage = () => {
+        bon = {};
+        ecrire();
+        secouer(rendre(true));
+        annonce.textContent = 'Bon de commande vidé.';
+      };
+      if (!anime || reduit.matches || !lignes.children.length) return vidage();
+      lignes.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 180, easing: 'ease-in', fill: 'forwards' }).onfinish = (e) => {
+        vidage();
+        e.target.cancel();
+      };
     } else if (cible.hasAttribute('data-ouvrir-bon')) basculer(!feuille.classList.contains('est-ouvert'));
     else if (cible.hasAttribute('data-fermer-bon')) basculer(false);
   });

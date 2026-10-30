@@ -372,13 +372,6 @@ a[href^="tel:"] {
   border-bottom: 2px solid currentColor;
 }
 
-.lien-fort .icone {
-  transition: transform 200ms var(--sortie);
-}
-
-.lien-fort:hover .icone {
-  transform: translateX(0.25rem);
-}
 
 /* ---------- État d'ouverture ---------- */
 
@@ -415,6 +408,14 @@ a[href^="tel:"] {
   border-radius: 0 0 0 0.3rem;
   translate: -50% -50%;
   rotate: 45deg;
+}
+
+/* Avec JavaScript, le résumé statique des horaires ne s'affiche pas : la pancarte attend l'état en direct
+   sur une seule ligne, ce qui évite que les boutons sautent au chargement. */
+.js .etat:not([data-code]) .etat__texte {
+  max-height: 1.35em;
+  overflow: hidden;
+  visibility: hidden;
 }
 
 .etat__pastille {
@@ -613,7 +614,13 @@ a[href^="tel:"] {
   margin-inline: calc(-1 * var(--marge));
 }
 
+.etal {
+  position: relative;
+}
+
 .etal svg {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
 }
@@ -626,9 +633,18 @@ a[href^="tel:"] {
   aspect-ratio: 800 / 440;
 }
 
-.etiquette {
+/* L'étiquette pend à son clou : .accroche la place et la fait arriver, .etiquette garde son angle de repos. */
+.accroche {
+  --repos: 4deg;
   position: absolute;
   z-index: 2;
+  top: 1rem;
+  right: calc(var(--marge) + 0.5rem);
+  transform-origin: 1.2rem 50%;
+}
+
+.etiquette {
+  position: relative;
   display: grid;
   gap: 0.1rem;
   padding: 0.7rem 1.1rem 0.75rem 2.4rem;
@@ -668,9 +684,7 @@ a[href^="tel:"] {
 }
 
 .etiquette--pendue {
-  top: 1rem;
-  right: calc(var(--marge) + 0.5rem);
-  transform: rotate(4deg);
+  rotate: var(--repos);
   transform-origin: 1.2rem 50%;
 }
 
@@ -685,35 +699,6 @@ a[href^="tel:"] {
   border-radius: 1px;
   transform-origin: 50% 100%;
   transform: rotate(-28deg);
-}
-
-.etiquette--pendue:hover {
-  animation: balancer 1.4s var(--sortie);
-}
-
-@keyframes balancer {
-  20% {
-    transform: rotate(-3deg);
-  }
-  45% {
-    transform: rotate(7deg);
-  }
-  70% {
-    transform: rotate(2.5deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .etal .piece {
-    animation: poser 900ms var(--sortie) both;
-    animation-delay: calc(120ms + var(--i) * 40ms);
-  }
-}
-
-@keyframes poser {
-  from {
-    translate: 0 -26px;
-  }
 }
 
 /* ---------- Menu bon et pas cher ---------- */
@@ -1025,6 +1010,7 @@ a[href^="tel:"] {
 }
 
 .semaine__jour {
+  position: relative;
   display: inline-block;
   padding: 0.1rem 0.55rem;
   margin-left: -0.55rem;
@@ -1033,8 +1019,28 @@ a[href^="tel:"] {
 }
 
 .semaine .est-aujourdhui .semaine__jour {
-  border-color: var(--sucre);
   background: var(--curcuma);
+}
+
+.cercle-main {
+  position: absolute;
+  top: -0.4rem;
+  left: -0.5rem;
+  width: calc(100% + 1rem);
+  height: calc(100% + 0.8rem);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.cercle-main path {
+  fill: none;
+  stroke: var(--sucre);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
 }
 
 .semaine .est-aujourdhui th,
@@ -1233,10 +1239,6 @@ a[href^="tel:"] {
   grid-column: 1 / -1;
 }
 
-.barre-action__compte.vient-de-changer {
-  animation: compter 420ms var(--sortie);
-}
-
 .barre-action__compte {
   min-width: 1.5rem;
   padding: 0 0.35rem;
@@ -1342,6 +1344,7 @@ a[href^="tel:"] {
 }
 
 .rubriques ul {
+  position: relative;
   display: flex;
   gap: 0.5rem;
   margin: 0;
@@ -1385,6 +1388,29 @@ a[href^="tel:"] {
   opacity: 0.4;
 }
 
+.rubriques li {
+  position: relative;
+  z-index: 1;
+}
+
+.rubriques .rubriques__curseur {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-radius: 999px;
+  background: var(--sucre);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rubriques.a-curseur a[aria-current="true"],
+.rubriques.a-curseur a[aria-current="true"]:hover {
+  background: transparent;
+}
+
 .carte__liste {
   padding-top: 2rem;
   min-width: 0;
@@ -1409,7 +1435,8 @@ a[href^="tel:"] {
   display: inline;
   font-size: clamp(1.75rem, 1.35rem + 1.4vw, 2.5rem);
   letter-spacing: -0.02em;
-  background: linear-gradient(transparent 58%, var(--curcuma) 58%, var(--curcuma) 92%, transparent 92%);
+  background: linear-gradient(transparent 58%, var(--curcuma) 58%, var(--curcuma) 92%, transparent 92%) 0 0 / 100% 100%
+    no-repeat;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
   padding-inline: 0.1em;
@@ -1591,6 +1618,11 @@ a[href^="tel:"] {
   font-size: 1.35rem;
 }
 
+/* Le titre reçoit le focus à l'ouverture pour les lecteurs d'écran ; il n'est pas interactif. */
+.bon__tete h2:focus {
+  outline: none;
+}
+
 .bon__fermer {
   display: grid;
   place-items: center;
@@ -1686,15 +1718,22 @@ a[href^="tel:"] {
   display: inline-block;
 }
 
-.bon__total output.vient-de-changer {
-  animation: compter 420ms var(--sortie);
-}
-
-@keyframes compter {
-  from {
-    transform: translateY(0.35em);
-    opacity: 0.35;
-  }
+.jeton {
+  position: fixed;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding-inline: 0.4rem;
+  border: 2px solid var(--sucre);
+  border-radius: 999px;
+  background: var(--curcuma);
+  color: var(--sucre);
+  font: 600 0.95rem/1 var(--prix);
+  box-shadow: var(--ombre);
+  pointer-events: none;
+  translate: -50% -50%;
 }
 
 .bon__note {
@@ -1762,11 +1801,12 @@ a[href^="tel:"] {
 /* ---------- Tablette ---------- */
 
 @media (min-width: 45rem) {
-  .barre-action {
+  /* Sur tablette, la carte garde sa barre : c'est elle qui ouvre le bon de commande jusqu'à 72rem. */
+  .barre-action:not(.barre-action--carte) {
     display: none;
   }
 
-  .pied {
+  body:not(.page-carte) .pied {
     padding-bottom: 2rem;
   }
 
@@ -1828,7 +1868,7 @@ a[href^="tel:"] {
     width: 100%;
   }
 
-  .etiquette--pendue {
+  .accroche {
     top: auto;
     bottom: 1rem;
     right: var(--marge);
@@ -1886,23 +1926,11 @@ a[href^="tel:"] {
     display: none;
   }
 
-  .etiquette--pendue {
+  .accroche {
+    --repos: -5deg;
     top: 14%;
     left: -1.5rem;
     right: auto;
-    transform: rotate(-5deg);
-  }
-
-  @keyframes balancer {
-    20% {
-      transform: rotate(-9deg);
-    }
-    45% {
-      transform: rotate(-1deg);
-    }
-    70% {
-      transform: rotate(-6.5deg);
-    }
   }
 
   .etiquette__prix {
@@ -1996,6 +2024,17 @@ a[href^="tel:"] {
     border-color: var(--sucre);
   }
 
+  .rubriques.a-curseur a[aria-current="true"] {
+    color: var(--sucre);
+    border-color: transparent;
+  }
+
+  .rubriques .rubriques__curseur {
+    border-radius: 0.35rem;
+    background: var(--curcuma);
+    box-shadow: inset 0 0 0 1.5px var(--sucre);
+  }
+
   .bon {
     position: sticky;
     top: 1.5rem;
@@ -2021,17 +2060,363 @@ a[href^="tel:"] {
   .barre-action--carte {
     display: none;
   }
+
+  .page-carte .pied {
+    padding-bottom: 2rem;
+  }
 }
 
-/* ---------- Mouvement réduit ---------- */
+/* ---------- Mouvement ----------
+   Un seul moment fort : on installe l'étal. Tout le reste explique un état ou répond à un geste.
+   Sans préférence de mouvement réduit seulement ; sinon, fondus et changements d'état, sans déplacement. */
+
+@view-transition {
+  navigation: auto;
+}
+
+.entete {
+  view-transition-name: entete;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* On installe l'étal : la feuille glisse, les ingrédients tombent avec leurs ombres, l'étiquette se balance. */
+  .etal__feuille {
+    transform-origin: 100% 100%;
+    animation: etaler 950ms var(--sortie) both;
+  }
+
+  .etal .ombres {
+    animation: ombrer 1100ms ease-out 550ms both;
+  }
+
+  .etal .piece {
+    animation: tomber 720ms both;
+    animation-delay: calc(380ms + var(--i) * 36ms);
+  }
+
+  .accroche {
+    animation: suspendre 1700ms both;
+    animation-delay: 1150ms;
+  }
+
+  .etiquette--pendue:hover {
+    animation: balancer 1400ms var(--sortie);
+  }
+
+  /* Gestes */
+  .bouton--appel:hover .icone--telephone,
+  .barre-action__appel:active .icone--telephone {
+    animation: sonner 520ms ease-in-out;
+  }
+
+  .icone--fleche {
+    transition: translate 200ms var(--sortie);
+  }
+
+  .bouton:hover .icone--fleche,
+  .lien-fort:hover .icone--fleche {
+    translate: 0.25rem 0;
+  }
+
+  .classique__prix {
+    transform-origin: 80% 0;
+    transition: rotate 240ms var(--sortie);
+  }
+
+  .classique__lien:hover .classique__prix {
+    rotate: -5deg;
+  }
+
+  /* Les saveurs se posent sur la table, et se soulèvent quand on les regarde de près. */
+  .saveur__dessin {
+    transition:
+      opacity 400ms ease-out,
+      translate 700ms var(--sortie);
+    transition-delay: calc(var(--i) * 70ms);
+  }
+
+  .saveurs__liste.est-pret .saveur__dessin {
+    opacity: 0;
+    translate: 0 -1.75rem;
+  }
+
+  .saveur__piece,
+  .saveur__ombre {
+    transition:
+      translate 260ms var(--sortie),
+      opacity 260ms ease-out;
+  }
+
+  .saveur:hover .saveur__piece {
+    translate: 0 -10px;
+  }
+
+  .saveur:hover .saveur__ombre {
+    opacity: 0.5;
+  }
+
+  /* Le tampon frappe la promesse. */
+  .promesse.est-pret .promesse__tampon {
+    opacity: 0;
+  }
+
+  .promesse.est-tamponne .promesse__tampon {
+    animation: tamponner 560ms both;
+  }
+
+  /* Le jour courant s'entoure au marqueur. */
+  .cercle-main path {
+    transition: stroke-dashoffset 800ms cubic-bezier(0.65, 0, 0.35, 1) 200ms;
+  }
+
+  .cercle-main.est-pret path {
+    stroke-dashoffset: 1;
+  }
+
+  /* La carte */
+  .rubriques .rubriques__curseur {
+    transition:
+      translate 300ms var(--sortie),
+      width 300ms var(--sortie),
+      height 300ms var(--sortie),
+      opacity 200ms ease-out;
+  }
+
+  .rubriques .rubriques__curseur.sans-transition {
+    transition: none;
+  }
+
+  .rubriques.a-curseur a[aria-current="true"] {
+    transition: color 120ms ease-out 160ms;
+  }
+
+  .rubrique:target .rubrique__titre {
+    animation: surligner 800ms var(--sortie) 350ms both;
+  }
+
+  .bon__ligne.vient-d-arriver {
+    animation: entrer 320ms var(--sortie) both;
+  }
+
+  .bon__total output.vient-de-changer,
+  .barre-action__compte.vient-de-changer,
+  .bon__qte.vient-de-changer {
+    animation: compter 420ms var(--sortie);
+  }
+
+  .plat__ajout.vient-de-changer::after {
+    animation: pastille 420ms var(--sortie);
+  }
+
+  ::view-transition-old(root) {
+    animation: page-sortie 180ms ease-in both;
+  }
+
+  ::view-transition-new(root) {
+    animation: page-entree 380ms var(--sortie) both;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 1ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 1ms !important;
+  html {
+    scroll-behavior: auto;
+  }
+
+  .bon__total output.vient-de-changer,
+  .barre-action__compte.vient-de-changer,
+  .bon__qte.vient-de-changer,
+  .plat__ajout.vient-de-changer::after {
+    animation: eclairer 360ms ease-out;
+  }
+
+  .bon__ligne.vient-d-arriver {
+    animation: apparaitre 240ms ease-out both;
+  }
+
+  .barre-action,
+  .bon {
+    transition-property: opacity, visibility;
+  }
+
+  .barre-action:not(.est-visible) {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (max-width: 71.99rem) {
+  .bon:not(.est-ouvert) {
+    opacity: 0;
+  }
+}
+
+@keyframes etaler {
+  from {
+    opacity: 0;
+    transform: translate3d(12%, 6%, 0) rotate(5deg);
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+@keyframes ombrer {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Chute : accélération jusqu'à la feuille, petit rebond, immobilité. */
+@keyframes tomber {
+  0% {
+    opacity: 0;
+    translate: 0 -64px;
+    animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.45);
+  }
+  18% {
+    opacity: 1;
+  }
+  72% {
+    translate: 0 0;
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  84% {
+    translate: 0 -5px;
+    animation-timing-function: cubic-bezier(0.5, 0, 0.7, 0.4);
+  }
+  100% {
+    translate: 0 0;
+  }
+}
+
+/* Pendule amorti autour du trou de l'étiquette. */
+@keyframes suspendre {
+  0% {
+    opacity: 0;
+    translate: 0 -2.5rem;
+    rotate: -26deg;
+    animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.5);
+  }
+  22% {
+    opacity: 1;
+    translate: 0 0;
+    rotate: 16deg;
+    animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+  }
+  44% {
+    rotate: -11deg;
+    animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+  }
+  64% {
+    rotate: 6deg;
+    animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+  }
+  82% {
+    rotate: -3deg;
+    animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
+
+@keyframes balancer {
+  20% {
+    transform: rotate(-7deg);
+  }
+  45% {
+    transform: rotate(4deg);
+  }
+  70% {
+    transform: rotate(-2deg);
+  }
+}
+
+@keyframes sonner {
+  20% {
+    rotate: -16deg;
+  }
+  40% {
+    rotate: 13deg;
+  }
+  60% {
+    rotate: -8deg;
+  }
+  80% {
+    rotate: 4deg;
+  }
+}
+
+@keyframes tamponner {
+  0% {
+    opacity: 0;
+    scale: 1.9;
+    rotate: -18deg;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.85, 0.35);
+  }
+  60% {
+    opacity: 1;
+    scale: 0.95;
+    rotate: -6deg;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  100% {
+    scale: 1;
+    rotate: -6deg;
+  }
+}
+
+@keyframes surligner {
+  from {
+    background-size: 0% 100%;
+  }
+}
+
+@keyframes entrer {
+  from {
+    opacity: 0;
+    translate: 0 -0.5rem;
+  }
+}
+
+@keyframes compter {
+  from {
+    transform: translateY(0.35em);
+    opacity: 0.35;
+  }
+}
+
+@keyframes pastille {
+  from {
+    scale: 0.2;
+  }
+  60% {
+    scale: 1.2;
+  }
+}
+
+@keyframes eclairer {
+  from {
+    opacity: 0.3;
+  }
+}
+
+@keyframes apparaitre {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes page-sortie {
+  to {
+    opacity: 0;
+    translate: 0 -0.75rem;
+  }
+}
+
+@keyframes page-entree {
+  from {
+    opacity: 0;
+    translate: 0 1.5rem;
   }
 }
 

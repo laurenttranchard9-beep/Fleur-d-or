@@ -149,6 +149,7 @@ La densité alterne : un héros saturé, des passages calmes sur papier riz pour
 - Rouge piment réservé à l'appel téléphonique
 - Étiquettes d'étal pour l'état d'ouverture et les prix mis en avant
 - Prix en chiffres tabulaires, au format « 10,00 € »
+- Un seul moment fort animé : l'étal s'installe au chargement ; le reste du mouvement explique un état ou répond à un geste
 
 ## Colors
 
@@ -226,6 +227,8 @@ Le relief vient de l'impression, pas de l'interface : contours d'encre décalés
 - **Ombre de feuille** (`box-shadow: 0 -1rem 2rem -1rem rgb(42 23 13 / 0.45)`) : bon de commande ouvert en feuille basse sur mobile.
 
 ### Named Rules
+**The Stall Setup Rule.** L'étal s'installe une fois, au chargement de l'accueil, et le texte n'attend jamais : nom, état et bouton d'appel sont lisibles dès la première image. Une animation qui n'explique ni un état, ni un geste, ni un lien entre deux endroits n'a pas sa place.
+
 **The Print Depth Rule.** Pas d'ombre décalée dure ni de halo coloré : la profondeur d'une illustration est une silhouette plate décalée, celle d'un objet d'interface est une ombre douce sous ce que l'on peut prendre.
 
 ## Shapes
@@ -246,12 +249,16 @@ Coins doux de 0,5rem pour les boutons, champs et étiquettes d'état ; 0,45rem p
 ### État d'ouverture (étiquette)
 - Riz, contour d'encre, bout gauche en pointe (carré pivoté de 45°), pastille : feuille vive = ouvert, curcuma = sur commande, riz 2 = fermé.
 - Variantes : compacte dans l'en-tête, grande sur curcuma pâle dans les horaires. Texte calculé à l'heure de Paris.
+- Mouvement : quand l'état change (et au chargement), la pancarte se retourne sur son axe vertical (170ms pour la demi-face sortante, 380ms pour l'entrante). En mouvement réduit, simple fondu.
+- Le jour courant du tableau est entouré à la main : un trait SVG qui se referme en dépassant, tracé en 800ms quand le tableau entre à l'écran.
 
 ### Étiquette pendue
-- Fond riz, trou perforé curcuma cerclé d'encre, ficelle d'encre, rotation −5° ; titre en label, prix en Kantumruy Pro Prix 2,6rem.
+- Fond riz, trou perforé curcuma cerclé d'encre, ficelle d'encre, rotation de repos −5° (4° sur mobile, variable `--repos`) ; titre en label, prix en Kantumruy Pro Prix 2,6rem.
+- Mouvement : l'attache (`.accroche`) la fait tomber de son clou puis osciller en pendule amorti jusqu'au repos (1,7s, à 1,15s du chargement) ; au survol, elle se balance de nouveau.
 
 ### Chips (rubriques de la carte)
 - Puces pleine pastille à contour 1,5px ; active : sucre plein, texte riz. Sur bureau, liste verticale collante ; active : curcuma à contour d'encre.
+- Mouvement : un curseur unique glisse sous la rubrique en cours (300ms) ; la rubrique visée par l'index voit son surlignage curcuma se repeindre de gauche à droite.
 
 ### Inputs / Fields
 - Recherche : fond riz, contour d'encre 2px, icône loupe à gauche, focus en anneau curcuma clair de 3px.
@@ -262,6 +269,7 @@ Coins doux de 0,5rem pour les boutons, champs et étiquettes d'état ; 0,45rem p
 ### Bon de commande (signature)
 - Feuille papier (#FFFDF8) à bord perforé sur bureau, collante dans la colonne de droite ; feuille basse non modale sur mobile, ouverte depuis la barre d'actions.
 - Lignes avec quantité − / +, total indicatif en chiffres tabulaires qui remonte de 0,35em à chaque changement, bouton d'appel pleine largeur.
+- Mouvement : un jeton « +1 » curcuma vole en parabole du bouton « + » jusqu'au total (bureau) ou jusqu'au bouton « Mon bon » (mobile), 640ms ; à l'arrivée, total et compteur remontent. Les lignes entrent en glissant (320ms) et sortent plus vite (170ms).
 
 ### Navigation
 - En-tête curcuma : enseigne réduite, liens soulignés au survol par un trait qui se déroule, état compact, bouton d'appel. Sous 45rem, liens remplacés par la barre d'actions basse (Appeler · La carte · Y aller).
@@ -273,7 +281,8 @@ Coins doux de 0,5rem pour les boutons, champs et étiquettes d'état ; 0,45rem p
 - **Do** écrire les prix « 10,00 € » en Kantumruy Pro Prix et les aligner à droite.
 - **Do** dessiner tout nouvel ingrédient avec les cinq encres de `tools/etal.mjs`, contour décalé et ombre plate.
 - **Do** garder des cibles tactiles de 2,75rem minimum et un focus visible (3px sucre, ou curcuma clair sur fond sombre).
-- **Do** donner un mouvement par moment fort seulement : les ingrédients qui se posent au chargement (900ms, décalage 40ms), l'étiquette qui se balance, le total qui remonte.
+- **Do** garder un seul moment fort par page : à l'accueil, la feuille glisse (950ms), les ingrédients tombent avec leurs ombres (720ms chacun, décalés de 36ms) et l'étiquette se balance. Le reste explique un état (pancarte, curseur, jeton) ou répond à un geste, sans boucle.
+- **Do** prévoir le mouvement réduit : plus aucun déplacement, mais les fondus et changements d'état restent lisibles.
 
 ### Don't:
 - **Don't** utiliser le rouge piment pour autre chose que l'appel.

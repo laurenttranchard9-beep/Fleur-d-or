@@ -23,6 +23,7 @@ Page d'accueil entière : [apercus/accueil-page-entiere.jpg](apercus/accueil-pag
 | Formulaire « Vous avez envie de travailler avec nous ? » (texte de modèle) | Adresse, plan du quartier dessiné d'après l'IGN, liens Itinéraire / Waze / Plans |
 | Pas de description, pas de données pour Google | Titre et description, image de partage, données structurées `Restaurant` et `Menu` (horaires, adresse, prix), sitemap |
 | — | Accessible (0 erreur axe-core, contrastes AA, clavier, lecteurs d'écran), sans cookie, sans traceur, ~80 Ko de polices auto-hébergées |
+| Aucune animation | **On installe l'étal** au chargement : la feuille glisse, les ingrédients tombent avec leurs ombres, l'étiquette 10 € se balance. Pancarte « ouvert / fermé » qui se retourne, jour entouré au marqueur, tampon « ឆ្ងាញ់ », saveurs qui se posent, jeton « +1 » qui vole jusqu'au bon, transition douce entre les pages. Tout respecte le réglage « réduire les animations » du téléphone |
 
 Toutes les coquilles corrigées et les points à confirmer sont listés dans [CORRECTIONS.md](CORRECTIONS.md).
 
