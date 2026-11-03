@@ -61,17 +61,44 @@ Fermeture exceptionnelle (le bandeau d'état l'affichera) :
 
 ## Mettre en ligne
 
-Le dossier `public/` est le site complet : du HTML, du CSS et un peu de JavaScript, sans serveur ni base de données.
+Le site complet tient dans un seul fichier : **`livraison/aux-saveurs-du-cambodge-site.zip`** (250 Ko environ).
+Il contient le contenu du dossier `public/` : du HTML, du CSS, un peu de JavaScript, sans base de données ni PHP.
+Il est refait à chaque `node build.mjs`.
 
-- **Netlify** (le plus simple) : glisser le dossier `public/` sur [app.netlify.com/drop](https://app.netlify.com/drop).
+### Chez IONOS (ou tout hébergement Apache : OVH, o2switch…)
+
+1. **Décompresser l'archive sur l'ordinateur.** On obtient `index.html`, `404.html`, les dossiers `assets`, `carte`,
+   `mentions-legales`, `nouvelle-page`, et un fichier caché **`.htaccess`** (sur Mac, Cmd + Maj + point pour l'afficher).
+2. **Récupérer les accès SFTP** : espace client IONOS → Menu → Hébergement → tuile « SFTP & SSH » → Gérer → le nom
+   d'utilisateur. On y trouve l'hôte (`access…webspace-data.io`), l'utilisateur et le mot de passe ; port 22.
+3. **Envoyer les fichiers** avec [FileZilla](https://filezilla-project.org) (gratuit, protocole SFTP) : glisser **le contenu**
+   du dossier décompressé, `.htaccess` compris, dans le dossier du webspace prévu pour le site. Remplacer les fichiers existants.
+   L'explorateur de webspace d'IONOS, dans le navigateur, permet aussi de téléverser les fichiers ;
+   FileZilla reste le plus simple pour envoyer tous les dossiers d'un coup, `.htaccess` compris.
+4. **Rattacher le domaine à ce dossier** : Domaines & SSL → le domaine → connexion au webspace → choisir le dossier.
+   Si le domaine est encore chez Squarespace, le transférer chez IONOS ou faire pointer ses DNS vers IONOS
+   (IONOS propose de faire les réglages DNS lui-même quand il gère le domaine).
+5. **Vérifier que le certificat SSL du domaine est actif** (inclus dans les offres d'hébergement IONOS) :
+   `.htaccess` renvoie tout le monde vers `https://www.auxsaveursducambodge-saintalban.com`.
+
+Ce que fait `.htaccess` : page 404 du site, ancienne adresse `/nouvelle-page` → `/carte/`, passage en HTTPS avec « www »
+(seulement sur le domaine du restaurant, pour que d'autres adresses de test affichent le site sans redirection),
+compression, cache et en-têtes de sécurité. Il a été essayé sur Apache 2.4 avec les seules directives qu'un hébergement mutualisé autorise.
+En cas de page blanche « erreur 500 » ou d'erreur de certificat, supprimer `.htaccess` sur le serveur remet le site en ligne sans ces réglages.
+
+Si le site change de domaine, mettre la nouvelle adresse dans `url` de `data/restaurant.json` puis relancer `node build.mjs` :
+les liens, le plan du site et `.htaccess` suivent.
+
+### Autres hébergeurs
+
+- **Netlify** : glisser le dossier `public/` sur [app.netlify.com/drop](https://app.netlify.com/drop).
   Avec le dépôt GitHub : dossier de base `aux-saveurs-du-cambodge`, le reste est dans `netlify.toml`.
 - **Cloudflare Pages, Vercel** : commande `node build.mjs`, dossier de sortie `public`.
-- **Hébergeur classique (OVH, o2switch…)** : envoyer le contenu de `public/` par FTP.
 
-Pour garder l'adresse actuelle, il faut ensuite faire pointer le domaine vers le nouvel hébergeur
+Pour garder l'adresse actuelle, il faut faire pointer le domaine vers le nouvel hébergeur
 (enregistrements DNS chez le gestionnaire du domaine, éventuellement Squarespace Domains) et résilier l'abonnement Squarespace une fois la bascule faite.
 
-`_redirects` (Netlify, Cloudflare) envoie l'ancienne adresse `/nouvelle-page` vers `/carte/` ; une page de redirection couvre les autres hébergeurs.
+`_redirects` et `_headers` jouent le rôle de `.htaccess` sur Netlify et Cloudflare ; une page de redirection couvre l'ancienne adresse partout ailleurs.
 
 ## Organisation
 
@@ -81,6 +108,7 @@ aux-saveurs-du-cambodge/
 ├── data/                  contenu : restaurant.json, carte.json
 ├── public/                site prêt à publier (pages générées + assets)
 │   └── assets/            css, js, police Inter (OFL), plats dessinés, plan du quartier
+├── livraison/             public/ en une archive ZIP, à déposer chez IONOS ou un autre hébergeur
 ├── tools/                 régénération ponctuelle des dessins, de la police, du plan et des images
 ├── PRODUCT.md, DESIGN.md  contexte produit et système visuel (couleurs, typographie, règles)
 └── CORRECTIONS.md         corrections de contenu et points à vérifier

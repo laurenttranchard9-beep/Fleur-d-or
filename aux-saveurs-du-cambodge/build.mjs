@@ -1,10 +1,12 @@
-// Génère le site statique dans public/ à partir de data/*.json.
+// Génère le site statique dans public/ à partir de data/*.json, et l'archive à déposer
+// chez un hébergeur classique (IONOS, OVH, o2switch…) dans livraison/.
 // Aucune dépendance : node build.mjs (Node 18 ou plus).
 
 import { createHash } from 'node:crypto';
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { deflateRawSync } from 'node:zlib';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const PUBLIC = join(ROOT, 'public');
@@ -652,6 +654,147 @@ const annexes = () => {
     )}${String.fromCharCode(10)}`,
   );
   writeFileSync(join(PUBLIC, '_redirects'), ['/nouvelle-page  /carte/  301', '/nouvelle-page/  /carte/  301', ''].join(String.fromCharCode(10)));
+
+  // Hébergement Apache (IONOS, OVH, o2switch…) : les règles de _redirects et _headers, plus le passage en HTTPS.
+  // Aucune barre oblique inverse : les points des motifs s'écrivent [.].
+  const hote = new URL(resto.url).hostname;
+  const motif = hote.replace(/^www[.]/, '').split('.').join('[.]');
+  writeFileSync(
+    join(PUBLIC, '.htaccess'),
+    [
+      '# Aux Saveurs du Cambodge : réglages pour un hébergement Apache (IONOS, OVH, o2switch…).',
+      '# Fichier généré par build.mjs : modifier le générateur plutôt que ce fichier.',
+      '',
+      '# Page « introuvable » du site',
+      'ErrorDocument 404 /404.html',
+      '',
+      '# Types et encodage des fichiers',
+      'AddType application/manifest+json .webmanifest',
+      'AddType font/woff2 .woff2',
+      'AddType image/svg+xml .svg',
+      'AddCharset utf-8 .html .css .js .svg .xml .txt .webmanifest',
+      '',
+      '<IfModule mod_rewrite.c>',
+      '  RewriteEngine On',
+      '',
+      `  # Toujours https://${hote}, avec le test de port conseillé par IONOS.`,
+      '  # Ne joue que sur le vrai domaine : l’adresse provisoire de l’hébergeur reste consultable pendant les essais.',
+      '  # Prérequis : le certificat SSL du domaine doit être actif.',
+      `  RewriteCond %{HTTP_HOST} ^(www[.])?${motif}(:[0-9]+)?$ [NC]`,
+      '  RewriteCond %{SERVER_PORT} !=443 [OR]',
+      '  RewriteCond %{HTTP_HOST} !^www[.] [NC]',
+      `  RewriteRule ^(.*)$ https://${hote}/$1 [R=301,L]`,
+      '',
+      '  # L’ancienne adresse de la carte',
+      '  RewriteRule ^nouvelle-page/?$ /carte/ [R=301,L]',
+      '</IfModule>',
+      '',
+      '<IfModule mod_deflate.c>',
+      '  <IfModule mod_filter.c>',
+      '    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/javascript text/javascript application/json application/manifest+json image/svg+xml',
+      '  </IfModule>',
+      '</IfModule>',
+      '',
+      '<IfModule mod_headers.c>',
+      '  Header always set X-Content-Type-Options "nosniff"',
+      '  Header always set Referrer-Policy "strict-origin-when-cross-origin"',
+      '  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"',
+      '  # La police ne change jamais (un an) ; images, styles et scripts versionnés : une semaine ; les pages se revérifient.',
+      '  <FilesMatch "[.]woff2$">',
+      '    Header set Cache-Control "public, max-age=31536000, immutable"',
+      '  </FilesMatch>',
+      '  <FilesMatch "[.](css|js|svg|png|jpg|webmanifest)$">',
+      '    Header set Cache-Control "public, max-age=604800"',
+      '  </FilesMatch>',
+      '  <FilesMatch "[.]html$">',
+      '    Header set Cache-Control "no-cache"',
+      '  </FilesMatch>',
+      '</IfModule>',
+      '',
+    ].join(String.fromCharCode(10)),
+  );
+};
+
+/* ---------- Archive à déposer chez un hébergeur classique ---------- */
+
+// CRC-32 (polynôme 0xEDB88320), la somme de contrôle du format ZIP.
+const TABLE_CRC = Array.from({ length: 256 }, (_, n) => {
+  let c = n;
+  for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+  return c >>> 0;
+});
+const crc32 = (octets) => {
+  let c = 0xffffffff;
+  for (const o of octets) c = TABLE_CRC[(c ^ o) & 0xff] ^ (c >>> 8);
+  return (c ^ 0xffffffff) >>> 0;
+};
+
+// Dossiers puis fichiers de public/, triés, chemins séparés par « / ».
+const inventaire = (dossier, prefixe = '') =>
+  readdirSync(dossier, { withFileTypes: true })
+    .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))
+    .flatMap((e) =>
+      e.isDirectory() ? [`${prefixe}${e.name}/`, ...inventaire(join(dossier, e.name), `${prefixe}${e.name}/`)] : [`${prefixe}${e.name}`],
+    );
+
+// ZIP reproductible : ordre trié et date fixe (celle de la carte), donc la même archive tant que le site ne change pas.
+// Les fichiers sont à la racine de l'archive : on la décompresse directement dans le dossier du site chez l'hébergeur.
+const archiver = (source, cible, exclus) => {
+  const [an, mois, jour] = carte.updated.split('-').map(Number);
+  const dateDos = ((an - 1980) << 9) | (mois << 5) | jour;
+  const locaux = [];
+  const central = [];
+  let decalage = 0;
+  let nombre = 0;
+  for (const nom of inventaire(source).filter((n) => !exclus.includes(n))) {
+    const dossier = nom.endsWith('/');
+    const brut = dossier ? Buffer.alloc(0) : readFileSync(join(source, nom));
+    const compresse = dossier ? brut : deflateRawSync(brut, { level: 9 });
+    const stocke = dossier || compresse.length >= brut.length;
+    const donnees = stocke ? brut : compresse;
+    const nomOctets = Buffer.from(nom, 'utf8');
+    const crc = crc32(brut);
+    const local = Buffer.alloc(30);
+    local.writeUInt32LE(0x04034b50, 0);
+    local.writeUInt16LE(20, 4);
+    local.writeUInt16LE(0x0800, 6);
+    local.writeUInt16LE(stocke ? 0 : 8, 8);
+    local.writeUInt16LE(0, 10);
+    local.writeUInt16LE(dateDos, 12);
+    local.writeUInt32LE(crc, 14);
+    local.writeUInt32LE(donnees.length, 18);
+    local.writeUInt32LE(brut.length, 22);
+    local.writeUInt16LE(nomOctets.length, 26);
+    local.writeUInt16LE(0, 28);
+    const fiche = Buffer.alloc(46);
+    fiche.writeUInt32LE(0x02014b50, 0);
+    fiche.writeUInt16LE(0x0314, 4);
+    fiche.writeUInt16LE(20, 6);
+    fiche.writeUInt16LE(0x0800, 8);
+    fiche.writeUInt16LE(stocke ? 0 : 8, 10);
+    fiche.writeUInt16LE(0, 12);
+    fiche.writeUInt16LE(dateDos, 14);
+    fiche.writeUInt32LE(crc, 16);
+    fiche.writeUInt32LE(donnees.length, 20);
+    fiche.writeUInt32LE(brut.length, 24);
+    fiche.writeUInt16LE(nomOctets.length, 28);
+    fiche.writeUInt32LE(dossier ? 0o40755 * 65536 + 0x10 : 0o100644 * 65536, 38);
+    fiche.writeUInt32LE(decalage, 42);
+    locaux.push(local, nomOctets, donnees);
+    central.push(fiche, nomOctets);
+    decalage += local.length + nomOctets.length + donnees.length;
+    nombre += 1;
+  }
+  const tailleCentral = central.reduce((s, b) => s + b.length, 0);
+  const fin = Buffer.alloc(22);
+  fin.writeUInt32LE(0x06054b50, 0);
+  fin.writeUInt16LE(nombre, 8);
+  fin.writeUInt16LE(nombre, 10);
+  fin.writeUInt32LE(tailleCentral, 12);
+  fin.writeUInt32LE(decalage, 16);
+  mkdirSync(dirname(cible), { recursive: true });
+  writeFileSync(cible, Buffer.concat([...locaux, ...central, fin]));
+  return nombre;
 };
 
 /* ---------- Construction ---------- */
@@ -664,8 +807,13 @@ redirection('nouvelle-page/', 'carte/');
 annexes();
 rmSync(join(PUBLIC, '404-tmp'), { recursive: true, force: true });
 
+// _headers et _redirects ne servent qu'à Netlify et Cloudflare : un serveur Apache lit .htaccess.
+const ARCHIVE = 'livraison/aux-saveurs-du-cambodge-site.zip';
+const nbFichiers = archiver(PUBLIC, join(ROOT, ARCHIVE), ['_headers', '_redirects']);
+
 const manquants = Object.entries(resto.legal)
   .filter(([cle, v]) => !v && cle !== 'legalForm' && cle !== 'hostAddress')
   .map(([cle]) => cle);
 console.log(`Site généré dans public/ : accueil, carte (${nbPlats} plats), mentions légales, 404.`);
+console.log(`Archive pour un hébergeur classique (IONOS…) : ${ARCHIVE} (${nbFichiers} fichiers et dossiers).`);
 if (manquants.length) console.warn(`À compléter avant la mise en ligne (data/restaurant.json → legal) : ${manquants.join(', ')}`);

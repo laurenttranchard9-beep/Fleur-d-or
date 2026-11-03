@@ -1,0 +1,48 @@
+# Aux Saveurs du Cambodge : réglages pour un hébergement Apache (IONOS, OVH, o2switch…).
+# Fichier généré par build.mjs : modifier le générateur plutôt que ce fichier.
+
+# Page « introuvable » du site
+ErrorDocument 404 /404.html
+
+# Types et encodage des fichiers
+AddType application/manifest+json .webmanifest
+AddType font/woff2 .woff2
+AddType image/svg+xml .svg
+AddCharset utf-8 .html .css .js .svg .xml .txt .webmanifest
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Toujours https://www.auxsaveursducambodge-saintalban.com, avec le test de port conseillé par IONOS.
+  # Ne joue que sur le vrai domaine : l’adresse provisoire de l’hébergeur reste consultable pendant les essais.
+  # Prérequis : le certificat SSL du domaine doit être actif.
+  RewriteCond %{HTTP_HOST} ^(www[.])?auxsaveursducambodge-saintalban[.]com(:[0-9]+)?$ [NC]
+  RewriteCond %{SERVER_PORT} !=443 [OR]
+  RewriteCond %{HTTP_HOST} !^www[.] [NC]
+  RewriteRule ^(.*)$ https://www.auxsaveursducambodge-saintalban.com/$1 [R=301,L]
+
+  # L’ancienne adresse de la carte
+  RewriteRule ^nouvelle-page/?$ /carte/ [R=301,L]
+</IfModule>
+
+<IfModule mod_deflate.c>
+  <IfModule mod_filter.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/javascript text/javascript application/json application/manifest+json image/svg+xml
+  </IfModule>
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  # La police ne change jamais (un an) ; images, styles et scripts versionnés : une semaine ; les pages se revérifient.
+  <FilesMatch "[.]woff2$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "[.](css|js|svg|png|jpg|webmanifest)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  <FilesMatch "[.]html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
