@@ -15,40 +15,39 @@ const { chromium } = (() => {
   }
 })();
 
-const sprite = readFileSync(`${root}src/svg/sprite.svg`, 'utf8');
-const etal = readFileSync(`${root}src/svg/etal.svg`, 'utf8');
-const piment = sprite.match(/<symbol id="piment" viewBox="([^"]+)">([\s\S]*?)<\/symbol>/);
+const resto = JSON.parse(readFileSync(`${root}data/restaurant.json`, 'utf8'));
 
-// Le piment sur un carré curcuma : lisible à 16 px, reconnaissable sur un écran d'accueil.
+// Un bol et ses baguettes, blancs sur noir : lisible à 16 px, net sur un écran d'accueil.
 const icone = (arrondi) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="${arrondi}" fill="#F2A51C"/>
-  <svg x="2" y="18" width="60" height="28" viewBox="${piment[1]}" overflow="visible">
-    <g transform="rotate(-32 62 20)">${piment[2].trim()}</g>
-  </svg>
+  <rect width="64" height="64" rx="${arrondi}" fill="#000"/>
+  <g stroke="#f5f5f7" stroke-width="3.4" stroke-linecap="round">
+    <path d="M30 27 47 8"/>
+    <path d="M36 28 54 12"/>
+  </g>
+  <path d="M9 31h46a23 23 0 0 1-46 0z" fill="#f5f5f7"/>
+  <rect x="23" y="52" width="18" height="5" rx="2.5" fill="#f5f5f7"/>
 </svg>
 `;
 
 writeFileSync(`${root}public/favicon.svg`, icone(14));
 
-const fonts = (name) => pathToFileURL(`${root}public/assets/fonts/${name}`).href;
+const fichierLocal = (chemin) => pathToFileURL(`${root}${chemin}`).href;
 
+// L'image de partage reprend la première tuile de l'accueil : le nom, la phrase, le bol.
 const og = `<!doctype html><html lang="fr"><meta charset="utf-8"><style>
-@font-face{font-family:"Kantumruy Pro";src:url(${fonts('kantumruy-pro-latin.woff2')});font-weight:300 700}
-@font-face{font-family:Moul;src:url(${fonts('moul-enseigne.woff2')})}
-html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#F2A51C;color:#2A170D;font-family:"Kantumruy Pro"}
-.etal{position:absolute;right:-60px;top:-40px;width:640px;height:720px}
-.etal svg{position:absolute;inset:0;width:100%;height:100%}
-.texte{position:absolute;left:72px;top:96px;width:620px}
-.km{font-family:Moul;font-size:52px;line-height:1.5;color:#1B5232}
-.nom{font-family:Moul;font-size:74px;line-height:1;text-transform:uppercase}
-.nom small{font-family:"Kantumruy Pro";font-weight:600;font-size:30px;text-transform:none;vertical-align:28px;margin-right:6px}
-.accroche{margin-top:28px;font-size:30px;font-weight:500;color:#5A3416}
-.tel{display:inline-block;margin-top:34px;padding:12px 22px;background:#C8261B;color:#FFFBF3;border:3px solid #2A170D;border-radius:10px;font-size:30px;font-weight:700}
-</style><body>${sprite}<div class="etal">${etal}</div>
-<div class="texte"><div class="km">រសជាតិកម្ពុជា</div><div class="nom">Aux Saveurs<br><small>du</small>Cambodge</div>
-<p class="accroche">Cuisine cambodgienne faite maison<br>à Saint-Alban</p><span class="tel">07 59 52 53 41</span></div></body></html>`;
+@font-face{font-family:Inter;src:url(${fichierLocal('public/assets/fonts/inter.woff2')});font-weight:400 700}
+html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#000;color:#f5f5f7;font-family:Inter;-webkit-font-smoothing:antialiased}
+.texte{position:absolute;left:84px;top:50%;width:560px;transform:translateY(-50%)}
+h1{margin:0;font-size:70px;line-height:1.06;font-weight:600;letter-spacing:-0.012em}
+p{margin:22px 0 0;font-size:30px;line-height:1.25;color:#86868b;letter-spacing:-0.005em;text-wrap:balance}
+.tel{margin-top:30px;color:#f5f5f7;font-variant-numeric:tabular-nums}
+img{position:absolute;top:50%;right:-110px;width:660px;height:660px;transform:translateY(-50%) rotate(-8deg)}
+</style><body>
+<div class="texte"><h1>${resto.name}</h1><p>Cuisine cambodgienne faite maison, à&nbsp;${resto.town}.</p><p class="tel">${resto.phone.display}</p></div>
+<img src="${fichierLocal('public/assets/img/plats/soupe.svg')}" alt="">
+</body></html>`;
 
-// Une page file:// pour que les polices locales se chargent.
+// Une page file:// pour que la police et le dessin locaux se chargent.
 const fichier = `${root}tools/.cache/og.html`;
 mkdirSync(`${root}tools/.cache`, { recursive: true });
 writeFileSync(fichier, og);

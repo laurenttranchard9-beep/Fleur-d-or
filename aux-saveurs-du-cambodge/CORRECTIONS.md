@@ -13,7 +13,6 @@ seules l'orthographe, la typographie et la présentation ont changé.
 | « Poulet sauce légumes » | Renommé **Poulet aux légumes** | Tournure plus naturelle ; vérifier que c'est bien le même plat |
 | Assiette composée : « 1 nems, 1nems poulet » | « 1 nem, 1 nem au poulet » | Le premier nem est sans doute au porc : à préciser |
 | Service sur place | Le site propose « réserver une table » et « commander à emporter » | Déduit de « On vous garde une petite place ? » et « Commandez dès maintenant ! » |
-| Nom khmer | « រសជាតិកម្ពុជា » (« saveurs du Cambodge ») sur l'enseigne | Traduction proposée : à remplacer si le restaurant a déjà un nom khmer |
 | Mentions légales | Champs vides dans `data/restaurant.json` → `legal` | Raison sociale, SIRET, directeur de publication et hébergeur sont obligatoires (LCEN) |
 
 ## Coquilles corrigées
@@ -22,7 +21,7 @@ seules l'orthographe, la typographie et la présentation ont changé.
 - « SAMEDI DIAMNCHE » → **samedi et dimanche**
 - « +33 07 59 52 53 41 » → **07 59 52 53 41** (format international correct : +33 7 59 52 53 41)
 - « 10 Avenue salvador allende » → **10 avenue Salvador Allende**
-- « LOCALISATIO / N » (mot coupé) → bloc « Nous trouver »
+- « LOCALISATIO / N » (mot coupé) → tuile « Accès » avec l'adresse et le plan
 - Bloc « Contactez-nous — Vous avez envie de travailler avec nous ? » : texte de modèle Squarespace, retiré
 - Adresse de la carte « /nouvelle-page » → **/carte/** (l'ancienne adresse redirige)
 

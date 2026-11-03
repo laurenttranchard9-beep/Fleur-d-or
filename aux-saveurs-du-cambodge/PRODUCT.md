@@ -60,13 +60,15 @@ c'est la cuisine de la maison, servie comme chez soi.
 
 - Nom : « Aux Saveurs du Cambodge » ; lieu : Saint-Alban.
 - Formules existantes à conserver : « On vous garde une petite place ? », « Chez nous, tout est fait maison, avec des produits frais… et beaucoup d'amour ! », « Commandez dès maintenant ! », « Menu bon et pas cher ».
-- Aucun logo, aucune charte : l'identité visuelle actuelle (gris Squarespace, Space Grotesk) n'est pas un engagement.
+- Aucun logo, aucune charte : l'identité visuelle de l'ancien site (gris Squarespace, Space Grotesk) n'est pas un engagement.
+- Direction visuelle demandée le 03/11/2026 : « minimaliste comme le site d'Apple ». Elle remplace la direction « étal de marché » de la première refonte.
 
 ## Evidence on Hand
 
 - Textes et carte du site actuel (corrigés pour l'orthographe, voir `CORRECTIONS.md`).
 - Aucune photo du restaurant ni des plats. Ne jamais présenter une image comme une photo des plats de la maison ;
-  toute illustration doit être signalée comme telle et listée pour remplacement.
+  toute illustration doit être signalée comme telle et listée pour remplacement. Les plats du site sont dessinés
+  (`tools/plats.mjs`) en attendant de vraies photos.
 - Pas d'avis clients vérifiés : n'en afficher aucun, ne pas inventer de note.
 
 ## Product Principles

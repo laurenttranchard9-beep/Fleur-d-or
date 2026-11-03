@@ -1,57 +1,49 @@
 Revue de finition exécutée en ligne (degraded/finish-reviewer.md) : les sous-agents ne sont lancés ici que sur demande explicite de l'utilisateur.
-Entrées absentes : carte QUALITY BAR (direction issue de la liste propre, pas du catalogue) et comp (code-led, pas de génération d'images).
+Entrées absentes : carte QUALITY BAR (canon épinglé par l'utilisateur, « minimaliste comme le site d'Apple », pas de carte de monde) et comp (build code-led). Captures lues : desktop.png, mobile.png, carte-desktop.png, carte-mobile.png (pages entières, mouvement réduit pour montrer l'état final).
 
 disposition: fix
 
 ## persistence
-pass — PRODUCT.md présent (aux-saveurs-du-cambodge/PRODUCT.md) ; build code-led, donc pas de state.json ni de tour de comps ; DESIGN.md sera écrit après cette revue (nouveau monde).
+pass — PRODUCT.md présent et mis à jour (direction du 03/11/2026) ; build code-led, donc ni state.json ni tour de comps. DESIGN.md et .impeccable/design.json décrivent encore l'étal de marché : nouveau monde, ils sont réécrits après cette revue.
 
 ## fidelity
-Pas de comp approuvé : TYPE, MATERIAL et GROUND jugés contre OWN-WORLD.
-- TYPE — match : enseigne Moul (khmer + capitales latines), Kantumruy Pro partout ailleurs, prix en chiffres tabulaires.
-- MATERIAL — contradicted (partiel) : le médium promis (aplats sérigraphiés, contour décalé, trame) est tenu, mais OWN-WORLD annonce « 4–5 encres » et l'illustration en compte ~35.
-- GROUND — match : curcuma #F2A51C sur les champs nommés ; champ de lecture riz #FFFBF3, quasi blanc, sans dérive crème.
-- Enseigne ~4,5 vw au lieu de « ~7 vw » — adaptation : plafond 6 rem du craft floor et largeur de colonne.
-- État d'ouverture « étiquette » — contradicted : rendu en pastille arrondie, sans la grammaire de l'étiquette (trou, bout entaillé).
-- Étiquette pendue « Menu bon et pas cher 10 € » — match.
-- Feuille coupée par le bord droit, boutons Appeler + Voir la carte, barre mobile après le héros — match.
-- Conseil « Envie de déjeuner … midi ? » — adaptation : RAISE « l'heure locale est un état de premier rang ».
-- Khmer masqué dans l'en-tête de l'accueil — adaptation : évite le doublon avec l'enseigne du héros.
+Pas de comp : TYPE, MATERIAL et GROUND jugés contre OWN-WORLD ; le reste contre FIRST VIEWPORT et STORY.
+- TYPE — adaptation (demande de l'utilisateur) : la voix d'affichage est la police système d'Apple, ce que le plancher refuse par défaut mais que la demande « comme le site d'Apple » réclame ; ailleurs Inter auto-hébergée, demi-gras 600, approche serrée. Conforme à OWN-WORLD.
+- MATERIAL — adaptation (vérité produit : aucune photo des plats, PRODUCT.md interdit d'en simuler) : les « produits » sont des plats dessinés vus du dessus, aplats et dégradés doux, ombre floue ; aucune matière simulée en CSS.
+- GROUND — match : blanc, #F5F5F7 et #000 relevés sur les captures ; aucune dérive crème ou ardoise.
+- Navigation translucide 44 px (nom, liens 12 px centrés, téléphone) — match.
+- Ruban d'état centré sur gris clair — match.
+- Tuile noire : titre 56 px sur une ligne, sous-titre 28 px, ligne grise, pilules Appeler / Voir la carte — match.
+- Bol de soupe centré, coupé par le bas de la tuile — match.
+- Mobile : même pile, titre 40 px, boutons côte à côte — match ; bol de 360 px au lieu de 300 px — adaptation non citée (à consigner).
+- Tuiles produit (menu 10 €, lok lac, bo bun, nems, porc au caramel), manifeste « fait maison », horaires, adresse — match.
+- Carte : recherche, barre locale collante soulignée, ajout, « Votre commande », appel — match.
+- Rotation des plats liée au défilement et manifeste qui s'allume phrase après phrase — added without approval : absents de la section Motion du contrat.
+- Rail de l'index (bureau), trait actif de 2 px — adaptation : repère de position d'un index, pas une bande décorative de carte.
 
 ## ceiling
-- Le bandeau de la promesse est un encadré arrondi générique, moitié droite vide : aucun matériau du monde (feuille, tampon, étiquette).
-- Le motif de feuille déchirée reste confiné au héros ; aucune section ne le reprend.
+reached — tuiles pleine largeur, produit isolé et coupé par le bord, pilules bleues, liens à chevron, verre dépoli limité aux barres collantes, pied de page en 12 px : les dispositifs du canon sont tous employés.
 
 ## material_fixes
-1. Floor — eyebrow interdit : retirer la rubrique en petites capitales au-dessus de chaque plat de « Par où commencer ? ».
-2. Contrat (RAISE « une seule couleur d'action ») : le pictogramme piment de la carte est rouge piment ; le passer à l'encre sucre.
-3. MATERIAL — réduire la palette de l'illustration à un jeu d'encres lié aux jetons de la page (curcuma, orange, piment, deux verts feuille, vert tendre, rose, sucre, riz), ombres en trame.
-4. Saveurs — la botte de citronnelle déborde de sa vignette et chevauche « Citronnelle » sur bureau : la recadrer dans son cadre 200 × 200.
-5. OWN-WORLD « étiquettes … pour l'état d'ouverture » : donner à l'état en direct la forme d'une étiquette (trou perforé, bout entaillé).
-6. Ceiling — la promesse : y poser un matériau du monde (tampon khmer en Moul, « ឆ្ងាញ់ » = « délicieux »), pas un encadré nu.
-7. Carte mobile — la note riz se coupe en « · riz cantonais… » avec le séparateur en tête de ligne : deux lignes propres sur petit écran.
-8. FINISH — les rasters livrés (og.jpg, icônes) n'ont pas encore leur provenance intégrée.
+1. Truth — le manifeste annonce « Citronnelle, galanga, curcuma, combava » : galanga, curcuma et combava n'apparaissent nulle part sur la carte ; ne citer que des saveurs que la carte nomme (citronnelle, saté, caramel, lait de coco).
+2. FINISH — og.jpg et les quatre icônes PNG ont été régénérés sans provenance : l'intégrer (`impeccable embed-prompt`).
+3. Contrat — consigner dans la section Motion la rotation des plats au défilement et l'allumage du manifeste, et le bol mobile de 360 px, ou les retirer.
 
 ## keep
-L'enseigne bilingue Moul sur le champ curcuma, l'étal sur feuille de bananier coupé par le bord droit, et le rouge piment réservé à l'appel.
+La tuile noire du héros avec le nom sur une ligne et le bol coupé par le bas, et le bleu réservé à l'action.
 
 ---
 
 # Passe de verdict (captures refaites sur les mêmes fichiers)
 
 ## verdict
-1. Eyebrow au-dessus des plats — resolved : « Par où commencer ? » ne montre plus que nom, texte et prix.
-2. Rouge piment réservé à l'appel — resolved : le pictogramme rouge a disparu de la carte ; le rouge ne reste que sur « Appeler / Commander ».
-3. Palette de l'illustration — resolved : cinq encres (sucre, curcuma, piment, feuille, vert tendre) sur papier riz, tons obtenus par trame ou surimpression ; échalotes rouge sombre, galanga ocre pâle.
-4. Citronnelle des saveurs — resolved : la botte tient dans sa vignette, l'étiquette est dégagée.
-5. État en étiquette — resolved : bout en pointe, pastille en trou perforé, dans l'en-tête, le héros et les horaires.
-6. Promesse — resolved : tampon khmer « ឆ្ងាញ់ » en Moul, traduit « Délicieux », sur le bandeau feuille.
-7. Note riz sur mobile — resolved : deux lignes nettes, plus de séparateur en tête de ligne.
-8. Provenance des rasters — resolved : `impeccable embed-prompt --scan public` → 5 rasters, 0 missing.
+1. Truth, saveurs du manifeste — resolved : desktop.png montre « Citronnelle, saté, caramel, lait de coco », quatre mots présents dans data/carte.json.
+2. FINISH, provenance des rasters — resolved : `impeccable embed-prompt --scan public` → 5 rasters, 0 missing (og.jpg régénérée pour garder « à Saint-Alban » sur une ligne, provenance réintégrée).
+3. Contrat, mouvement et bol mobile — resolved : la section Motion consigne la rotation liée au défilement et l'allumage du manifeste ; FIRST VIEWPORT donne le bol mobile de 360 px.
 
-Régression introduite puis corrigée dans le même lot : le piment passé à l'encre se lisait comme une banane ; remplacé par une mention texte, retirée ensuite car redondante avec « piquante » dans le nom.
+Aucune régression visible dans les captures refaites.
 
 ## remaining
 clear
 
-disposition: ship (porte sur les huit corrections notées, pas sur une nouvelle revue complète de la surface)
+disposition: ship (porte sur les trois corrections notées, pas sur une nouvelle revue complète de la surface)

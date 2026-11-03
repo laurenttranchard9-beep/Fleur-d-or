@@ -1,531 +1,550 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-30T12:00:00+01:00",
+  "generatedAt": "2026-11-03T13:30:00+01:00",
   "title": "Design System: Aux Saveurs du Cambodge",
   "extensions": {
     "colorMeta": {
-      "curcuma": {
+      "blanc": {
+        "role": "neutral",
+        "displayName": "Blanc",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#222222",
+          "#3A3A3A",
+          "#555555",
+          "#717171",
+          "#9E9E9E",
+          "#CACACA",
+          "#EEEEEE"
+        ]
+      },
+      "perle": {
+        "role": "neutral",
+        "displayName": "Gris perle",
+        "canonical": "#F5F5F7",
+        "tonalRamp": [
+          "#0B0B0C",
+          "#212123",
+          "#3A3A3C",
+          "#555557",
+          "#717173",
+          "#9E9EA0",
+          "#CACACC",
+          "#EEEEF0"
+        ]
+      },
+      "verre": {
+        "role": "neutral",
+        "displayName": "Verre",
+        "canonical": "rgb(250 250 252 / 0.8)",
+        "tonalRamp": [
+          "#0B0B0C",
+          "#212123",
+          "#3A3A3C",
+          "#555557",
+          "#717173",
+          "#9E9EA0",
+          "#CACACC",
+          "#EEEEF0"
+        ]
+      },
+      "verre-plein": {
+        "role": "neutral",
+        "displayName": "Verre plein",
+        "canonical": "#FAFAFC",
+        "tonalRamp": [
+          "#0B0B0C",
+          "#212123",
+          "#3A3A3C",
+          "#555557",
+          "#717173",
+          "#9E9EA0",
+          "#CACACC",
+          "#EEEEF0"
+        ]
+      },
+      "noir": {
+        "role": "neutral",
+        "displayName": "Noir",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#222222",
+          "#3A3A3A",
+          "#555555",
+          "#717171",
+          "#9E9E9E",
+          "#CACACA",
+          "#EEEEEE"
+        ]
+      },
+      "encre": {
+        "role": "neutral",
+        "displayName": "Encre",
+        "canonical": "#1D1D1F",
+        "tonalRamp": [
+          "#0B0B0D",
+          "#212123",
+          "#3A3A3C",
+          "#555557",
+          "#717174",
+          "#9E9EA1",
+          "#CACACD",
+          "#EEEEF1"
+        ]
+      },
+      "gris": {
+        "role": "neutral",
+        "displayName": "Gris",
+        "canonical": "#6E6E73",
+        "tonalRamp": [
+          "#0B0B0E",
+          "#212125",
+          "#3A3A3E",
+          "#555559",
+          "#717176",
+          "#9E9EA3",
+          "#CACACF",
+          "#EEEEF4"
+        ]
+      },
+      "gris-nuit": {
+        "role": "neutral",
+        "displayName": "Gris de nuit",
+        "canonical": "#86868B",
+        "tonalRamp": [
+          "#0B0B0E",
+          "#212125",
+          "#3A3A3E",
+          "#555559",
+          "#717176",
+          "#9E9EA3",
+          "#CACACF",
+          "#EEEEF3"
+        ]
+      },
+      "filet": {
+        "role": "neutral",
+        "displayName": "Filet",
+        "canonical": "#D2D2D7",
+        "tonalRamp": [
+          "#0B0B0E",
+          "#212125",
+          "#3A3A3E",
+          "#555559",
+          "#717175",
+          "#9E9EA3",
+          "#CACACF",
+          "#EEEEF3"
+        ]
+      },
+      "pied-lien": {
+        "role": "neutral",
+        "displayName": "Lien du pied de page",
+        "canonical": "#424245",
+        "tonalRamp": [
+          "#0B0B0D",
+          "#212124",
+          "#3A3A3D",
+          "#555558",
+          "#717174",
+          "#9E9EA1",
+          "#CACACE",
+          "#EEEEF2"
+        ]
+      },
+      "bleu": {
         "role": "primary",
-        "displayName": "Curcuma",
-        "canonical": "#F2A51C",
+        "displayName": "Bleu d'action",
+        "canonical": "#0071E3",
         "tonalRamp": [
-          "#3D2500",
-          "#6B4300",
-          "#9A6200",
-          "#C98207",
-          "#F2A51C",
-          "#F7C25A",
-          "#FBD993",
-          "#FDEECB"
+          "#000925",
+          "#00204B",
+          "#003878",
+          "#0052A9",
+          "#006DDC",
+          "#589FFE",
+          "#A9CDFE",
+          "#E5F0FE"
         ]
       },
-      "curcuma-clair": {
+      "bleu-appuye": {
         "role": "primary",
-        "displayName": "Curcuma clair",
-        "canonical": "#F7C25A",
+        "displayName": "Bleu appuyé",
+        "canonical": "#0066CC",
         "tonalRamp": [
-          "#432C00",
-          "#6F4C00",
-          "#9C6D06",
-          "#C99025",
-          "#F7C25A",
-          "#FAD385",
-          "#FCE3AF",
-          "#FEF2D9"
+          "#000924",
+          "#00204A",
+          "#003876",
+          "#0052A7",
+          "#126FD6",
+          "#569FFF",
+          "#A9CDFE",
+          "#E5F0FE"
         ]
       },
-      "curcuma-pale": {
+      "lien": {
         "role": "primary",
-        "displayName": "Curcuma pâle",
-        "canonical": "#FDE7B4",
+        "displayName": "Bleu de lien",
+        "canonical": "#0066CC",
         "tonalRamp": [
-          "#4A3200",
-          "#76561A",
-          "#A07B3A",
-          "#C9A35F",
-          "#EAC98A",
-          "#F6DCA6",
-          "#FDE7B4",
-          "#FFF5DE"
+          "#000924",
+          "#00204A",
+          "#003876",
+          "#0052A7",
+          "#126FD6",
+          "#569FFF",
+          "#A9CDFE",
+          "#E5F0FE"
         ]
       },
-      "feuille": {
-        "role": "secondary",
-        "displayName": "Feuille de bananier",
-        "canonical": "#1B5232",
+      "lien-nuit": {
+        "role": "primary",
+        "displayName": "Bleu de nuit",
+        "canonical": "#2997FF",
         "tonalRamp": [
-          "#0A2214",
-          "#123A23",
-          "#1B5232",
-          "#2C7343",
-          "#4F9461",
-          "#78B486",
-          "#A7D2B0",
-          "#D6EDDA"
+          "#000B20",
+          "#002245",
+          "#003B6F",
+          "#00569D",
+          "#0372CC",
+          "#48A2FE",
+          "#A4CFFE",
+          "#E4F0FE"
         ]
       },
-      "feuille-2": {
-        "role": "secondary",
-        "displayName": "Feuille vive",
-        "canonical": "#2C7343",
-        "tonalRamp": [
-          "#0C2616",
-          "#16402A",
-          "#215A39",
-          "#2C7343",
-          "#4C9262",
-          "#74B186",
-          "#A3CFAE",
-          "#D3EAD9"
-        ]
-      },
-      "feuille-clair": {
-        "role": "secondary",
-        "displayName": "Feuille tendre",
-        "canonical": "#B9DB95",
-        "tonalRamp": [
-          "#253512",
-          "#3E5A21",
-          "#5A8034",
-          "#78A44B",
-          "#97C26D",
-          "#B9DB95",
-          "#D3EABC",
-          "#EDF6E3"
-        ]
-      },
-      "feuille-encre": {
-        "role": "secondary",
-        "displayName": "Feuille encre",
-        "canonical": "#16472B",
-        "tonalRamp": [
-          "#071A0F",
-          "#0E2F1C",
-          "#16472B",
-          "#24663F",
-          "#3F8659",
-          "#68A77E",
-          "#9CC9AA",
-          "#D1E7D8"
-        ]
-      },
-      "piment": {
+      "ouvert": {
         "role": "tertiary",
-        "displayName": "Piment",
-        "canonical": "#C8261B",
+        "displayName": "Pastille ouvert",
+        "canonical": "#34C759",
         "tonalRamp": [
-          "#3B0905",
-          "#63110A",
-          "#8E1A10",
-          "#C8261B",
-          "#E2564A",
-          "#EE8A80",
-          "#F6BBB5",
-          "#FCE5E2"
+          "#001001",
+          "#002B0A",
+          "#014817",
+          "#006824",
+          "#048933",
+          "#24BD4F",
+          "#61EC7C",
+          "#C9FFCE"
         ]
       },
-      "piment-fonce": {
+      "commande": {
         "role": "tertiary",
-        "displayName": "Piment foncé",
-        "canonical": "#A51D14",
+        "displayName": "Pastille sur commande",
+        "canonical": "#FF9F0A",
         "tonalRamp": [
-          "#330704",
-          "#560E08",
-          "#7D150D",
-          "#A51D14",
-          "#CE3D32",
-          "#E57A70",
-          "#F2B2AC",
-          "#FBE1DE"
+          "#160700",
+          "#331B00",
+          "#553100",
+          "#794900",
+          "#9F6101",
+          "#DC8907",
+          "#FEBB72",
+          "#FEEBD8"
         ]
       },
-      "sucre": {
-        "role": "neutral",
-        "displayName": "Sucre de palme",
-        "canonical": "#2A170D",
+      "ferme": {
+        "role": "tertiary",
+        "displayName": "Pastille fermé",
+        "canonical": "#FF3B30",
         "tonalRamp": [
-          "#140A05",
-          "#2A170D",
-          "#43281A",
-          "#5E3D2A",
-          "#7C5843",
-          "#A08066",
-          "#C7AE97",
-          "#EBDDCF"
-        ]
-      },
-      "sucre-doux": {
-        "role": "neutral",
-        "displayName": "Sucre doux",
-        "canonical": "#5A3416",
-        "tonalRamp": [
-          "#1E1006",
-          "#3A200C",
-          "#5A3416",
-          "#7A4C27",
-          "#9C6C44",
-          "#BD9169",
-          "#DAB998",
-          "#F2E2CF"
-        ]
-      },
-      "riz": {
-        "role": "neutral",
-        "displayName": "Riz",
-        "canonical": "#FFFBF3",
-        "tonalRamp": [
-          "#4A4234",
-          "#71675A",
-          "#978C7E",
-          "#BBB1A2",
-          "#DAD1C2",
-          "#EEE7D9",
-          "#F8F3E8",
-          "#FFFBF3"
-        ]
-      },
-      "riz-2": {
-        "role": "neutral",
-        "displayName": "Riz 2",
-        "canonical": "#F4EAD6",
-        "tonalRamp": [
-          "#463B26",
-          "#6B5E46",
-          "#908266",
-          "#B3A587",
-          "#D2C5A8",
-          "#E7DCC4",
-          "#F4EAD6",
-          "#FBF6EC"
-        ]
-      },
-      "riz-texte": {
-        "role": "neutral",
-        "displayName": "Riz texte",
-        "canonical": "#6A5442",
-        "tonalRamp": [
-          "#21180F",
-          "#3A2C20",
-          "#524031",
-          "#6A5442",
-          "#8A735F",
-          "#AC9781",
-          "#CFBDA8",
-          "#EEE3D6"
-        ]
-      },
-      "papier-bon": {
-        "role": "neutral",
-        "displayName": "Papier du bon",
-        "canonical": "#FFFDF8",
-        "tonalRamp": [
-          "#4B4636",
-          "#736C5B",
-          "#999180",
-          "#BDB5A4",
-          "#DCD5C5",
-          "#EFEADF",
-          "#F9F6EF",
-          "#FFFDF8"
-        ]
-      },
-      "pied-texte": {
-        "role": "neutral",
-        "displayName": "Pied texte",
-        "canonical": "#D9C7AD",
-        "tonalRamp": [
-          "#33281A",
-          "#53432E",
-          "#746045",
-          "#967F60",
-          "#B8A27F",
-          "#D9C7AD",
-          "#EADDCB",
-          "#F7F0E6"
-        ]
-      },
-      "pied-note": {
-        "role": "neutral",
-        "displayName": "Pied note",
-        "canonical": "#CBB89C",
-        "tonalRamp": [
-          "#302517",
-          "#4E3F2A",
-          "#6E5B40",
-          "#8F7A5A",
-          "#B09A79",
-          "#CBB89C",
-          "#E2D4C0",
-          "#F4ECE1"
+          "#210000",
+          "#480000",
+          "#740001",
+          "#A30004",
+          "#D50309",
+          "#FF6555",
+          "#FFB5AA",
+          "#FEE9E5"
         ]
       }
     },
     "typographyMeta": {
-      "enseigne": {
-        "displayName": "Enseigne",
-        "purpose": "Nom du restaurant en capitales Moul, deux lignes, « du » en petit Kantumruy 600."
+      "manifeste": {
+        "displayName": "Manifeste",
+        "purpose": "La phrase « Tout est fait maison… » ; 48 px sous 1068 px, 40 px sous 734 px."
       },
-      "enseigne-khmer": {
-        "displayName": "Enseigne khmère",
-        "purpose": "Mots khmers en Moul : nom, « អរគុណ » en pied, tampon « ឆ្ងាញ់ »."
+      "display": {
+        "displayName": "Display",
+        "purpose": "Nom du restaurant, titres des tuiles pleine largeur, « La carte » ; 48 px puis 40 px."
       },
       "headline": {
-        "displayName": "Titre de section",
-        "purpose": "Titres h2 des sections et des pages."
+        "displayName": "Headline",
+        "purpose": "Noms des plats dans la grille de tuiles ; 32 px sous 1068 px."
       },
       "title": {
-        "displayName": "Titre de plat",
-        "purpose": "Plats mis en avant et titres de rubrique de la carte."
+        "displayName": "Title",
+        "purpose": "Rubriques de la carte ; 28 px sur mobile."
+      },
+      "tagline": {
+        "displayName": "Tagline",
+        "purpose": "Phrase sous un titre de tuile pleine largeur ; 24 px puis 21 px."
+      },
+      "subhead": {
+        "displayName": "Subhead",
+        "purpose": "Phrase des tuiles de la grille, accroche de la carte, titre de la fiche commande (600)."
       },
       "body": {
-        "displayName": "Texte courant",
-        "purpose": "Paragraphes, descriptions, noms de plats dans les listes (en 600)."
+        "displayName": "Body",
+        "purpose": "Texte courant, boutons, noms de plats (600), prix en chiffres tabulaires."
       },
-      "label": {
-        "displayName": "Label",
-        "purpose": "Titre d'étiquette et titres du pied de page, en capitales espacées."
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Descriptions de plats, rubriques, ruban d’état, notes."
       },
-      "prix": {
-        "displayName": "Prix",
-        "purpose": "Tous les prix ; chiffres de chasse fixe pour l'alignement en colonne."
+      "footnote": {
+        "displayName": "Footnote",
+        "purpose": "Liens de navigation, pied de page, crédits."
       }
     },
     "shadows": [
       {
-        "name": "ombre-prise",
-        "value": "0 0.6rem 1.4rem -0.7rem rgb(42 23 13 / 0.55)",
-        "purpose": "Sous ce qui se saisit : bouton d'appel, étiquette pendue, bon de commande sur bureau."
+        "name": "voile",
+        "value": "rgb(0 0 0 / 0.32)",
+        "purpose": "Fond assombri derrière la feuille « Votre commande » sur mobile et tablette."
       },
       {
-        "name": "ombre-barre",
-        "value": "0 -0.5rem 1.5rem -0.75rem rgb(42 23 13 / 0.6)",
-        "purpose": "Barre d'actions mobile."
+        "name": "halo-focus",
+        "value": "0 0 0 4px rgb(0 125 250 / 0.35)",
+        "purpose": "Focus du champ de recherche, avec le contour bleu."
       },
       {
-        "name": "ombre-feuille",
-        "value": "0 -1rem 2rem -1rem rgb(42 23 13 / 0.45)",
-        "purpose": "Bon de commande ouvert en feuille basse sur mobile."
+        "name": "verre",
+        "value": "backdrop-filter: saturate(180%) blur(20px)",
+        "purpose": "Navigation, rubriques et barre de commande collées au-dessus du contenu."
+      },
+      {
+        "name": "ombre-plat",
+        "value": "SVG : disque noir à 28 %, flou gaussien 16, décalé vers le bas",
+        "purpose": "La seule ombre du site : sous chaque plat dessiné (tools/plats.mjs)."
       }
     ],
     "motion": [
       {
-        "name": "sortie",
-        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "Courbe de sortie exponentielle : arrivées et transitions d'état."
+        "name": "courbe",
+        "value": "cubic-bezier(0.28, 0.11, 0.32, 1)",
+        "purpose": "Courbe de tous les dévoilements et glissements."
       },
       {
-        "name": "etaler",
-        "value": "950ms sortie, translate3d(12%, 6%, 0) rotate(5deg) → 0",
-        "purpose": "La feuille de bananier glisse sur le curcuma ; calque SVG séparé, composé sur le GPU."
+        "name": "heros-texte",
+        "value": "1s, décalages 0 / 0,1 / 0,18 / 0,26 s",
+        "purpose": "Titre, phrase, détail et boutons du héros montent de 24 px en fondu."
       },
       {
-        "name": "tomber",
-        "value": "720ms, délai 380ms + 36ms par pièce ; chute accélérée, rebond de 5px",
-        "purpose": "Les ingrédients tombent sur la feuille ; les ombres apparaissent en un seul groupe (ombrer, 1,1s)."
+        "name": "heros-bol",
+        "value": "1,6s après 0,15 s",
+        "purpose": "Le bol monte de 120 px en se redressant de −24°."
       },
       {
-        "name": "suspendre",
-        "value": "1,7s à 1,15s ; pendule amorti 16° → −11° → 6° → −3° → 0",
-        "purpose": "L'étiquette 10 € tombe de son clou et se balance jusqu'au repos."
+        "name": "revelation",
+        "value": "opacité 0,9 s, translation 1,1 s, décalage 80 ms par élément",
+        "purpose": "Une seule fois par tuile en entrant à l’écran ; texte 36 px, plat 90 px."
       },
       {
-        "name": "retourner",
-        "value": "170ms ease-in puis 380ms sortie, rotateY 90° autour de l'axe vertical",
-        "purpose": "La pancarte d'état se retourne quand l'état ouvert/fermé change."
+        "name": "rotation-defilement",
+        "value": "animation-timeline: view(), −10° → +10°",
+        "purpose": "Le plat d’une tuile pivote pendant qu’elle traverse l’écran (navigateurs compatibles)."
       },
       {
-        "name": "entourer",
-        "value": "800ms cubic-bezier(0.65, 0, 0.35, 1), stroke-dashoffset 1 → 0",
-        "purpose": "Le jour courant s'entoure au marqueur dans le tableau des horaires."
+        "name": "manifeste",
+        "value": "view-timeline, gris de nuit → encre",
+        "purpose": "Les deux dernières phrases s’allument au défilement."
       },
       {
-        "name": "poser",
-        "value": "700ms sortie, décalage 70ms par vignette",
-        "purpose": "Les saveurs se posent sur la table quand la section entre à l'écran ; soulevées de 10px au survol."
+        "name": "curseur-rubrique",
+        "value": "0,45 s, translate + scale",
+        "purpose": "Le trait glisse sous la rubrique en cours."
       },
       {
-        "name": "tamponner",
-        "value": "560ms ; scale 1.9 → 0.95 → 1, rotation −18° → −6°",
-        "purpose": "Le tampon « ឆ្ងាញ់ » frappe le bandeau de la promesse."
+        "name": "feuille",
+        "value": "0,45 s",
+        "purpose": "La feuille de commande monte du bas, le voile apparaît."
       },
       {
-        "name": "voler",
-        "value": "640ms ease-in-out, parabole en 11 images",
-        "purpose": "Le jeton « +1 » relie le bouton du plat au bon de commande."
-      },
-      {
-        "name": "curseur",
-        "value": "300ms sortie sur translate, width, height",
-        "purpose": "Le curseur de rubrique glisse sous la rubrique en cours."
-      },
-      {
-        "name": "compter",
-        "value": "420ms sortie, translateY 0.35em → 0",
-        "purpose": "Total, compteur et quantité remontent à chaque changement."
-      },
-      {
-        "name": "page",
-        "value": "sortie 180ms ease-in, entrée 380ms sortie (view transitions)",
-        "purpose": "Passage d'une page à l'autre : l'en-tête reste, le contenu glisse."
+        "name": "jeton",
+        "value": "620 ms, parabole",
+        "purpose": "Le jeton bleu « +1 » vole du cercle jusqu’au total ou au sac."
       },
       {
         "name": "etat",
-        "value": "160ms ease-out",
-        "purpose": "Survol des boutons, puces et liens ; téléphone qui sonne au survol (520ms)."
+        "value": "180 ms sortie, 320 ms entrée",
+        "purpose": "Fondu enchaîné quand l’état d’ouverture change pendant la visite."
       },
       {
-        "name": "reduit",
+        "name": "mouvement-reduit",
         "value": "prefers-reduced-motion: reduce",
-        "purpose": "Plus de déplacement ; fondus (240–360ms) et changements d'état conservés."
+        "purpose": "Aucune animation ni transition, défilement instantané, pas de jeton."
       }
     ],
     "breakpoints": [
       {
-        "name": "tablette",
-        "value": "45rem"
+        "name": "grand",
+        "value": "1069px",
+        "purpose": "Carte en trois colonnes, tuiles à hauteur fixe."
       },
       {
-        "name": "bureau",
-        "value": "64rem"
+        "name": "moyen",
+        "value": "1068px",
+        "purpose": "Feuille de commande et barre du bas ; tuiles à hauteur libre."
       },
       {
-        "name": "carte-large",
-        "value": "72rem"
+        "name": "navigation",
+        "value": "833px",
+        "purpose": "Bouton menu, barre de 48 px."
+      },
+      {
+        "name": "petit",
+        "value": "734px",
+        "purpose": "Une colonne, corps réduits, marges de 16 px."
       }
     ]
   },
   "components": [
     {
-      "name": "Bouton d'appel",
+      "name": "Bouton plein",
       "kind": "button",
-      "refersTo": "bouton-appel",
-      "description": "Le seul bouton rouge : appeler le restaurant.",
-      "html": "<a class=\"ds-btn-appel\" href=\"tel:+33759525341\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6.6 3.5h2.6l1.6 4.2-2 1.4a12 12 0 0 0 6.1 6.1l1.4-2 4.2 1.6v2.6a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z\"/></svg><span>Appeler</span><span class=\"ds-btn-appel__num\">07 59 52 53 41</span></a>",
-      "css": ".ds-btn-appel{display:inline-flex;align-items:center;gap:.6rem;min-height:3.25rem;padding:.5rem 1.35rem;border:2px solid var(--sucre,#2A170D);border-radius:.5rem;background:var(--piment,#C8261B);color:var(--riz,#FFFBF3);font:700 1.0625rem/1.2 'Kantumruy Pro',system-ui,sans-serif;text-decoration:none;box-shadow:0 .6rem 1.4rem -.7rem rgb(42 23 13/.55);transition:background-color 160ms ease-out,transform 160ms cubic-bezier(.16,1,.3,1)}.ds-btn-appel:hover{background:var(--piment-fonce,#A51D14)}.ds-btn-appel:active{transform:translateY(1px)}.ds-btn-appel:focus-visible{outline:3px solid var(--sucre,#2A170D);outline-offset:3px}.ds-btn-appel__num{padding-left:.7rem;border-left:1.5px solid rgb(255 251 243/.5);font-weight:500}"
+      "refersTo": "bouton",
+      "description": "L'action principale de chaque tuile : Appeler, Commander, Itinéraire.",
+      "html": "<a class=\"ds-bouton\" href=\"tel:+33759525341\">Appeler</a>",
+      "css": ".ds-bouton{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:11px 21px;border:1px solid var(--bleu,#0071e3);border-radius:980px;font:400 17px/1.17648 -apple-system,BlinkMacSystemFont,Inter,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;letter-spacing:-.022em;text-decoration:none;white-space:nowrap;transition:background-color .2s ease,border-color .2s ease,color .2s ease;background:var(--bleu,#0071e3);color:#fff}.ds-bouton:hover{background:var(--bleu-appuye,#0066cc);border-color:var(--bleu-appuye,#0066cc)}.ds-bouton:focus-visible{outline:2px solid var(--bleu,#0071e3);outline-offset:3px}"
     },
     {
-      "name": "Bouton trait",
+      "name": "Bouton contour",
       "kind": "button",
-      "refersTo": "bouton-trait",
-      "description": "Action secondaire : voir la carte, itinéraire.",
-      "html": "<a class=\"ds-btn-trait\" href=\"#\">Voir la carte <svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4.5 12h15M13.5 6l6 6-6 6\"/></svg></a>",
-      "css": ".ds-btn-trait{display:inline-flex;align-items:center;gap:.6rem;min-height:3.25rem;padding:.5rem 1.35rem;border:2px solid var(--sucre,#2A170D);border-radius:.5rem;background:transparent;color:var(--sucre,#2A170D);font:700 1.0625rem/1.2 'Kantumruy Pro',system-ui,sans-serif;text-decoration:none;transition:background-color 160ms ease-out,color 160ms ease-out}.ds-btn-trait:hover{background:var(--sucre,#2A170D);color:var(--curcuma-clair,#F7C25A)}.ds-btn-trait:focus-visible{outline:3px solid var(--sucre,#2A170D);outline-offset:3px}"
+      "refersTo": "bouton-contour",
+      "description": "L'action secondaire, à droite de la pilule pleine ; se remplit au survol.",
+      "html": "<a class=\"ds-bouton-contour\" href=\"#\">Voir la carte</a>",
+      "css": ".ds-bouton-contour{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:11px 21px;border:1px solid var(--bleu,#0071e3);border-radius:980px;font:400 17px/1.17648 -apple-system,BlinkMacSystemFont,Inter,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;letter-spacing:-.022em;text-decoration:none;white-space:nowrap;transition:background-color .2s ease,border-color .2s ease,color .2s ease;background:transparent;color:var(--lien,#0066cc)}.ds-bouton-contour:hover{background:var(--bleu,#0071e3);color:#fff}.ds-bouton-contour:focus-visible{outline:2px solid var(--bleu,#0071e3);outline-offset:3px}"
     },
     {
-      "name": "État d'ouverture",
-      "kind": "chip",
-      "refersTo": "etat-etiquette",
-      "description": "Étiquette d'étal à bout en pointe ; la pastille fait le trou perforé.",
-      "html": "<p class=\"ds-etat\" data-code=\"ouvert\"><span class=\"ds-etat__trou\"></span>Ouvert · service du midi jusqu’à 14 h</p>",
-      "css": ".ds-etat{position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:.6rem;margin:0 0 0 .9rem;padding:.5rem .95rem .5rem .3rem;background:var(--riz,#FFFBF3);color:var(--sucre,#2A170D);border:2px solid var(--sucre,#2A170D);border-left:0;border-radius:0 .5rem .5rem 0;font:600 .95rem/1.35 'Kantumruy Pro',system-ui,sans-serif}.ds-etat::before{content:'';position:absolute;z-index:-1;top:50%;left:0;height:70.71%;aspect-ratio:1;background:inherit;border-left:2px solid var(--sucre,#2A170D);border-bottom:2px solid var(--sucre,#2A170D);border-radius:0 0 0 .3rem;translate:-50% -50%;rotate:45deg}.ds-etat__trou{width:.75rem;height:.75rem;border-radius:50%;border:2px solid var(--sucre,#2A170D);background:var(--curcuma,#F2A51C)}.ds-etat[data-code=ouvert] .ds-etat__trou{background:var(--feuille-2,#2C7343);border-color:var(--feuille,#1B5232);box-shadow:0 0 0 3px rgb(44 115 67/.25)}"
-    },
-    {
-      "name": "Étiquette pendue",
+      "name": "Lien à chevron",
       "kind": "custom",
-      "refersTo": "etiquette-pendue",
-      "description": "L'offre phare, pendue à sa ficelle sur l'étal ; se balance au survol.",
-      "html": "<a class=\"ds-etiquette\" href=\"#\"><span class=\"ds-etiquette__titre\">Menu bon et pas cher</span><span class=\"ds-etiquette__prix\">10 €</span></a>",
-      "css": ".ds-etiquette{position:relative;display:inline-grid;gap:.1rem;margin:4rem 0 0 2rem;padding:.7rem 1.1rem .75rem 2.4rem;background:var(--riz,#FFFBF3);color:var(--sucre,#2A170D);border:2px solid var(--sucre,#2A170D);border-radius:.45rem;text-decoration:none;box-shadow:0 .6rem 1.4rem -.7rem rgb(42 23 13/.55);transform:rotate(-5deg);transform-origin:1.2rem 50%;font-family:'Kantumruy Pro',system-ui,sans-serif}.ds-etiquette::before{content:'';position:absolute;left:.85rem;top:50%;width:.7rem;height:.7rem;margin-top:-.35rem;border-radius:50%;background:var(--curcuma,#F2A51C);border:2px solid var(--sucre,#2A170D)}.ds-etiquette::after{content:'';position:absolute;left:calc(1.2rem - 1px);bottom:calc(50% + .2rem);width:2px;height:4rem;background:var(--sucre,#2A170D);transform-origin:50% 100%;transform:rotate(-28deg)}.ds-etiquette:hover{transform:rotate(-1deg)}.ds-etiquette__titre{font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}.ds-etiquette__prix{font:600 2.6rem/1 'Kantumruy Pro Prix','Kantumruy Pro',sans-serif}"
+      "refersTo": "lien-chevron",
+      "description": "Lien de suite, texte bleu et chevron dessiné, souligné au survol.",
+      "html": "<a class=\"ds-lien\" href=\"#\">Découvrir la carte<svg viewBox=\"0 0 24 24\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 5.5l6.5 6.5L9 18.5\"/></svg></a>",
+      "css": ".ds-lien{display:inline-flex;align-items:center;gap:.15em;color:var(--lien,#0066cc);font:400 21px/1.38 -apple-system,BlinkMacSystemFont,Inter,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;letter-spacing:.011em;text-decoration:none}.ds-lien svg{width:.7em;height:.7em;margin-top:.08em}.ds-lien:hover{text-decoration:underline}.ds-lien:focus-visible{outline:2px solid var(--bleu,#0071e3);outline-offset:3px;border-radius:4px}"
     },
     {
-      "name": "Puce de rubrique",
+      "name": "Navigation",
       "kind": "nav",
-      "refersTo": "rubrique-puce",
-      "description": "Index des rubriques de la carte ; la rubrique en cours est pleine.",
-      "html": "<nav class=\"ds-rubriques\"><a href=\"#\">Entrées</a><a href=\"#\" aria-current=\"true\">Soupes</a><a href=\"#\">Bœuf</a></nav>",
-      "css": ".ds-rubriques{display:flex;gap:.5rem}.ds-rubriques a{display:inline-flex;align-items:center;min-height:2.5rem;padding:.3rem .9rem;border:1.5px solid var(--sucre,#2A170D);border-radius:999px;color:var(--sucre,#2A170D);font:600 .95rem 'Kantumruy Pro',system-ui,sans-serif;text-decoration:none;transition:background-color 160ms ease-out}.ds-rubriques a:hover{background:var(--curcuma-pale,#FDE7B4)}.ds-rubriques a[aria-current=true]{background:var(--sucre,#2A170D);color:var(--riz,#FFFBF3)}.ds-rubriques a:focus-visible{outline:3px solid var(--sucre,#2A170D);outline-offset:3px}"
+      "refersTo": "navigation",
+      "description": "Barre de verre dépoli de 44 px collée en haut : nom, liens de 12 px, téléphone.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Navigation\"><a class=\"ds-nav__nom\" href=\"#\">Aux Saveurs du Cambodge</a><span class=\"ds-nav__liens\"><a href=\"#\">La carte</a><a href=\"#\">Horaires</a><a href=\"#\">Accès</a></span><a class=\"ds-nav__tel\" href=\"tel:+33759525341\"><svg viewBox=\"0 0 24 24\" width=\"15\" height=\"15\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6.6 3.5h2.6l1.6 4.2-2 1.4a12 12 0 0 0 6.1 6.1l1.4-2 4.2 1.6v2.6a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z\"/></svg>07 59 52 53 41</a></nav>",
+      "css": ".ds-nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:44px;padding:0 22px;background:rgb(250 250 252/.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);font:400 12px/1 -apple-system,BlinkMacSystemFont,Inter,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;letter-spacing:-.01em}.ds-nav a{color:rgb(0 0 0/.8);text-decoration:none;transition:color .2s ease}.ds-nav a:hover{color:#000}.ds-nav__nom{justify-self:start;font-size:14px;font-weight:600;color:#1d1d1f!important}.ds-nav__liens{display:flex}.ds-nav__liens a{padding:16px 10px}.ds-nav__tel{justify-self:end;display:flex;align-items:center;gap:6px}.ds-nav a:focus-visible{outline:2px solid #0071e3;outline-offset:2px;border-radius:4px}"
+    },
+    {
+      "name": "Ruban d'état",
+      "kind": "custom",
+      "refersTo": "ruban",
+      "description": "L'état d'ouverture en direct sous la navigation, avec l'appel.",
+      "html": "<p class=\"ds-ruban\"><span class=\"ds-ruban__pastille\" aria-hidden=\"true\"></span>Ouvert jusqu’à 14&nbsp;h <a href=\"tel:+33759525341\">Appeler<svg viewBox=\"0 0 24 24\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 5.5l6.5 6.5L9 18.5\"/></svg></a></p>",
+      "css": ".ds-ruban{margin:0;padding:13px 22px;background:var(--perle,#f5f5f7);color:#1d1d1f;font:400 14px/1.42859 -apple-system,BlinkMacSystemFont,Inter,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;letter-spacing:-.016em;text-align:center}.ds-ruban__pastille{display:inline-block;width:.5em;height:.5em;margin-right:.45em;border-radius:50%;background:#34c759;vertical-align:.1em}.ds-ruban a{display:inline-flex;align-items:center;gap:.15em;color:#0066cc;text-decoration:none}.ds-ruban a svg{width:.7em;height:.7em}.ds-ruban a:hover{text-decoration:underline}"
+    },
+    {
+      "name": "Tuile produit",
+      "kind": "card",
+      "refersTo": "tuile-noire",
+      "description": "Un plat comme un produit : titre, phrase, prix, deux pilules, sur noir ou perle.",
+      "html": "<section class=\"ds-tuile\"><h2>Bo bun</h2><p class=\"ds-tuile__phrase\">La salade qui fait un repas.</p><p class=\"ds-tuile__detail\">8,50&nbsp;€.</p><p class=\"ds-tuile__actions\"><a class=\"ds-tuile__plein\" href=\"#\">Commander</a><a class=\"ds-tuile__contour\" href=\"#\">Voir à la carte</a></p></section>",
+      "css": ".ds-tuile{padding:52px 22px 56px;background:#000;color:#f5f5f7;text-align:center;font-family:-apple-system,BlinkMacSystemFont,Inter,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif}.ds-tuile h2{margin:0;font-size:40px;line-height:1.1;font-weight:600}.ds-tuile__phrase{margin:6px 0 0;font-size:21px;line-height:1.19;letter-spacing:.011em}.ds-tuile__detail{margin:12px 0 0;color:#86868b;font-size:17px}.ds-tuile__actions{display:flex;justify-content:center;gap:14px;margin:22px 0 0}.ds-tuile__plein,.ds-tuile__contour{display:inline-flex;align-items:center;min-height:44px;padding:11px 21px;border-radius:980px;font-size:17px;line-height:1.17648;text-decoration:none;transition:background-color .2s ease,color .2s ease}.ds-tuile__plein{border:1px solid #0071e3;background:#0071e3;color:#fff}.ds-tuile__plein:hover{background:#0066cc}.ds-tuile__contour{border:1px solid #2997ff;color:#2997ff}.ds-tuile__contour:hover{background:#2997ff;color:#000}.ds-tuile a:focus-visible{outline:2px solid #2997ff;outline-offset:3px}"
     },
     {
       "name": "Champ de recherche",
       "kind": "input",
       "refersTo": "champ-recherche",
-      "description": "Recherche instantanée dans les 86 plats, insensible aux accents.",
-      "html": "<label class=\"ds-recherche\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"10.5\" cy=\"10.5\" r=\"6.5\"/><path d=\"M15.5 15.5l5 5\"/></svg><input type=\"search\" placeholder=\"lok lac, citronnelle, crevettes…\"></label>",
-      "css": ".ds-recherche{position:relative;display:block;max-width:24rem}.ds-recherche svg{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:var(--sucre-doux,#5A3416)}.ds-recherche input{width:100%;min-height:3.25rem;padding:.5rem 1rem .5rem 2.9rem;border:2px solid var(--sucre,#2A170D);border-radius:.5rem;background:var(--riz,#FFFBF3);color:var(--sucre,#2A170D);font:400 1.0625rem 'Kantumruy Pro',system-ui,sans-serif}.ds-recherche input::placeholder{color:var(--riz-texte,#6A5442);opacity:1}.ds-recherche input:focus-visible{outline:3px solid var(--curcuma-clair,#F7C25A);outline-offset:2px}"
+      "description": "Recherche instantanée de la carte, loupe à gauche, halo bleu au focus.",
+      "html": "<label class=\"ds-recherche\"><svg viewBox=\"0 0 24 24\" width=\"19\" height=\"19\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"10.5\" cy=\"10.5\" r=\"6.5\"/><path d=\"M15.5 15.5l5 5\"/></svg><input type=\"search\" placeholder=\"Chercher un plat : lok lac, crevettes…\" aria-label=\"Chercher un plat\"></label>",
+      "css": ".ds-recherche{position:relative;display:block;max-width:560px}.ds-recherche svg{position:absolute;top:50%;left:17px;color:#6e6e73;transform:translateY(-50%);pointer-events:none}.ds-recherche input{width:100%;height:52px;padding:0 16px 0 46px;border:1px solid #86868b;border-radius:12px;background:#fff;color:#1d1d1f;font:400 17px -apple-system,BlinkMacSystemFont,Inter,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;letter-spacing:-.022em;box-sizing:border-box;-webkit-appearance:none;appearance:none}.ds-recherche input::placeholder{color:#6e6e73}.ds-recherche input:focus{outline:none;border-color:#0071e3;box-shadow:0 0 0 4px rgb(0 125 250/.35)}"
     },
     {
       "name": "Ligne de plat",
       "kind": "custom",
       "refersTo": "bouton-ajout",
-      "description": "Nom, description, prix tabulaire et bouton + qui note le plat dans le bon.",
-      "html": "<div class=\"ds-plat\"><span class=\"ds-plat__nom\">Nems au porc</span><span class=\"ds-plat__desc\">5 pièces</span><span class=\"ds-plat__prix\">7,00 €</span><button class=\"ds-plat__ajout\" type=\"button\" aria-label=\"Ajouter au bon : Nems au porc\"><svg viewBox=\"0 0 24 24\" width=\"19\" height=\"19\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg></button></div>",
-      "css": ".ds-plat{display:grid;grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:'nom prix ajout' 'desc prix ajout';column-gap:1rem;padding:.95rem 0;border-bottom:1px dashed rgb(42 23 13/.28);font-family:'Kantumruy Pro',system-ui,sans-serif;color:var(--sucre,#2A170D)}.ds-plat__nom{grid-area:nom;font-weight:600;font-size:1.0625rem}.ds-plat__desc{grid-area:desc;font-size:.925rem;color:var(--riz-texte,#6A5442)}.ds-plat__prix{grid-area:prix;font:600 1.0625rem 'Kantumruy Pro Prix','Kantumruy Pro',sans-serif;text-align:right;white-space:nowrap}.ds-plat__ajout{grid-area:ajout;display:grid;place-items:center;width:2.75rem;height:2.75rem;margin-block:-.45rem;padding:0;border:2px solid var(--sucre,#2A170D);border-radius:50%;background:var(--riz,#FFFBF3);color:var(--sucre,#2A170D);cursor:pointer;transition:background-color 160ms ease-out}.ds-plat__ajout:hover{background:var(--curcuma,#F2A51C)}.ds-plat__ajout:focus-visible{outline:3px solid var(--sucre,#2A170D);outline-offset:3px}"
+      "description": "Un plat de la carte : nom, description, prix tabulaire et cercle « + » ; dans la commande, cercle plein et quantité en pastille.",
+      "html": "<div class=\"ds-plat\"><span class=\"ds-plat__nom\">Lok lac</span><span class=\"ds-plat__desc\">Bœuf mariné sauté</span><span class=\"ds-plat__prix\">13,50&nbsp;€</span><button type=\"button\" class=\"ds-plat__ajout\" data-quantite=\"1\" aria-label=\"Ajouter à la commande : Lok lac\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M12 5.5v13M5.5 12h13\"/></svg></button></div>",
+      "css": ".ds-plat{display:grid;grid-template-columns:minmax(0,1fr) auto 32px;grid-template-areas:\"nom prix ajout\" \"desc prix ajout\";column-gap:16px;padding:15px 0;border-bottom:1px solid #d2d2d7;font:400 17px/1.47 -apple-system,BlinkMacSystemFont,Inter,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;letter-spacing:-.022em;color:#1d1d1f}.ds-plat__nom{grid-area:nom;font-weight:600}.ds-plat__desc{grid-area:desc;color:#6e6e73;font-size:14px;line-height:1.43}.ds-plat__prix{grid-area:prix;font-variant-numeric:tabular-nums}.ds-plat__ajout{grid-area:ajout;position:relative;align-self:start;display:grid;place-items:center;width:32px;height:32px;margin-top:-3px;padding:0;border:1px solid #0071e3;border-radius:50%;background:#0071e3;color:#fff;cursor:pointer}.ds-plat__ajout:hover{background:#0066cc}.ds-plat__ajout:focus-visible{outline:2px solid #0071e3;outline-offset:3px}.ds-plat__ajout::after{content:attr(data-quantite);position:absolute;top:-7px;right:-7px;display:grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border:2px solid #fff;border-radius:9px;background:#1d1d1f;color:#fff;font:600 11px/1 -apple-system,BlinkMacSystemFont,Inter,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif}"
     }
   ],
   "narrative": {
-    "northStar": "L'étal du marché",
-    "overview": "Le site se tient comme un étal de marché cambodgien : de grands aplats de curcuma et de feuille de bananier possèdent des régions entières de la page, les ingrédients du kroeung sont posés dessus en illustrations sérigraphiées, et l'on vend franchement — un prix lisible, une étiquette qui dit si c'est ouvert, un téléphone à un geste. L'identité tient dans l'enseigne bilingue : le nom en khmer, en Moul, au-dessus du nom latin en capitales Moul, comme sur les devantures de Phnom Penh.\n\nLa densité alterne : un héros saturé, des passages calmes sur papier riz pour lire (la carte compte 86 plats), puis de nouveau la couleur en bandes. Le relief est celui de l'impression : contours d'encre légèrement décalés, trame de points, ombres plates de sérigraphie. Aucune photo, aucun costume « asiatique » (laques rouge et or, lanternes, pinceau), aucun héros sombre façon restaurant chic.",
+    "northStar": "La vitrine produit",
+    "overview": "Chaque plat est présenté comme Apple présente un produit : seul, centré, vu du dessus, sur une tuile pleine largeur noire ou gris perle, avec un nom court, une phrase et un prix. L'interface se retire : trois fonds (blanc, perle, noir), une police, un bleu. Toute la couleur de la page vient des plats dessinés ; le reste est de l'air, du texte demi-gras serré et des pilules bleues.\n\nLa page se lit comme une suite de tuiles : le nom du restaurant et le bol de soupe sur noir, le menu à 10 € sur perle, quatre plats en grille de deux, une phrase manifeste sur blanc, les horaires, l'adresse et son plan. La carte reprend la même retenue pour lire 86 plats : une barre locale collante en verre dépoli, des lignes séparées par des filets, un cercle bleu pour ajouter, une fiche « Votre commande » gris perle.",
     "keyCharacteristics": [
-      "Aplats curcuma (#F2A51C) et feuille (#1B5232) qui tiennent des sections entières",
-      "Enseigne bilingue en Moul ; tout le texte courant en Kantumruy Pro",
-      "Illustrations en cinq encres sur papier riz, contour décalé, trame de points",
-      "Rouge piment réservé à l'appel téléphonique",
-      "Étiquettes d'étal pour l'état d'ouverture et les prix mis en avant",
+      "Tuiles pleine largeur noires (#000000) et gris perle (#F5F5F7), séparées par 12 px de blanc",
+      "Police du système d'Apple (SF Pro) sur ses appareils, Inter auto-hébergée ailleurs ; titres demi-gras serrés",
+      "Un seul bleu d'action : pilules pleines ou en contour, cercle d'ajout, compteur",
+      "Les plats dessinés vus du dessus, coupés par le bas de leur tuile",
+      "Verre dépoli réservé à ce qui reste collé au-dessus du contenu",
       "Prix en chiffres tabulaires, au format « 10,00 € »",
-      "Un seul moment fort animé : l'étal s'installe au chargement ; le reste du mouvement explique un état ou répond à un geste"
+      "Mouvement discret : le héros se dévoile au chargement, chaque tuile une seule fois au défilement"
     ],
     "rules": [
       {
-        "name": "The One Chili Rule",
-        "body": "Le rouge piment est l'appel téléphonique et rien d'autre dans l'interface. Les seuls autres rouges sont les piments dessinés.",
+        "name": "The One Blue Rule",
+        "body": "Le bleu est la seule couleur d'action. Rien d'autre n'est cliquable en couleur ; les pastilles d'état sont des points, pas des boutons.",
         "section": "colors"
       },
       {
-        "name": "The Five Inks Rule",
-        "body": "Les illustrations n'utilisent que cinq encres (sucre, curcuma, piment, feuille, vert tendre #A9C65C) sur papier riz (#FBF5EA) ; toute autre teinte est une trame ou une surimpression de ces encres (voir tools/etal.mjs).",
+        "name": "The Dish Is The Color Rule",
+        "body": "L'interface n'a pas de teinte : la couleur de la page vient des plats dessinés (bouillon, herbes, crevettes). Une nouvelle surface n'ajoute pas de couleur d'interface, elle ajoute un plat.",
         "section": "colors"
       },
       {
-        "name": "The Quiet Field Rule",
-        "body": "Les longues listes se lisent sur riz ; la couleur tient les bandes, les titres soulignés au curcuma et les bords, jamais le fond d'une liste de plats.",
+        "name": "The Three Grounds Rule",
+        "body": "Trois fonds seulement : blanc pour lire, perle et noir pour les tuiles. Deux tuiles de même fond ne se touchent jamais sans les 12 px de blanc qui les séparent.",
         "section": "colors"
       },
       {
-        "name": "The Bilingual Sign Rule",
-        "body": "Moul ne sert qu'à l'enseigne et aux mots khmers. Jamais pour du français courant : sa partie latine n'a pas d'accents.",
+        "name": "The System Voice Rule",
+        "body": "Une seule famille : SF Pro par la police du système chez Apple, Inter auto-hébergée ailleurs. C'est la police de la référence demandée, pas un repli faute de mieux.",
+        "section": "typography"
+      },
+      {
+        "name": "The Semibold Ceiling Rule",
+        "body": "Le gras s'arrête à 600. Un titre gagne sa place par sa taille, jamais par une graisse plus forte, une capitale ou une couleur.",
         "section": "typography"
       },
       {
         "name": "The Tabular Price Rule",
-        "body": "Un prix s'écrit « 10,00 € » (Intl fr-FR), en Kantumruy Pro Prix, pour que les virgules s'alignent en colonne.",
+        "body": "Un prix s'écrit « 10,00 € » (Intl fr-FR) en chiffres tabulaires, aligné à droite.",
         "section": "typography"
       },
       {
         "name": "The Fine Space Rule",
-        "body": "Espace fine insécable avant « ? ! : ; » et dans « « » » ; gluon U+2060 après le tiret des plages horaires pour que « 18 h – 21 h 45 » ne se coupe pas.",
+        "body": "Espace fine insécable avant « ? ! : ; » et dans « « » » ; gluon après le tiret des plages horaires pour que « 18 h – 21 h 45 » ne se coupe pas.",
         "section": "typography"
       },
       {
-        "name": "The Print Depth Rule",
-        "body": "Pas d'ombre décalée dure ni de halo coloré : la profondeur d'une illustration est une silhouette plate décalée, celle d'un objet d'interface est une ombre douce sous ce que l'on peut prendre.",
+        "name": "The Centered Tile Rule",
+        "body": "Une tuile porte un seul sujet, dans cet ordre : titre, phrase, détail en gris, deux actions (pleine puis contour), image centrée qui sort par le bas.",
+        "section": "layout"
+      },
+      {
+        "name": "The Glass Only When Sticky Rule",
+        "body": "Le verre dépoli ne sert qu'à ce qui flotte au-dessus du contenu qui défile : navigation, rubriques, barre de commande. Jamais sur une carte posée dans la page.",
         "section": "elevation"
       },
       {
-        "name": "The Stall Setup Rule",
-        "body": "L'étal s'installe une fois, au chargement de l'accueil, et le texte n'attend jamais : nom, état et bouton d'appel sont lisibles dès la première image. Une animation qui n'explique ni un état, ni un geste, ni un lien entre deux endroits n'a pas sa place.",
-        "section": "elevation"
-      },
-      {
-        "name": "The Tag Rule",
-        "body": "Ce qui annonce un état ou une offre est une étiquette d'étal : l'état d'ouverture a un bout en pointe dont la pastille fait le trou perforé ; l'offre à 10 € pend à sa ficelle et se balance au survol.",
+        "name": "The Pill Rule",
+        "body": "Un bouton est toujours une pilule pleine ou en contour, jamais un rectangle ; une action dans une ligne est un cercle de 32 px.",
         "section": "shapes"
       }
     ],
     "dos": [
-      "Do poser la couleur en aplats de section (curcuma #F2A51C, feuille #1B5232) et garder les listes sur riz (#FFFBF3).",
-      "Do écrire les prix « 10,00 € » en Kantumruy Pro Prix et les aligner à droite.",
-      "Do dessiner tout nouvel ingrédient avec les cinq encres de tools/etal.mjs, contour décalé et ombre plate.",
-      "Do garder des cibles tactiles de 2,75rem minimum et un focus visible (3px sucre, ou curcuma clair sur fond sombre).",
-      "Do garder un seul moment fort par page : à l'accueil, la feuille glisse (950ms), les ingrédients tombent avec leurs ombres (720ms chacun, décalés de 36ms) et l'étiquette se balance. Le reste explique un état (pancarte, curseur, jeton) ou répond à un geste, sans boucle.",
-      "Do prévoir le mouvement réduit : plus aucun déplacement, mais les fondus et changements d'état restent lisibles."
+      "Do présenter un plat comme un produit : seul, vu du dessus, centré sur une tuile noire ou perle, coupé par le bas.",
+      "Do garder le bleu (#0071E3) pour l'action et le bleu de lien (#0066CC, #2997FF sur noir) pour les liens à chevron.",
+      "Do écrire les prix « 10,00 € » en chiffres tabulaires, alignés à droite.",
+      "Do garder des cibles tactiles de 44 px et un focus bleu visible de 2 px.",
+      "Do dévoiler une seule fois : le héros au chargement (texte qui monte en 1 s, bol qui se pose en tournant en 1,6 s), chaque tuile en entrant à l'écran ; rien en boucle, aucun déplacement en mouvement réduit.",
+      "Do signaler les dessins comme dessins (« (illustration) » dans le texte alternatif, note de pied de page) tant qu'il n'y a pas de vraies photos."
     ],
     "donts": [
-      "Don't utiliser le rouge piment pour autre chose que l'appel.",
-      "Don't composer du français en Moul, ni utiliser une police système comme voix d'affichage.",
-      "Don't mettre de sur-titre ou d'eyebrow au-dessus d'un titre.",
-      "Don't présenter une illustration ou une photo comme une photo des plats de la maison.",
-      "Don't revenir au costume « asiatique » : laque rouge et or, lanternes, dragons, faux pinceau.",
-      "Don't utiliser d'ombre décalée dure, de dégradé de texte ou de verre dépoli décoratif."
+      "Don't ajouter une couleur d'interface : pas de rouge, d'or, de vert, hors des pastilles d'état.",
+      "Don't mettre de sur-titre ou d'étiquette (« Nouveau ») au-dessus d'un titre de tuile.",
+      "Don't dépasser le demi-gras (600) ni composer de titre en capitales.",
+      "Don't poser de texture, d'ornement, de photo d'ambiance sombre ou d'ombre portée sur l'interface.",
+      "Don't utiliser de dégradé de texte ni de verre dépoli sur ce qui ne reste pas collé à l'écran.",
+      "Don't présenter un dessin comme une photo des plats de la maison."
     ]
   }
 }

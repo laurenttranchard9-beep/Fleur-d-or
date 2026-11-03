@@ -1,7 +1,7 @@
 """Draw the neighbourhood map (public/assets/img/plan-quartier.svg) from IGN BD TOPO data.
 
 Data: IGN – BD TOPO®, Licence Ouverte Etalab 2.0, fetched from the Géoplateforme WFS
-and cached in tools/.cache/. The label font (a Kantumruy Pro subset) is embedded so the
+and cached in tools/.cache/. The label font (an Inter subset) is embedded so the
 file renders the same when loaded as an <img>. Requires: pip install fonttools brotli
 Usage: python tools/plan.py
 """
@@ -20,7 +20,7 @@ from fontTools.ttLib import TTFont
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CACHE = ROOT / "tools" / ".cache"
 OUT = ROOT / "public" / "assets" / "img" / "plan-quartier.svg"
-FONT = ROOT / "public" / "assets" / "fonts" / "kantumruy-pro-latin.woff2"
+FONT = ROOT / "public" / "assets" / "fonts" / "inter.woff2"
 
 LAT0, LON0 = 43.688048, 1.40842  # 10 avenue Salvador Allende (Base Adresse Nationale)
 W, H = 800, 560
@@ -36,12 +36,16 @@ LAYERS = [
     "equipement_de_transport",
 ]
 
-INK = "#2A170D"
-GROUND = "#F2A51C"
-BUILT = "#E59A17"
-RICE = "#FFFBF3"
-LEAF = "#2C7343"
-LEAF_DEEP = "#1B5232"
+# Neutral palette in the spirit of a maps app: grey ground, white streets, one blue pin.
+INK = "#1D1D1F"
+LABEL = "#6E6E73"
+GROUND = "#F2F2F4"
+BUILT = "#E5E5EA"
+RICE = "#FFFFFF"
+CASING = "#D2D2D7"
+LEAF = "#DCEBD3"
+LEAF_DEEP = "#CFE3F2"
+PIN = "#0071E3"
 
 
 def fetch(layer):
@@ -152,7 +156,7 @@ def main():
         for ring in lines(f["geometry"])
         if visible(ring)
     ]
-    parts.append(f'<path d="{" ".join(zone_paths)}" fill="{LEAF}" opacity=".85"/>')
+    parts.append(f'<path d="{" ".join(zone_paths)}" fill="{LEAF}"/>')
 
     water_paths = [path(ring, close=True) for f in water for ring in lines(f["geometry"]) if visible(ring)]
     parts.append(f'<path d="{" ".join(water_paths)}" fill="{LEAF_DEEP}"/>')
@@ -178,21 +182,21 @@ def main():
                 groups[road_class(p)].append(path(line))
 
     parts.append(
-        f'<path d="{" ".join(groups["sentier"])}" stroke="{RICE}" stroke-width="1.6" stroke-dasharray="3 4" fill="none" opacity=".9"/>'
+        f'<path d="{" ".join(groups["sentier"])}" stroke="{CASING}" stroke-width="1.6" stroke-dasharray="3 4" fill="none"/>'
     )
     minor = " ".join(groups["mineure"])
     major = " ".join(groups["majeure"])
     highway = " ".join(groups["autoroute"])
-    parts.append(f'<path d="{minor}" stroke="{INK}" stroke-width="7.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".35"/>')
-    parts.append(f'<path d="{major}" stroke="{INK}" stroke-width="12.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>')
+    parts.append(f'<path d="{minor}" stroke="{CASING}" stroke-width="7.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>')
+    parts.append(f'<path d="{major}" stroke="{CASING}" stroke-width="12.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>')
     parts.append(f'<path d="{minor}" stroke="{RICE}" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>')
     parts.append(f'<path d="{major}" stroke="{RICE}" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>')
-    parts.append(f'<path d="{highway}" stroke="{INK}" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/>')
-    parts.append(f'<path d="{highway}" stroke="{GROUND}" stroke-width="2" fill="none" stroke-dasharray="10 8"/>')
+    parts.append(f'<path d="{highway}" stroke="#BDBDC4" stroke-width="15" fill="none" stroke-linecap="round" stroke-linejoin="round"/>')
+    parts.append(f'<path d="{highway}" stroke="{RICE}" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>')
 
     rails = [path(line) for f in rail if f["properties"].get("nature") == "Voie ferrée principale" for line in lines(f["geometry"]) if visible(line)]
-    parts.append(f'<path d="{" ".join(rails)}" stroke="{INK}" stroke-width="3" fill="none"/>')
-    parts.append(f'<path d="{" ".join(rails)}" stroke="{INK}" stroke-width="9" fill="none" stroke-dasharray="1.6 9"/>')
+    parts.append(f'<path d="{" ".join(rails)}" stroke="#B7B7BE" stroke-width="2.5" fill="none"/>')
+    parts.append(f'<path d="{" ".join(rails)}" stroke="#B7B7BE" stroke-width="8" fill="none" stroke-dasharray="1.4 9"/>')
 
     # Street labels follow the longest visible segment of each named street.
     labels = {
@@ -246,7 +250,7 @@ def main():
     for name, (x, y) in pois:
         if 30 < x < W - 30 and 30 < y < H - 30:
             texts.append(
-                f'<g class="lieu" transform="translate({x:.1f} {y:.1f})"><circle r="5" fill="{RICE}" stroke="{INK}" stroke-width="2"/>'
+                f'<g class="lieu" transform="translate({x:.1f} {y:.1f})"><circle r="5" fill="{RICE}" stroke="{LABEL}" stroke-width="2"/>'
                 f'<text x="9" y="4">{name}</text></g>'
             )
 
@@ -257,34 +261,34 @@ def main():
         f'<rect width="{bar / 2:.1f}" height="6" fill="{RICE}" stroke="{INK}" stroke-width="1.5"/><text y="-7">100 m</text></g>'
     )
     texts.append(
-        f'<g class="note" transform="translate({W - 34} 34)"><circle r="18" fill="{RICE}" stroke="{INK}" stroke-width="2"/>'
+        f'<g class="note" transform="translate({W - 34} 34)"><circle r="18" fill="{RICE}" stroke="{CASING}" stroke-width="1.5"/>'
         f'<path d="M0 -12 L6 6 L0 2 L-6 6 Z" fill="{INK}"/><text y="-22" text-anchor="middle">N</text></g>'
     )
 
     marker = (
         f'<g transform="translate({W / 2} {H / 2})">'
-        f'<circle r="30" fill="{INK}" opacity=".16"/>'
-        f'<path d="M0 0 C-4 -10 -17 -19 -17 -32 A17 17 0 1 1 17 -32 C17 -19 4 -10 0 0 Z" fill="{INK}"/>'
-        f'<circle cy="-32" r="7" fill="{GROUND}"/>'
-        f'<g class="enseigne" transform="translate(-246 -108)">'
-        f'<rect width="214" height="50" rx="3" fill="{RICE}" stroke="{INK}" stroke-width="2.5"/>'
-        f'<path d="M214 34 L232 66 L196 50 Z" fill="{RICE}" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>'
-        f'<rect x="190" y="38" width="22" height="10" fill="{RICE}"/>'
-        f'<text x="14" y="22" class="nom">Aux Saveurs du Cambodge</text>'
-        f'<text x="14" y="40">10 av. Salvador Allende</text></g></g>'
+        f'<ellipse cy="2" rx="12" ry="4" fill="{INK}" opacity=".18"/>'
+        f'<path d="M0 0 C-4 -10 -17 -19 -17 -32 A17 17 0 1 1 17 -32 C17 -19 4 -10 0 0 Z" fill="{PIN}"/>'
+        f'<circle cy="-32" r="6.5" fill="{RICE}"/>'
+        f'<g class="enseigne" transform="translate(-238 -104)">'
+        f'<rect width="206" height="52" rx="12" fill="{INK}" opacity=".12" filter="url(#flou)" transform="translate(0 4)"/>'
+        f'<rect width="206" height="52" rx="12" fill="{RICE}"/>'
+        f'<path d="M190 52 L214 74 L170 52 Z" fill="{RICE}"/>'
+        f'<text x="16" y="23" class="nom">Aux Saveurs du Cambodge</text>'
+        f'<text x="16" y="41">10 av. Salvador Allende</text></g></g>'
     )
 
     used = "".join(labels.values()).upper() + "".join(name for name, _ in pois) + "100 mN" + "Aux Saveurs du Cambodge10 av. Salvador Allende"
     style = (
         font_face(used)
-        + f"text{{font-family:Plan,sans-serif;font-weight:600;font-size:13px;fill:{INK}}}"
-        + ".rue{letter-spacing:.06em;text-transform:uppercase;font-size:12px}"
-        + ".enseigne text{font-size:13px;font-weight:500}.enseigne .nom{font-weight:700;font-size:15px}"
+        + f"text{{font-family:Plan,sans-serif;font-weight:500;font-size:13px;fill:{LABEL}}}"
+        + ".rue{letter-spacing:.04em;text-transform:uppercase;font-size:11px;font-weight:600}"
+        + f".enseigne text{{font-size:13px;font-weight:400;fill:{LABEL}}}.enseigne .nom{{font-weight:600;font-size:14px;fill:{INK}}}"
     )
     svg = (
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">'
         f"<style>{style}</style>"
-        f'<defs>{"".join(defs)}</defs>'
+        f'<defs><filter id="flou" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation="6"/></filter>{"".join(defs)}</defs>'
         + "".join(parts)
         + "".join(texts)
         + marker

@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "node build.mjs",
-    "dessins": "node tools/etal.mjs && node build.mjs",
+    "dessins": "node tools/plats.mjs && node build.mjs",
     "images": "node tools/images.mjs",
     "apercu": "npx --yes serve public"
   }

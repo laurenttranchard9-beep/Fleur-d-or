@@ -8,40 +8,33 @@ related_targets: ["public/carte/index.html"]
 # Surface brief — accueil (public/index.html) + carte (public/carte/index.html)
 
 ## Scope and mode
-- Accueil : Persuade. Carte : Read/Operate (scanner ~90 plats, préparer une commande téléphonique).
+- Accueil : Persuade. Carte : Read/Operate (scanner 86 plats, préparer une commande téléphonique).
 - Audience : voisins du nord toulousain sur mobile, pause déjeuner ou commande du soir. Action : appeler (07 59 52 53 41), sinon itinéraire ou carte.
-- Preuves disponibles : la carte et ses prix, les horaires, l'adresse, la promesse « fait maison ». Pas de photos, pas d'avis : rien d'inventé.
-- Carte blanche du commanditaire : direction tirée au sort et retenue sans tour de décision (non présentée).
+- Demande du 03/11/2026 : « fait un site qui soit minimaliste comme le site de Apple ». Elle remplace la direction « étal de marché » (toujours dans l'historique, commit ba701ed).
+- Référence relevée sur apple.com/fr le 03/11/2026 : tuiles pleine largeur noires et gris clair, titre centré 40–56 px demi-gras, sous-titre 28 px, boutons pilules bleus plein et contour, grande image produit centrée, navigation 44 px, pied de page gris en 12 px.
 
 ## Direction contract
 
-THESIS: Le site est un étal de marché cambodgien : les « saveurs » du nom sont montrées telles quelles (citronnelle, galanga, curcuma, combava, piment), et la page vend comme un étal — prix francs, étiquette ouvert/fermé en direct, téléphone à un geste. Refuse le défaut de la catégorie : héro photo sombre + « Bienvenue » en script, et le costume rouge-or-lanterne « asiatique ».
+THESIS: Une vitrine épurée à la manière d'Apple : chaque plat est présenté comme un produit, seul et centré sur une tuile noire ou gris très clair, avec un nom court, une phrase et un prix. Le téléphone reste à un geste et l'état d'ouverture tient dans un bandeau. Refuse la vitrine de restaurant chargée (photos sombres, textures, ornements) comme l'étal coloré précédent.
 
-OWN-WORLD: Aplats curcuma et feuille de bananier qui possèdent des régions entières ; encre sucre de palme ; rouge piment réservé à « Appeler ». Ingrédients sérigraphiés à plat sur feuille de bananier (SVG d'auteur, 4–5 encres, léger décalage de repérage). Étiquettes en carton pour les prix et l'état d'ouverture. Enseigne bilingue : khmer en Moul au-dessus du latin ; Kantumruy Pro (dessinée par un typographe cambodgien) pour tout ce qui se lit ; chiffres de prix tabulaires.
+OWN-WORLD: Blanc, gris #F5F5F7 et noir en tuiles pleine largeur ; texte #1D1D1F, gris #6E6E73 ; bleu #0071E3 pour les boutons pilules, #0066CC (#2997FF sur noir) pour les liens à chevron ; aucune autre couleur dans l'interface : la couleur vient seulement des plats dessinés vus du dessus (aplats, dégradés doux, ombre floue). Police système d'Apple (SF Pro via -apple-system) et Inter auto-hébergée ailleurs ; titres demi-gras serrés, beaucoup d'air.
 
-STORY: Le voisin affamé comprend en un écran ce que c'est (cuisine cambodgienne faite maison, Saint-Alban), si c'est ouvert maintenant, qu'un menu complet coûte 10 €, et il appelle. Les autres descendent vers les classiques, les saveurs, les horaires (midi du week-end sur commande la veille), l'adresse, puis la carte où ils composent un bon de commande à lire au téléphone.
+STORY: En un écran, le visiteur sait qui c'est, voit dans le bandeau si c'est ouvert et peut appeler. Il fait défiler des tuiles « produit » (menu à 10 €, lok lac, bo bun, nems, porc au caramel), lit la promesse « fait maison », les horaires et l'adresse. Sur la carte, il cherche, ajoute au bon de commande et appelle.
 
-FIRST VIEWPORT: Desktop 1440×900 : champ curcuma ; colonnes 1–6 : enseigne (khmer « រសជាតិកម្ពុជា » en Moul, puis AUX SAVEURS DU CAMBODGE en capitales Moul ~7vw, puis « Cuisine cambodgienne faite maison · Saint-Alban »), étiquette d'état en direct, bouton rouge piment « Appeler · 07 59 52 53 41 » + « Voir la carte ». Colonnes 7–12 : feuille de bananier portant l'étal d'ingrédients, coupée par le bord droit, étiquette pendue « Menu bon et pas cher 10 € ». Mobile 390×844 : enseigne empilée pleine largeur, étiquette d'état, deux boutons pleine largeur au-dessus de la ligne de flottaison, illustration qui dépasse en bas ; barre fixe basse (Appeler · Carte · Y aller) après le héro.
+FIRST VIEWPORT: Desktop 1440×900 : navigation translucide de 44 px (nom à gauche, liens de 12 px au centre, téléphone à droite) ; bandeau d'état gris clair centré ; tuile noire : « Aux Saveurs du Cambodge » 56 px centré, sous-titre 28 px, ligne grise, boutons pilules « Appeler » (plein) et « Voir la carte » (contour), le bol de soupe vu du dessus centré sous le texte qui dépasse en bas de l'écran. Mobile 390×844 : même pile centrée, titre 40 px, boutons côte à côte, bol de 360 px (94 % de la largeur), coupé par le bas comme sur bureau.
 
-FORM: Étal de marché et ingrédients du kroeung — position 4 de ma liste ordonnée (krama, enseignes de street-food de Phnom Penh, dépliant de traiteur, ingrédients du marché, table de gargote, billets en riel, ornement d'Angkor) ; seed key d10c6c2b ; code-led (pas de génération d'images).
-
-RAISES:
-- Donné par le bord de nuage irisé (déclinée) : la couleur tient les bandes et les bords ; le champ de lecture de la carte reste calme pour que 90 plats restent lisibles.
-- Donné par la ville endormie (déclinée) : l'heure locale est un état de premier rang — le premier écran parle du service en cours (déjeuner, dîner, fermé, midi du week-end sur commande la veille), calculé en heure de Paris.
-- Donné par le relevé d'exposition (déclinée) : discipline tabulaire — un seul format de prix, chiffres tabulaires sur une colonne alignée.
-- Donné par le compteur nixie (déclinée) : les quantités sont l'interface — le nombre et le total du bon de commande changent comme des événements visibles, chiffres à position fixe.
-- Donné par l'établi matériel (déclinée) : une seule couleur d'action — le rouge piment est « Appeler » et rien d'autre dans l'interface.
-- Calendrier publicitaire à feuillets (compétitive, reste l'alternative ; non construite faute de plaque peinte) : son anneau du jour inspire l'état « aujourd'hui » du tableau d'horaires.
+FORM: Canon épinglé par l'utilisateur (« minimaliste comme le site d'Apple ») ; seed key b7e0bfa3, tirage (index 3) écarté parce que la demande explicite l'emporte ; code-led (pas de génération d'images).
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 
-## Motion (ajoutée le 30/10/2026, demande « ajoute des animations »)
-- Moment fort : « On installe l'étal ». Au chargement, la feuille de bananier glisse sur le curcuma, les ingrédients tombent un à un et leurs ombres se posent avec eux, puis l'étiquette 10 € tombe de son clou et se balance jusqu'au repos. Environ 1,6 s, une seule fois, en CSS seul. Le texte et les boutons d'appel restent visibles d'emblée.
-- Continuité : transition entre les pages (l'en-tête reste en place, le contenu glisse) ; sur la carte, un curseur glisse d'une rubrique à l'autre, le titre visé par l'index se surligne au marqueur, et un jeton « +1 » vole du bouton jusqu'au bon de commande.
-- Retour d'action : l'étiquette d'état se retourne comme une pancarte « ouvert / fermé » ; le jour courant est entouré au marqueur ; le tampon « ឆ្ងាញ់ » frappe le bandeau ; les ingrédients des saveurs se posent sur la table et se soulèvent au survol ; le téléphone sonne au survol des boutons d'appel ; les lignes du bon entrent et sortent.
-- Budget : rien ne tourne en boucle ; transform, opacity et stroke-dashoffset ; la feuille est un calque à part pour rester composée sur le GPU ; les ombres s'animent en un seul groupe. Mouvement réduit : plus aucun déplacement, mais fondus et changements d'état conservés.
+## Motion
+- Moment fort : au chargement, le titre et les boutons montent en fondu, puis le bol de soupe s'élève en tournant légèrement, comme un produit qu'on dévoile.
+- Défilement : chaque tuile révèle son texte puis son plat une seule fois en entrant à l'écran (fondu, montée de 36 px, le plat de 90 px). Rien ne tourne en boucle.
+- Défilement lié (navigateurs qui gèrent `animation-timeline`, sinon rien) : le plat d'une tuile tourne de −10° à +10° pendant qu'elle traverse l'écran, comme un produit qu'on fait pivoter ; le manifeste s'allume phrase après phrase, du gris au noir.
+- Retour d'action : bandeau d'état en fondu ; sur la carte, un point bleu vole du plat jusqu'au bon, les lignes entrent et sortent, un trait souligne la rubrique en cours ; transition douce entre les pages.
+- Mouvement réduit : aucun déplacement, fondus conservés.
 
 ## Unresolved
 - Identité légale (raison sociale, SIRET, directeur de publication) pour les mentions légales.
+- Photos réelles des plats : les dessins sont prévus pour être remplacés.
 - Service sur place confirmé ? Moyens de paiement ? Fermetures annuelles ?
-- Nom khmer officiel éventuel du restaurant (« រសជាតិកម្ពុជា » = « saveurs du Cambodge », traduction proposée).

@@ -1,6 +1,4 @@
-Kantumruy Pro: Copyright 2022 The Kantumruy Pro Project Authors (https://github.com/googlefonts/kantumruy)
-Moul: Copyright 2020 The Moul Project Authors (https://github.com/danhhong/Moul)
-kantumruy-pro-prix.woff2 is a modified subset of Kantumruy Pro (tabular digits), renamed "Kantumruy Pro Prix".
+Copyright 2020 The Inter Project Authors (https://github.com/rsms/inter)
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:

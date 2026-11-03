@@ -1,4 +1,4 @@
-// Génère le site statique dans public/ à partir de data/*.json et src/svg/*.svg.
+// Génère le site statique dans public/ à partir de data/*.json.
 // Aucune dépendance : node build.mjs (Node 18 ou plus).
 
 import { createHash } from 'node:crypto';
@@ -11,48 +11,53 @@ const PUBLIC = join(ROOT, 'public');
 
 const resto = JSON.parse(readFileSync(join(ROOT, 'data/restaurant.json'), 'utf8'));
 const carte = JSON.parse(readFileSync(join(ROOT, 'data/carte.json'), 'utf8'));
-const svg = (name) => readFileSync(join(ROOT, 'src/svg', name), 'utf8').trim();
 
 /* ---------- Outils ---------- */
+
+// Caractères invisibles construits ici plutôt qu'écrits en dur : ils restent lisibles dans le code.
+const NBSP = String.fromCharCode(0xa0);
+const FINE = String.fromCharCode(0x202f);
+const GLUON = String.fromCharCode(0x2060);
+const BARRE = String.fromCharCode(92);
 
 // Échappe le HTML et pose les espaces fines insécables de la typographie française.
 const esc = (s) =>
   String(s)
     .replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
-    .replace(/ ([?!:;»])/g, '\u202f$1')
-    .replace(/« /g, '«\u202f');
+    .replace(/ ([?!:;»])/g, `${FINE}$1`)
+    .replace(/« /g, `«${FINE}`);
 
 const euros = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' });
 const euro = (n) => euros.format(n);
-const euroRond = (n) => (Number.isInteger(n) ? `${n}\u00a0€` : euro(n));
+const euroRond = (n) => (Number.isInteger(n) ? `${n}${NBSP}€` : euro(n));
 
-const NBSP = '\u00a0';
 const heure = (hhmm) => {
   const [h, m] = hhmm.split(':').map(Number);
   return m ? `${h}${NBSP}h${NBSP}${String(m).padStart(2, '0')}` : `${h}${NBSP}h`;
 };
-// Le gluon U+2060 empêche la coupure après le tiret : « 18 h – 21 h 45 » reste sur une ligne.
-const plage = ([a, b]) => `${heure(a)}${NBSP}–\u2060${NBSP}${heure(b)}`;
+// Le gluon empêche la coupure après le tiret : « 18 h – 21 h 45 » reste sur une ligne.
+const plage = ([a, b]) => `${heure(a)}${NBSP}–${GLUON}${NBSP}${heure(b)}`;
+
+const sansAccents = (s) =>
+  [...s.normalize('NFD')]
+    .filter((c) => {
+      const code = c.charCodeAt(0);
+      return code < 0x300 || code > 0x36f;
+    })
+    .join('');
 
 const slug = (s) =>
-  s
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
+  sansAccents(s.toLowerCase())
     .replace(/œ/g, 'oe')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
 
 const normaliser = (s) =>
-  s
-    .toLowerCase()
-    .replace(/œ/g, 'oe')
-    .replace(/æ/g, 'ae')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
+  sansAccents(s.toLowerCase().replace(/œ/g, 'oe').replace(/æ/g, 'ae'))
     .replace(/[’']/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+    .split(' ')
+    .filter(Boolean)
+    .join(' ');
 
 const empreinte = (file) => createHash('md5').update(readFileSync(join(PUBLIC, file))).digest('hex').slice(0, 8);
 
@@ -73,43 +78,40 @@ const liens = {
 
 const tousLesPlats = carte.sections.flatMap((section) => section.items.map((item) => ({ ...item, section })));
 const nbPlats = tousLesPlats.length;
+const plat = (nom) => tousLesPlats.find((p) => p.name === nom);
 
-/* ---------- Icônes (tracé 1,8, bouts ronds) ---------- */
+/* ---------- Icônes : un trait fin, des bouts ronds ---------- */
 
 const ICONES = {
   telephone:
     '<path d="M6.6 3.5h2.6l1.6 4.2-2 1.4a12 12 0 0 0 6.1 6.1l1.4-2 4.2 1.6v2.6a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/>',
-  itineraire:
-    '<path d="M12.8 2.6l8.6 8.6a1.1 1.1 0 0 1 0 1.6l-8.6 8.6a1.1 1.1 0 0 1-1.6 0l-8.6-8.6a1.1 1.1 0 0 1 0-1.6l8.6-8.6a1.1 1.1 0 0 1 1.6 0z"/><path d="M9 14.5v-2.3a2 2 0 0 1 2-2h4.6"/><path d="M13.4 8l2.3 2.2-2.3 2.2"/>',
-  carte: '<path d="M6 3.5h9l3 3V20.5H6z"/><path d="M9 9.5h6M9 13h6M9 16.5h3.5"/>',
-  plus: '<path d="M12 5v14M5 12h14"/>',
-  moins: '<path d="M5 12h14"/>',
-  fermer: '<path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/>',
+  chevron: '<path d="M9 5.5l6.5 6.5L9 18.5"/>',
   recherche: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5l5 5"/>',
-  fleche: '<path d="M4.5 12h15M13.5 6l6 6-6 6"/>',
-  bon: '<path d="M6 3h12v18l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4z"/><path d="M9 8h6M9 11.5h6M9 15h3.5"/>',
+  plus: '<path d="M12 5.5v13M5.5 12h13"/>',
+  moins: '<path d="M5.5 12h13"/>',
+  fermer: '<path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/>',
+  sac: '<path d="M5.5 8.5h13l-1 11.5h-11z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/>',
 };
 
 const icone = (nom, classe = '') =>
   `<svg class="icone icone--${nom}${classe ? ` ${classe}` : ''}" aria-hidden="true" focusable="false"><use href="#i-${nom}"/></svg>`;
 
-// Les dessins d'ingrédients ne sont embarqués que sur l'accueil ; les icônes, partout.
-const sprite = (avecDessins) => {
-  const base = avecDessins
-    ? svg('sprite.svg')
-    : '<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">\n</svg>';
-  const symboles = Object.entries(ICONES)
+const sprite = () =>
+  `<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">${Object.entries(
+    ICONES,
+  )
     .map(
       ([id, body]) =>
-        `<symbol id="i-${id}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${body}</symbol>`,
+        `<symbol id="i-${id}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">${body}</symbol>`,
     )
-    .join('\n');
-  return base.replace('</svg>', `${symboles}\n</svg>`);
-};
+    .join('')}</svg>`;
+
+// Lien bleu suivi d'un chevron, comme sur apple.com.
+const lien = (href, texte, extra = '') => `<a class="lien" href="${href}"${extra}>${texte}${icone('chevron')}</a>`;
 
 /* ---------- Horaires ---------- */
 
-const horairesResume = () => {
+const groupesHoraires = () => {
   const groupes = [];
   for (const jour of SEMAINE) {
     const cle = JSON.stringify(resto.hours[jour] || []);
@@ -117,17 +119,14 @@ const horairesResume = () => {
     if (dernier && dernier.cle === cle) dernier.jours.push(jour);
     else groupes.push({ cle, jours: [jour], plages: resto.hours[jour] || [] });
   }
-  return groupes
-    .map(({ jours, plages }) => {
-      const nom = (j) => JOURS[j];
-      const qui = jours.length > 2 ? `du ${nom(jours[0])} au ${nom(jours.at(-1))}` : jours.map(nom).join(' et ');
-      return `${capitale(qui)} : ${plages.length ? plages.map(plage).join(' et ') : 'fermé'}`;
-    })
-    .join(' · ');
+  return groupes.map(({ jours, plages }) => {
+    const qui = jours.length > 2 ? `du ${JOURS[jours[0]]} au ${JOURS[jours.at(-1)]}` : jours.map((j) => JOURS[j]).join(' et ');
+    return `${capitale(qui)} : ${plages.length ? plages.map(plage).join(' et ') : 'fermé'}`;
+  });
 };
+const horairesResume = () => groupesHoraires().join(' · ');
 
-const tableHoraires = () => `
-      <table class="semaine">
+const tableHoraires = () => `<table class="semaine">
         <caption class="visuellement-cache">Horaires d’ouverture, du lundi au dimanche</caption>
         <thead class="visuellement-cache"><tr><th scope="col">Jour</th><th scope="col">Midi</th><th scope="col">Soir</th></tr></thead>
         <tbody>
@@ -137,18 +136,19 @@ ${SEMAINE.map((jour) => {
   const soir = plages.find(([a]) => a >= '15:00');
   const surCommande = !midi && resto.preorderLunch.days.includes(jour);
   return `          <tr data-jour="${jour}">
-            <th scope="row"><span class="semaine__jour">${capitale(JOURS[jour])}</span></th>
-            <td${surCommande ? ' class="semaine__commande"' : ''}>${midi ? plage(midi) : surCommande ? 'Sur commande, la veille' : 'Fermé'}</td>
+            <th scope="row">${capitale(JOURS[jour])}</th>
+            <td${surCommande ? ' class="semaine__commande"' : ''}>${midi ? plage(midi) : surCommande ? 'Sur commande' : 'Fermé'}</td>
             <td>${soir ? plage(soir) : 'Fermé'}</td>
           </tr>`;
-}).join('\n')}
+}).join('')}
         </tbody>
       </table>`;
 
-const etat = (variante) =>
-  `<p class="etat etat--${variante}" data-etat="${variante}"${variante === 'compact' ? ' hidden' : ''}><span class="etat__pastille" aria-hidden="true"></span><span class="etat__texte">${esc(
-    variante === 'compact' ? 'Horaires' : horairesResume(),
-  )}</span></p>`;
+// État d'ouverture : le résumé statique sert sans JavaScript, le script le remplace par l'état en direct.
+const etat = (variante, classe = '') =>
+  `<span class="etat${classe ? ` ${classe}` : ''}" data-etat="${variante}"><span class="etat__pastille" aria-hidden="true"></span><span class="etat__texte">${esc(
+    horairesResume(),
+  )}</span></span>`;
 
 /* ---------- Données structurées ---------- */
 
@@ -215,14 +215,14 @@ const schemaMenu = () => ({
   })),
 });
 
-const jsonld = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`;
+const jsonld = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).replaceAll('<', `${BARRE}u003c`)}</script>`;
 
 /* ---------- Gabarit commun ---------- */
 
 const ASSETS = {};
 const asset = (file) => (ASSETS[file] ??= `${file}?v=${empreinte(file)}`);
 
-function page({ chemin, titre, description, corps, classe, schema, barre, prechargement = [], indexable = true, dessins = false }) {
+function page({ chemin, titre, description, corps, classe, schema, apres = '', indexable = true }) {
   const profondeur = chemin.split('/').filter(Boolean).length;
   const r = profondeur ? '../'.repeat(profondeur) : './';
   const url = `${resto.url}/${chemin}`;
@@ -240,7 +240,7 @@ function page({ chemin, titre, description, corps, classe, schema, barre, precha
 <title>${esc(titre)}</title>
 <meta name="description" content="${esc(description)}">
 ${indexable ? `<link rel="canonical" href="${url}">` : '<meta name="robots" content="noindex">'}
-<meta name="theme-color" content="#F2A51C">
+<meta name="theme-color" content="#fafafc">
 <meta name="format-detection" content="telephone=no">
 <meta property="og:type" content="restaurant">
 <meta property="og:locale" content="fr_FR">
@@ -257,19 +257,19 @@ ${indexable ? `<link rel="canonical" href="${url}">` : '<meta name="robots" cont
 <link rel="icon" href="${r}favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="${r}apple-touch-icon.png">
 <link rel="manifest" href="${r}site.webmanifest">
-<link rel="preload" href="${r}assets/fonts/kantumruy-pro-latin.woff2" as="font" type="font/woff2" crossorigin>
-${prechargement.map((f) => `<link rel="preload" href="${r}${f}" as="font" type="font/woff2" crossorigin>\n`).join('')}<script>document.documentElement.classList.add('js')</script>
+<script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="${r}${asset('assets/css/site.css')}">
 <script src="${r}${asset('assets/js/site.js')}" defer></script>
 ${schema ? jsonld(schema) : ''}
 </head>
 <body class="${classe}">
 <a class="evitement" href="#contenu">Aller au contenu</a>
-${sprite(dessins)}
-${entete(r, chemin)}
+${sprite()}
+${navigation(r, chemin)}
+${ruban()}
 ${corps(r)}
+${apres}
 ${pied(r)}
-${barre ? barre(r) : ''}
 <script type="application/json" id="donnees-site">${JSON.stringify(donnees)}</script>
 </body>
 </html>
@@ -280,79 +280,93 @@ ${barre ? barre(r) : ''}
   return html;
 }
 
-const entete = (r, chemin) => `<header class="entete">
-  <div class="entete__barre conteneur">
-    <a class="enseigne-mini" href="${r}"${chemin === '' ? ' aria-current="page"' : ''}>
-      <span class="enseigne-mini__km" lang="km" aria-hidden="true">${resto.nameKhmer}</span>
-      <span class="enseigne-mini__nom">${esc(resto.name)}</span>
-    </a>
-    <nav class="entete__nav" aria-label="Navigation principale">
-      <a href="${r}carte/"${chemin === 'carte/' ? ' aria-current="page"' : ''}>La carte</a>
-      <a href="${r}#infos">Horaires et accès</a>
-    </nav>
-    ${etat('compact')}
-    <a class="bouton bouton--appel bouton--entete" href="${tel}" aria-label="Appeler le restaurant au ${resto.phone.display}">${icone('telephone')}<span class="bouton__num">${resto.phone.display}</span></a>
-  </div>
+const navigation = (r, chemin) => `<header class="navigation">
+  <nav class="navigation__barre" aria-label="Navigation principale">
+    <a class="navigation__nom" href="${r}"${chemin === '' ? ' aria-current="page"' : ''}>${esc(resto.name)}</a>
+    <ul class="navigation__liens" id="navigation-liens">
+      <li><a href="${r}carte/"${chemin === 'carte/' ? ' aria-current="page"' : ''}>La carte</a></li>
+      <li><a href="${r}#horaires">Horaires</a></li>
+      <li><a href="${r}#acces">Accès</a></li>
+    </ul>
+    <a class="navigation__appel" href="${tel}" aria-label="Appeler le restaurant au ${resto.phone.display}">${icone('telephone')}<span>${resto.phone.display}</span></a>
+    <button type="button" class="navigation__menu" data-menu aria-controls="navigation-liens" aria-expanded="false" aria-label="Menu" hidden><span></span><span></span></button>
+  </nav>
 </header>`;
 
+// Le bandeau sous la navigation dit si c'est ouvert, à toute heure, sur toutes les pages.
+const ruban = () => `<aside class="ruban" aria-label="Ouverture">
+  <p class="ruban__texte">${etat('ruban')} ${lien(tel, 'Appeler')}</p>
+</aside>`;
+
 const pied = (r) => `<footer class="pied">
-  <div class="conteneur pied__grille">
-    <div class="pied__merci">
-      <p class="pied__km" lang="km" aria-hidden="true">អរគុណ</p>
-      <p class="pied__au-revoir">Merci, et à très vite !</p>
+  <div class="pied__conteneur">
+    <div class="pied__notes">
+      <p>Prix en euros, toutes taxes comprises. Le prix confirmé au téléphone ou au comptoir fait foi.</p>
+      <p>Les plats du site sont des dessins, pas des photos de nos assiettes.</p>
+      <p>Plan : IGN – BD TOPO®, Licence Ouverte Etalab 2.0. Police Inter, licence SIL OFL 1.1. Ce site ne dépose aucun cookie.</p>
     </div>
-    <div class="pied__bloc">
-      <h2 class="pied__titre">${esc(resto.name)}</h2>
-      <address>
-        ${esc(resto.address.street)}<br>
-        ${resto.address.postalCode} ${esc(resto.address.city)}<br>
-        <a href="${tel}">${resto.phone.display}</a>
-      </address>
-    </div>
-    <div class="pied__bloc">
-      <h2 class="pied__titre">Horaires</h2>
-      <p>${esc(horairesResume()).replace(' · ', '<br>')}</p>
-      <p class="pied__note">${esc(resto.preorderLunch.rule)}</p>
-    </div>
-    <nav class="pied__bloc" aria-label="Pied de page">
-      <h2 class="pied__titre">Sur ce site</h2>
-      <ul>
-        <li><a href="${r}">Accueil</a></li>
-        <li><a href="${r}carte/">La carte</a></li>
-        <li><a href="${r}#infos">Horaires et accès</a></li>
-        <li><a href="${r}mentions-legales/">Mentions légales</a></li>
-      </ul>
+    <nav class="pied__plan" aria-label="Plan du site">
+      <div>
+        <h2>Le restaurant</h2>
+        <ul>
+          <li><a href="${r}carte/">La carte</a></li>
+          <li><a href="${r}#horaires">Horaires</a></li>
+          <li><a href="${r}#acces">Accès</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="${tel}">${resto.phone.display}</a></li>
+          <li>${esc(resto.address.street)}</li>
+          <li>${resto.address.postalCode} ${esc(resto.address.city)}</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Horaires</h2>
+        <ul>
+${groupesHoraires()
+  .map((g) => `          <li>${esc(g)}</li>`)
+  .join('')}
+          <li>${esc(resto.preorderLunch.rule)}</li>
+        </ul>
+      </div>
     </nav>
+    <div class="pied__bas">
+      <p>Copyright © ${new Date().getFullYear()} ${esc(resto.name)}. Tous droits réservés.</p>
+      <ul><li><a href="${r}mentions-legales/">Mentions légales</a></li></ul>
+    </div>
   </div>
-  <p class="conteneur pied__credits">Illustrations dessinées pour le site · Plan : IGN – BD TOPO® · Polices Kantumruy Pro et Moul (SIL OFL) · Aucun cookie.</p>
 </footer>`;
 
 /* ---------- Accueil ---------- */
 
 const bonEtPasCher = carte.sections.find((s) => s.id === 'menu-bon-et-pas-cher');
-const classiques = tousLesPlats.filter((p) => p.featured).sort((a, b) => a.featured - b.featured);
+const variantesMenu = bonEtPasCher.items
+  .slice(0, 2)
+  .map((i) => i.name.replace('Menu bon et pas cher ', ''))
+  .join(' ou ');
 
-const SAVEURS = [
-  { sym: 'botte', fr: 'Citronnelle', km: 'ស្លឹកគ្រៃ', vb: '0 0 200 200', w: 74, x: 100, y: 100, r: 45 },
-  { sym: 'galanga', fr: 'Galanga', km: 'រំដេង', vb: '0 0 200 200', w: 200, x: 100, y: 104, r: -24 },
-  { sym: 'curcuma', fr: 'Curcuma', km: 'រមៀត', vb: '0 0 200 200', w: 196, x: 100, y: 104, r: 14 },
-  { sym: 'combava', fr: 'Combava', km: 'ក្រូចសើច', vb: '0 0 200 200', w: 206, x: 100, y: 100, r: -34 },
-  { sym: 'ail', fr: 'Ail', km: 'ខ្ទឹមស', vb: '0 0 200 200', w: 136, x: 100, y: 98, r: 6 },
-  { sym: 'echalote', fr: 'Échalote', km: 'ខ្ទឹមក្រហម', vb: '0 0 200 200', w: 100, x: 100, y: 100, r: -12 },
-  { sym: 'piment', fr: 'Piment', km: 'ម្ទេស', vb: '0 0 200 200', w: 196, x: 100, y: 100, r: -36 },
-  { sym: 'citron', fr: 'Citron vert', km: 'ក្រូចឆ្មារ', vb: '0 0 200 200', w: 138, x: 100, y: 100, r: 0 },
-];
+const image = (r, nom, alt, classe, { taille = 660, charge = 'lazy' } = {}) =>
+  `<img class="${classe}" src="${r}assets/img/plats/${nom}.svg" width="${taille}" height="${taille}" alt="${esc(alt)}"${
+    charge === 'eager' ? ' fetchpriority="high"' : ' loading="lazy"'
+  } decoding="async">`;
 
-const VIEWBOXES = Object.fromEntries(
-  [...svg('sprite.svg').matchAll(/<symbol id="([^"]+)" viewBox="([^"]+)"/g)].map(([, id, vb]) => [id, vb.split(' ').map(Number)]),
-);
-
-const vignette = ({ sym, vb, w, x, y, r }, i) => {
-  const [, , vw, vh] = VIEWBOXES[sym];
-  const h = (w * vh) / vw;
-  const use = (classe) =>
-    `<use${classe ? ` class="${classe}"` : ''} href="#${sym}" x="${-w / 2}" y="${(-h / 2).toFixed(1)}" width="${w}" height="${h.toFixed(1)}" transform="translate(${x} ${y}) rotate(${r})"/>`;
-  return `<svg class="saveur__dessin" style="--i:${i}" viewBox="${vb}" aria-hidden="true" focusable="false"><g class="saveur__ombre" filter="url(#silhouette)" transform="translate(6 8)">${use('')}</g>${use('saveur__piece')}</svg>`;
+// Une tuile « produit » : nom, phrase, prix, deux actions, le plat dessiné.
+const tuile = (r, p, teinte) => {
+  const detail = p.section.withRice ? `${euro(p.price)}, servi avec du riz nature.` : `${euro(p.price)}.`;
+  return `<section class="tuile tuile--${teinte} tuile--demi" aria-labelledby="tuile-${slug(p.name)}" data-reveler>
+      <div class="tuile__texte">
+        <h2 class="tuile__titre" id="tuile-${slug(p.name)}">${esc(p.name)}</h2>
+        <p class="tuile__accroche">${esc(p.accroche)}</p>
+        <p class="tuile__detail">${esc(detail)}</p>
+        <div class="tuile__actions">
+          <a class="bouton" href="${tel}">Commander</a>
+          <a class="bouton bouton--contour" href="${r}carte/#${p.section.id}">Voir à la carte</a>
+        </div>
+      </div>
+      ${image(r, p.image, `${p.name} vu du dessus (illustration)`, 'tuile__image', { taille: 660 })}
+    </section>`;
 };
 
 const accueil = () =>
@@ -361,161 +375,89 @@ const accueil = () =>
     titre: `${resto.name} — restaurant cambodgien à ${resto.town}`,
     description: resto.description,
     classe: 'page-accueil',
-    dessins: true,
     schema: schemaRestaurant(),
-    prechargement: ['assets/fonts/moul-enseigne.woff2'],
-    barre: (r) => `<nav class="barre-action" aria-label="Actions rapides" data-barre>
-  <a class="barre-action__appel" href="${tel}">${icone('telephone')}<span>Appeler</span></a>
-  <a href="${r}carte/">${icone('carte')}<span>La carte</span></a>
-  <a href="${liens.itineraire}">${icone('itineraire')}<span>Y aller</span></a>
-</nav>`,
     corps: (r) => `<main id="contenu">
-  <section class="heros" aria-labelledby="heros-titre">
-    <div class="heros__grille conteneur">
-      <div class="heros__texte">
-        <h1 class="enseigne" id="heros-titre">
-          <span class="enseigne__km" lang="km" aria-hidden="true">${resto.nameKhmer}</span>
-          <span class="enseigne__nom"><span>Aux Saveurs</span> <span><span class="enseigne__du">du</span> Cambodge</span></span>
-        </h1>
-        <p class="heros__accroche">${esc(resto.tagline)}, à ${esc(resto.town)}.</p>
-        ${etat('long')}
-        <p class="heros__conseil" data-conseil hidden></p>
-        <div class="heros__actions" data-actions-heros>
-          <a class="bouton bouton--appel" href="${tel}">${icone('telephone')}<span>Appeler</span><span class="bouton__num">${resto.phone.display}</span></a>
-          <a class="bouton bouton--trait" href="${r}carte/"><span>Voir la carte</span>${icone('fleche')}</a>
-        </div>
-        <p class="heros__mention">Commandes et réservations par téléphone.</p>
-      </div>
-      <div class="heros__etal">
-        <div class="etal etal--large">${svg('etal.svg')}</div>
-        <div class="etal etal--bande">${svg('etal-bande.svg')}</div>
-        <div class="accroche">
-          <a class="etiquette etiquette--pendue" href="${r}carte/#menu-bon-et-pas-cher">
-            <span class="etiquette__titre">Menu bon et pas cher</span>
-            <span class="etiquette__prix">${euroRond(bonEtPasCher.items[0].price)}</span>
-          </a>
-        </div>
+  <section class="tuile tuile--noire tuile--heros" aria-labelledby="heros-titre">
+    <div class="tuile__texte">
+      <h1 class="tuile__titre" id="heros-titre">${esc(resto.name)}</h1>
+      <p class="tuile__accroche">${esc(resto.tagline)}.</p>
+      <p class="tuile__detail">${esc(resto.town)}. Commandes et réservations par téléphone.</p>
+      <div class="tuile__actions">
+        <a class="bouton" href="${tel}">Appeler</a>
+        <a class="bouton bouton--contour" href="${r}carte/">Voir la carte</a>
       </div>
     </div>
+    ${image(r, 'soupe', 'Soupe Phnom Penh vue du dessus (illustration)', 'tuile__image', { taille: 660, charge: 'eager' })}
   </section>
 
-  <section class="section section--feuille bpc" id="bon-et-pas-cher" aria-labelledby="bpc-titre">
-    <div class="conteneur bpc__grille">
-      <div class="bpc__tete">
-        <h2 id="bpc-titre">Le menu bon et pas cher</h2>
-        <p class="bpc__prix" aria-hidden="true">${euroRond(bonEtPasCher.items[0].price)}</p>
-        <p class="bpc__texte">Une viande marinée, du riz thaï et sa salade composée : un vrai repas, pour ${euroRond(
-          bonEtPasCher.items[0].price,
-        )}.</p>
-      </div>
-      <ul class="bpc__choix">
-${bonEtPasCher.items
-  .slice(0, 3)
-  .map(
-    (item, i) => `        <li class="bpc__plat${i === 2 ? ' bpc__plat--extra' : ''}">
-          <h3>${esc(i < 2 ? capitale(item.name.replace('Menu bon et pas cher ', '')) : item.name)}</h3>
-          <p>${esc(item.desc)}</p>
-          <p class="prix">${i === 2 ? '+ ' : ''}${euro(item.price)}</p>
-        </li>`,
-  )
-  .join('\n')}
-      </ul>
-      <div class="bpc__actions">
-        <a class="bouton bouton--appel" href="${tel}">${icone('telephone')}<span>Commander</span><span class="bouton__num">${resto.phone.display}</span></a>
-        <a class="lien-fort" href="${r}carte/">Toute la carte, ${nbPlats} plats ${icone('fleche')}</a>
+  <section class="tuile tuile--claire" id="menu" aria-labelledby="menu-titre" data-reveler>
+    <div class="tuile__texte">
+      <h2 class="tuile__titre" id="menu-titre">${esc(bonEtPasCher.title)}</h2>
+      <p class="tuile__accroche">Un plat mariné, du riz thaï et sa salade composée.</p>
+      <p class="tuile__detail">${euroRond(bonEtPasCher.items[0].price)}, ${esc(variantesMenu)}.</p>
+      <div class="tuile__actions">
+        <a class="bouton" href="${tel}">Commander</a>
+        <a class="bouton bouton--contour" href="${r}carte/#menu-bon-et-pas-cher">En savoir plus</a>
       </div>
     </div>
+    ${image(r, 'menu', 'Menu bon et pas cher vu du dessus : porc mariné, riz thaï et salade (illustration)', 'tuile__image')}
   </section>
 
-  <section class="section section--riz classiques" aria-labelledby="classiques-titre">
-    <div class="conteneur classiques__grille">
-      <div class="classiques__tete">
-        <h2 id="classiques-titre">Par où commencer&#8239;?</h2>
-        <p>Six plats de la carte, du lok lac à la soupe Phnom Penh. Les plats sont servis avec leur riz nature.</p>
-        <a class="bouton bouton--trait" href="${r}carte/"><span>Voir les ${nbPlats} plats</span>${icone('fleche')}</a>
-      </div>
-      <ul class="classiques__liste">
-${classiques
-  .map(
-    (p) => `        <li class="classique">
-          <a class="classique__lien" href="${r}carte/#${p.section.id}">
-            <span class="classique__nom">${esc(p.name)}</span>
-            <span class="classique__texte">${esc(p.blurb)}</span>
-            <span class="classique__prix">${euro(p.price)}</span>
-          </a>
-        </li>`,
-  )
-  .join('\n')}
-      </ul>
-    </div>
+  <div class="grille">
+    ${tuile(r, plat('Lok lac'), 'claire')}
+    ${tuile(r, plat('Bo bun'), 'noire')}
+    ${tuile(r, plat('Nems au porc'), 'noire')}
+    ${tuile(r, plat('Porc au caramel'), 'claire')}
+  </div>
+
+  <section class="manifeste" aria-labelledby="manifeste-titre" data-reveler>
+    <h2 class="manifeste__texte" id="manifeste-titre">Tout est fait maison. <span>Avec des produits frais.</span> <span>Et beaucoup d’amour.</span></h2>
+    <p class="manifeste__detail">Citronnelle, saté, caramel, lait de coco&#8239;: les saveurs du Cambodge, dans une carte de ${nbPlats} plats.</p>
+    ${lien(`${r}carte/`, 'Découvrir la carte')}
   </section>
 
-  <section class="section section--curcuma saveurs" aria-labelledby="saveurs-titre">
-    <div class="conteneur saveurs__grille">
-      <div class="saveurs__texte">
-        <h2 id="saveurs-titre">Les saveurs du Cambodge</h2>
-        <p>Citronnelle, galanga, curcuma, combava, ail et échalote&#8239;: pilés ensemble, ils donnent le <span lang="km-Latn">kroeung</span>, la pâte aromatique qui parfume la cuisine khmère. Le piment vient ensuite, selon les goûts.</p>
-      </div>
-      <ul class="saveurs__liste">
-${SAVEURS.map(
-  (s, i) => `        <li class="saveur">
-          ${vignette(s, i)}
-          <span class="saveur__fr">${s.fr}</span>
-          <span class="saveur__km" lang="km">${s.km}</span>
-        </li>`,
-).join('\n')}
-      </ul>
-      <div class="promesse">
-        <blockquote class="promesse__citation">
-          <p>${esc(resto.promise)}</p>
-        </blockquote>
-        <p class="promesse__tampon"><span class="promesse__km" lang="km" aria-hidden="true">ឆ្ងាញ់</span><span class="promesse__sens">«&#8239;Délicieux&#8239;», en khmer</span></p>
-      </div>
+  <section class="tuile tuile--claire tuile--horaires" id="horaires" aria-labelledby="horaires-titre" data-reveler>
+    <div class="tuile__texte">
+      <h2 class="tuile__titre" id="horaires-titre">Horaires</h2>
+      <p class="tuile__accroche">${etat('grand')}</p>
+      <p class="tuile__detail tuile__conseil" data-conseil hidden></p>
     </div>
+    ${tableHoraires()}
+    <p class="tuile__note">${esc(resto.preorderLunch.rule)}</p>
+    <div class="tuile__actions"><a class="bouton" href="${tel}">Appeler</a></div>
   </section>
 
-  <section class="section section--riz infos" id="infos" aria-labelledby="infos-titre">
-    <div class="conteneur">
-      <h2 class="infos__titre" id="infos-titre">${esc(resto.invite)}</h2>
-      <div class="infos__grille">
-        <div class="horaires" id="horaires">
-          <h3>Horaires</h3>
-          ${etat('grand')}
-${tableHoraires()}
-          <p class="horaires__note">${esc(resto.preorderLunch.rule)}</p>
-        </div>
-        <div class="acces" id="nous-trouver">
-          <h3>Nous trouver</h3>
-          <address class="acces__adresse">${esc(resto.address.street)}<br>${resto.address.postalCode} ${esc(resto.address.city)}</address>
-          <p class="acces__tel"><a href="${tel}">${icone('telephone')}${resto.phone.display}</a></p>
-          <figure class="plan">
-            <a href="${liens.carteGoogle}" class="plan__lien">
-              <img src="${r}assets/img/plan-quartier.svg" width="800" height="560" loading="lazy" decoding="async" alt="Plan du quartier : le restaurant est au 10 avenue Salvador Allende, près de la rue de Fenouillet et de la route de Paris.">
-            </a>
-            <figcaption>Plan : IGN – BD TOPO®, Licence Ouverte Etalab 2.0</figcaption>
-          </figure>
-          <div class="acces__actions">
-            <a class="bouton bouton--trait" href="${liens.itineraire}">${icone('itineraire')}<span>Itinéraire</span></a>
-            <a class="lien" href="${liens.waze}">Waze</a>
-            <a class="lien" href="${liens.apple}">Plans (Apple)</a>
-          </div>
-        </div>
+  <section class="tuile tuile--blanche tuile--acces" id="acces" aria-labelledby="acces-titre" data-reveler>
+    <div class="tuile__texte">
+      <h2 class="tuile__titre" id="acces-titre">${esc(resto.invite)}</h2>
+      <p class="tuile__accroche"><span class="insecable">${esc(resto.address.street)},</span> <span class="insecable">${resto.address.postalCode} ${esc(resto.address.city)}.</span></p>
+      <p class="tuile__detail">Au nord de Toulouse. Commandes et réservations par téléphone.</p>
+      <div class="tuile__actions">
+        <a class="bouton" href="${liens.itineraire}">Itinéraire</a>
+        <a class="bouton bouton--contour" href="${tel}">Appeler</a>
       </div>
+      <p class="tuile__liens">${lien(liens.waze, 'Ouvrir dans Waze')} ${lien(liens.apple, 'Ouvrir dans Plans')}</p>
     </div>
+    <figure class="plan">
+      <a class="plan__lien" href="${liens.carteGoogle}">
+        <img src="${r}assets/img/plan-quartier.svg" width="800" height="560" loading="lazy" decoding="async" alt="Plan du quartier : le restaurant est au 10 avenue Salvador Allende, près de la rue de Fenouillet et de la route de Paris.">
+      </a>
+      <figcaption>Plan : IGN – BD TOPO®, Licence Ouverte Etalab 2.0</figcaption>
+    </figure>
   </section>
 </main>`,
   });
 
 /* ---------- La carte ---------- */
 
-const plat = (item, section) => {
+const ligne = (item, section) => {
   const id = `${section.id}--${slug(item.name)}`;
   const recherche = normaliser([item.name, item.desc, section.title, item.spicy ? 'piquant epice' : ''].filter(Boolean).join(' '));
   return `          <li class="plat" data-plat="${id}" data-nom="${esc(item.name)}" data-prix="${Math.round(item.price * 100)}" data-recherche="${esc(recherche)}">
             <span class="plat__nom">${esc(item.name)}</span>
             ${item.desc ? `<span class="plat__desc">${esc(item.desc)}</span>` : ''}
             <span class="plat__prix">${euro(item.price)}</span>
-            <button type="button" class="plat__ajout" data-ajouter="${id}" hidden aria-label="Ajouter au bon : ${esc(item.name)}">${icone('plus')}</button>
+            <button type="button" class="plat__ajout" data-ajouter="${id}" hidden aria-label="Ajouter à la commande : ${esc(item.name)}">${icone('plus')}</button>
           </li>`;
 };
 
@@ -523,17 +465,17 @@ const rubrique = (section) => `      <section class="rubrique" id="${section.id}
         <h2 id="r-${section.id}" class="rubrique__titre">${esc(section.title)}</h2>
         ${
           section.withRice
-            ? `<p class="rubrique__riz"><span>Servis avec du riz nature.</span> <span class="rubrique__riz-sup">Riz cantonais (porc ou crevettes) <span class="prix-inline">+&nbsp;${euro(
+            ? `<p class="rubrique__riz"><span>Servis avec du riz nature.</span> <span class="rubrique__riz-sup">Riz cantonais (porc ou crevettes)&nbsp;: + ${euro(
                 carte.riceUpgrade.price,
-              )}</span> <button type="button" class="plat__ajout plat__ajout--petit" data-ajouter="supplement-riz-cantonais" data-nom="${esc(
+              )} <button type="button" class="plat__ajout plat__ajout--petit" data-ajouter="supplement-riz-cantonais" data-nom="${esc(
                 carte.riceUpgrade.name,
-              )}" data-prix="${Math.round(carte.riceUpgrade.price * 100)}" hidden aria-label="Ajouter au bon : ${esc(
+              )}" data-prix="${Math.round(carte.riceUpgrade.price * 100)}" hidden aria-label="Ajouter à la commande : ${esc(
                 carte.riceUpgrade.name,
               )}">${icone('plus')}</button></span></p>`
             : ''
         }
         <ul class="plats">
-${section.items.map((item) => plat(item, section)).join('\n')}
+${section.items.map((item) => ligne(item, section)).join('')}
         </ul>
       </section>`;
 
@@ -544,60 +486,55 @@ const lacarte = () =>
     description: `Toute la carte d’${resto.name} à ${resto.town} : ${nbPlats} plats faits maison, du menu bon et pas cher à 10 € au lok lac, avec les prix. Commande par téléphone au ${resto.phone.display}.`,
     classe: 'page-carte',
     schema: schemaMenu(),
-    barre: () => `<nav class="barre-action barre-action--carte est-visible" aria-label="Actions rapides" data-barre>
-  <a class="barre-action__appel" href="${tel}">${icone('telephone')}<span>Appeler</span></a>
-  <button type="button" class="barre-action__bon" data-ouvrir-bon aria-controls="bon" aria-expanded="false" hidden>${icone('bon')}<span>Mon bon</span><span class="barre-action__compte" data-bon-compte>0</span></button>
+    apres: `<nav class="barre-bon" aria-label="Actions rapides" data-barre-bon>
+  <button type="button" class="barre-bon__ouvrir" data-ouvrir-bon aria-controls="bon" aria-expanded="false" hidden>${icone('sac')}<span>Votre commande</span><span class="barre-bon__compte" data-bon-compte hidden>0</span></button>
+  <a class="bouton bouton--petit" href="${tel}">Appeler</a>
 </nav>`,
-    corps: (r) => `<main id="contenu">
-  <section class="carte-tete section--feuille" aria-labelledby="carte-titre">
-    <div class="conteneur carte-tete__grille">
-      <div>
-        <h1 id="carte-titre">La carte</h1>
-        <p class="carte-tete__intro">${nbPlats} plats faits maison. Prix TTC. On commande par téléphone, au <a href="${tel}">${resto.phone.display}</a>.</p>
-      </div>
-      <div class="recherche" role="search">
-        <label class="recherche__label" for="recherche">Chercher un plat</label>
-        <div class="recherche__champ">
-          ${icone('recherche')}
-          <input id="recherche" type="search" placeholder="lok lac, citronnelle, crevettes…" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-describedby="recherche-etat">
-        </div>
-        <p class="recherche__etat" id="recherche-etat" role="status" aria-live="polite"></p>
-      </div>
+    corps: () => `<main id="contenu">
+  <header class="carte-tete">
+    <h1 class="carte-tete__titre">La carte</h1>
+    <p class="carte-tete__accroche">${nbPlats} plats faits maison.</p>
+    <p class="carte-tete__detail">${esc('Commandez dès maintenant !')} Par téléphone, au <a href="${tel}">${resto.phone.display}</a>.</p>
+    <div class="recherche" role="search">
+      <label class="visuellement-cache" for="recherche">Chercher un plat</label>
+      ${icone('recherche')}
+      <input id="recherche" type="search" placeholder="Chercher un plat : lok lac, crevettes…" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-describedby="recherche-etat">
     </div>
-  </section>
+    <p class="recherche__etat" id="recherche-etat" role="status" aria-live="polite"></p>
+  </header>
 
-  <div class="carte conteneur">
+  <div class="carte">
     <nav class="rubriques" aria-label="Rubriques de la carte">
       <ul>
-${carte.sections.map((s) => `        <li><a href="#${s.id}" data-lien-rubrique="${s.id}">${esc(s.title)}</a></li>`).join('\n')}
+${carte.sections.map((s) => `        <li><a href="#${s.id}" data-lien-rubrique="${s.id}">${esc(s.title)}</a></li>`).join('')}
       </ul>
     </nav>
 
     <div class="carte__liste">
       <div class="carte__vide" data-vide hidden>
-        <p>Aucun plat ne correspond à «&nbsp;<span data-vide-terme></span>&nbsp;».</p>
-        <p>Essayez «&nbsp;crevettes&nbsp;», «&nbsp;poulet&nbsp;» ou «&nbsp;soupe&nbsp;», ou <button type="button" class="lien" data-effacer>effacez la recherche</button>.</p>
+        <p>Aucun plat ne correspond à «&#8239;<span data-vide-terme></span>&#8239;».</p>
+        <p>Essayez «&#8239;crevettes&#8239;», «&#8239;poulet&#8239;» ou «&#8239;soupe&#8239;», ou <button type="button" class="lien lien--bouton" data-effacer>effacez la recherche</button>.</p>
       </div>
-${carte.sections.map(rubrique).join('\n')}
+${carte.sections.map(rubrique).join('')}
       <p class="carte__maj">Carte mise à jour le ${new Date(`${carte.updated}T12:00:00`).toLocaleDateString('fr-FR', {
         day: 'numeric',
         month: 'long',
         year: 'numeric',
-      })}. Les prix affichés sont ceux du restaurant&#8239;; en cas de doute, ils font foi au téléphone.</p>
+      })}. Prix TTC&#8239;; en cas de doute, le prix annoncé au téléphone fait foi.</p>
     </div>
 
     <aside class="bon" id="bon" aria-labelledby="bon-titre" data-bon hidden>
       <div class="bon__feuille">
         <div class="bon__tete">
-          <h2 id="bon-titre">Mon bon de commande</h2>
-          <button type="button" class="bon__fermer" data-fermer-bon aria-label="Fermer le bon">${icone('fermer')}</button>
+          <h2 id="bon-titre">Votre commande</h2>
+          <button type="button" class="bon__fermer" data-fermer-bon aria-label="Fermer">${icone('fermer')}</button>
         </div>
-        <p class="bon__vide" data-bon-vide>Touchez ${icone('plus', 'icone--inline')} à côté d’un plat pour le noter ici, puis appelez-nous pour le dicter.</p>
+        <p class="bon__vide" data-bon-vide>Ajoutez des plats avec le bouton ${icone('plus', 'icone--texte')}, puis appelez-nous pour commander.</p>
         <ul class="bon__lignes" data-bon-lignes></ul>
-        <p class="bon__total"><span>Total indicatif</span> <output data-bon-total>0,00&nbsp;€</output></p>
-        <a class="bouton bouton--appel bouton--large" href="${tel}">${icone('telephone')}<span>Appeler pour commander</span></a>
-        <button type="button" class="bouton bouton--texte" data-bon-vider>Vider le bon</button>
-        <p class="bon__note">Ce bon ne passe pas commande&#8239;: il vous aide à la dicter au téléphone. Il reste sur votre appareil.</p>
+        <p class="bon__total"><span>Total</span> <output data-bon-total>0,00&nbsp;€</output></p>
+        <a class="bouton bouton--large" href="${tel}">Appeler pour commander</a>
+        <button type="button" class="lien lien--bouton bon__vider" data-bon-vider>Tout retirer</button>
+        <p class="bon__note">Rien n’est envoyé : vous dictez votre commande au téléphone. Le total est indicatif et reste sur votre appareil.</p>
       </div>
     </aside>
   </div>
@@ -614,27 +551,25 @@ const mentions = () =>
     titre: `Mentions légales — ${resto.name}`,
     description: `Mentions légales et informations sur le site d’${resto.name}, ${resto.town}.`,
     classe: 'page-texte',
-    corps: () => `<main id="contenu" class="section section--riz">
-  <div class="conteneur texte">
-    <h1>Mentions légales</h1>
-    <h2>Éditeur du site</h2>
-    <p>${esc(resto.name)}<br>
-      Raison sociale : ${aCompleter(resto.legal.company)}${resto.legal.legalForm ? ` (${esc(resto.legal.legalForm)})` : ''}<br>
-      SIRET : ${aCompleter(resto.legal.siret)}<br>
-      ${esc(resto.address.street)}, ${resto.address.postalCode} ${esc(resto.address.city)}<br>
-      Téléphone : <a href="${tel}">${resto.phone.display}</a></p>
-    <p>Directeur ou directrice de la publication : ${aCompleter(resto.legal.publisher)}</p>
-    <h2>Hébergement</h2>
-    <p>${aCompleter(resto.legal.host)}${resto.legal.hostAddress ? `<br>${esc(resto.legal.hostAddress)}` : ''}</p>
-    <h2>Données personnelles et cookies</h2>
-    <p>Ce site ne dépose aucun cookie, n’utilise aucun outil de mesure d’audience et ne collecte aucune donnée personnelle. Le «&nbsp;bon de commande&nbsp;» de la carte est enregistré uniquement dans votre navigateur (stockage local) et n’est jamais transmis&#8239;: vous pouvez le vider à tout moment.</p>
-    <h2>Crédits</h2>
-    <p>Illustrations&#8239;: dessins vectoriels créés pour ce site. Ce ne sont pas des photos des plats du restaurant.<br>
-      Plan du quartier&#8239;: données IGN – BD TOPO®, Licence Ouverte Etalab 2.0.<br>
-      Polices&#8239;: Kantumruy Pro (Tep Sovichet, Wei Huang) et Moul (Danh Hong), sous licence SIL Open Font License 1.1.</p>
-    <h2>Prix</h2>
-    <p>Les prix sont indiqués en euros, toutes taxes comprises. Ils peuvent évoluer&#8239;; le prix confirmé au téléphone ou au comptoir fait foi.</p>
-  </div>
+    corps: () => `<main id="contenu" class="texte">
+  <h1>Mentions légales</h1>
+  <h2>Éditeur du site</h2>
+  <p>${esc(resto.name)}<br>
+    Raison sociale : ${aCompleter(resto.legal.company)}${resto.legal.legalForm ? ` (${esc(resto.legal.legalForm)})` : ''}<br>
+    SIRET : ${aCompleter(resto.legal.siret)}<br>
+    ${esc(resto.address.street)}, ${resto.address.postalCode} ${esc(resto.address.city)}<br>
+    Téléphone : <a href="${tel}">${resto.phone.display}</a></p>
+  <p>Directeur ou directrice de la publication : ${aCompleter(resto.legal.publisher)}</p>
+  <h2>Hébergement</h2>
+  <p>${aCompleter(resto.legal.host)}${resto.legal.hostAddress ? `<br>${esc(resto.legal.hostAddress)}` : ''}</p>
+  <h2>Données personnelles et cookies</h2>
+  <p>Ce site ne dépose aucun cookie, n’utilise aucun outil de mesure d’audience et ne collecte aucune donnée personnelle. La commande préparée sur la carte est enregistrée uniquement dans votre navigateur (stockage local) et n’est jamais transmise&#8239;: vous pouvez la vider à tout moment.</p>
+  <h2>Crédits</h2>
+  <p>Illustrations&#8239;: dessins vectoriels créés pour ce site. Ce ne sont pas des photos des plats du restaurant.<br>
+    Plan du quartier&#8239;: données IGN – BD TOPO®, Licence Ouverte Etalab 2.0.<br>
+    Police&#8239;: Inter (Rasmus Andersson), sous licence SIL Open Font License 1.1&#8239;; police système sur les appareils Apple.</p>
+  <h2>Prix</h2>
+  <p>Les prix sont indiqués en euros, toutes taxes comprises. Ils peuvent évoluer&#8239;; le prix confirmé au téléphone ou au comptoir fait foi.</p>
 </main>`,
   });
 
@@ -647,12 +582,12 @@ const introuvable = () => {
     description: 'Cette page n’existe pas ou plus.',
     classe: 'page-texte page-404',
     indexable: false,
-    corps: () => `<main id="contenu" class="section section--curcuma">
-  <div class="conteneur texte introuvable">
-    <p class="introuvable__code" aria-hidden="true">404</p>
-    <h1>Cette page s’est perdue au marché.</h1>
-    <p>L’adresse a peut-être changé. La carte, elle, est toujours là.</p>
-    <p class="introuvable__actions"><a class="bouton bouton--trait" href="/carte/"><span>Voir la carte</span>${icone('fleche')}</a> <a class="lien" href="/">Revenir à l’accueil</a></p>
+    corps: () => `<main id="contenu" class="introuvable">
+  <h1>Cette page est introuvable.</h1>
+  <p>L’adresse a peut-être changé. La carte, elle, est toujours là.</p>
+  <div class="tuile__actions">
+    <a class="bouton" href="/carte/">Voir la carte</a>
+    <a class="bouton bouton--contour" href="/">Revenir à l’accueil</a>
   </div>
 </main>`,
   });
@@ -695,18 +630,18 @@ const annexes = () => {
 </urlset>
 `,
   );
-  writeFileSync(join(PUBLIC, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${resto.url}/sitemap.xml\n`);
+  writeFileSync(join(PUBLIC, 'robots.txt'), ['User-agent: *', 'Allow: /', '', `Sitemap: ${resto.url}/sitemap.xml`, ''].join(String.fromCharCode(10)));
   writeFileSync(
     join(PUBLIC, 'site.webmanifest'),
-    JSON.stringify(
+    `${JSON.stringify(
       {
         name: resto.name,
         short_name: 'Saveurs du Cambodge',
         lang: 'fr',
         start_url: './',
         display: 'browser',
-        background_color: '#F2A51C',
-        theme_color: '#F2A51C',
+        background_color: '#ffffff',
+        theme_color: '#fafafc',
         icons: [
           { src: 'icon-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'icon-512.png', sizes: '512x512', type: 'image/png' },
@@ -714,9 +649,9 @@ const annexes = () => {
       },
       null,
       2,
-    ) + '\n',
+    )}${String.fromCharCode(10)}`,
   );
-  writeFileSync(join(PUBLIC, '_redirects'), '/nouvelle-page  /carte/  301\n/nouvelle-page/  /carte/  301\n');
+  writeFileSync(join(PUBLIC, '_redirects'), ['/nouvelle-page  /carte/  301', '/nouvelle-page/  /carte/  301', ''].join(String.fromCharCode(10)));
 };
 
 /* ---------- Construction ---------- */
@@ -727,7 +662,6 @@ mentions();
 introuvable();
 redirection('nouvelle-page/', 'carte/');
 annexes();
-
 rmSync(join(PUBLIC, '404-tmp'), { recursive: true, force: true });
 
 const manquants = Object.entries(resto.legal)

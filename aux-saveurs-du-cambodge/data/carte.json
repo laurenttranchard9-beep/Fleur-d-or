@@ -7,7 +7,7 @@
       "id": "menu-bon-et-pas-cher",
       "title": "Menu bon et pas cher",
       "items": [
-        { "name": "Menu bon et pas cher au porc", "desc": "Échine de porc marinée, riz thaï et sa salade composée", "price": 10.0 },
+        { "name": "Menu bon et pas cher au porc", "desc": "Échine de porc marinée, riz thaï et sa salade composée", "price": 10.0, "image": "menu" },
         { "name": "Menu bon et pas cher au poulet", "desc": "Cuisse de poulet marinée, riz thaï et sa salade composée", "price": 10.0 },
         { "name": "Perles de coco", "desc": "2 pièces, uniquement avec le menu bon et pas cher", "price": 2.5 },
         { "name": "Riz crousty", "desc": "Riz blanc, sauce blanche, poulet frit, sauce aigre-douce, oignons frits", "price": 11.0 }
@@ -17,7 +17,7 @@
       "id": "entrees",
       "title": "Entrées",
       "items": [
-        { "name": "Nems au porc", "desc": "5 pièces", "price": 7.0, "featured": 6, "blurb": "Le classique croustillant, à partager… ou pas." },
+        { "name": "Nems au porc", "desc": "5 pièces", "price": 7.0, "image": "nems", "accroche": "Le classique croustillant." },
         { "name": "Nems au poulet", "desc": "5 pièces", "price": 7.5 },
         { "name": "Nems aux crevettes", "desc": "5 pièces", "price": 8.0 },
         { "name": "Samoussas au bœuf", "desc": "5 pièces", "price": 7.5 },
@@ -37,7 +37,7 @@
       "title": "Salades",
       "items": [
         { "name": "Salade de nems", "price": 7.5 },
-        { "name": "Bo bun", "desc": "Salade de bœuf et nems", "price": 8.5, "featured": 5, "blurb": "Bœuf sauté, nems et vermicelles de riz : la salade qui fait un repas." },
+        { "name": "Bo bun", "desc": "Salade de bœuf et nems", "price": 8.5, "image": "bobun", "accroche": "La salade qui fait un repas." },
         { "name": "Salade au poulet", "price": 7.5 },
         { "name": "Salade thaïe au bœuf", "price": 10.0 },
         { "name": "Salade thaïe aux crevettes", "price": 10.0 },
@@ -63,7 +63,7 @@
       "items": [
         { "name": "Soupe pho", "desc": "Bœuf, poulet ou crevettes", "price": 11.5 },
         { "name": "Soupe de raviolis", "desc": "Porc et crevettes", "price": 11.5 },
-        { "name": "Soupe Phnom Penh", "desc": "Porc et crevettes", "price": 11.5, "featured": 2, "blurb": "Le kuy teav de la capitale : bouillon clair, nouilles de riz, porc et crevettes." }
+        { "name": "Soupe Phnom Penh", "desc": "Porc et crevettes", "price": 11.5, "image": "soupe", "accroche": "Le kuy teav de la capitale." }
       ]
     },
     {
@@ -71,7 +71,7 @@
       "title": "Porc",
       "withRice": true,
       "items": [
-        { "name": "Porc au caramel", "price": 10.5, "featured": 3, "blurb": "Mijoté sucré-salé, laqué de caramel, servi avec son riz nature." },
+        { "name": "Porc au caramel", "price": 10.5, "image": "caramel", "accroche": "Mijoté, laqué, sucré-salé." },
         { "name": "Porc laqué", "price": 10.5 },
         { "name": "Brochettes de porc", "price": 10.5 }
       ]
@@ -85,7 +85,7 @@
         { "name": "Poulet sauce curry", "price": 11.0 },
         { "name": "Poulet sauté sauce saté", "price": 11.0 },
         { "name": "Poulet sauce ananas", "price": 11.0 },
-        { "name": "Poulet sauce citronnelle", "price": 11.0, "featured": 4, "blurb": "La citronnelle, parfum premier de la cuisine khmère, avec son riz nature." },
+        { "name": "Poulet sauce citronnelle", "price": 11.0 },
         { "name": "Poulet aux légumes", "price": 11.0 },
         { "name": "Poulet sauce piquante", "price": 11.0, "spicy": true }
       ]
@@ -95,7 +95,7 @@
       "title": "Bœuf",
       "withRice": true,
       "items": [
-        { "name": "Lok lac", "desc": "Bœuf mariné sauté", "price": 13.5, "featured": 1, "blurb": "Le grand classique cambodgien : bœuf mariné, saisi vif, servi avec son riz." },
+        { "name": "Lok lac", "desc": "Bœuf mariné sauté", "price": 13.5, "image": "loklac", "accroche": "Le grand classique cambodgien." },
         { "name": "Bœuf aux champignons noirs", "price": 13.5 },
         { "name": "Bœuf sauce saté", "price": 13.5 },
         { "name": "Bœuf sauce thaïe", "price": 13.5 },

@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-11-03T12:29:24.644Z",
+        "reason": "Agent: direction « minimaliste comme le site d'Apple » demandée par l'utilisateur le 03/11/2026 ; SF Pro via la police système chez Apple, Inter auto-hébergée comme équivalent ouvert ailleurs (DESIGN.md, The System Voice Rule)"
+      }
+    ]
+  }
+}

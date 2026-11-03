@@ -1,293 +1,297 @@
 ---
 name: Aux Saveurs du Cambodge
-description: L'étal de marché cambodgien de Saint-Alban — curcuma, feuille de bananier, piment et sucre de palme.
+description: Une vitrine minimaliste à la manière d'apple.com — tuiles noires et gris perle, police du système, un seul bleu pour agir, les plats comme des produits.
 colors:
-  curcuma: "#F2A51C"
-  curcuma-clair: "#F7C25A"
-  curcuma-pale: "#FDE7B4"
-  feuille: "#1B5232"
-  feuille-2: "#2C7343"
-  feuille-clair: "#B9DB95"
-  feuille-encre: "#16472B"
-  piment: "#C8261B"
-  piment-fonce: "#A51D14"
-  sucre: "#2A170D"
-  sucre-doux: "#5A3416"
-  riz: "#FFFBF3"
-  riz-2: "#F4EAD6"
-  riz-texte: "#6A5442"
-  papier-bon: "#FFFDF8"
-  pied-texte: "#D9C7AD"
-  pied-note: "#CBB89C"
+  blanc: "#FFFFFF"
+  perle: "#F5F5F7"
+  verre: "rgb(250 250 252 / 0.8)"
+  verre-plein: "#FAFAFC"
+  noir: "#000000"
+  encre: "#1D1D1F"
+  gris: "#6E6E73"
+  gris-nuit: "#86868B"
+  filet: "#D2D2D7"
+  pied-lien: "#424245"
+  bleu: "#0071E3"
+  bleu-appuye: "#0066CC"
+  lien: "#0066CC"
+  lien-nuit: "#2997FF"
+  ouvert: "#34C759"
+  commande: "#FF9F0A"
+  ferme: "#FF3B30"
 typography:
-  enseigne:
-    fontFamily: "Moul, Kantumruy Pro, serif"
-    fontSize: "clamp(2.2rem, 0.9rem + 5.2vw, 4.05rem)"
-    fontWeight: 400
-    lineHeight: 1
-    letterSpacing: "0.01em"
-  enseigne-khmer:
-    fontFamily: "Moul, Kantumruy Pro, serif"
-    fontSize: "clamp(1.5rem, 1rem + 2.2vw, 2.75rem)"
-    fontWeight: 400
-    lineHeight: 1.55
-  headline:
-    fontFamily: "Kantumruy Pro, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(2rem, 1.3rem + 2.6vw, 3.5rem)"
-    fontWeight: 700
-    lineHeight: 1.08
-    letterSpacing: "-0.015em"
-  title:
-    fontFamily: "Kantumruy Pro, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(1.6rem, 1.25rem + 1.1vw, 2.25rem)"
-    fontWeight: 700
-    lineHeight: 1.05
-    letterSpacing: "-0.02em"
-  body:
-    fontFamily: "Kantumruy Pro, Segoe UI, system-ui, sans-serif"
-    fontSize: "1.0625rem"
-    fontWeight: 400
-    lineHeight: 1.55
-  label:
-    fontFamily: "Kantumruy Pro, Segoe UI, system-ui, sans-serif"
-    fontSize: "0.8rem"
-    fontWeight: 700
-    letterSpacing: "0.06em"
-  prix:
-    fontFamily: "Kantumruy Pro Prix, Kantumruy Pro, system-ui, sans-serif"
-    fontSize: "1.0625rem"
+  manifeste:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "64px"
     fontWeight: 600
+    lineHeight: 1.0625
+    letterSpacing: "-0.009em"
+  display:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "56px"
+    fontWeight: 600
+    lineHeight: 1.07143
+    letterSpacing: "-0.005em"
+  headline:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "40px"
+    fontWeight: 600
+    lineHeight: 1.1
+    letterSpacing: "0"
+  title:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "32px"
+    fontWeight: 600
+    lineHeight: 1.125
+    letterSpacing: "0.004em"
+  tagline:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "28px"
+    fontWeight: 400
+    lineHeight: 1.14286
+    letterSpacing: "0.007em"
+  subhead:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "21px"
+    fontWeight: 400
+    lineHeight: 1.3
+    letterSpacing: "0.011em"
+  body:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "17px"
+    fontWeight: 400
+    lineHeight: 1.47059
+    letterSpacing: "-0.022em"
+  caption:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "14px"
+    fontWeight: 400
+    lineHeight: 1.42859
+    letterSpacing: "-0.016em"
+  footnote:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "12px"
+    fontWeight: 400
+    lineHeight: 1.33337
+    letterSpacing: "-0.01em"
 rounded:
-  etiquette: "0.45rem"
-  base: "0.5rem"
-  plan: "0.6rem"
-  bandeau: "0.75rem"
-  feuille-bon: "1rem"
-  tampon: "1.25rem"
-  pastille: "999px"
+  pilule: "980px"
+  carte: "18px"
+  champ: "12px"
+  cercle: "50%"
 spacing:
-  marge: "clamp(1rem, 4vw, 3rem)"
-  conteneur: "80rem"
-  section: "clamp(4rem, 3rem + 5vw, 8rem)"
-  cible-tactile: "2.75rem"
-  bouton: "3.25rem"
+  navigation: "44px"
+  gouttiere: "22px"
+  entre-tuiles: "12px"
+  haut-de-tuile: "52px"
+  tuile-pleine: "692px"
+  tuile-demi: "580px"
+  cible-tactile: "44px"
+  texte-max: "980px"
 components:
-  bouton-appel:
-    backgroundColor: "{colors.piment}"
-    textColor: "{colors.riz}"
-    rounded: "{rounded.base}"
-    padding: "0.5rem 1.35rem"
-    height: "{spacing.bouton}"
-  bouton-appel-hover:
-    backgroundColor: "{colors.piment-fonce}"
-  bouton-trait:
+  bouton:
+    backgroundColor: "{colors.bleu}"
+    textColor: "{colors.blanc}"
+    typography: "{typography.body}"
+    rounded: "{rounded.pilule}"
+    padding: "11px 21px"
+    height: "{spacing.cible-tactile}"
+  bouton-hover:
+    backgroundColor: "{colors.bleu-appuye}"
+  bouton-contour:
     backgroundColor: "transparent"
-    textColor: "{colors.sucre}"
-    rounded: "{rounded.base}"
-    padding: "0.5rem 1.35rem"
-    height: "{spacing.bouton}"
-  bouton-trait-hover:
-    backgroundColor: "{colors.sucre}"
-    textColor: "{colors.curcuma-clair}"
-  etat-etiquette:
-    backgroundColor: "{colors.riz}"
-    textColor: "{colors.sucre}"
-    rounded: "{rounded.base}"
-    padding: "0.5rem 0.95rem 0.5rem 0.3rem"
-  etiquette-pendue:
-    backgroundColor: "{colors.riz}"
-    textColor: "{colors.sucre}"
-    rounded: "{rounded.etiquette}"
-    padding: "0.7rem 1.1rem 0.75rem 2.4rem"
-  prix-etiquette:
-    backgroundColor: "{colors.curcuma}"
-    textColor: "{colors.sucre}"
-    typography: "{typography.prix}"
-    rounded: "0.3rem"
-    padding: "0.2rem 0.55rem"
-  rubrique-puce:
-    backgroundColor: "{colors.riz}"
-    textColor: "{colors.sucre}"
-    rounded: "{rounded.pastille}"
-    padding: "0.3rem 0.9rem"
-    height: "2.5rem"
-  rubrique-puce-active:
-    backgroundColor: "{colors.sucre}"
-    textColor: "{colors.riz}"
+    textColor: "{colors.lien}"
+    typography: "{typography.body}"
+    rounded: "{rounded.pilule}"
+    padding: "11px 21px"
+    height: "{spacing.cible-tactile}"
+  bouton-contour-hover:
+    backgroundColor: "{colors.bleu}"
+    textColor: "{colors.blanc}"
+  bouton-contour-nuit:
+    backgroundColor: "transparent"
+    textColor: "{colors.lien-nuit}"
+  lien-chevron:
+    textColor: "{colors.lien}"
+  navigation:
+    backgroundColor: "{colors.verre}"
+    textColor: "{colors.encre}"
+    typography: "{typography.footnote}"
+    height: "{spacing.navigation}"
+  ruban:
+    backgroundColor: "{colors.perle}"
+    textColor: "{colors.encre}"
+    typography: "{typography.caption}"
+    padding: "13px 22px"
+  tuile-noire:
+    backgroundColor: "{colors.noir}"
+    textColor: "{colors.perle}"
+  tuile-claire:
+    backgroundColor: "{colors.perle}"
+    textColor: "{colors.encre}"
   champ-recherche:
-    backgroundColor: "{colors.riz}"
-    textColor: "{colors.sucre}"
-    rounded: "{rounded.base}"
-    padding: "0.5rem 1rem 0.5rem 2.9rem"
-    height: "{spacing.bouton}"
+    backgroundColor: "{colors.blanc}"
+    textColor: "{colors.encre}"
+    rounded: "{rounded.champ}"
+    padding: "0 16px 0 46px"
+    height: "52px"
   bouton-ajout:
-    backgroundColor: "{colors.riz}"
-    textColor: "{colors.sucre}"
-    rounded: "{rounded.pastille}"
-    size: "{spacing.cible-tactile}"
+    backgroundColor: "{colors.blanc}"
+    textColor: "{colors.bleu}"
+    rounded: "{rounded.cercle}"
+    size: "32px"
   bouton-ajout-actif:
-    backgroundColor: "{colors.feuille}"
-    textColor: "{colors.riz}"
+    backgroundColor: "{colors.bleu}"
+    textColor: "{colors.blanc}"
+  commande:
+    backgroundColor: "{colors.perle}"
+    textColor: "{colors.encre}"
+    rounded: "{rounded.carte}"
+    padding: "24px"
 ---
 
 # Design System: Aux Saveurs du Cambodge
 
-<!-- Système relevé sur le site livré (public/), sans entretien : le commanditaire a donné carte blanche. -->
+<!-- Système relevé sur le site livré (public/) après la refonte demandée le 03/11/2026 : « minimaliste comme le site d'Apple ». -->
 
 ## Overview
 
-**Creative North Star: "L'étal du marché"**
+**Creative North Star: "La vitrine produit"**
 
-Le site se tient comme un étal de marché cambodgien : de grands aplats de curcuma et de feuille de bananier possèdent des régions entières de la page, les ingrédients du kroeung sont posés dessus en illustrations sérigraphiées, et l'on vend franchement — un prix lisible, une étiquette qui dit si c'est ouvert, un téléphone à un geste. L'identité tient dans l'enseigne bilingue : le nom en khmer, en Moul, au-dessus du nom latin en capitales Moul, comme sur les devantures de Phnom Penh.
+Chaque plat est présenté comme Apple présente un produit : seul, centré, vu du dessus, sur une tuile pleine largeur noire ou gris perle, avec un nom court, une phrase et un prix. L'interface se retire : trois fonds (blanc, perle, noir), une police, un bleu. Toute la couleur de la page vient des plats dessinés ; le reste est de l'air, du texte demi-gras serré et des pilules bleues.
 
-La densité alterne : un héros saturé, des passages calmes sur papier riz pour lire (la carte compte 86 plats), puis de nouveau la couleur en bandes. Le relief est celui de l'impression : contours d'encre légèrement décalés, trame de points, ombres plates de sérigraphie. Aucune photo, aucun costume « asiatique » (laques rouge et or, lanternes, pinceau), aucun héros sombre façon restaurant chic.
+La page se lit comme une suite de tuiles : le nom du restaurant et le bol de soupe sur noir, le menu à 10 € sur perle, quatre plats en grille de deux, une phrase manifeste sur blanc, les horaires, l'adresse et son plan. La carte reprend la même retenue pour lire 86 plats : une barre locale collante en verre dépoli, des lignes séparées par des filets, un cercle bleu pour ajouter, une fiche « Votre commande » gris perle.
 
 **Key Characteristics:**
-- Aplats curcuma (#F2A51C) et feuille (#1B5232) qui tiennent des sections entières
-- Enseigne bilingue en Moul ; tout le texte courant en Kantumruy Pro
-- Illustrations en cinq encres sur papier riz, contour décalé, trame de points
-- Rouge piment réservé à l'appel téléphonique
-- Étiquettes d'étal pour l'état d'ouverture et les prix mis en avant
+- Tuiles pleine largeur noires (#000000) et gris perle (#F5F5F7), séparées par 12 px de blanc
+- Police du système d'Apple (SF Pro) sur ses appareils, Inter auto-hébergée ailleurs ; titres demi-gras serrés
+- Un seul bleu d'action : pilules pleines ou en contour, cercle d'ajout, compteur
+- Les plats dessinés vus du dessus, coupés par le bas de leur tuile
+- Verre dépoli réservé à ce qui reste collé au-dessus du contenu
 - Prix en chiffres tabulaires, au format « 10,00 € »
-- Un seul moment fort animé : l'étal s'installe au chargement ; le reste du mouvement explique un état ou répond à un geste
+- Mouvement discret : le héros se dévoile au chargement, chaque tuile une seule fois au défilement
 
 ## Colors
 
-Une palette de marché : épice jaune, feuille verte, piment rouge, encre brune de sucre de palme, papier de riz.
+Une palette sans teinte : blanc, gris perle, noir, deux gris de texte, et le bleu d'Apple pour agir.
 
 ### Primary
-- **Curcuma** (#F2A51C) : le champ principal — héros, section des saveurs, page 404, fond des étiquettes de prix sur papier riz. Toujours couvert d'une trame de points à 11 % d'encre.
-- **Curcuma clair** (#F7C25A) : prix et guillemets sur fond feuille, tampon de la promesse, contour de focus sur fond sombre.
-- **Curcuma pâle** (#FDE7B4) : fond de l'état « grand » dans les horaires, survol des puces de rubrique.
-
-### Secondary
-- **Feuille de bananier** (#1B5232) : champ profond — menu bon et pas cher, en-tête de la carte, bandeau de la promesse, bouton d'ajout actif.
-- **Feuille vive** (#2C7343) : pastille « ouvert », mention « sur commande », curseur de saisie, barre de défilement.
-- **Feuille tendre** (#B9DB95) : texte secondaire sur fond feuille (5,9:1).
-- **Feuille encre** (#16472B) : petit khmer de l'enseigne d'en-tête sur curcuma (5,2:1).
-
-### Tertiary
-- **Piment** (#C8261B) / **Piment foncé** (#A51D14, survol) : uniquement le geste d'appel — boutons Appeler / Commander, bouton d'appel de la barre mobile.
+- **Bleu d'action** (bleu) : fond des boutons pilules pleins (Appeler, Commander, Itinéraire), contour des pilules secondaires, cercle d'ajout de la carte, pastille du compteur de commande, anneau de focus. Survol : **bleu appuyé**.
+- **Bleu de lien** (lien) : liens à chevron « Découvrir la carte › », texte des pilules en contour sur fond clair. Sur noir, **bleu de nuit** (lien-nuit).
 
 ### Neutral
-- **Sucre de palme** (#2A170D) : l'encre — texte, contours, filets, pied de page.
-- **Sucre doux** (#5A3416) : texte secondaire sur curcuma (5,25:1).
-- **Riz** (#FFFBF3) : champ de lecture, fond des étiquettes et des champs.
-- **Riz 2** (#F4EAD6) : texte du pied de page, piste de la barre de défilement.
-- **Riz texte** (#6A5442) : texte secondaire sur riz (6,9:1).
-- **Papier du bon** (#FFFDF8) : feuille du bon de commande.
-- **Pied texte** (#D9C7AD) / **Pied note** (#CBB89C) : notes et crédits sur le pied sucre.
+- **Blanc** : fond de page, des pages de texte, de la tuile Accès et du manifeste.
+- **Gris perle** (perle) : tuiles claires, ruban d'état, fiche « Votre commande », pied de page.
+- **Noir** : tuile du héros et tuiles sombres de la grille.
+- **Encre** : tout le texte sur fond clair ; texte des tuiles noires en gris perle.
+- **Gris** : texte secondaire sur clair (détails, descriptions, notes) ; **gris de nuit** : texte secondaire sur noir.
+- **Filet** : séparateurs de lignes de plats, du tableau des horaires et du pied de page.
+- **Verre** (blanc à 80 %, flou 20 px, saturation 180 %) : navigation, rubriques de la carte, barre de commande mobile ; **verre plein** quand le flou n'est pas disponible ou que le menu mobile est ouvert.
+
+### Tertiary
+- **Pastilles d'état** : ouvert, midi sur commande, fermé — uniquement le point devant l'état d'ouverture, jamais du texte ni un fond.
 
 ### Named Rules
-**The One Chili Rule.** Le rouge piment est l'appel téléphonique et rien d'autre dans l'interface. Les seuls autres rouges sont les piments dessinés.
+**The One Blue Rule.** Le bleu est la seule couleur d'action. Rien d'autre n'est cliquable en couleur ; les pastilles d'état sont des points, pas des boutons.
 
-**The Five Inks Rule.** Les illustrations n'utilisent que cinq encres (sucre, curcuma, piment, feuille, vert tendre #A9C65C) sur papier riz (#FBF5EA) ; toute autre teinte est une trame ou une surimpression de ces encres (voir `tools/etal.mjs`).
+**The Dish Is The Color Rule.** L'interface n'a pas de teinte : la couleur de la page vient des plats dessinés (bouillon, herbes, crevettes). Une nouvelle surface n'ajoute pas de couleur d'interface, elle ajoute un plat.
 
-**The Quiet Field Rule.** Les longues listes se lisent sur riz ; la couleur tient les bandes, les titres soulignés au curcuma et les bords, jamais le fond d'une liste de plats.
+**The Three Grounds Rule.** Trois fonds seulement : blanc pour lire, perle et noir pour les tuiles. Deux tuiles de même fond ne se touchent jamais sans les 12 px de blanc qui les séparent.
 
 ## Typography
 
-**Display Font:** Moul (Danh Hong), repli Kantumruy Pro
-**Body Font:** Kantumruy Pro (Tep Sovichet, Wei Huang), repli Segoe UI / system-ui
-**Price Font:** Kantumruy Pro Prix — sous-ensemble de Kantumruy Pro 600 aux chiffres de chasse fixe
+**Display Font:** SF Pro, par la police du système (-apple-system, BlinkMacSystemFont), sur les appareils Apple
+**Body Font:** la même ; ailleurs Inter (Rasmus Andersson, SIL OFL 1.1), variable 400–700 avec axe de taille optique, auto-hébergée (75 Ko), affichée dès son arrivée (`font-display: swap`)
 
-**Character:** deux faces dessinées par des typographes cambodgiens. Moul, l'écriture des enseignes et des titres khmers, porte l'identité ; Kantumruy Pro, sobre et lisible, porte tout le reste, en latin comme en khmer.
+**Character:** une seule famille, celle de la référence. La hiérarchie vient de la taille et de l'interligne, pas des graisses : 600 pour les titres, 400 pour tout le reste. Approche resserrée sur les grands corps, légèrement ouverte sur les sous-titres, comme sur apple.com.
 
 ### Hierarchy
-- **Enseigne** (Moul 400, clamp(2.2rem, 0.9rem + 5.2vw, 4.05rem), interligne 1, capitales, +0,01em) : le nom du restaurant en deux lignes, « du » glissé en petit Kantumruy 600 à 0,4em.
-- **Enseigne khmère** (Moul, clamp(1.5rem, 1rem + 2.2vw, 2.75rem), interligne 1,55) : « រសជាតិកម្ពុជា » au-dessus du nom ; « អរគុណ » en pied de page ; « ឆ្ងាញ់ » sur le tampon.
-- **Headline** (700, clamp(2rem, 1.3rem + 2.6vw, 3.5rem), 1,08, −0,015em) : titres de section.
-- **Title** (700, clamp(1.6rem, 1.25rem + 1.1vw, 2.25rem), 1,05, −0,02em) : noms de plats mis en avant ; titres de rubrique de la carte en clamp(1.75rem, 1.35rem + 1.4vw, 2.5rem).
-- **Body** (400, 1,0625rem, 1,55) : texte courant, 34 à 44ch selon les blocs.
-- **Label** (700, 0,8rem, +0,06em, capitales) : titre d'étiquette, titres du pied de page (0,85rem, +0,08em).
-- **Prix** (Kantumruy Pro Prix 600) : tous les prix, alignés à droite.
+- **Manifeste** (600, 64 px / 48 px / 40 px selon l'écran, interligne 1,06) : la phrase « Tout est fait maison. Avec des produits frais. Et beaucoup d'amour. »
+- **Display** (600, 56 px, 48 px sous 1068 px, 40 px sous 734 px, interligne 1,07) : nom du restaurant, titres des tuiles pleine largeur, « La carte ».
+- **Headline** (600, 40 px, 32 px sous 1068 px) : noms des plats dans la grille.
+- **Title** (600, 32 px, 28 px sur mobile) : rubriques de la carte.
+- **Tagline** (400, 28 px, 24 px puis 21 px) : phrase sous un titre de tuile pleine largeur.
+- **Subhead** (400, 21 px, interligne 1,3 pour rester lisible sur deux lignes) : phrase des tuiles de la grille, accroche de la carte, titre de la fiche commande (en 600).
+- **Body** (400, 17 px, interligne 1,47) : texte courant, boutons, noms de plats (en 600), prix.
+- **Caption** (400, 14 px) : descriptions de plats, rubriques, ruban d'état, notes.
+- **Footnote** (400, 12 px) : liens de navigation, pied de page, crédits.
 
 ### Named Rules
-**The Bilingual Sign Rule.** Moul ne sert qu'à l'enseigne et aux mots khmers. Jamais pour du français courant : sa partie latine n'a pas d'accents.
+**The System Voice Rule.** Une seule famille : SF Pro par la police du système chez Apple, Inter auto-hébergée ailleurs. C'est la police de la référence demandée, pas un repli faute de mieux.
 
-**The Tabular Price Rule.** Un prix s'écrit « 10,00 € » (Intl fr-FR), en Kantumruy Pro Prix, pour que les virgules s'alignent en colonne.
+**The Semibold Ceiling Rule.** Le gras s'arrête à 600. Un titre gagne sa place par sa taille, jamais par une graisse plus forte, une capitale ou une couleur.
 
-**The Fine Space Rule.** Espace fine insécable avant « ? ! : ; » et dans « « » » ; gluon U+2060 après le tiret des plages horaires pour que « 18 h – 21 h 45 » ne se coupe pas.
+**The Tabular Price Rule.** Un prix s'écrit « 10,00 € » (Intl fr-FR) en chiffres tabulaires, aligné à droite.
+
+**The Fine Space Rule.** Espace fine insécable avant « ? ! : ; » et dans « « » » ; gluon après le tiret des plages horaires pour que « 18 h – 21 h 45 » ne se coupe pas.
 
 ## Layout
 
-Conteneur de 80rem centré, marges latérales clamp(1rem, 4vw, 3rem), sections espacées de clamp(4rem, 3rem + 5vw, 8rem). Points de rupture : 45rem (tablette : grilles à deux colonnes, barre d'actions mobile masquée), 64rem (bureau : héros à quatre pistes dont l'étal court jusqu'au bord droit de l'écran), 72rem (carte à trois colonnes : index 12rem, liste, bon 21rem).
+Tout est centré. Les tuiles pleine largeur font 692 px de haut sur grand écran, texte en haut à 52 px du bord, image en bas ; la grille de plats est en deux colonnes de 580 px de haut, séparées et bordées de 12 px. Le texte ne dépasse jamais 980 px de large ; les tuiles de la grille, 40rem. Marges latérales de 22 px, 16 px sous 734 px.
 
-Le héros de bureau est une grille pleine largeur `minmax(marge, 1fr) | 39rem | 41rem | minmax(marge, 1fr)` : le texte dans la deuxième piste, l'illustration sur les deux dernières, coupée par le bord. Sur mobile, l'enseigne passe pleine largeur, les deux boutons s'empilent au-dessus de la ligne de flottaison et l'étal devient une bande 800 × 440 sous les boutons.
+Points de rupture : 1068 px (sous ce seuil les tuiles perdent leur hauteur fixe, la commande devient une feuille basse et une barre « Votre commande » apparaît), 833 px (la navigation passe au bouton menu, 48 px de haut), 734 px (une colonne, corps réduits). Sur la carte, au-delà de 1068 px, trois colonnes : index des rubriques (200 px), liste, fiche commande (320 px), les deux bords collants.
 
-Les sections alternent curcuma → feuille → riz → curcuma → riz → sucre ; jamais deux aplats de même couleur côte à côte.
+### Named Rules
+**The Centered Tile Rule.** Une tuile porte un seul sujet, dans cet ordre : titre, phrase, détail en gris, deux actions (pleine puis contour), image centrée qui sort par le bas.
 
 ## Elevation & Depth
 
-Le relief vient de l'impression, pas de l'interface : contours d'encre décalés de 1,6 × 1,3 px sur chaque ingrédient, silhouettes d'ombre plates (encre à 30 %), trame de points. Côté interface, une seule ombre douce, réservée à ce qui se saisit : boutons d'appel, étiquettes, bon de commande.
-
-### Shadow Vocabulary
-- **Ombre de prise** (`box-shadow: 0 0.6rem 1.4rem -0.7rem rgb(42 23 13 / 0.55)`) : bouton d'appel, étiquette pendue, bon de commande sur bureau.
-- **Ombre de barre** (`box-shadow: 0 -0.5rem 1.5rem -0.75rem rgb(42 23 13 / 0.6)`) : barre d'actions mobile.
-- **Ombre de feuille** (`box-shadow: 0 -1rem 2rem -1rem rgb(42 23 13 / 0.45)`) : bon de commande ouvert en feuille basse sur mobile.
+Aucune ombre d'interface. La profondeur vient de deux choses : l'ombre floue que chaque plat dessiné porte sous lui, et le verre dépoli des barres qui restent collées au-dessus du contenu. Le voile de la feuille de commande mobile (noir à 32 %) est le seul assombrissement.
 
 ### Named Rules
-**The Stall Setup Rule.** L'étal s'installe une fois, au chargement de l'accueil, et le texte n'attend jamais : nom, état et bouton d'appel sont lisibles dès la première image. Une animation qui n'explique ni un état, ni un geste, ni un lien entre deux endroits n'a pas sa place.
-
-**The Print Depth Rule.** Pas d'ombre décalée dure ni de halo coloré : la profondeur d'une illustration est une silhouette plate décalée, celle d'un objet d'interface est une ombre douce sous ce que l'on peut prendre.
+**The Glass Only When Sticky Rule.** Le verre dépoli ne sert qu'à ce qui flotte au-dessus du contenu qui défile : navigation, rubriques, barre de commande. Jamais sur une carte posée dans la page.
 
 ## Shapes
 
-Coins doux de 0,5rem pour les boutons, champs et étiquettes d'état ; 0,45rem pour l'étiquette pendue ; 0,75rem pour les bandeaux ; 999px pour les puces et boutons ronds. Les filets sont l'encre : 2px pleins sous les titres de liste, 1px en tirets entre les plats.
+Ce qui agit est une pilule (980 px) ou un cercle ; ce qui contient est arrondi à 18 px (fiche commande, plan, feuille mobile) ; le champ de recherche et la ligne du jour à 12 px. Filets de 1 px pour séparer, jamais de cadre autour d'une liste.
 
 ### Named Rules
-**The Tag Rule.** Ce qui annonce un état ou une offre est une étiquette d'étal : l'état d'ouverture a un bout en pointe dont la pastille fait le trou perforé ; l'offre à 10 € pend à sa ficelle et se balance au survol.
+**The Pill Rule.** Un bouton est toujours une pilule pleine ou en contour, jamais un rectangle ; une action dans une ligne est un cercle de 32 px.
 
 ## Components
 
 ### Buttons
-- **Shape :** coins doux (0,5rem), contour d'encre 2px, hauteur 3,25rem.
-- **Appel :** fond piment, texte riz, icône téléphone, numéro séparé par un filet riz à 50 % ; survol piment foncé ; enfoncement de 1px.
-- **Trait :** transparent, encre sucre ; au survol, fond sucre et texte curcuma clair sur curcuma, texte riz sur riz. Sur fond feuille, trait et texte riz, qui se remplit de riz au survol.
-- **Texte :** lien souligné, 2,75rem de cible.
+- **Forme :** pilule (980 px), 17 px, 11 × 21 px de marge intérieure, 44 px de haut.
+- **Plein :** fond bleu, texte blanc ; survol bleu appuyé. Toujours l'action principale : Appeler, Commander, Itinéraire.
+- **Contour :** 1 px de bleu, texte bleu de lien ; au survol, il se remplit de bleu. Sur noir, bleu de nuit, rempli au survol avec un texte noir.
+- **Lien à chevron :** texte bleu suivi d'un chevron dessiné (trait 2,6), souligné au survol.
 
-### État d'ouverture (étiquette)
-- Riz, contour d'encre, bout gauche en pointe (carré pivoté de 45°), pastille : feuille vive = ouvert, curcuma = sur commande, riz 2 = fermé.
-- Variantes : compacte dans l'en-tête, grande sur curcuma pâle dans les horaires. Texte calculé à l'heure de Paris.
-- Mouvement : quand l'état change (et au chargement), la pancarte se retourne sur son axe vertical (170ms pour la demi-face sortante, 380ms pour l'entrante). En mouvement réduit, simple fondu.
-- Le jour courant du tableau est entouré à la main : un trait SVG qui se referme en dépassant, tracé en 800ms quand le tableau entre à l'écran.
+### Ruban d'état
+- Bande gris perle sous la navigation, centrée : pastille d'état, texte court calculé à l'heure de Paris (« Ouvert jusqu'à 14 h », « Fermé · ouvre à 18 h »), puis « Appeler › ».
+- Sans JavaScript, il affiche le résumé des horaires ; avec, le texte statique ne s'affiche pas avant l'état en direct, pour que rien ne bouge.
 
-### Étiquette pendue
-- Fond riz, trou perforé curcuma cerclé d'encre, ficelle d'encre, rotation de repos −5° (4° sur mobile, variable `--repos`) ; titre en label, prix en Kantumruy Pro Prix 2,6rem.
-- Mouvement : l'attache (`.accroche`) la fait tomber de son clou puis osciller en pendule amorti jusqu'au repos (1,7s, à 1,15s du chargement) ; au survol, elle se balance de nouveau.
-
-### Chips (rubriques de la carte)
-- Puces pleine pastille à contour 1,5px ; active : sucre plein, texte riz. Sur bureau, liste verticale collante ; active : curcuma à contour d'encre.
-- Mouvement : un curseur unique glisse sous la rubrique en cours (300ms) ; la rubrique visée par l'index voit son surlignage curcuma se repeindre de gauche à droite.
+### Tuiles
+- **Pleine largeur** (héros, menu à 10 €, horaires, accès) et **demi** (grille de plats), noires ou perle, contenu centré selon The Centered Tile Rule.
+- Le plat dessiné mesure 520 px (380 px dans la grille, 360 px sur mobile) et sort de 16 à 20 % par le bas.
 
 ### Inputs / Fields
-- Recherche : fond riz, contour d'encre 2px, icône loupe à gauche, focus en anneau curcuma clair de 3px.
-
-### Liste de plats
-- Nom (600), description (riz texte, 0,925rem), prix à droite en chiffres tabulaires, bouton rond « + » de 2,75rem qui passe au vert feuille avec une pastille de quantité curcuma.
-
-### Bon de commande (signature)
-- Feuille papier (#FFFDF8) à bord perforé sur bureau, collante dans la colonne de droite ; feuille basse non modale sur mobile, ouverte depuis la barre d'actions.
-- Lignes avec quantité − / +, total indicatif en chiffres tabulaires qui remonte de 0,35em à chaque changement, bouton d'appel pleine largeur.
-- Mouvement : un jeton « +1 » curcuma vole en parabole du bouton « + » jusqu'au total (bureau) ou jusqu'au bouton « Mon bon » (mobile), 640ms ; à l'arrivée, total et compteur remontent. Les lignes entrent en glissant (320ms) et sortent plus vite (170ms).
+- **Recherche :** fond blanc, contour gris de nuit de 1 px (3,5:1), rayon 12 px, 52 px de haut, loupe à gauche ; au focus, contour bleu et halo bleu de 4 px.
 
 ### Navigation
-- En-tête curcuma : enseigne réduite, liens soulignés au survol par un trait qui se déroule, état compact, bouton d'appel. Sous 45rem, liens remplacés par la barre d'actions basse (Appeler · La carte · Y aller).
+- Verre dépoli de 44 px, collé en haut : nom du restaurant (14 px, 600) à gauche, liens de 12 px au centre, téléphone à droite.
+- Sous 833 px : nom, icône téléphone et bouton menu à deux traits qui se croisent ; le menu ouvert couvre l'écran en blanc, liens en 28 px demi-gras, le reste de la page inerte.
+- Carte : barre locale collante des rubriques, soulignée d'un trait de 2 px qui glisse sous la rubrique en cours (index vertical sur grand écran).
+
+### Votre commande (signature)
+- Grand écran : fiche gris perle (rayon 18 px) collée dans la colonne de droite. Mobile et tablette : feuille blanche qui monte du bas sur un voile, ouverte depuis la barre « Votre commande ».
+- Chaque plat a son cercle bleu « + » ; dans la commande, la quantité s'affiche en pastille noire sur le cercle devenu plein.
+- Lignes : nom, montant, boutons − / + ; total en 600 ; « Appeler pour commander » en pilule pleine largeur ; « Tout retirer » en lien.
+- Mouvement : un jeton bleu « +1 » vole en parabole du cercle jusqu'au total (ou jusqu'au sac de la barre), 620 ms ; à l'arrivée, total et compteur pulsent une fois.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** poser la couleur en aplats de section (curcuma #F2A51C, feuille #1B5232) et garder les listes sur riz (#FFFBF3).
-- **Do** écrire les prix « 10,00 € » en Kantumruy Pro Prix et les aligner à droite.
-- **Do** dessiner tout nouvel ingrédient avec les cinq encres de `tools/etal.mjs`, contour décalé et ombre plate.
-- **Do** garder des cibles tactiles de 2,75rem minimum et un focus visible (3px sucre, ou curcuma clair sur fond sombre).
-- **Do** garder un seul moment fort par page : à l'accueil, la feuille glisse (950ms), les ingrédients tombent avec leurs ombres (720ms chacun, décalés de 36ms) et l'étiquette se balance. Le reste explique un état (pancarte, curseur, jeton) ou répond à un geste, sans boucle.
-- **Do** prévoir le mouvement réduit : plus aucun déplacement, mais les fondus et changements d'état restent lisibles.
+- **Do** présenter un plat comme un produit : seul, vu du dessus, centré sur une tuile noire ou perle, coupé par le bas.
+- **Do** garder le bleu (#0071E3) pour l'action et le bleu de lien (#0066CC, #2997FF sur noir) pour les liens à chevron.
+- **Do** écrire les prix « 10,00 € » en chiffres tabulaires, alignés à droite.
+- **Do** garder des cibles tactiles de 44 px et un focus bleu visible de 2 px.
+- **Do** dévoiler une seule fois : le héros au chargement (texte qui monte en 1 s, bol qui se pose en tournant en 1,6 s), chaque tuile en entrant à l'écran ; rien en boucle, aucun déplacement en mouvement réduit.
+- **Do** signaler les dessins comme dessins (« (illustration) » dans le texte alternatif, note de pied de page) tant qu'il n'y a pas de vraies photos.
 
 ### Don't:
-- **Don't** utiliser le rouge piment pour autre chose que l'appel.
-- **Don't** composer du français en Moul, ni utiliser une police système comme voix d'affichage.
-- **Don't** mettre de sur-titre ou d'eyebrow au-dessus d'un titre.
-- **Don't** présenter une illustration ou une photo comme une photo des plats de la maison.
-- **Don't** revenir au costume « asiatique » : laque rouge et or, lanternes, dragons, faux pinceau.
-- **Don't** utiliser d'ombre décalée dure, de dégradé de texte ou de verre dépoli décoratif.
+- **Don't** ajouter une couleur d'interface : pas de rouge, d'or, de vert, hors des pastilles d'état.
+- **Don't** mettre de sur-titre ou d'étiquette (« Nouveau ») au-dessus d'un titre de tuile.
+- **Don't** dépasser le demi-gras (600) ni composer de titre en capitales.
+- **Don't** poser de texture, d'ornement, de photo d'ambiance sombre ou d'ombre portée sur l'interface.
+- **Don't** utiliser de dégradé de texte ni de verre dépoli sur ce qui ne reste pas collé à l'écran.
+- **Don't** présenter un dessin comme une photo des plats de la maison.
