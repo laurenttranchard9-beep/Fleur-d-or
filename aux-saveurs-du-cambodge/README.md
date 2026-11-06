@@ -89,6 +89,22 @@ En cas de page blanche « erreur 500 » ou d'erreur de certificat, supprimer `.h
 Si le site change de domaine, mettre la nouvelle adresse dans `url` de `data/restaurant.json` puis relancer `node build.mjs` :
 les liens, le plan du site et `.htaccess` suivent.
 
+### Essayer sur son ordinateur avec XAMPP
+
+XAMPP contient Apache, le même serveur que chez IONOS : le site et son `.htaccess` y fonctionnent tels quels, sans PHP ni base de données.
+(Ouvrir `index.html` par un double-clic ne suffit pas : les liens vers la carte afficheraient un dossier.)
+
+1. Dans le dossier de XAMPP (`C:\xampp` sous Windows, `/Applications/XAMPP` sur Mac, `/opt/lampp` sous Linux),
+   renommer `htdocs` en `htdocs-xampp` (son tableau de bord est mis de côté), puis créer un nouveau dossier `htdocs` vide.
+2. Décompresser l'archive dans ce nouveau `htdocs` : `index.html` doit se trouver directement dedans.
+3. Démarrer Apache dans le panneau de contrôle de XAMPP, puis ouvrir <http://localhost/>.
+
+Pour revenir à XAMPP d'origine : supprimer ce `htdocs` et renommer `htdocs-xampp` en `htdocs`.
+Variante sans rien renommer : décompresser dans `htdocs/saveurs` et ouvrir <http://localhost/saveurs/>. Tout fonctionne,
+sauf la page « introuvable » du site et l'ancienne adresse `/nouvelle-page`, qui visent la racine du serveur.
+Si Apache refuse de démarrer, le port 80 est souvent occupé (Skype, IIS) : dans XAMPP, Config → `httpd.conf`,
+remplacer `Listen 80` par `Listen 8080`, redémarrer Apache et ouvrir <http://localhost:8080/>.
+
 ### Autres hébergeurs
 
 - **Netlify** : glisser le dossier `public/` sur [app.netlify.com/drop](https://app.netlify.com/drop).
