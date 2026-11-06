@@ -12,11 +12,12 @@ web
 
 ## Stack
 
-délégué : site statique HTML/CSS/JS sans framework, généré par un petit script Node sans dépendance
-(`build.mjs`) à partir de deux fichiers de données (`data/restaurant.json`, `data/carte.json`).
-Raison : hébergeable partout (Netlify, Cloudflare Pages, OVH, GitHub Pages), aucune maintenance de dépendances,
-et une seule source de vérité pour les horaires, la carte et les données structurées.
-Le site actuel tourne sur Squarespace ; la migration du domaine reste une décision du restaurant.
+délégué : pages HTML/CSS/JS sans framework, générées par un petit script Node sans dépendance
+(`build.mjs`) à partir de deux fichiers de données (`data/restaurant.json`, `data/carte.json`), plus un peu de PHP
+(7.4 ou plus récent, sans base de données) pour ce qui doit vivre sur le serveur : les prix modifiables depuis
+l'espace gestion (`/admin/`) et la mesure d'audience du site lui-même. Données du serveur en fichiers dans `donnees/`.
+Hébergement choisi par le restaurant : IONOS (essai local possible avec XAMPP). Le site actuel tourne sur Squarespace ;
+la bascule du domaine reste à faire.
 
 ## Users
 
@@ -53,8 +54,12 @@ c'est la cuisine de la maison, servie comme chez soi.
   canard, crevettes, seiches, spécialités du chef, brochettes, nouilles, accompagnements, desserts). Source : `data/carte.json`.
 - Les plats principaux sont servis avec du riz nature ; supplément riz cantonais (porc ou crevettes) : 4,50 €.
 - Prix publiés en euros TTC tels qu'affichés sur le site actuel ; aucun prix n'est inventé.
-- Non décidé / inconnu : livraison (ne pas l'annoncer), paiement accepté, nombre de couverts, e-mail, réseaux sociaux,
-  identité légale (raison sociale, SIRET, directeur de publication) pour les mentions légales.
+- Identité légale (06/11/2026) : raison sociale TRANCHARD, SIRET 517 803 433 00039, directeur de la publication
+  Laurent Tranchard, hébergeur IONOS SARL.
+- Les prix se changent dans l'espace gestion ; ceux de `data/carte.json` restent les prix d'origine.
+- Mesure d'audience demandée par le restaurant (« des stats avec des cookies ») : faite par le site, dans les conditions
+  d'exemption de consentement de la CNIL (cookie de 13 mois, données 25 mois, aucun tiers), refus possible.
+- Non décidé / inconnu : livraison (ne pas l'annoncer), paiement accepté, nombre de couverts, e-mail, réseaux sociaux.
 
 ## Brand Commitments
 
@@ -62,6 +67,7 @@ c'est la cuisine de la maison, servie comme chez soi.
 - Formules existantes à conserver : « On vous garde une petite place ? », « Chez nous, tout est fait maison, avec des produits frais… et beaucoup d'amour ! », « Commandez dès maintenant ! », « Menu bon et pas cher ».
 - Aucun logo, aucune charte : l'identité visuelle de l'ancien site (gris Squarespace, Space Grotesk) n'est pas un engagement.
 - Direction visuelle demandée le 03/11/2026 : « minimaliste comme le site d'Apple ». Elle remplace la direction « étal de marché » de la première refonte.
+- Demande du 06/11/2026 : « plus d'animation, il faut que ce soit vivant », dans cette même direction.
 
 ## Evidence on Hand
 
@@ -83,3 +89,4 @@ c'est la cuisine de la maison, servie comme chez soi.
 
 Public large et local (tous âges) : texte confortable sur mobile, contrastes AA, cibles tactiles ≥ 44 px,
 navigation clavier, contenu complet sans JavaScript, respect de `prefers-reduced-motion`.
+L'espace gestion suit les mêmes exigences : il sert une personne, souvent sur téléphone, entre deux services.

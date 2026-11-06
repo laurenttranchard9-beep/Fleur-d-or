@@ -19,6 +19,8 @@ colors:
   ouvert: "#34C759"
   commande: "#FF9F0A"
   ferme: "#FF3B30"
+  erreur: "#D70015"
+  succes: "#1D7A35"
 typography:
   manifeste:
     fontFamily: "-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
@@ -169,7 +171,8 @@ La page se lit comme une suite de tuiles : le nom du restaurant et le bol de sou
 - Les plats dessinés vus du dessus, coupés par le bas de leur tuile
 - Verre dépoli réservé à ce qui reste collé au-dessus du contenu
 - Prix en chiffres tabulaires, au format « 10,00 € »
-- Mouvement discret : le héros se dévoile au chargement, chaque tuile une seule fois au défilement
+- Un site vivant mais sobre : le nom se lève mot après mot, le bol fume, la soupe se prépare au fil du défilement, le reste répond au geste
+- Un espace gestion au même système : prix et statistiques, sans un pixel de décor
 
 ## Colors
 
@@ -190,6 +193,7 @@ Une palette sans teinte : blanc, gris perle, noir, deux gris de texte, et le ble
 
 ### Tertiary
 - **Pastilles d'état** : ouvert, midi sur commande, fermé — uniquement le point devant l'état d'ouverture, jamais du texte ni un fond.
+- **Erreur** et **succès** : espace gestion seulement — texte et fond pâle d'un message, contour d'un champ refusé, bouton « Effacer les statistiques ». Jamais sur le site public.
 
 ### Named Rules
 **The One Blue Rule.** Le bleu est la seule couleur d'action. Rien d'autre n'est cliquable en couleur ; les pastilles d'état sont des points, pas des boutons.
@@ -232,6 +236,10 @@ Tout est centré. Les tuiles pleine largeur font 692 px de haut sur grand écran
 Points de rupture : 1068 px (sous ce seuil les tuiles perdent leur hauteur fixe, la commande devient une feuille basse et une barre « Votre commande » apparaît), 833 px (la navigation passe au bouton menu, 48 px de haut), 734 px (une colonne, corps réduits). Sur la carte, au-delà de 1068 px, trois colonnes : index des rubriques (200 px), liste, fiche commande (320 px), les deux bords collants.
 
 ### Named Rules
+**The Hot Dish Rule.** Seul ce qui vit pour de vrai bouge en boucle : la vapeur d'un plat chaud, la pastille « ouvert », l'épingle du plan. Jamais hors de l'écran, jamais en mouvement réduit.
+
+**The One Scene Rule.** Une page a au plus une scène liée au défilement, et elle raconte le produit : sur l'accueil, la soupe se prépare. Tout le reste se révèle une fois et s'arrête.
+
 **The Centered Tile Rule.** Une tuile porte un seul sujet, dans cet ordre : titre, phrase, détail en gris, deux actions (pleine puis contour), image centrée qui sort par le bas.
 
 ## Elevation & Depth
@@ -272,11 +280,29 @@ Ce qui agit est une pilule (980 px) ou un cercle ; ce qui contient est arrondi �
 - Sous 833 px : nom, icône téléphone et bouton menu à deux traits qui se croisent ; le menu ouvert couvre l'écran en blanc, liens en 28 px demi-gras, le reste de la page inerte.
 - Carte : barre locale collante des rubriques, soulignée d'un trait de 2 px qui glisse sous la rubrique en cours (index vertical sur grand écran).
 
+### Scène « fait maison » (moment fort)
+- Une tuile noire de 3,4 écrans de haut ; son cadre reste collé à l'écran pendant qu'on la traverse.
+- En haut, les trois phrases du restaurant, centrées (56 px, 40 px sur mobile), grises puis blanches à mesure qu'elles arrivent ; en bas, la soupe Phnom Penh vue du dessus, en deux couches : le bol vide (image) et la garniture (dessin inséré dans la page, un groupe par ingrédient).
+- Au défilement : le bouillon se verse depuis le centre, les nouilles arrivent en tournant, le porc, les crevettes, les herbes, l'ail et les piments tombent dans le bol (ils viennent de plus près, donc plus grands, et se posent), le citron vert se pose, les baguettes glissent ; le bol entier se redresse de −30° et grandit de 10 %. Puis le détail des saveurs et « Découvrir la carte › » apparaissent, et le bol se met à fumer.
+- Sans JavaScript ou en mouvement réduit : une tuile normale, la soupe complète, les phrases en blanc.
+
+### Vapeur
+- Trois voiles blancs en dégradé radial au-dessus d'un bol chaud (héros, fin de la scène) : ils montent vers nous en grandissant et se dissipent, 7 à 8,6 s chacun, décalés.
+- Seulement quand le plat est posé et à l'écran ; rien en mouvement réduit.
+
 ### Votre commande (signature)
 - Grand écran : fiche gris perle (rayon 18 px) collée dans la colonne de droite. Mobile et tablette : feuille blanche qui monte du bas sur un voile, ouverte depuis la barre « Votre commande ».
 - Chaque plat a son cercle bleu « + » ; dans la commande, la quantité s'affiche en pastille noire sur le cercle devenu plein.
 - Lignes : nom, montant, boutons − / + ; total en 600 ; « Appeler pour commander » en pilule pleine largeur ; « Tout retirer » en lien.
-- Mouvement : un jeton bleu « +1 » vole en parabole du cercle jusqu'au total (ou jusqu'au sac de la barre), 620 ms ; à l'arrivée, total et compteur pulsent une fois.
+- Mouvement : le cercle touché fait une onde bleue ; un jeton bleu « +1 » vole en parabole du cercle jusqu'au total (ou jusqu'au sac de la barre, qui remue), 620 ms ; le total défile jusqu'à sa nouvelle valeur (420 ms), total et compteur pulsent une fois.
+
+### Espace gestion (outil)
+- Mode « Operate » : le même système en version outil, pour une personne qui gère le restaurant, souvent sur téléphone.
+- Fond gris perle, contenus sur des fiches blanches arrondies à 18 px ; barre du haut en verre collante : « Gestion », sections en commande segmentée (Statistiques, Prix, Réglages), « Voir le site », « Se déconnecter ».
+- Statistiques : un seul grand nombre par vue (visiteurs, 64 px demi-gras, chiffres proportionnels) et sa phrase ; histogramme des visites (barres d'encre de 24 px au plus, bout arrondi de 4 px, base carrée, 2 px d'écart, filets de graduation à 0, la moitié et le haut, bleu au survol et au clavier avec une info-bulle qui glisse avec la position du jour pour rester dans le cadre, tableau des chiffres repliable) ; actions en quatre colonnes séparées de filets ; listes classées avec un trait de 6 px sur une piste perle.
+- Prix : une ligne par plat (nom, description, champ de prix aligné à droite suivi de « € »), un champ modifié passe au bleu pâle, le prix d'origine rappelé dessous ; barre « Enregistrer les prix » en verre collée en bas, avec le compte des prix modifiés ; un champ atteint au clavier ne passe jamais sous une barre collante.
+- Réglages : interrupteur vert à la manière d'iOS pour la mesure d'audience, case de confirmation avant d'effacer, champs de mot de passe.
+- Mouvement d'outil : les barres poussent depuis la base au chargement (700 ms), les traits des listes s'étirent ; rien d'autre.
 
 ## Do's and Don'ts
 
@@ -285,7 +311,9 @@ Ce qui agit est une pilule (980 px) ou un cercle ; ce qui contient est arrondi �
 - **Do** garder le bleu (#0071E3) pour l'action et le bleu de lien (#0066CC, #2997FF sur noir) pour les liens à chevron.
 - **Do** écrire les prix « 10,00 € » en chiffres tabulaires, alignés à droite.
 - **Do** garder des cibles tactiles de 44 px et un focus bleu visible de 2 px.
-- **Do** dévoiler une seule fois : le héros au chargement (texte qui monte en 1 s, bol qui se pose en tournant en 1,6 s), chaque tuile en entrant à l'écran ; rien en boucle, aucun déplacement en mouvement réduit.
+- **Do** dévoiler une seule fois : le héros au chargement (nom qui se lève mot après mot, texte qui monte en 1 s, bol qui se pose en tournant en 1,6 s), chaque tuile en entrant à l'écran ; aucun déplacement en mouvement réduit.
+- **Do** ne faire boucler que ce qui est vivant pour de vrai : la vapeur d'un plat chaud, la pastille « ouvert », l'onde de l'épingle du plan ; chacune seulement à l'écran.
+- **Do** garder une seule scène liée au défilement par page : la soupe qui se prépare.
 - **Do** signaler les dessins comme dessins (« (illustration) » dans le texte alternatif, note de pied de page) tant qu'il n'y a pas de vraies photos.
 
 ### Don't:

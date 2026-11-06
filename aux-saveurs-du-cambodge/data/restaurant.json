@@ -4,7 +4,7 @@
   "tagline": "Cuisine cambodgienne faite maison",
   "promise": "Chez nous, tout est fait maison, avec des produits frais… et beaucoup d’amour !",
   "invite": "On vous garde une petite place ?",
-  "description": "Restaurant cambodgien à Saint-Alban, au nord de Toulouse : lok lac, soupe Phnom Penh, porc au caramel, nems et vapeurs faits maison, menu complet à 10 €. Commande et réservation par téléphone au 07 59 52 53 41.",
+  "description": "Restaurant cambodgien à Saint-Alban, au nord de Toulouse : lok lac, soupe Phnom Penh, porc au caramel, nems et vapeurs faits maison, menu complet à {prix-menu}. Commande et réservation par téléphone au 07 59 52 53 41.",
   "url": "https://www.auxsaveursducambodge-saintalban.com",
   "phone": {
     "display": "07 59 52 53 41",
@@ -40,11 +40,12 @@
   "closures": [],
   "notice": null,
   "legal": {
-    "company": "",
+    "company": "TRANCHARD",
     "legalForm": "",
-    "siret": "",
-    "publisher": "",
-    "host": "",
-    "hostAddress": ""
+    "siret": "51780343300039",
+    "publisher": "Laurent Tranchard",
+    "host": "IONOS SARL",
+    "hostAddress": "7, place de la Gare, BP 70109, 57200 Sarreguemines Cedex",
+    "hostPhone": "09 70 80 89 11"
   }
 }

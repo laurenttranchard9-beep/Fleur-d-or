@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-330 -330 660 660">
+  <title>Bol vide vu du dessus (illustration)</title>
+  <defs>
+  <radialGradient id="bol-ceramique" cx="42%" cy="38%" r="70%">
+    <stop offset="0" stop-color="#ffffff"/><stop offset=".72" stop-color="#f1eee9"/><stop offset="1" stop-color="#d8d3cb"/>
+  </radialGradient>
+  <radialGradient id="bol-creux" cx="55%" cy="60%" r="65%">
+    <stop offset="0" stop-color="#fbfaf7"/><stop offset=".8" stop-color="#e7e2da"/><stop offset="1" stop-color="#cfc8bd"/>
+  </radialGradient>
+  <filter id="bol-ombre" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="16"/></filter>
+  <filter id="bol-doux" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.2"/></filter></defs>
+  
+  <ellipse cx="0" cy="26.4" rx="258.71999999999997" ry="258.71999999999997" fill="#000" opacity=".28" filter="url(#bol-ombre)"/>
+  <circle r="264" fill="url(#bol-ceramique)"/>
+  <circle r="227" fill="url(#bol-creux)"/>
+  <circle r="263" fill="none" stroke="#fff" stroke-width="2" opacity=".8"/>
+</svg>

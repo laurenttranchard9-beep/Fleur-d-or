@@ -1,5 +1,7 @@
 // Dessine les plats vus du dessus, au style épuré (aplats, dégradés doux, aucune ligne d'encre).
-// Sortie : public/assets/img/plats/<plat>.svg, affichés en <img> (le texte alternatif vit dans la page).
+// Sortie : public/assets/img/plats/<plat>.svg, affichés en <img> (le texte alternatif vit dans la page),
+// plus la soupe en deux couches pour la scène « fait maison » : soupe-bol.svg (le bol vide, en <img>)
+// et soupe-garniture.svg (chaque ingrédient dans son groupe, insérée dans la page et animée au défilement).
 // Usage : node tools/plats.mjs
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -106,9 +108,9 @@ const citronVert = (x, y, rot, s = 1) => `<g transform="translate(${f(x)} ${f(y)
 const piment = (x, y, s = 1) =>
   `<circle cx="${f(x)}" cy="${f(y)}" r="${f(7 * s)}" fill="#d8352a"/><circle cx="${f(x)}" cy="${f(y)}" r="${f(3.4 * s)}" fill="#f6d6a8"/><circle cx="${f(x + 1.2 * s)}" cy="${f(y - 1 * s)}" r="${f(1.1 * s)}" fill="#fff4dd"/>`;
 
-// Paire de baguettes en bois clair, posées en travers.
-const baguettes = (id, x, y, rot, l = 520) => `<g transform="translate(${f(x)} ${f(y)}) rotate(${f(rot)})">
-    <rect x="${-l / 2 + 8}" y="6" width="${l}" height="13" rx="6.5" fill="#000" opacity=".22" filter="url(#${id}-doux)"/>
+// Paire de baguettes en bois clair, posées en travers. Sans flou, l'ombre reste nette (couche animée : rien de coûteux à repeindre).
+const baguettes = (id, x, y, rot, l = 520, flou = true) => `<g transform="translate(${f(x)} ${f(y)}) rotate(${f(rot)})">
+    <rect x="${-l / 2 + 8}" y="6" width="${l}" height="13" rx="6.5" fill="#000" opacity="${flou ? '.22' : '.14'}"${flou ? ` filter="url(#${id}-doux)"` : ''}/>
     <rect x="${-l / 2}" y="-16" width="${l}" height="12" rx="6" fill="url(#${id}-bois)"/>
     <rect x="${-l / 2 + 14}" y="2" width="${l - 14}" height="12" rx="6" fill="url(#${id}-bois)"/>
   </g>`;
@@ -132,46 +134,94 @@ const nid = (r, cx, cy, R, n) =>
   }).join(' ');
 
 // --- Soupe Phnom Penh -------------------------------------------------------------------------------
-const soupe = () => {
+// « entier » : le dessin complet. « bol » et « garniture » : les deux couches de la scène, même tirage au hasard,
+// donc exactement la même soupe ; dans la garniture, chaque ingrédient porte sa fenêtre d'arrivée (data-de → data-a,
+// en part du défilement de la scène) et sa façon d'arriver (verse, tourne, tombe, glisse, fondu).
+const soupe = (mode = 'entier') => {
   const r = hasard(7);
-  const id = 'soupe';
+  const entier = mode === 'entier';
+  const id = entier ? 'soupe' : 'etapes';
   const nouilles = nid(r, -20, 20, 125, 34);
   const soja = Array.from({ length: 7 }, () => {
     const [x, y] = dansDisque(r, 130);
     const a = r() * Math.PI * 2;
     return `<path d="M${f(x)} ${f(y)} q ${f(Math.cos(a) * 20)} ${f(Math.sin(a) * 20 - 8)} ${f(Math.cos(a) * 34)} ${f(Math.sin(a) * 34)}" stroke="#fbf6e6" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="${f(x)}" cy="${f(y)}" r="4.5" fill="#f0d98c"/>`;
-  }).join('');
+  });
   const ail = Array.from({ length: 30 }, () => {
     const [x, y] = dansDisque(r, 180);
     return `<circle cx="${f(x)}" cy="${f(y)}" r="${f(1.8 + r() * 2.4)}" fill="#e7ad52"/>`;
   }).join('');
   const cib = Array.from({ length: 16 }, () => ciboule(...dansDisque(r, 170), 0.9 + r() * 0.4)).join('');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-330 -330 660 660">
-  <title>Soupe Phnom Penh vue du dessus : bouillon clair, nouilles de riz, porc et crevettes (illustration)</title>
-  <defs>${defs(id)}${bois(id)}
-    <radialGradient id="${id}-bouillon" cx="42%" cy="38%" r="66%">
+  const brins = `<path d="${nouilles}" stroke="#b07a3a" stroke-width="7" fill="none" stroke-linecap="round" opacity=".35" transform="translate(2 3)"/>
+    <path d="${nouilles}" stroke="#f8edd2" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+    <path d="${nouilles}" stroke="#ffffff" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".7" transform="translate(-1 -1.4)"/>`;
+  const porcs = [porc(-92, -58, 24), porc(-40, -110, -8, 0.92), porc(-118, 18, 74, 0.95)];
+  const crevettes = [crevette(78, -40, 20), crevette(26, 86, 150, 0.95), crevette(112, 70, 250, 0.9)];
+  const herbes = [coriandre(-52, 92, 20, 1.15), coriandre(-8, 48, 140, 1), coriandre(46, -118, 60, 1.2), coriandre(140, -10, 100, 1)];
+  const piments = [piment(-128, 84), piment(-142, 110, 0.9), piment(132, -96)];
+  const reflet = '<path d="M -150 -80 A 170 170 0 0 1 -40 -168" stroke="#fff" stroke-width="16" fill="none" stroke-linecap="round" opacity=".16"/>';
+  const bouillonDefs = `<radialGradient id="${id}-bouillon" cx="42%" cy="38%" r="66%">
       <stop offset="0" stop-color="#f3cd86"/><stop offset=".62" stop-color="#dfa24c"/><stop offset=".92" stop-color="#bf7a2f"/><stop offset="1" stop-color="#a4652a"/>
     </radialGradient>
-    <clipPath id="${id}-surface"><circle r="202"/></clipPath>
+    <clipPath id="${id}-surface"><circle r="202"/></clipPath>`;
+
+  if (entier) {
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-330 -330 660 660">
+  <title>Soupe Phnom Penh vue du dessus : bouillon clair, nouilles de riz, porc et crevettes (illustration)</title>
+  <defs>${defs(id)}${bois(id)}
+    ${bouillonDefs}
   </defs>
   ${bol(id, 264)}
   <circle r="202" fill="url(#${id}-bouillon)"/>
   <g clip-path="url(#${id}-surface)">
-    <path d="${nouilles}" stroke="#b07a3a" stroke-width="7" fill="none" stroke-linecap="round" opacity=".35" transform="translate(2 3)"/>
-    <path d="${nouilles}" stroke="#f8edd2" stroke-width="5.5" fill="none" stroke-linecap="round"/>
-    <path d="${nouilles}" stroke="#ffffff" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".7" transform="translate(-1 -1.4)"/>
-    ${soja}
-    ${porc(-92, -58, 24)}${porc(-40, -110, -8, 0.92)}${porc(-118, 18, 74, 0.95)}
-    ${crevette(78, -40, 20)}${crevette(26, 86, 150, 0.95)}${crevette(112, 70, 250, 0.9)}
+    ${brins}
+    ${soja.join('')}
+    ${porcs.join('')}
+    ${crevettes.join('')}
     ${cib}
-    ${coriandre(-52, 92, 20, 1.15)}${coriandre(-8, 48, 140, 1)}${coriandre(46, -118, 60, 1.2)}${coriandre(140, -10, 100, 1)}
+    ${herbes.join('')}
     ${ail}
-    ${piment(-128, 84)}${piment(-142, 110, 0.9)}${piment(132, -96)}
-    <path d="M -150 -80 A 170 170 0 0 1 -40 -168" stroke="#fff" stroke-width="16" fill="none" stroke-linecap="round" opacity=".16"/>
+    ${piments.join('')}
+    ${reflet}
   </g>
   <circle r="202" fill="none" stroke="#8a5223" stroke-width="5" opacity=".18"/>
   ${citronVert(96, -150, 12, 0.92)}
   ${baguettes(id, 70, 210, -28, 500)}
+</svg>
+`;
+  }
+
+  if (mode === 'bol') {
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-330 -330 660 660">
+  <title>Bol vide vu du dessus (illustration)</title>
+  <defs>${defs('bol')}</defs>
+  ${bol('bol', 264)}
+</svg>
+`;
+  }
+
+  const fenetre = (de, a) => `data-de="${f(de * 100) / 100}" data-a="${f(a * 100) / 100}"`;
+  const piece = (contenu, de, a, effet) => `<g class="piece piece--${effet}" ${fenetre(de, a)}>${contenu}</g>`;
+  const suite = (liste, de, pas, duree, effet) => liste.map((c, i) => piece(c, de + i * pas, de + i * pas + duree, effet)).join('');
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-330 -330 660 660" class="scene__garniture" aria-hidden="true" focusable="false">
+  <defs>${bois(id)}
+    ${bouillonDefs}
+  </defs>
+  ${piece(`<circle r="202" fill="url(#${id}-bouillon)"/>`, 0.06, 0.24, 'verse')}
+  <g clip-path="url(#${id}-surface)">
+    ${piece(brins, 0.18, 0.36, 'tourne')}
+    ${suite(soja, 0.3, 0.014, 0.08, 'tombe')}
+    ${suite(porcs, 0.38, 0.03, 0.1, 'tombe')}
+    ${suite(crevettes, 0.46, 0.03, 0.1, 'tombe')}
+    ${piece(cib, 0.58, 0.68, 'tombe')}
+    ${suite(herbes, 0.62, 0.02, 0.08, 'tombe')}
+    ${piece(ail, 0.66, 0.74, 'tombe')}
+    ${suite(piments, 0.7, 0.02, 0.07, 'tombe')}
+    ${piece(reflet, 0.74, 0.84, 'fondu')}
+  </g>
+  ${piece('<circle r="202" fill="none" stroke="#8a5223" stroke-width="5" opacity=".18"/>', 0.06, 0.24, 'fondu')}
+  ${piece(citronVert(96, -150, 12, 0.92), 0.76, 0.86, 'tombe')}
+  ${piece(baguettes(id, 70, 210, -28, 500, false), 0.82, 0.94, 'glisse')}
 </svg>
 `;
 };
@@ -435,7 +485,7 @@ const menu = () => {
 };
 
 mkdirSync(OUT, { recursive: true });
-const plats = { soupe, loklac, nems, bobun, caramel, menu };
+const plats = { soupe, loklac, nems, bobun, caramel, menu, 'soupe-bol': () => soupe('bol'), 'soupe-garniture': () => soupe('garniture') };
 for (const [nom, dessin] of Object.entries(plats)) {
   writeFileSync(`${OUT}/${nom}.svg`, dessin());
 }

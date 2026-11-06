@@ -1,0 +1,985 @@
+/* Espace gestion : le système du site (blanc, gris perle, encre, un seul bleu), en version outil. */
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/inter.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --blanc: #fff;
+  --perle: #f5f5f7;
+  --verre: rgb(250 250 252 / 0.8);
+  --encre: #1d1d1f;
+  --gris: #6e6e73;
+  --gris-nuit: #86868b;
+  --filet: #d2d2d7;
+  --filet-doux: #e8e8ed;
+  --bleu: #0071e3;
+  --bleu-appuye: #0066cc;
+  --lien: #0066cc;
+  --erreur: #d70015;
+  --succes: #1d7a35;
+  --police: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --courbe: cubic-bezier(0.28, 0.11, 0.32, 1);
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Un champ atteint au clavier ne passe jamais sous la barre du haut ni sous la barre « Enregistrer ». */
+html {
+  scroll-padding-top: 72px;
+  scroll-padding-bottom: calc(96px + env(safe-area-inset-bottom));
+}
+
+body {
+  margin: 0;
+  background: var(--perle);
+  color: var(--encre);
+  font-family: var(--police);
+  font-size: 17px;
+  line-height: 1.47059;
+  letter-spacing: -0.022em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgb(0 113 227 / 0.18);
+}
+
+h1,
+h2,
+p,
+ul,
+ol,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: var(--lien);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button,
+input {
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--bleu);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.visuellement-cache {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Boutons, liens, champs ---------- */
+
+.g-bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 11px 21px;
+  border: 1px solid var(--bleu);
+  border-radius: 980px;
+  background: var(--bleu);
+  color: var(--blanc);
+  font-size: 17px;
+  line-height: 1.17648;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    scale 0.15s ease;
+}
+
+.g-bouton:hover {
+  border-color: var(--bleu-appuye);
+  background: var(--bleu-appuye);
+}
+
+.g-bouton:active {
+  scale: 0.97;
+}
+
+.g-bouton:disabled {
+  border-color: var(--filet);
+  background: var(--filet);
+  color: var(--gris);
+  cursor: default;
+  scale: 1;
+}
+
+.g-bouton--contour {
+  background: transparent;
+  color: var(--lien);
+}
+
+.g-bouton--contour:hover {
+  background: var(--bleu);
+  color: var(--blanc);
+}
+
+.g-bouton--danger {
+  border-color: var(--erreur);
+  background: transparent;
+  color: var(--erreur);
+}
+
+.g-bouton--danger:hover {
+  border-color: var(--erreur);
+  background: var(--erreur);
+  color: var(--blanc);
+}
+
+.g-bouton--large {
+  width: 100%;
+}
+
+.g-lien {
+  color: var(--lien);
+  font-size: 14px;
+  letter-spacing: -0.016em;
+}
+
+.g-lien--bouton {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.g-lien--bouton:hover {
+  text-decoration: underline;
+}
+
+.g-formulaire {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+}
+
+.g-champ {
+  display: grid;
+  gap: 6px;
+  width: min(100%, 360px);
+}
+
+.g-champ__nom {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.016em;
+}
+
+.g-champ input,
+.g-filtre input,
+.g-plat__champ input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--gris-nuit);
+  border-radius: 12px;
+  background: var(--blanc);
+  font-size: 17px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.g-champ input:focus,
+.g-filtre input:focus,
+.g-plat__champ input:focus {
+  outline: none;
+  border-color: var(--bleu);
+  box-shadow: 0 0 0 4px rgb(0 125 250 / 0.3);
+}
+
+.g-aide {
+  max-width: 62ch;
+  color: var(--gris);
+  font-size: 14px;
+  line-height: 1.42859;
+  letter-spacing: -0.016em;
+}
+
+.g-message,
+.g-alerte {
+  max-width: 62ch;
+  margin-bottom: 24px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.g-message {
+  background: #e3f3e6;
+  color: var(--succes);
+  animation: arriver 0.4s var(--courbe);
+}
+
+.g-alerte {
+  background: #fde8ea;
+  color: var(--erreur);
+}
+
+.g-alerte a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* ---------- Connexion ---------- */
+
+.g--accueil {
+  display: grid;
+  min-height: 100vh;
+  min-height: 100dvh;
+  place-items: center;
+  background: var(--blanc);
+}
+
+.g-accueil {
+  display: grid;
+  gap: 18px;
+  width: min(100% - 32px, 380px);
+  padding: 48px 0;
+}
+
+.g-accueil__titre {
+  font-size: 40px;
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+.g-accueil__sous {
+  margin-top: -12px;
+  color: var(--gris);
+  font-size: 21px;
+  letter-spacing: 0.011em;
+}
+
+.g-accueil__texte {
+  color: var(--gris);
+}
+
+.g-accueil .g-champ {
+  width: 100%;
+}
+
+.g-accueil__retour {
+  font-size: 14px;
+}
+
+/* ---------- Barre et sections ---------- */
+
+.g-barre {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid rgb(0 0 0 / 0.08);
+  background: var(--verre);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+.g-barre__contenu {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  max-width: 1024px;
+  min-height: 52px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.g-barre__nom {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.g-barre__nom a {
+  color: var(--encre);
+}
+
+.g-barre__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+}
+
+.g-segments {
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 10px;
+  background: rgb(118 118 128 / 0.12);
+}
+
+.g-segments a {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 14px;
+  border-radius: 8px;
+  color: var(--encre);
+  font-size: 14px;
+  letter-spacing: -0.016em;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.g-segments a:hover {
+  text-decoration: none;
+  background: rgb(255 255 255 / 0.6);
+}
+
+.g-segments a[aria-current="page"] {
+  background: var(--blanc);
+  box-shadow: 0 3px 8px rgb(0 0 0 / 0.12), 0 0 1px rgb(0 0 0 / 0.2);
+  font-weight: 600;
+}
+
+.g-contenu {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 40px 22px 120px;
+}
+
+.g-entete-vue {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.g-entete-vue h1 {
+  font-size: 40px;
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+.g-section {
+  margin-top: 16px;
+  padding: 28px;
+  border-radius: 18px;
+  background: var(--blanc);
+}
+
+.g-section h2 {
+  margin-bottom: 18px;
+  font-size: 21px;
+  line-height: 1.19048;
+  font-weight: 600;
+  letter-spacing: 0.011em;
+}
+
+.g-intro {
+  max-width: 62ch;
+  margin-bottom: 20px;
+  color: var(--gris);
+}
+
+.g-note {
+  max-width: 70ch;
+  margin-top: 28px;
+  color: var(--gris);
+  font-size: 12px;
+  line-height: 1.33337;
+  letter-spacing: -0.01em;
+}
+
+.g-vide {
+  color: var(--gris);
+  font-size: 15px;
+}
+
+.g-attente h2 {
+  margin-bottom: 10px;
+}
+
+.g-attente p + p {
+  margin-top: 8px;
+  color: var(--gris);
+}
+
+/* ---------- Statistiques ---------- */
+
+.g-resume {
+  padding-top: 32px;
+}
+
+/* Le seul grand nombre de la page : en chiffres proportionnels, comme un titre. */
+.g-chiffre {
+  font-size: 64px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.g-chiffre__legende {
+  margin-top: 10px;
+  color: var(--gris);
+  font-size: 21px;
+  line-height: 1.3;
+  letter-spacing: 0.011em;
+}
+
+.g-histogramme {
+  position: relative;
+  height: 240px;
+  margin-top: 8px;
+  padding: 0 0 26px;
+}
+
+.g-histogramme__graduations {
+  position: absolute;
+  inset: 0 0 26px;
+  pointer-events: none;
+}
+
+/* Graduations : un filet par valeur ronde, le chiffre posé au-dessus, à droite. */
+.g-histogramme__graduations span {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: calc(var(--v) / var(--max) * 100%);
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--filet-doux);
+  color: var(--gris);
+  font-size: 12px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.g-histogramme__graduations span:last-child {
+  border-bottom-color: var(--filet);
+}
+
+.g-histogramme__barres {
+  position: relative;
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 2px;
+  height: 100%;
+  margin-right: 34px;
+}
+
+.g-colonne {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  cursor: default;
+}
+
+.g-colonne:focus-visible {
+  outline-offset: 0;
+}
+
+/* Barre : 24 px au plus, bout arrondi, base carrée. */
+.g-colonne__trait {
+  width: min(24px, 72%);
+  height: calc(var(--v) / var(--max) * 100%);
+  border-radius: 4px 4px 0 0;
+  background: var(--encre);
+  transform-origin: bottom;
+  animation: pousser 0.7s var(--courbe) both;
+  transition: background-color 0.15s ease;
+}
+
+.g-colonne:nth-child(n + 8) .g-colonne__trait {
+  animation-delay: 0.1s;
+}
+
+.g-colonne:nth-child(n + 16) .g-colonne__trait {
+  animation-delay: 0.2s;
+}
+
+.g-colonne:hover .g-colonne__trait,
+.g-colonne:focus-visible .g-colonne__trait {
+  background: var(--bleu);
+}
+
+.g-colonne__date {
+  position: absolute;
+  top: 100%;
+  margin-top: 6px;
+  color: var(--gris);
+  font-size: 12px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.g-colonne__date--cachee {
+  visibility: hidden;
+}
+
+/* Info-bulle : --x va de 0 (premier jour) à 1 (dernier). Elle part de la barre vers la droite au début,
+   se centre au milieu, s'ouvre vers la gauche à la fin : elle reste toujours dans le cadre. */
+.g-colonne::after {
+  content: attr(data-info);
+  position: absolute;
+  bottom: calc(var(--v) / var(--max) * (100% - 26px) + 34px);
+  left: 50%;
+  z-index: 2;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--encre);
+  color: var(--blanc);
+  font-size: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+  opacity: 0;
+  translate: calc(var(--x, 0.5) * -100%) 4px;
+  pointer-events: none;
+  transition:
+    opacity 0.15s ease,
+    translate 0.15s ease;
+}
+
+.g-colonne:hover::after,
+.g-colonne:focus-visible::after {
+  opacity: 1;
+  translate: calc(var(--x, 0.5) * -100%) 0;
+}
+
+.g-tableau {
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+.g-tableau summary {
+  color: var(--lien);
+  cursor: pointer;
+}
+
+.g-tableau table {
+  width: min(100%, 420px);
+  margin-top: 10px;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.g-tableau th,
+.g-tableau td {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--filet-doux);
+  font-weight: 400;
+  text-align: left;
+}
+
+.g-tableau td {
+  text-align: right;
+}
+
+.g-actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--filet-doux);
+}
+
+.g-actions > div {
+  padding: 16px 16px 4px 0;
+}
+
+.g-actions > div + div {
+  padding-left: 16px;
+  border-left: 1px solid var(--filet-doux);
+}
+
+.g-actions dt {
+  color: var(--gris);
+  font-size: 14px;
+  letter-spacing: -0.016em;
+}
+
+.g-actions dd {
+  margin-top: 4px;
+  font-size: 28px;
+  line-height: 1.14286;
+  font-weight: 600;
+  letter-spacing: 0.007em;
+}
+
+.g-actions + .g-aide {
+  margin-top: 16px;
+}
+
+.g-grille {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 16px;
+}
+
+.g-classement {
+  display: grid;
+  gap: 12px;
+}
+
+.g-classement li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 12px;
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.g-classement__nom {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.g-classement__valeur {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.g-classement__part {
+  margin-left: 4px;
+  color: var(--gris);
+  font-weight: 400;
+}
+
+/* Trait fin de 6 px sur une piste perle : la longueur dit la part. */
+.g-classement__trait {
+  grid-column: 1 / -1;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(var(--encre), var(--encre)) 0 0 / calc(var(--part) * 100%) 100% no-repeat, var(--perle);
+  animation: etirer 0.8s var(--courbe) both;
+}
+
+/* ---------- Prix ---------- */
+
+.g-filtre {
+  max-width: 420px;
+  margin-bottom: 8px;
+}
+
+.g-rubrique {
+  margin-top: 16px;
+  padding: 24px 28px 12px;
+  border-radius: 18px;
+  background: var(--blanc);
+}
+
+.g-rubrique h2 {
+  margin-bottom: 6px;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: 0.011em;
+}
+
+.g-plat {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 132px;
+  align-items: center;
+  gap: 4px 16px;
+  padding: 12px 0;
+  border-top: 1px solid var(--filet-doux);
+}
+
+.g-rubrique h2 + .g-plats .g-plat:first-child {
+  border-top: 0;
+}
+
+.g-plat__texte {
+  display: grid;
+  gap: 2px;
+  cursor: pointer;
+}
+
+.g-plat__nom {
+  font-weight: 600;
+}
+
+.g-plat__desc {
+  color: var(--gris);
+  font-size: 14px;
+  letter-spacing: -0.016em;
+}
+
+.g-plat__champ {
+  position: relative;
+}
+
+.g-plat__champ input {
+  padding-right: 34px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.g-plat__euro {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  color: var(--gris);
+  translate: 0 -50%;
+  pointer-events: none;
+}
+
+.g-plat.est-change .g-plat__champ input {
+  border-color: var(--bleu);
+  background: #f2f8ff;
+}
+
+.g-plat__origine,
+.g-plat__erreur {
+  grid-column: 1 / -1;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  text-align: right;
+}
+
+.g-plat__origine {
+  color: var(--gris);
+}
+
+.g-plat__erreur {
+  color: var(--erreur);
+}
+
+.g-plat--erreur .g-plat__champ input {
+  border-color: var(--erreur);
+}
+
+/* La barre d'enregistrement reste collée en bas tant qu'on modifie. */
+.g-enregistrer {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+  margin: 24px -22px 0;
+  padding: 12px 22px calc(12px + env(safe-area-inset-bottom));
+  border-top: 1px solid rgb(0 0 0 / 0.08);
+  background: var(--verre);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+.g-enregistrer__etat {
+  color: var(--gris);
+  font-size: 14px;
+}
+
+/* ---------- Réglages ---------- */
+
+.g-interrupteur {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.g-interrupteur input {
+  position: absolute;
+  opacity: 0;
+}
+
+.g-interrupteur__piste {
+  position: relative;
+  width: 51px;
+  height: 31px;
+  flex: none;
+  border-radius: 16px;
+  background: rgb(120 120 128 / 0.32);
+  transition: background-color 0.25s ease;
+}
+
+.g-interrupteur__piste::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: var(--blanc);
+  box-shadow: 0 3px 8px rgb(0 0 0 / 0.15), 0 1px 1px rgb(0 0 0 / 0.16);
+  transition: translate 0.25s var(--courbe);
+}
+
+.g-interrupteur input:checked + .g-interrupteur__piste {
+  background: #34c759;
+}
+
+.g-interrupteur input:checked + .g-interrupteur__piste::after {
+  translate: 20px 0;
+}
+
+.g-interrupteur input:focus-visible + .g-interrupteur__piste {
+  outline: 2px solid var(--bleu);
+  outline-offset: 3px;
+}
+
+.g-case {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 62ch;
+  cursor: pointer;
+}
+
+.g-case input {
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  flex: none;
+  accent-color: var(--bleu);
+}
+
+/* ---------- Mouvement ---------- */
+
+@keyframes pousser {
+  from {
+    scale: 1 0;
+  }
+}
+
+@keyframes etirer {
+  from {
+    background-size: 0 100%, auto;
+  }
+}
+
+@keyframes arriver {
+  from {
+    opacity: 0;
+    translate: 0 -6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+}
+
+/* ---------- Petits écrans ---------- */
+
+@media (max-width: 833px) {
+  html {
+    scroll-padding-top: 132px;
+  }
+
+  .g-barre__contenu {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 8px 16px;
+  }
+
+  .g-barre .g-segments {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: stretch;
+  }
+
+  .g-barre .g-segments a {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .g-contenu {
+    padding: 28px 16px 120px;
+  }
+
+  .g-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .g-actions > div:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .g-grille {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .g-enregistrer {
+    margin: 24px -16px 0;
+    padding-inline: 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .g-section,
+  .g-rubrique {
+    padding: 20px 18px;
+  }
+
+  .g-chiffre {
+    font-size: 52px;
+  }
+
+  .g-entete-vue h1 {
+    font-size: 32px;
+  }
+
+  .g-plat {
+    grid-template-columns: minmax(0, 1fr) 112px;
+  }
+
+  .g-barre__actions {
+    gap: 12px;
+  }
+}

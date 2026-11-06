@@ -213,6 +213,168 @@
     });
   }
 
+  /* ---------- Mesure d'audience, faite par le site lui-même (voir les mentions légales) ---------- */
+
+  const adresseCollecte = document.body.dataset.collecte;
+  const refusee = () => document.cookie.split('; ').some((c) => c.startsWith('asdc_refus='));
+  const nePasSuivre = navigator.doNotTrack === '1' || window.doNotTrack === '1' || navigator.globalPrivacyControl === true;
+  const envoyer = (corps) =>
+    fetch(adresseCollecte, {
+      method: 'POST',
+      body: corps,
+      keepalive: true,
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+    }).catch(() => {});
+  const mesurer = (message) => {
+    if (!adresseCollecte || refusee() || nePasSuivre) return;
+    const corps = JSON.stringify(message);
+    try {
+      if (navigator.sendBeacon && navigator.sendBeacon(adresseCollecte, new Blob([corps], { type: 'application/json' }))) return;
+    } catch {
+      /* on passe par fetch */
+    }
+    envoyer(corps);
+  };
+  mesurer({ type: 'vue', p: document.body.dataset.page, l: window.innerWidth, r: document.referrer });
+
+  // Un bouton « Appeler » ou un lien d'itinéraire touché ; l'appel depuis « Votre commande » est compté à part.
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href]');
+    if (!a || a.closest('[data-bon]')) return;
+    const href = a.getAttribute('href');
+    if (href.startsWith('tel:')) mesurer({ type: 'appel' });
+    else if (/google[.]com[/]maps|waze[.]com|maps[.]apple[.]com/.test(href)) mesurer({ type: 'itineraire' });
+  });
+
+  // Mentions légales : refuser (ou accepter de nouveau) la mesure, sur ce navigateur.
+  const refus = document.querySelector('[data-refus]');
+  if (refus) {
+    const etatRefus = refus.querySelector('[data-refus-etat]');
+    const boutonRefus = refus.querySelector('[data-refus-bouton]');
+    const securise = window.location.protocol === 'https:' ? '; secure' : '';
+    const afficherRefus = () => {
+      if (nePasSuivre) {
+        etatRefus.textContent = 'Votre navigateur demande à ne pas être suivi : rien n’est mesuré.';
+        boutonRefus.hidden = true;
+        return;
+      }
+      const refuse = refusee();
+      etatRefus.textContent = refuse ? 'Vous avez refusé la mesure d’audience sur ce navigateur.' : 'La mesure d’audience est active sur ce navigateur.';
+      boutonRefus.textContent = refuse ? 'Accepter de nouveau' : 'Refuser la mesure d’audience';
+      boutonRefus.hidden = false;
+    };
+    etatRefus.setAttribute('aria-live', 'polite');
+    boutonRefus.addEventListener('click', () => {
+      if (refusee()) {
+        document.cookie = `asdc_refus=; max-age=0; path=/; samesite=lax${securise}`;
+      } else {
+        document.cookie = `asdc_refus=1; max-age=${395 * 86400}; path=/; samesite=lax${securise}`;
+        // Le serveur efface alors l'identifiant de mesure déjà posé.
+        if (adresseCollecte) envoyer('{"type":"refus"}');
+      }
+      afficherRefus();
+    });
+    afficherRefus();
+  }
+
+  /* ---------- Vivant : vapeur, plats qu'on prend en main, ondes, scène « fait maison » ---------- */
+
+  const surveiller = (elements, classe) => {
+    if (!('IntersectionObserver' in window)) return elements.forEach((el) => el.classList.add(classe));
+    const o = new IntersectionObserver((entrees) => entrees.forEach((e) => e.target.classList.toggle(classe, e.isIntersecting)));
+    elements.forEach((el) => o.observe(el));
+  };
+
+  if (!reduit.matches) {
+    // Les ondes (« ouvert », épingle du plan) ne battent qu'à l'écran.
+    surveiller([...document.querySelectorAll('.etat, .plan')], 'est-visible');
+
+    // Le bol du héros fume une fois posé, tant qu'il est à l'écran.
+    const chaud = document.querySelector('.tuile__plat--chaud');
+    if (chaud) {
+      let pose = false;
+      let visible = true;
+      const majChaud = () => chaud.classList.toggle('est-chaud', pose && visible);
+      window.setTimeout(() => {
+        pose = true;
+        majChaud();
+      }, 1700);
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([e]) => {
+          visible = e.isIntersecting;
+          majChaud();
+        }).observe(chaud);
+      }
+    }
+
+    // Sur ordinateur, le plat suit la souris, comme un produit qu'on prend en main.
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      document.querySelectorAll('.tuile').forEach((tuile) => {
+        const cadre = tuile.querySelector('.tuile__plat');
+        if (!cadre) return;
+        let prevu = 0;
+        let px = 0;
+        let py = 0;
+        tuile.addEventListener('pointermove', (e) => {
+          const r = tuile.getBoundingClientRect();
+          px = ((e.clientX - r.left) / r.width) * 2 - 1;
+          py = ((e.clientY - r.top) / r.height) * 2 - 1;
+          if (prevu) return;
+          prevu = requestAnimationFrame(() => {
+            prevu = 0;
+            cadre.style.setProperty('--px', px.toFixed(3));
+            cadre.style.setProperty('--py', py.toFixed(3));
+          });
+        });
+        tuile.addEventListener('pointerleave', () => {
+          cadre.style.setProperty('--px', '0');
+          cadre.style.setProperty('--py', '0');
+        });
+      });
+    }
+
+    // La scène « fait maison » : pendant qu'on fait défiler, le bouillon se verse, les nouilles tournent,
+    // le porc, les crevettes et les herbes tombent dans le bol, et les trois phrases s'allument.
+    const scene = document.querySelector('[data-scene]');
+    if (scene) {
+      const etapes = [...scene.querySelectorAll('[data-de]')].map((el) => ({ el, de: Number(el.dataset.de), a: Number(el.dataset.a), t: -1 }));
+      const adoucir = (x) => 1 - (1 - x) ** 3;
+      let enVue = false;
+      let prevue = false;
+      const majScene = () => {
+        prevue = false;
+        const r = scene.getBoundingClientRect();
+        const course = r.height - window.innerHeight;
+        const p = course > 0 ? Math.min(1, Math.max(0, -r.top / course)) : 1;
+        scene.style.setProperty('--p', p.toFixed(4));
+        for (const etape of etapes) {
+          const t = adoucir(Math.min(1, Math.max(0, (p - etape.de) / (etape.a - etape.de))));
+          if (Math.abs(t - etape.t) < 0.002) continue;
+          etape.t = t;
+          etape.el.style.setProperty('--t', t.toFixed(3));
+        }
+        scene.classList.toggle('est-chaud', enVue && p > 0.94);
+      };
+      const planifierScene = () => {
+        if (prevue) return;
+        prevue = true;
+        requestAnimationFrame(majScene);
+      };
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([e]) => {
+          enVue = e.isIntersecting;
+          planifierScene();
+        }).observe(scene);
+      } else {
+        enVue = true;
+      }
+      window.addEventListener('scroll', () => enVue && planifierScene(), { passive: true });
+      window.addEventListener('resize', planifierScene);
+      majScene();
+    }
+  }
+
   /* ---------- La carte ---------- */
 
   const champ = document.getElementById('recherche');
@@ -265,6 +427,38 @@
   };
 
   champ.addEventListener('input', filtrer);
+
+  // Ce que les visiteurs cherchent : le terme, une fois la saisie posée.
+  const recherchesEnvoyees = new Set();
+  let delaiRecherche = 0;
+  champ.addEventListener('input', () => {
+    window.clearTimeout(delaiRecherche);
+    delaiRecherche = window.setTimeout(() => {
+      const mot = normaliser(champ.value);
+      if (mot.length < 3 || recherchesEnvoyees.has(mot)) return;
+      recherchesEnvoyees.add(mot);
+      mesurer({ type: 'recherche', q: mot });
+    }, 1500);
+  });
+
+  // Les plats d'une rubrique arrivent à la file en entrant à l'écran.
+  if (!reduit.matches && 'IntersectionObserver' in window) {
+    rubriques.forEach((r) => r.querySelectorAll('.plat').forEach((p, i) => p.style.setProperty('--i', String(Math.min(i, 10)))));
+    const aMontrer = rubriques.filter(sousLaLigne);
+    const montrer = new IntersectionObserver(
+      (entrees) =>
+        entrees.forEach((e) => {
+          if (!e.isIntersecting) return;
+          e.target.classList.remove('est-pret');
+          montrer.unobserve(e.target);
+        }),
+      { rootMargin: '0px 0px -6% 0px' },
+    );
+    aMontrer.forEach((r) => {
+      r.classList.add('est-pret');
+      montrer.observe(r);
+    });
+  }
   document.querySelector('[data-effacer]')?.addEventListener('click', () => {
     champ.value = '';
     filtrer();
@@ -397,6 +591,27 @@
 
   const somme = () => Object.keys(bon).reduce((s, id) => s + catalogue.get(id).prix * bon[id], 0);
 
+  // Le total défile jusqu'à sa nouvelle valeur, comme un compteur ; il repart de ce qui est affiché.
+  let roulement = 0;
+  let affiche = null;
+  const rouler = (el, de, a, anime) => {
+    cancelAnimationFrame(roulement);
+    const depart = affiche ?? de;
+    if (!anime || reduit.matches || depart === a) {
+      affiche = a;
+      el.textContent = prix(a);
+      return;
+    }
+    const debut = performance.now();
+    const pas = (instant) => {
+      const k = Math.min(1, (instant - debut) / 420);
+      affiche = Math.round(depart + (a - depart) * (1 - (1 - k) ** 3));
+      el.textContent = prix(affiche);
+      if (k < 1) roulement = requestAnimationFrame(pas);
+    };
+    roulement = requestAnimationFrame(pas);
+  };
+
   // Met la commande à jour et renvoie les éléments dont le changement mérite une pulsation.
   const rendre = (changement, modifie = null, avant = 0) => {
     const ids = Object.keys(bon);
@@ -420,9 +635,11 @@
 
     bonVide.hidden = nombre > 0;
     lignes.hidden = nombre === 0;
-    const texteTotal = prix(somme());
-    if (total.textContent !== texteTotal) {
-      total.textContent = texteTotal;
+    const nouveauTotal = somme();
+    const ancienTotal = Number(total.dataset.centimes || 0);
+    if (ancienTotal !== nouveauTotal || total.textContent !== prix(nouveauTotal)) {
+      rouler(total, ancienTotal, nouveauTotal, changement);
+      total.dataset.centimes = String(nouveauTotal);
       if (changement) aSecouer.push(total);
     }
     compteurs.forEach((c) => {
@@ -506,7 +723,19 @@
 
     const aSecouer = rendre(true, id, avant);
     if (!origine) return secouer(aSecouer);
-    voler(origine, () => secouer(aSecouer));
+    voler(origine, () => {
+      secouer(aSecouer);
+      remuer();
+    });
+  };
+
+  // Le sac de la barre du bas remue quand un plat y arrive.
+  const remuer = () => {
+    const sac = ouvrir?.querySelector('.icone');
+    if (!sac || reduit.matches) return;
+    sac.classList.remove('est-remue');
+    void sac.getBoundingClientRect();
+    sac.classList.add('est-remue');
   };
 
   // Sur mobile et tablette, la commande est une feuille : le reste de la page attend derrière.
@@ -531,7 +760,14 @@
     if (e.target === feuille) return basculer(false);
     const cible = e.target.closest('[data-ajouter], [data-plus], [data-moins], [data-bon-vider], [data-ouvrir-bon], [data-fermer-bon]');
     if (!cible) return;
-    if (cible.dataset.ajouter) modifier(cible.dataset.ajouter, 1, cible);
+    if (cible.dataset.ajouter) {
+      // Le cercle touché fait une onde ; le plat ajouté est compté (sans rien qui identifie le visiteur).
+      cible.classList.remove('est-touche');
+      void cible.getBoundingClientRect();
+      cible.classList.add('est-touche');
+      mesurer({ type: 'ajout', id: cible.dataset.ajouter });
+      modifier(cible.dataset.ajouter, 1, cible);
+    }
     else if (cible.dataset.plus) modifier(cible.dataset.plus, 1);
     else if (cible.dataset.moins) modifier(cible.dataset.moins, -1);
     else if (cible.hasAttribute('data-bon-vider')) {
@@ -559,6 +795,12 @@
     feuille.classList.remove('est-ouvert');
     ouvrir?.setAttribute('aria-expanded', 'false');
     derriere().forEach((el) => (el.inert = false));
+  });
+
+  // « Appeler pour commander » : la commande préparée est comptée, en nombre de plats et en total.
+  feuille.querySelector('a[href^="tel:"]')?.addEventListener('click', () => {
+    const nombre = Object.values(bon).reduce((s, q) => s + q, 0);
+    mesurer(nombre ? { type: 'commande', n: nombre, t: somme() } : { type: 'appel' });
   });
 
   document.querySelectorAll('[data-ajouter]').forEach((b) => (b.hidden = false));

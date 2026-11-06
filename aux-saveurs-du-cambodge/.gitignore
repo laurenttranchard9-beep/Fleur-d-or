@@ -2,3 +2,8 @@ node_modules/
 tools/.cache/
 .impeccable/review/*.png
 .DS_Store
+
+# Données du serveur créées à l'usage (prix saisis, statistiques, mot de passe) : jamais dans le dépôt.
+public/donnees/*
+!public/donnees/.htaccess
+!public/donnees/index.html

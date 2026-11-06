@@ -82,6 +82,15 @@ const tousLesPlats = carte.sections.flatMap((section) => section.items.map((item
 const nbPlats = tousLesPlats.length;
 const plat = (nom) => tousLesPlats.find((p) => p.name === nom);
 
+// Les prix ne sont pas écrits en dur dans les pages : un jeton que le serveur remplace par le prix du moment,
+// celui de la carte ou celui saisi dans l'espace gestion (public/inc/noyau.php).
+const idPlat = (item, section) => `${section.id}--${slug(item.name)}`;
+const ID_SUPPLEMENT = 'supplement-riz-cantonais';
+const jeton = (genre, ...ids) => `{{${genre}:${ids.join(',')}}}`;
+const ID_MENU = tousLesPlats.filter((p) => p.section.id === 'menu-bon-et-pas-cher').slice(0, 2).map((p) => idPlat(p, p.section));
+const descriptionResto = resto.description.replace('{prix-menu}', jeton('rond', ID_MENU[0]));
+const noteRiz = `Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + ${jeton('prix', ID_SUPPLEMENT)}.`;
+
 /* ---------- Icônes : un trait fin, des bouts ronds ---------- */
 
 const ICONES = {
@@ -176,7 +185,7 @@ const schemaRestaurant = () => ({
   '@type': 'Restaurant',
   '@id': `${resto.url}/#restaurant`,
   name: resto.name,
-  description: resto.description,
+  description: descriptionResto,
   url: `${resto.url}/`,
   telephone: resto.phone.e164,
   image: `${resto.url}/og.jpg`,
@@ -207,12 +216,12 @@ const schemaMenu = () => ({
   hasMenuSection: carte.sections.map((section) => ({
     '@type': 'MenuSection',
     name: section.title,
-    ...(section.withRice ? { description: carte.riceNote } : {}),
+    ...(section.withRice ? { description: noteRiz } : {}),
     hasMenuItem: section.items.map((item) => ({
       '@type': 'MenuItem',
       name: item.name,
       ...(item.desc ? { description: item.desc } : {}),
-      offers: { '@type': 'Offer', price: item.price.toFixed(2), priceCurrency: 'EUR' },
+      offers: { '@type': 'Offer', price: jeton('json', idPlat(item, section)), priceCurrency: 'EUR' },
     })),
   })),
 });
@@ -224,7 +233,7 @@ const jsonld = (obj) => `<script type="application/ld+json">${JSON.stringify(obj
 const ASSETS = {};
 const asset = (file) => (ASSETS[file] ??= `${file}?v=${empreinte(file)}`);
 
-function page({ chemin, titre, description, corps, classe, schema, apres = '', indexable = true }) {
+function page({ chemin, cle, titre, description, corps, classe, schema, apres = '', indexable = true, php = false }) {
   const profondeur = chemin.split('/').filter(Boolean).length;
   const r = profondeur ? '../'.repeat(profondeur) : './';
   const url = `${resto.url}/${chemin}`;
@@ -264,7 +273,7 @@ ${indexable ? `<link rel="canonical" href="${url}">` : '<meta name="robots" cont
 <script src="${r}${asset('assets/js/site.js')}" defer></script>
 ${schema ? jsonld(schema) : ''}
 </head>
-<body class="${classe}">
+<body class="${classe}" data-page="${cle}" data-collecte="${r}stats/collecte.php">
 <a class="evitement" href="#contenu">Aller au contenu</a>
 ${sprite()}
 ${navigation(r, chemin)}
@@ -278,7 +287,13 @@ ${pied(r)}
 `;
   const dossier = join(PUBLIC, chemin);
   mkdirSync(dossier, { recursive: true });
-  writeFileSync(join(dossier, 'index.html'), html);
+  // Page à prix : un fichier PHP qui remplace les jetons {{prix:…}} au moment de l'envoi.
+  if (php) {
+    rmSync(join(dossier, 'index.html'), { force: true });
+    writeFileSync(join(dossier, 'index.php'), `<?php require __DIR__ . '/${'../'.repeat(profondeur)}inc/page.php'; ?>${String.fromCharCode(10)}${html}`);
+  } else {
+    writeFileSync(join(dossier, 'index.html'), html);
+  }
   return html;
 }
 
@@ -305,7 +320,8 @@ const pied = (r) => `<footer class="pied">
     <div class="pied__notes">
       <p>Prix en euros, toutes taxes comprises. Le prix confirmé au téléphone ou au comptoir fait foi.</p>
       <p>Les plats du site sont des dessins, pas des photos de nos assiettes.</p>
-      <p>Plan : IGN – BD TOPO®, Licence Ouverte Etalab 2.0. Police Inter, licence SIL OFL 1.1. Ce site ne dépose aucun cookie.</p>
+      <p>Plan : IGN – BD TOPO®, Licence Ouverte Etalab 2.0. Police Inter, licence SIL OFL 1.1.</p>
+      <p>Le site mesure sa fréquentation avec un cookie à lui, sans publicité ni partage : <a href="${r}mentions-legales/#cookies">en savoir plus ou refuser</a>.</p>
     </div>
     <nav class="pied__plan" aria-label="Plan du site">
       <div>
@@ -354,9 +370,23 @@ const image = (r, nom, alt, classe, { taille = 660, charge = 'lazy' } = {}) =>
     charge === 'eager' ? ' fetchpriority="high"' : ' loading="lazy"'
   } decoding="async">`;
 
+// La vapeur d'un plat chaud : trois voiles qui montent vers nous et se dissipent (animés seulement à l'écran).
+const vapeur = () => '<span class="vapeur" aria-hidden="true"><span></span><span></span><span></span></span>';
+
+// Le plat dans son cadre : c'est le cadre qui se révèle et qui recadre, le dessin qui tourne et s'incline.
+const cadrePlat = (contenu, classe = '') => `<div class="tuile__plat${classe ? ` ${classe}` : ''}">${contenu}</div>`;
+
+// Le titre du héros se lève mot après mot, chacun sorti de son propre cache.
+const motsLeves = (texte) =>
+  texte
+    .split(' ')
+    .map((mot, i) => `<span class="mot"><span class="mot__in" style="--m:${i}">${esc(mot)}</span></span>`)
+    .join(' ');
+
 // Une tuile « produit » : nom, phrase, prix, deux actions, le plat dessiné.
 const tuile = (r, p, teinte) => {
-  const detail = p.section.withRice ? `${euro(p.price)}, servi avec du riz nature.` : `${euro(p.price)}.`;
+  const prix = jeton('prix', idPlat(p, p.section));
+  const detail = p.section.withRice ? `${prix}, servi avec du riz nature.` : `${prix}.`;
   return `<section class="tuile tuile--${teinte} tuile--demi" aria-labelledby="tuile-${slug(p.name)}" data-reveler>
       <div class="tuile__texte">
         <h2 class="tuile__titre" id="tuile-${slug(p.name)}">${esc(p.name)}</h2>
@@ -367,21 +397,26 @@ const tuile = (r, p, teinte) => {
           <a class="bouton bouton--contour" href="${r}carte/#${p.section.id}">Voir à la carte</a>
         </div>
       </div>
-      ${image(r, p.image, `${p.name} vu du dessus (illustration)`, 'tuile__image', { taille: 660 })}
+      ${cadrePlat(image(r, p.image, `${p.name} vu du dessus (illustration)`, 'tuile__image', { taille: 660 }))}
     </section>`;
 };
+
+// La soupe en deux couches pour la scène « fait maison » : le bol vide, puis la garniture, ingrédient par ingrédient.
+const garnitureSoupe = readFileSync(join(PUBLIC, 'assets/img/plats/soupe-garniture.svg'), 'utf8').trim();
 
 const accueil = () =>
   page({
     chemin: '',
+    cle: 'accueil',
+    php: true,
     titre: `${resto.name} — restaurant cambodgien à ${resto.town}`,
-    description: resto.description,
+    description: descriptionResto,
     classe: 'page-accueil',
     schema: schemaRestaurant(),
     corps: (r) => `<main id="contenu">
   <section class="tuile tuile--noire tuile--heros" aria-labelledby="heros-titre">
     <div class="tuile__texte">
-      <h1 class="tuile__titre" id="heros-titre">${esc(resto.name)}</h1>
+      <h1 class="tuile__titre" id="heros-titre">${motsLeves(resto.name)}</h1>
       <p class="tuile__accroche">${esc(resto.tagline)}.</p>
       <p class="tuile__detail">${esc(resto.town)}. Commandes et réservations par téléphone.</p>
       <div class="tuile__actions">
@@ -389,20 +424,20 @@ const accueil = () =>
         <a class="bouton bouton--contour" href="${r}carte/">Voir la carte</a>
       </div>
     </div>
-    ${image(r, 'soupe', 'Soupe Phnom Penh vue du dessus (illustration)', 'tuile__image', { taille: 660, charge: 'eager' })}
+    ${cadrePlat(`${image(r, 'soupe', 'Soupe Phnom Penh vue du dessus (illustration)', 'tuile__image', { taille: 660, charge: 'eager' })}${vapeur()}`, 'tuile__plat--chaud')}
   </section>
 
   <section class="tuile tuile--claire" id="menu" aria-labelledby="menu-titre" data-reveler>
     <div class="tuile__texte">
       <h2 class="tuile__titre" id="menu-titre">${esc(bonEtPasCher.title)}</h2>
       <p class="tuile__accroche">Un plat mariné, du riz thaï et sa salade composée.</p>
-      <p class="tuile__detail">${euroRond(bonEtPasCher.items[0].price)}, ${esc(variantesMenu)}.</p>
+      <p class="tuile__detail">${jeton('des', ...ID_MENU)}, ${esc(variantesMenu)}.</p>
       <div class="tuile__actions">
         <a class="bouton" href="${tel}">Commander</a>
         <a class="bouton bouton--contour" href="${r}carte/#menu-bon-et-pas-cher">En savoir plus</a>
       </div>
     </div>
-    ${image(r, 'menu', 'Menu bon et pas cher vu du dessus : porc mariné, riz thaï et salade (illustration)', 'tuile__image')}
+    ${cadrePlat(image(r, 'menu', 'Menu bon et pas cher vu du dessus : porc mariné, riz thaï et salade (illustration)', 'tuile__image'))}
   </section>
 
   <div class="grille">
@@ -412,10 +447,25 @@ const accueil = () =>
     ${tuile(r, plat('Porc au caramel'), 'claire')}
   </div>
 
-  <section class="manifeste" aria-labelledby="manifeste-titre" data-reveler>
-    <h2 class="manifeste__texte" id="manifeste-titre">Tout est fait maison. <span>Avec des produits frais.</span> <span>Et beaucoup d’amour.</span></h2>
-    <p class="manifeste__detail">Citronnelle, saté, caramel, lait de coco&#8239;: les saveurs du Cambodge, dans une carte de ${nbPlats} plats.</p>
-    ${lien(`${r}carte/`, 'Découvrir la carte')}
+  <section class="scene" id="fait-maison" aria-labelledby="scene-titre" data-scene>
+    <div class="scene__cadre">
+      <div class="scene__texte">
+        <h2 class="scene__titre" id="scene-titre">
+          <span class="scene__ligne" data-de="0" data-a="0.1">Tout est fait maison.</span>
+          <span class="scene__ligne" data-de="0.38" data-a="0.48">Avec des produits frais.</span>
+          <span class="scene__ligne" data-de="0.72" data-a="0.82">Et beaucoup d’amour.</span>
+        </h2>
+        <p class="scene__suite" data-de="0.86" data-a="0.96">
+          <span class="scene__detail">Citronnelle, saté, caramel, lait de coco&#8239;: les saveurs du Cambodge, dans une carte de ${nbPlats} plats.</span>
+          ${lien(`${r}carte/`, 'Découvrir la carte')}
+        </p>
+      </div>
+      <div class="scene__bol" role="img" aria-label="Une soupe Phnom Penh qui se prépare, vue du dessus : le bouillon, les nouilles, le porc, les crevettes, les herbes et le citron vert (illustration)">
+        <img class="scene__fond" src="${r}assets/img/plats/soupe-bol.svg" width="660" height="660" alt="" loading="lazy" decoding="async">
+        ${garnitureSoupe}
+        ${vapeur()}
+      </div>
+    </div>
   </section>
 
   <section class="tuile tuile--claire tuile--horaires" id="horaires" aria-labelledby="horaires-titre" data-reveler>
@@ -443,6 +493,7 @@ const accueil = () =>
     <figure class="plan">
       <a class="plan__lien" href="${liens.carteGoogle}">
         <img src="${r}assets/img/plan-quartier.svg" width="800" height="560" loading="lazy" decoding="async" alt="Plan du quartier : le restaurant est au 10 avenue Salvador Allende, près de la rue de Fenouillet et de la route de Paris.">
+        <span class="plan__onde" aria-hidden="true"></span>
       </a>
       <figcaption>Plan : IGN – BD TOPO®, Licence Ouverte Etalab 2.0</figcaption>
     </figure>
@@ -453,12 +504,12 @@ const accueil = () =>
 /* ---------- La carte ---------- */
 
 const ligne = (item, section) => {
-  const id = `${section.id}--${slug(item.name)}`;
+  const id = idPlat(item, section);
   const recherche = normaliser([item.name, item.desc, section.title, item.spicy ? 'piquant epice' : ''].filter(Boolean).join(' '));
-  return `          <li class="plat" data-plat="${id}" data-nom="${esc(item.name)}" data-prix="${Math.round(item.price * 100)}" data-recherche="${esc(recherche)}">
+  return `          <li class="plat" data-plat="${id}" data-nom="${esc(item.name)}" data-prix="${jeton('cents', id)}" data-recherche="${esc(recherche)}">
             <span class="plat__nom">${esc(item.name)}</span>
             ${item.desc ? `<span class="plat__desc">${esc(item.desc)}</span>` : ''}
-            <span class="plat__prix">${euro(item.price)}</span>
+            <span class="plat__prix">${jeton('prix', id)}</span>
             <button type="button" class="plat__ajout" data-ajouter="${id}" hidden aria-label="Ajouter à la commande : ${esc(item.name)}">${icone('plus')}</button>
           </li>`;
 };
@@ -467,11 +518,12 @@ const rubrique = (section) => `      <section class="rubrique" id="${section.id}
         <h2 id="r-${section.id}" class="rubrique__titre">${esc(section.title)}</h2>
         ${
           section.withRice
-            ? `<p class="rubrique__riz"><span>Servis avec du riz nature.</span> <span class="rubrique__riz-sup">Riz cantonais (porc ou crevettes)&nbsp;: + ${euro(
-                carte.riceUpgrade.price,
-              )} <button type="button" class="plat__ajout plat__ajout--petit" data-ajouter="supplement-riz-cantonais" data-nom="${esc(
+            ? `<p class="rubrique__riz"><span>Servis avec du riz nature.</span> <span class="rubrique__riz-sup">Riz cantonais (porc ou crevettes)&nbsp;: + ${jeton(
+                'prix',
+                ID_SUPPLEMENT,
+              )} <button type="button" class="plat__ajout plat__ajout--petit" data-ajouter="${ID_SUPPLEMENT}" data-nom="${esc(
                 carte.riceUpgrade.name,
-              )}" data-prix="${Math.round(carte.riceUpgrade.price * 100)}" hidden aria-label="Ajouter à la commande : ${esc(
+              )}" data-prix="${jeton('cents', ID_SUPPLEMENT)}" hidden aria-label="Ajouter à la commande : ${esc(
                 carte.riceUpgrade.name,
               )}">${icone('plus')}</button></span></p>`
             : ''
@@ -484,8 +536,10 @@ ${section.items.map((item) => ligne(item, section)).join('')}
 const lacarte = () =>
   page({
     chemin: 'carte/',
+    cle: 'carte',
+    php: true,
     titre: `La carte — ${resto.name}, ${resto.town}`,
-    description: `Toute la carte d’${resto.name} à ${resto.town} : ${nbPlats} plats faits maison, du menu bon et pas cher à 10 € au lok lac, avec les prix. Commande par téléphone au ${resto.phone.display}.`,
+    description: `Toute la carte d’${resto.name} à ${resto.town} : ${nbPlats} plats faits maison, du menu bon et pas cher à ${jeton('rond', ID_MENU[0])} au lok lac, avec les prix. Commande par téléphone au ${resto.phone.display}.`,
     classe: 'page-carte',
     schema: schemaMenu(),
     apres: `<nav class="barre-bon" aria-label="Actions rapides" data-barre-bon>
@@ -546,10 +600,12 @@ ${carte.sections.map(rubrique).join('')}
 /* ---------- Mentions légales ---------- */
 
 const aCompleter = (v) => (v ? esc(v) : '<span class="a-completer">à compléter</span>');
+const siret = (v) => (v ? esc(v.replace(/^([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{5})$/, '$1 $2 $3 $4')) : aCompleter(v));
 
 const mentions = () =>
   page({
     chemin: 'mentions-legales/',
+    cle: 'mentions',
     titre: `Mentions légales — ${resto.name}`,
     description: `Mentions légales et informations sur le site d’${resto.name}, ${resto.town}.`,
     classe: 'page-texte',
@@ -558,14 +614,24 @@ const mentions = () =>
   <h2>Éditeur du site</h2>
   <p>${esc(resto.name)}<br>
     Raison sociale : ${aCompleter(resto.legal.company)}${resto.legal.legalForm ? ` (${esc(resto.legal.legalForm)})` : ''}<br>
-    SIRET : ${aCompleter(resto.legal.siret)}<br>
+    SIRET : ${siret(resto.legal.siret)}<br>
     ${esc(resto.address.street)}, ${resto.address.postalCode} ${esc(resto.address.city)}<br>
     Téléphone : <a href="${tel}">${resto.phone.display}</a></p>
-  <p>Directeur ou directrice de la publication : ${aCompleter(resto.legal.publisher)}</p>
+  <p>Directeur de la publication : ${aCompleter(resto.legal.publisher)}</p>
   <h2>Hébergement</h2>
-  <p>${aCompleter(resto.legal.host)}${resto.legal.hostAddress ? `<br>${esc(resto.legal.hostAddress)}` : ''}</p>
-  <h2>Données personnelles et cookies</h2>
-  <p>Ce site ne dépose aucun cookie, n’utilise aucun outil de mesure d’audience et ne collecte aucune donnée personnelle. La commande préparée sur la carte est enregistrée uniquement dans votre navigateur (stockage local) et n’est jamais transmise&#8239;: vous pouvez la vider à tout moment.</p>
+  <p>${aCompleter(resto.legal.host)}${resto.legal.hostAddress ? `<br>${esc(resto.legal.hostAddress)}` : ''}${
+    resto.legal.hostPhone ? `<br>Téléphone : ${esc(resto.legal.hostPhone)}` : ''
+  }</p>
+  <h2 id="cookies">Données personnelles et cookies</h2>
+  <p>Le site mesure lui-même sa fréquentation, pour savoir combien de personnes le consultent et ce qui leur sert. Il dépose pour cela un cookie, «&#8239;asdc_mesure&#8239;», qui ne sert qu’à ces statistiques&#8239;: pas de publicité, aucun partage, aucun service extérieur. Il dure 13 mois au plus et n’est jamais prolongé&#8239;; les chiffres sont conservés 25 mois.</p>
+  <p>Sont comptés, sans rien qui vous identifie&#8239;: les pages vues, la provenance (moteur de recherche, réseau social…), le type d’appareil, les boutons «&#8239;Appeler&#8239;» et «&#8239;Itinéraire&#8239;» touchés, les plats ajoutés à la commande et les mots cherchés dans la carte. Ce fonctionnement dispense le site de bandeau de consentement selon les règles de la CNIL, mais vous pouvez refuser à tout moment.</p>
+  <div class="refus" data-refus>
+    <p class="refus__etat" data-refus-etat>Sans JavaScript, rien n’est mesuré.</p>
+    <button type="button" class="bouton bouton--contour" data-refus-bouton hidden>Refuser la mesure d’audience</button>
+  </div>
+  <p>Un navigateur réglé pour demander à ne pas être suivi («&#8239;Do Not Track&#8239;», «&#8239;Global Privacy Control&#8239;») n’est jamais mesuré.</p>
+  <p>La commande préparée sur la carte reste dans votre navigateur (stockage local) et n’est jamais transmise&#8239;; vous pouvez la vider à tout moment. Seuls le nombre de plats et le total sont comptés, sans le détail, quand vous appelez depuis «&#8239;Votre commande&#8239;».</p>
+  <p>Un dernier cookie, «&#8239;asdc_gestion&#8239;», ne sert qu’à l’espace de gestion réservé au restaurant.</p>
   <h2>Crédits</h2>
   <p>Illustrations&#8239;: dessins vectoriels créés pour ce site. Ce ne sont pas des photos des plats du restaurant.<br>
     Plan du quartier&#8239;: données IGN – BD TOPO®, Licence Ouverte Etalab 2.0.<br>
@@ -580,6 +646,7 @@ const mentions = () =>
 const introuvable = () => {
   const html = page({
     chemin: '404-tmp/',
+    cle: 'introuvable',
     titre: `Page introuvable — ${resto.name}`,
     description: 'Cette page n’existe pas ou plus.',
     classe: 'page-texte page-404',
@@ -594,7 +661,10 @@ const introuvable = () => {
 </main>`,
   });
   // La 404 est servie depuis n'importe quelle profondeur : chemins absolus.
-  writeFileSync(join(PUBLIC, '404.html'), html.replaceAll('href="../', 'href="/').replaceAll('src="../', 'src="/'));
+  writeFileSync(
+    join(PUBLIC, '404.html'),
+    html.replaceAll('href="../', 'href="/').replaceAll('src="../', 'src="/').replaceAll('data-collecte="../', 'data-collecte="/'),
+  );
 };
 
 const redirection = (de, vers) => {
@@ -653,7 +723,46 @@ const annexes = () => {
       2,
     )}${String.fromCharCode(10)}`,
   );
-  writeFileSync(join(PUBLIC, '_redirects'), ['/nouvelle-page  /carte/  301', '/nouvelle-page/  /carte/  301', ''].join(String.fromCharCode(10)));
+  // Le site a besoin de PHP (prix modifiables, statistiques) : les réglages propres à Netlify n'ont plus lieu d'être.
+  for (const fichier of ['_redirects', '_headers']) rmSync(join(PUBLIC, fichier), { force: true });
+
+  // La carte pour le serveur : identifiants, noms et prix d'origine en centimes (espace gestion, remplacement des jetons).
+  const rubriquesServeur = [
+    ...carte.sections.map((section) => ({
+      id: section.id,
+      titre: section.title,
+      plats: section.items.map((item) => ({
+        id: idPlat(item, section),
+        nom: item.name,
+        desc: item.desc || '',
+        prix: Math.round(item.price * 100),
+        recherche: normaliser([item.name, item.desc, section.title].filter(Boolean).join(' ')),
+      })),
+    })),
+    {
+      id: 'supplements',
+      titre: 'Supplément',
+      plats: [
+        {
+          id: ID_SUPPLEMENT,
+          nom: carte.riceUpgrade.name,
+          desc: 'Avec les plats servis avec du riz nature',
+          prix: Math.round(carte.riceUpgrade.price * 100),
+          recherche: normaliser(`${carte.riceUpgrade.name} riz`),
+        },
+      ],
+    },
+  ];
+  const ids = rubriquesServeur.flatMap((r) => r.plats.map((p) => p.id));
+  const doublons = ids.filter((id, i) => ids.indexOf(id) !== i);
+  if (doublons.length) throw new Error(`Deux plats portent le même identifiant : ${doublons.join(', ')}`);
+  mkdirSync(join(PUBLIC, 'inc'), { recursive: true });
+  // Comme les données du serveur : un fichier PHP qui s'arrête avant son contenu si on le demande depuis le navigateur.
+  rmSync(join(PUBLIC, 'inc/carte.json'), { force: true });
+  writeFileSync(
+    join(PUBLIC, 'inc/carte.php'),
+    `<?php http_response_code(404); exit; ?>${String.fromCharCode(10)}${JSON.stringify({ maj: carte.updated, rubriques: rubriquesServeur }, null, 1)}${String.fromCharCode(10)}`,
+  );
 
   // Hébergement Apache (IONOS, OVH, o2switch…) : les règles de _redirects et _headers, plus le passage en HTTPS.
   // Aucune barre oblique inverse : les points des motifs s'écrivent [.].
@@ -668,6 +777,9 @@ const annexes = () => {
       '# Page « introuvable » du site',
       'ErrorDocument 404 /404.html',
       '',
+      '# Pas de DirectoryIndex ici : un hébergement strict le refuse (erreur 500 sur tout le site).',
+      '# Les serveurs PHP servent index.php par défaut, et aucun dossier n’a à la fois index.php et index.html.',
+      '',
       '# Types et encodage des fichiers',
       'AddType application/manifest+json .webmanifest',
       'AddType font/woff2 .woff2',
@@ -676,6 +788,9 @@ const annexes = () => {
       '',
       '<IfModule mod_rewrite.c>',
       '  RewriteEngine On',
+      '',
+      '  # Fichiers internes (code commun, prix, statistiques, mot de passe) : jamais servis.',
+      '  RewriteRule ^(inc|donnees)(/|$) - [R=404,L]',
       '',
       `  # Toujours https://${hote}, avec le test de port conseillé par IONOS.`,
       '  # Ne joue que sur le vrai domaine : l’adresse provisoire de l’hébergeur reste consultable pendant les essais.',
@@ -739,14 +854,14 @@ const inventaire = (dossier, prefixe = '') =>
 
 // ZIP reproductible : ordre trié et date fixe (celle de la carte), donc la même archive tant que le site ne change pas.
 // Les fichiers sont à la racine de l'archive : on la décompresse directement dans le dossier du site chez l'hébergeur.
-const archiver = (source, cible, exclus) => {
+const archiver = (source, cible, garder) => {
   const [an, mois, jour] = carte.updated.split('-').map(Number);
   const dateDos = ((an - 1980) << 9) | (mois << 5) | jour;
   const locaux = [];
   const central = [];
   let decalage = 0;
   let nombre = 0;
-  for (const nom of inventaire(source).filter((n) => !exclus.includes(n))) {
+  for (const nom of inventaire(source).filter(garder)) {
     const dossier = nom.endsWith('/');
     const brut = dossier ? Buffer.alloc(0) : readFileSync(join(source, nom));
     const compresse = dossier ? brut : deflateRawSync(brut, { level: 9 });
@@ -807,9 +922,11 @@ redirection('nouvelle-page/', 'carte/');
 annexes();
 rmSync(join(PUBLIC, '404-tmp'), { recursive: true, force: true });
 
-// _headers et _redirects ne servent qu'à Netlify et Cloudflare : un serveur Apache lit .htaccess.
+// Les données du serveur (prix saisis, statistiques, mot de passe) ne partent jamais dans l'archive :
+// une mise à jour déposée par-dessus le site en ligne ne les écrase pas.
 const ARCHIVE = 'livraison/aux-saveurs-du-cambodge-site.zip';
-const nbFichiers = archiver(PUBLIC, join(ROOT, ARCHIVE), ['_headers', '_redirects']);
+const PROTEGES = ['donnees/', 'donnees/.htaccess', 'donnees/index.html'];
+const nbFichiers = archiver(PUBLIC, join(ROOT, ARCHIVE), (nom) => !nom.startsWith('donnees/') || PROTEGES.includes(nom));
 
 const manquants = Object.entries(resto.legal)
   .filter(([cle, v]) => !v && cle !== 'legalForm' && cle !== 'hostAddress')

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-03T13:30:00+01:00",
+  "generatedAt": "2026-11-06T11:00:00+01:00",
   "title": "Design System: Aux Saveurs du Cambodge",
   "extensions": {
     "colorMeta": {
@@ -258,6 +258,36 @@
           "#FFB5AA",
           "#FEE9E5"
         ]
+      },
+      "erreur": {
+        "role": "tertiary",
+        "displayName": "Erreur (espace gestion)",
+        "canonical": "#D70015",
+        "tonalRamp": [
+          "#3B0004",
+          "#5E0009",
+          "#86000F",
+          "#B00014",
+          "#D70015",
+          "#F25C66",
+          "#F9AEB3",
+          "#FDE8EA"
+        ]
+      },
+      "succes": {
+        "role": "tertiary",
+        "displayName": "Succès (espace gestion)",
+        "canonical": "#1D7A35",
+        "tonalRamp": [
+          "#05210D",
+          "#0B3A18",
+          "#125424",
+          "#1D7A35",
+          "#3E9A55",
+          "#77BE87",
+          "#B6DEBF",
+          "#E3F3E6"
+        ]
       }
     },
     "typographyMeta": {
@@ -347,11 +377,6 @@
         "purpose": "Le plat d’une tuile pivote pendant qu’elle traverse l’écran (navigateurs compatibles)."
       },
       {
-        "name": "manifeste",
-        "value": "view-timeline, gris de nuit → encre",
-        "purpose": "Les deux dernières phrases s’allument au défilement."
-      },
-      {
         "name": "curseur-rubrique",
         "value": "0,45 s, translate + scale",
         "purpose": "Le trait glisse sous la rubrique en cours."
@@ -375,6 +400,51 @@
         "name": "mouvement-reduit",
         "value": "prefers-reduced-motion: reduce",
         "purpose": "Aucune animation ni transition, défilement instantané, pas de jeton."
+      },
+      {
+        "name": "titre-leve",
+        "value": "1,05 s, 70 ms entre les mots",
+        "purpose": "Le nom du restaurant se lève mot après mot, chacun sorti de son cache."
+      },
+      {
+        "name": "vapeur",
+        "value": "7 à 8,6 s en boucle, décalées de 2,5 s",
+        "purpose": "Trois voiles montent d’un plat chaud et se dissipent ; seulement à l’écran."
+      },
+      {
+        "name": "scene-fait-maison",
+        "value": "cadre collant sur 3,4 écrans, progression 0 → 1, chaque ingrédient sur sa fenêtre, atténuation cubique",
+        "purpose": "La soupe se prépare au défilement : verse, tourne, tombe, glisse, fondu."
+      },
+      {
+        "name": "onde",
+        "value": "2,4 à 2,6 s en boucle, ×3,4",
+        "purpose": "Pastille « ouvert » et épingle du plan ; seulement à l’écran."
+      },
+      {
+        "name": "inclinaison",
+        "value": "perspective 1 100 px, ±9° / ±11°, 0,6 s",
+        "purpose": "Le plat d’une tuile suit la souris (ordinateur seulement)."
+      },
+      {
+        "name": "file-de-plats",
+        "value": "0,35 s, 28 ms d’écart, 10 au plus",
+        "purpose": "Les plats d’une rubrique de la carte arrivent à la file."
+      },
+      {
+        "name": "onde-bouton",
+        "value": "0,5 s",
+        "purpose": "Le cercle « + » touché fait une onde bleue."
+      },
+      {
+        "name": "total-qui-defile",
+        "value": "420 ms, atténuation cubique",
+        "purpose": "Le total de la commande défile jusqu’à sa nouvelle valeur."
+      },
+      {
+        "name": "gestion-barres",
+        "value": "0,7 s depuis la base, 0,1 s par groupe de 8",
+        "purpose": "Espace gestion : les barres de l’histogramme poussent, les traits des listes s’étirent."
       }
     ],
     "breakpoints": [
@@ -464,6 +534,30 @@
       "description": "Un plat de la carte : nom, description, prix tabulaire et cercle « + » ; dans la commande, cercle plein et quantité en pastille.",
       "html": "<div class=\"ds-plat\"><span class=\"ds-plat__nom\">Lok lac</span><span class=\"ds-plat__desc\">Bœuf mariné sauté</span><span class=\"ds-plat__prix\">13,50&nbsp;€</span><button type=\"button\" class=\"ds-plat__ajout\" data-quantite=\"1\" aria-label=\"Ajouter à la commande : Lok lac\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M12 5.5v13M5.5 12h13\"/></svg></button></div>",
       "css": ".ds-plat{display:grid;grid-template-columns:minmax(0,1fr) auto 32px;grid-template-areas:\"nom prix ajout\" \"desc prix ajout\";column-gap:16px;padding:15px 0;border-bottom:1px solid #d2d2d7;font:400 17px/1.47 -apple-system,BlinkMacSystemFont,Inter,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;letter-spacing:-.022em;color:#1d1d1f}.ds-plat__nom{grid-area:nom;font-weight:600}.ds-plat__desc{grid-area:desc;color:#6e6e73;font-size:14px;line-height:1.43}.ds-plat__prix{grid-area:prix;font-variant-numeric:tabular-nums}.ds-plat__ajout{grid-area:ajout;position:relative;align-self:start;display:grid;place-items:center;width:32px;height:32px;margin-top:-3px;padding:0;border:1px solid #0071e3;border-radius:50%;background:#0071e3;color:#fff;cursor:pointer}.ds-plat__ajout:hover{background:#0066cc}.ds-plat__ajout:focus-visible{outline:2px solid #0071e3;outline-offset:3px}.ds-plat__ajout::after{content:attr(data-quantite);position:absolute;top:-7px;right:-7px;display:grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border:2px solid #fff;border-radius:9px;background:#1d1d1f;color:#fff;font:600 11px/1 -apple-system,BlinkMacSystemFont,Inter,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif}"
+    },
+    {
+      "name": "Commande segmentée",
+      "kind": "nav",
+      "refersTo": "segments",
+      "description": "Sections et périodes de l’espace gestion, à la manière d’iOS.",
+      "html": "<nav class=\"ds-segments\" aria-label=\"Sections\"><a href=\"#\" aria-current=\"page\">Statistiques</a><a href=\"#\">Prix</a><a href=\"#\">Réglages</a></nav>",
+      "css": ".ds-segments{display:inline-flex;gap:2px;padding:2px;border-radius:10px;background:rgb(118 118 128/.12);font:400 14px/1 -apple-system,BlinkMacSystemFont,Inter,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;letter-spacing:-.016em}.ds-segments a{display:flex;align-items:center;min-height:32px;padding:0 14px;border-radius:8px;color:#1d1d1f;text-decoration:none;transition:background-color .2s ease,box-shadow .2s ease}.ds-segments a:hover{background:rgb(255 255 255/.6)}.ds-segments a[aria-current=\"page\"]{background:#fff;font-weight:600;box-shadow:0 3px 8px rgb(0 0 0/.12),0 0 1px rgb(0 0 0/.2)}.ds-segments a:focus-visible{outline:2px solid #0071e3;outline-offset:2px}"
+    },
+    {
+      "name": "Histogramme des visites",
+      "kind": "custom",
+      "refersTo": "histogramme",
+      "description": "Une barre d’encre par jour, bleue au survol et au clavier, info-bulle, graduations fines.",
+      "html": "<div class=\"ds-histo\" style=\"--max:30\"><ol><li class=\"ds-colonne\" style=\"--v:12\" tabindex=\"0\" data-info=\"12 visites\"><span></span></li><li class=\"ds-colonne\" style=\"--v:18\" tabindex=\"0\" data-info=\"18 visites\"><span></span></li><li class=\"ds-colonne\" style=\"--v:9\" tabindex=\"0\" data-info=\"9 visites\"><span></span></li><li class=\"ds-colonne\" style=\"--v:22\" tabindex=\"0\" data-info=\"22 visites\"><span></span></li><li class=\"ds-colonne\" style=\"--v:16\" tabindex=\"0\" data-info=\"16 visites\"><span></span></li><li class=\"ds-colonne\" style=\"--v:27\" tabindex=\"0\" data-info=\"27 visites\"><span></span></li><li class=\"ds-colonne\" style=\"--v:20\" tabindex=\"0\" data-info=\"20 visites\"><span></span></li></ol></div>",
+      "css": ".ds-histo{height:160px;padding:8px 0;border-bottom:1px solid #d2d2d7;font-family:-apple-system,BlinkMacSystemFont,Inter,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif}.ds-histo ol{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:2px;height:100%;margin:0;padding:0;list-style:none}.ds-colonne{position:relative;display:flex;align-items:flex-end;justify-content:center;height:100%}.ds-colonne span{width:min(24px,72%);height:calc(var(--v)/var(--max)*100%);border-radius:4px 4px 0 0;background:#1d1d1f;transition:background-color .15s ease}.ds-colonne:hover span,.ds-colonne:focus-visible span{background:#0071e3}.ds-colonne:focus-visible{outline:2px solid #0071e3;outline-offset:2px}.ds-colonne::after{content:attr(data-info);position:absolute;bottom:calc(var(--v)/var(--max)*100% + 8px);left:50%;padding:4px 8px;border-radius:8px;background:#1d1d1f;color:#fff;font-size:12px;white-space:nowrap;opacity:0;translate:-50% 4px;transition:opacity .15s ease,translate .15s ease;pointer-events:none}.ds-colonne:hover::after,.ds-colonne:focus-visible::after{opacity:1;translate:-50% 0}"
+    },
+    {
+      "name": "Ligne de prix",
+      "kind": "input",
+      "refersTo": "ligne-prix",
+      "description": "Espace gestion : un plat, son prix à droite ; un prix changé passe au bleu pâle.",
+      "html": "<div class=\"ds-ligne-prix\"><label for=\"ds-p\"><strong>Lok lac</strong><span>Bœuf mariné sauté</span></label><span class=\"ds-ligne-prix__champ\"><input id=\"ds-p\" value=\"14,90\" inputmode=\"decimal\"><span aria-hidden=\"true\">€</span></span></div>",
+      "css": ".ds-ligne-prix{display:grid;grid-template-columns:minmax(0,1fr) 132px;align-items:center;gap:16px;padding:12px 0;border-top:1px solid #e8e8ed;font:400 17px/1.47 -apple-system,BlinkMacSystemFont,Inter,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif;letter-spacing:-.022em;color:#1d1d1f}.ds-ligne-prix label{display:grid;gap:2px}.ds-ligne-prix label span{color:#6e6e73;font-size:14px}.ds-ligne-prix__champ{position:relative}.ds-ligne-prix input{width:100%;height:44px;padding:0 34px 0 14px;border:1px solid #0071e3;border-radius:12px;background:#f2f8ff;font:inherit;text-align:right;font-variant-numeric:tabular-nums;box-sizing:border-box}.ds-ligne-prix input:focus{outline:none;box-shadow:0 0 0 4px rgb(0 125 250/.3)}.ds-ligne-prix__champ span{position:absolute;top:50%;right:14px;color:#6e6e73;translate:0 -50%}"
     }
   ],
   "narrative": {
@@ -476,7 +570,8 @@
       "Les plats dessinés vus du dessus, coupés par le bas de leur tuile",
       "Verre dépoli réservé à ce qui reste collé au-dessus du contenu",
       "Prix en chiffres tabulaires, au format « 10,00 € »",
-      "Mouvement discret : le héros se dévoile au chargement, chaque tuile une seule fois au défilement"
+      "Un site vivant mais sobre : le nom se lève mot après mot, le bol fume, la soupe se prépare au fil du défilement, le reste répond au geste",
+      "Un espace gestion au même système : prix et statistiques, sans un pixel de décor"
     ],
     "rules": [
       {
@@ -528,6 +623,16 @@
         "name": "The Pill Rule",
         "body": "Un bouton est toujours une pilule pleine ou en contour, jamais un rectangle ; une action dans une ligne est un cercle de 32 px.",
         "section": "shapes"
+      },
+      {
+        "name": "The Hot Dish Rule",
+        "body": "Seul ce qui vit pour de vrai bouge en boucle : la vapeur d’un plat chaud, la pastille « ouvert », l’épingle du plan. Jamais hors de l’écran, jamais en mouvement réduit.",
+        "section": "layout"
+      },
+      {
+        "name": "The One Scene Rule",
+        "body": "Une page a au plus une scène liée au défilement, et elle raconte le produit : sur l’accueil, la soupe se prépare. Tout le reste se révèle une fois et s’arrête.",
+        "section": "layout"
       }
     ],
     "dos": [
@@ -535,7 +640,9 @@
       "Do garder le bleu (#0071E3) pour l'action et le bleu de lien (#0066CC, #2997FF sur noir) pour les liens à chevron.",
       "Do écrire les prix « 10,00 € » en chiffres tabulaires, alignés à droite.",
       "Do garder des cibles tactiles de 44 px et un focus bleu visible de 2 px.",
-      "Do dévoiler une seule fois : le héros au chargement (texte qui monte en 1 s, bol qui se pose en tournant en 1,6 s), chaque tuile en entrant à l'écran ; rien en boucle, aucun déplacement en mouvement réduit.",
+      "Do dévoiler une seule fois : le héros au chargement (nom qui se lève mot après mot, texte qui monte en 1 s, bol qui se pose en tournant en 1,6 s), chaque tuile en entrant à l'écran ; aucun déplacement en mouvement réduit.",
+      "Do ne faire boucler que ce qui est vivant pour de vrai : la vapeur d'un plat chaud, la pastille « ouvert », l'onde de l'épingle du plan ; chacune seulement à l'écran.",
+      "Do garder une seule scène liée au défilement par page : la soupe qui se prépare.",
       "Do signaler les dessins comme dessins (« (illustration) » dans le texte alternatif, note de pied de page) tant qu'il n'y a pas de vraies photos."
     ],
     "donts": [

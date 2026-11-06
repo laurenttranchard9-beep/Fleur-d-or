@@ -4,6 +4,9 @@
 # Page « introuvable » du site
 ErrorDocument 404 /404.html
 
+# Pas de DirectoryIndex ici : un hébergement strict le refuse (erreur 500 sur tout le site).
+# Les serveurs PHP servent index.php par défaut, et aucun dossier n’a à la fois index.php et index.html.
+
 # Types et encodage des fichiers
 AddType application/manifest+json .webmanifest
 AddType font/woff2 .woff2
@@ -12,6 +15,9 @@ AddCharset utf-8 .html .css .js .svg .xml .txt .webmanifest
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # Fichiers internes (code commun, prix, statistiques, mot de passe) : jamais servis.
+  RewriteRule ^(inc|donnees)(/|$) - [R=404,L]
 
   # Toujours https://www.auxsaveursducambodge-saintalban.com, avec le test de port conseillé par IONOS.
   # Ne joue que sur le vrai domaine : l’adresse provisoire de l’hébergeur reste consultable pendant les essais.

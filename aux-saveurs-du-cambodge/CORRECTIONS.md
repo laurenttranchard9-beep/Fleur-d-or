@@ -13,7 +13,12 @@ seules l'orthographe, la typographie et la présentation ont changé.
 | « Poulet sauce légumes » | Renommé **Poulet aux légumes** | Tournure plus naturelle ; vérifier que c'est bien le même plat |
 | Assiette composée : « 1 nems, 1nems poulet » | « 1 nem, 1 nem au poulet » | Le premier nem est sans doute au porc : à préciser |
 | Service sur place | Le site propose « réserver une table » et « commander à emporter » | Déduit de « On vous garde une petite place ? » et « Commandez dès maintenant ! » |
-| Mentions légales | Champs vides dans `data/restaurant.json` → `legal` | Raison sociale, SIRET, directeur de publication et hébergeur sont obligatoires (LCEN) |
+
+## Réglé depuis
+
+- Mentions légales remplies le 06/11/2026 : raison sociale TRANCHARD, SIRET 517 803 433 00039 (clé de contrôle valide),
+  directeur de la publication Laurent Tranchard, hébergeur IONOS SARL (adresse et téléphone de ses mentions légales officielles).
+  La forme juridique (entreprise individuelle, SARL…) n'a pas été donnée : à ajouter dans `legal.legalForm` si besoin.
 
 ## Coquilles corrigées
 

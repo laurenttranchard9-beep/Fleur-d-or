@@ -28,13 +28,15 @@ FORM: Canon épinglé par l'utilisateur (« minimaliste comme le site d'Apple »
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 
 ## Motion
-- Moment fort : au chargement, le titre et les boutons montent en fondu, puis le bol de soupe s'élève en tournant légèrement, comme un produit qu'on dévoile.
-- Défilement : chaque tuile révèle son texte puis son plat une seule fois en entrant à l'écran (fondu, montée de 36 px, le plat de 90 px). Rien ne tourne en boucle.
-- Défilement lié (navigateurs qui gèrent `animation-timeline`, sinon rien) : le plat d'une tuile tourne de −10° à +10° pendant qu'elle traverse l'écran, comme un produit qu'on fait pivoter ; le manifeste s'allume phrase après phrase, du gris au noir.
-- Retour d'action : bandeau d'état en fondu ; sur la carte, un point bleu vole du plat jusqu'au bon, les lignes entrent et sortent, un trait souligne la rubrique en cours ; transition douce entre les pages.
-- Mouvement réduit : aucun déplacement, fondus conservés.
+- Demande du 06/11/2026 : « ajoute plus d'animation sur le site, il faut que ce soit vivant ». Elle complète la direction sans la changer.
+- Thèse : la cuisine est vivante, l'interface reste calme. Le moment fort est une scène liée au défilement où la soupe Phnom Penh se prépare sous les yeux, ingrédient par ingrédient, pendant que s'allument les trois phrases du restaurant ; c'est la version « produit » d'apple.com (une vue éclatée qui se rassemble), appliquée à un plat fait maison.
+- Héros : le nom se lève mot après mot depuis son cache (1,05 s, 70 ms d'écart), le reste monte en fondu, le bol se pose en tournant, puis fume (trois voiles, seulement à l'écran).
+- Défilement : chaque tuile se révèle une fois ; le plat d'une tuile pivote de −10° à +10° pendant qu'elle traverse l'écran (navigateurs compatibles) et, sur ordinateur, s'incline sous la souris.
+- États vivants : la pastille « ouvert » et l'épingle du plan émettent une onde lente, seulement à l'écran.
+- Carte : les plats d'une rubrique arrivent à la file (28 ms d'écart, 10 au plus) ; le « + » touché fait une onde ; le jeton « +1 » vole jusqu'au total ou au sac, qui remue ; le total défile jusqu'à sa nouvelle valeur.
+- Budget : rien d'animé hors de l'écran ; la garniture de la scène est un SVG sans flou (pas de filtre à repeindre), le bol vide une image fixe ; 60 images par seconde mesurées avec un processeur ralenti six fois sur mobile.
+- Mouvement réduit et sans JavaScript : aucune boucle, aucun déplacement, la scène devient une tuile normale avec la soupe complète.
 
 ## Unresolved
-- Identité légale (raison sociale, SIRET, directeur de publication) pour les mentions légales.
 - Photos réelles des plats : les dessins sont prévus pour être remplacés.
 - Service sur place confirmé ? Moyens de paiement ? Fermetures annuelles ?
