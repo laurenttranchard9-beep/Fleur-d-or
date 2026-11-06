@@ -373,8 +373,8 @@
       },
       {
         "name": "rotation-defilement",
-        "value": "animation-timeline: view(), −10° → +10°",
-        "purpose": "Le plat d’une tuile pivote pendant qu’elle traverse l’écran (navigateurs compatibles)."
+        "value": "animation-timeline: view() (sinon --vue posé par le script), −10° → +10°",
+        "purpose": "Le plat d’une tuile pivote pendant qu’elle traverse l’écran ; Firefox et Safari d’avant 26 suivent le script."
       },
       {
         "name": "curseur-rubrique",
@@ -399,7 +399,7 @@
       {
         "name": "mouvement-reduit",
         "value": "prefers-reduced-motion: reduce",
-        "purpose": "Aucune animation ni transition, défilement instantané, pas de jeton."
+        "purpose": "Aucun déplacement, aucune rotation, aucune boucle, défilement instantané, pas de jeton ; le héros, les tuiles, les plats de la carte et la garniture de la scène apparaissent en fondu."
       },
       {
         "name": "titre-leve",
@@ -640,7 +640,7 @@
       "Do garder le bleu (#0071E3) pour l'action et le bleu de lien (#0066CC, #2997FF sur noir) pour les liens à chevron.",
       "Do écrire les prix « 10,00 € » en chiffres tabulaires, alignés à droite.",
       "Do garder des cibles tactiles de 44 px et un focus bleu visible de 2 px.",
-      "Do dévoiler une seule fois : le héros au chargement (nom qui se lève mot après mot, texte qui monte en 1 s, bol qui se pose en tournant en 1,6 s), chaque tuile en entrant à l'écran ; aucun déplacement en mouvement réduit.",
+      "Do dévoiler une seule fois : le héros au chargement (nom qui se lève mot après mot, texte qui monte en 1 s, bol qui se pose en tournant en 1,6 s), chaque tuile en entrant à l'écran ; en mouvement réduit, les mêmes révélations en simple fondu, sans aucun déplacement.",
       "Do ne faire boucler que ce qui est vivant pour de vrai : la vapeur d'un plat chaud, la pastille « ouvert », l'onde de l'épingle du plan ; chacune seulement à l'écran.",
       "Do garder une seule scène liée au défilement par page : la soupe qui se prépare.",
       "Do signaler les dessins comme dessins (« (illustration) » dans le texte alternatif, note de pied de page) tant qu'il n'y a pas de vraies photos."

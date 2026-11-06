@@ -33,7 +33,7 @@ Page d'accueil entière : [apercus/accueil-page-entiere.jpg](apercus/accueil-pag
 | Formulaire « Vous avez envie de travailler avec nous ? » (texte de modèle) | Adresse, plan du quartier redessiné d'après l'IGN, liens Itinéraire / Waze / Plans |
 | Pas de description, pas de données pour Google | Titre et description, image de partage, données structurées `Restaurant` et `Menu` (horaires, adresse, prix), sitemap |
 | — | Accessible (0 erreur axe-core sur toutes les pages, espace gestion compris), mentions légales complètes ; aucune police à télécharger sur les appareils Apple, 75 Ko (Inter) ailleurs |
-| Aucune animation | Le nom se lève mot après mot, le bol se pose et fume ; **la soupe se prépare sous les yeux** pendant qu'on fait défiler (bouillon, nouilles, porc, crevettes, herbes, citron vert, baguettes) au rythme de « Tout est fait maison. Avec des produits frais. Et beaucoup d'amour. » ; les plats s'inclinent sous la souris, « ouvert » et l'épingle du plan battent doucement ; sur la carte, les plats arrivent à la file, le « + » fait une onde, le total défile. Tout respecte le réglage « réduire les animations » du téléphone |
+| Aucune animation | Le nom se lève mot après mot, le bol se pose et fume ; **la soupe se prépare sous les yeux** pendant qu'on fait défiler (bouillon, nouilles, porc, crevettes, herbes, citron vert, baguettes) au rythme de « Tout est fait maison. Avec des produits frais. Et beaucoup d'amour. » ; les plats s'inclinent sous la souris, « ouvert » et l'épingle du plan battent doucement ; sur la carte, les plats arrivent à la file, le « + » fait une onde, le total défile. Avec le réglage « réduire les animations » de l'appareil, les mouvements deviennent des fondus |
 
 Toutes les coquilles corrigées et les points à confirmer sont listés dans [CORRECTIONS.md](CORRECTIONS.md).
 
@@ -47,7 +47,7 @@ Toutes les coquilles corrigées et les points à confirmer sont listés dans [CO
 
 ## L'espace gestion
 
-À l'adresse `/admin/` du site, protégé par le mot de passe choisi à la première visite (enregistré chiffré, jamais en clair ;
+À l'adresse `/admin/` du site (le lien « Espace gestion », en bas de chaque page, y mène), protégé par le mot de passe choisi à la première visite (enregistré chiffré, jamais en clair ;
 cinq essais ratés bloquent 15 minutes).
 
 - **Prix** : tous les plats de la carte, rubrique par rubrique, avec une recherche. On tape « 10,50 » ou « 10.5 », on enregistre :
@@ -144,6 +144,21 @@ remplacer `Listen 80` par `Listen 8080`, redémarrer Apache et ouvrir <http://lo
 Sous Linux, donner au serveur le droit d'écrire dans `htdocs/donnees` (`sudo chown -R daemon htdocs/donnees`).
 
 Les hébergements sans PHP (Netlify, Cloudflare Pages, GitHub Pages) ne conviennent plus : ils ne peuvent ni changer les prix ni compter les visites.
+
+### Si les animations ne bougent pas
+
+1. **L'adresse du site montre encore l'ancien site** tant que les fichiers ne sont pas chez IONOS et que le domaine n'y est pas rattaché.
+   Pour voir le nouveau dès maintenant : XAMPP, ci-dessus.
+2. **L'appareil demande de réduire les animations.** Le site le respecte : rien ne glisse ni ne tourne, tout apparaît en fondu.
+   Pour voir les mouvements complets, désactiver ce réglage :
+   - Windows 11 : Paramètres → Accessibilité → Effets visuels → activer « Effets d'animation » ;
+   - Mac : Réglages Système → Accessibilité → Affichage → décocher « Réduire les animations » ;
+   - iPhone : Réglages → Accessibilité → Mouvement → désactiver « Réduire les animations » ;
+   - Android : Paramètres → Accessibilité → désactiver « Supprimer les animations ».
+3. **Le fichier a été ouvert par un double-clic** : il faut passer par le serveur (IONOS, ou `http://localhost/` avec XAMPP).
+
+Le plat de chaque tuile tourne pendant le défilement dans tous les navigateurs récents (Chrome, Edge, Safari, Firefox).
+Sur ordinateur, il s'incline aussi sous la souris.
 
 ## Organisation
 

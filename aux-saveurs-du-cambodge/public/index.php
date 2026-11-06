@@ -25,8 +25,8 @@
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="manifest" href="./site.webmanifest">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="./assets/css/site.css?v=15e5e5a2">
-<script src="./assets/js/site.js?v=c72153a8" defer></script>
+<link rel="stylesheet" href="./assets/css/site.css?v=dcb60f39">
+<script src="./assets/js/site.js?v=68285b38" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","@id":"https://www.auxsaveursducambodge-saintalban.com/#restaurant","name":"Aux Saveurs du Cambodge","description":"Restaurant cambodgien à Saint-Alban, au nord de Toulouse : lok lac, soupe Phnom Penh, porc au caramel, nems et vapeurs faits maison, menu complet à {{rond:menu-bon-et-pas-cher--menu-bon-et-pas-cher-au-porc}}. Commande et réservation par téléphone au 07 59 52 53 41.","url":"https://www.auxsaveursducambodge-saintalban.com/","telephone":"+33759525341","image":"https://www.auxsaveursducambodge-saintalban.com/og.jpg","address":{"@type":"PostalAddress","streetAddress":"10 avenue Salvador Allende","postalCode":"31140","addressLocality":"Saint-Alban","addressRegion":"Occitanie","addressCountry":"FR"},"geo":{"@type":"GeoCoordinates","latitude":43.688048,"longitude":1.40842},"hasMap":"https://www.google.com/maps/search/?api=1&query=Aux%20Saveurs%20du%20Cambodge%2C%2010%20avenue%20Salvador%20Allende%2C%2031140%20Saint-Alban","servesCuisine":["Cambodgienne","Asiatique"],"priceRange":"€","currenciesAccepted":"EUR","hasMenu":"https://www.auxsaveursducambodge-saintalban.com/carte/","openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"12:00","closes":"14:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"18:00","closes":"21:45"}]}</script>
 </head>
 <body class="page-accueil" data-page="accueil" data-collecte="./stats/collecte.php">
@@ -324,7 +324,7 @@
     </nav>
     <div class="pied__bas">
       <p>Copyright © 2026 Aux Saveurs du Cambodge. Tous droits réservés.</p>
-      <ul><li><a href="./mentions-legales/">Mentions légales</a></li></ul>
+      <ul><li><a href="./mentions-legales/">Mentions légales</a></li><li><a href="./admin/" rel="nofollow">Espace gestion</a></li></ul>
     </div>
   </div>
 </footer>

@@ -284,7 +284,9 @@ Ce qui agit est une pilule (980 px) ou un cercle ; ce qui contient est arrondi �
 - Une tuile noire de 3,4 écrans de haut ; son cadre reste collé à l'écran pendant qu'on la traverse.
 - En haut, les trois phrases du restaurant, centrées (56 px, 40 px sur mobile), grises puis blanches à mesure qu'elles arrivent ; en bas, la soupe Phnom Penh vue du dessus, en deux couches : le bol vide (image) et la garniture (dessin inséré dans la page, un groupe par ingrédient).
 - Au défilement : le bouillon se verse depuis le centre, les nouilles arrivent en tournant, le porc, les crevettes, les herbes, l'ail et les piments tombent dans le bol (ils viennent de plus près, donc plus grands, et se posent), le citron vert se pose, les baguettes glissent ; le bol entier se redresse de −30° et grandit de 10 %. Puis le détail des saveurs et « Découvrir la carte › » apparaissent, et le bol se met à fumer.
-- Sans JavaScript ou en mouvement réduit : une tuile normale, la soupe complète, les phrases en blanc.
+- Sans JavaScript : une tuile normale, la soupe complète, les phrases en blanc.
+- En mouvement réduit : la tuile ne s'épingle pas et rien ne bouge, mais les ingrédients apparaissent en fondu, dans le même ordre, pendant que le bol entre dans l'écran, et les phrases s'allument de même.
+- « Découvrir la carte › » devient visible dès qu'il reçoit le focus, même avant la fin de la scène.
 
 ### Vapeur
 - Trois voiles blancs en dégradé radial au-dessus d'un bol chaud (héros, fin de la scène) : ils montent vers nous en grandissant et se dissipent, 7 à 8,6 s chacun, décalés.
@@ -295,6 +297,9 @@ Ce qui agit est une pilule (980 px) ou un cercle ; ce qui contient est arrondi �
 - Chaque plat a son cercle bleu « + » ; dans la commande, la quantité s'affiche en pastille noire sur le cercle devenu plein.
 - Lignes : nom, montant, boutons − / + ; total en 600 ; « Appeler pour commander » en pilule pleine largeur ; « Tout retirer » en lien.
 - Mouvement : le cercle touché fait une onde bleue ; un jeton bleu « +1 » vole en parabole du cercle jusqu'au total (ou jusqu'au sac de la barre, qui remue), 620 ms ; le total défile jusqu'à sa nouvelle valeur (420 ms), total et compteur pulsent une fois.
+
+### Pied de page
+- Gris perle, 12 px : notes (prix, dessins, crédits, mesure d'audience), plan du site en trois colonnes, puis la ligne du bas : copyright à gauche ; « Mentions légales » et « Espace gestion » à droite, séparés d'un filet (côte à côte sans filet sur mobile, cibles de 44 px). « Espace gestion » mène à la connexion de l'espace gestion.
 
 ### Espace gestion (outil)
 - Mode « Operate » : le même système en version outil, pour une personne qui gère le restaurant, souvent sur téléphone.
@@ -311,7 +316,7 @@ Ce qui agit est une pilule (980 px) ou un cercle ; ce qui contient est arrondi �
 - **Do** garder le bleu (#0071E3) pour l'action et le bleu de lien (#0066CC, #2997FF sur noir) pour les liens à chevron.
 - **Do** écrire les prix « 10,00 € » en chiffres tabulaires, alignés à droite.
 - **Do** garder des cibles tactiles de 44 px et un focus bleu visible de 2 px.
-- **Do** dévoiler une seule fois : le héros au chargement (nom qui se lève mot après mot, texte qui monte en 1 s, bol qui se pose en tournant en 1,6 s), chaque tuile en entrant à l'écran ; aucun déplacement en mouvement réduit.
+- **Do** dévoiler une seule fois : le héros au chargement (nom qui se lève mot après mot, texte qui monte en 1 s, bol qui se pose en tournant en 1,6 s), chaque tuile en entrant à l'écran ; en mouvement réduit, les mêmes révélations en simple fondu, sans aucun déplacement.
 - **Do** ne faire boucler que ce qui est vivant pour de vrai : la vapeur d'un plat chaud, la pastille « ouvert », l'onde de l'épingle du plan ; chacune seulement à l'écran.
 - **Do** garder une seule scène liée au défilement par page : la soupe qui se prépare.
 - **Do** signaler les dessins comme dessins (« (illustration) » dans le texte alternatif, note de pied de page) tant qu'il n'y a pas de vraies photos.

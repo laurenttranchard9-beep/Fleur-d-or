@@ -887,6 +887,18 @@ main > .grille {
   border-top: 1px solid var(--filet);
 }
 
+.pied__bas ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Les liens du bas, séparés d'un filet comme sur apple.com ; « Espace gestion » mène à la connexion. */
+.pied__bas li + li {
+  margin-left: 9px;
+  padding-left: 9px;
+  border-left: 1px solid var(--filet);
+}
+
 /* ---------- La carte ---------- */
 
 .carte-tete {
@@ -1898,8 +1910,9 @@ main > .grille {
   }
 
   .pied__plan a {
-    display: inline-block;
-    padding: 12px 0;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     font-size: 14px;
   }
 
@@ -1909,9 +1922,16 @@ main > .grille {
   }
 
   .pied__bas a {
-    display: inline-block;
-    padding: 12px 0;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     font-size: 14px;
+  }
+
+  .pied__bas li + li {
+    margin-left: 24px;
+    padding-left: 0;
+    border-left: 0;
   }
 
   .carte-tete {
@@ -2171,6 +2191,22 @@ main > .grille {
   }
 }
 
+/* Même rotation là où le navigateur ne sait pas encore lier une animation au défilement (Firefox, Safari d'avant 26) :
+   le script donne --vue, de 0 (le plat entre par le bas) à 1 (il sort par le haut). */
+@supports not (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveler] .tuile__image {
+      rotate: calc(var(--vue, 0.5) * 20deg - 10deg);
+    }
+  }
+}
+
+/* Un lien atteint au clavier se voit toujours, même avant la fin de la scène. */
+.scene__suite:focus-within {
+  opacity: 1 !important;
+  translate: none !important;
+}
+
 /* Sur ordinateur, le plat suit la souris, comme un produit qu'on prend en main. */
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .tuile__plat .tuile__image {
@@ -2312,6 +2348,82 @@ main > .grille {
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
   }
+
+  /* Animations réduites : rien ne glisse, ne tourne ni ne grandit, mais la page vit en fondus.
+     Ces règles passent devant le blocage ci-dessus : même importance, sélecteurs plus précis. */
+  .tuile--heros .mot__in,
+  .tuile--heros .tuile__texte > :not(.tuile__titre),
+  .tuile--heros .tuile__image {
+    animation: apparaitre 0.9s ease both !important;
+  }
+
+  .tuile--heros .mot__in {
+    animation-delay: calc(0.05s + var(--m) * 0.09s) !important;
+  }
+
+  .tuile--heros .tuile__accroche {
+    animation-delay: 0.3s !important;
+  }
+
+  .tuile--heros .tuile__detail {
+    animation-delay: 0.4s !important;
+  }
+
+  .tuile--heros .tuile__actions {
+    animation-delay: 0.5s !important;
+  }
+
+  .tuile--heros .tuile__image {
+    animation-duration: 1.4s !important;
+    animation-delay: 0.2s !important;
+  }
+
+  [data-reveler].est-pret > * {
+    opacity: 0;
+  }
+
+  [data-reveler]:not(.est-pret) > * {
+    transition: opacity 0.9s ease !important;
+  }
+
+  [data-reveler]:not(.est-pret) > :nth-child(2) {
+    transition-delay: 0.1s !important;
+  }
+
+  [data-reveler]:not(.est-pret) > :nth-child(3) {
+    transition-delay: 0.2s !important;
+  }
+
+  [data-reveler]:not(.est-pret) > :nth-child(4) {
+    transition-delay: 0.3s !important;
+  }
+
+  /* La scène ne s'épingle pas : la soupe se garnit en fondu pendant que le bol entre dans l'écran. */
+  .js .scene__ligne {
+    opacity: calc(0.42 + 0.58 * var(--t, 1));
+  }
+
+  .js .scene__suite {
+    opacity: var(--t, 1);
+  }
+
+  .js .scene .piece {
+    opacity: var(--t, 1);
+  }
+
+  .rubrique.est-pret .plat {
+    opacity: 0;
+  }
+
+  .rubrique:not(.est-pret) .plat {
+    transition: opacity 0.4s ease calc(var(--i, 0) * 28ms) !important;
+  }
+}
+
+@keyframes apparaitre {
+  from {
+    opacity: 0;
+  }
 }
 
 /* ---------- Impression : la carte et les horaires, sans le décor ---------- */
@@ -2364,7 +2476,9 @@ main > .grille {
   }
 
   .scene__ligne,
-  .scene__suite {
+  .scene__suite,
+  [data-reveler] > *,
+  .rubrique .plat {
     opacity: 1 !important;
     translate: none !important;
   }

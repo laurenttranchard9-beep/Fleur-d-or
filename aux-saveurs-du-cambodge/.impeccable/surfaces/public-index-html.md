@@ -31,11 +31,12 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 - Demande du 06/11/2026 : « ajoute plus d'animation sur le site, il faut que ce soit vivant ». Elle complète la direction sans la changer.
 - Thèse : la cuisine est vivante, l'interface reste calme. Le moment fort est une scène liée au défilement où la soupe Phnom Penh se prépare sous les yeux, ingrédient par ingrédient, pendant que s'allument les trois phrases du restaurant ; c'est la version « produit » d'apple.com (une vue éclatée qui se rassemble), appliquée à un plat fait maison.
 - Héros : le nom se lève mot après mot depuis son cache (1,05 s, 70 ms d'écart), le reste monte en fondu, le bol se pose en tournant, puis fume (trois voiles, seulement à l'écran).
-- Défilement : chaque tuile se révèle une fois ; le plat d'une tuile pivote de −10° à +10° pendant qu'elle traverse l'écran (navigateurs compatibles) et, sur ordinateur, s'incline sous la souris.
+- Défilement : chaque tuile se révèle une fois ; le plat d'une tuile pivote de −10° à +10° pendant qu'elle traverse l'écran (lié au défilement par le navigateur, ou par le script là où il ne sait pas le faire : Firefox, Safari d'avant 26) et, sur ordinateur, s'incline sous la souris.
 - États vivants : la pastille « ouvert » et l'épingle du plan émettent une onde lente, seulement à l'écran.
 - Carte : les plats d'une rubrique arrivent à la file (28 ms d'écart, 10 au plus) ; le « + » touché fait une onde ; le jeton « +1 » vole jusqu'au total ou au sac, qui remue ; le total défile jusqu'à sa nouvelle valeur.
 - Budget : rien d'animé hors de l'écran ; la garniture de la scène est un SVG sans flou (pas de filtre à repeindre), le bol vide une image fixe ; 60 images par seconde mesurées avec un processeur ralenti six fois sur mobile.
-- Mouvement réduit et sans JavaScript : aucune boucle, aucun déplacement, la scène devient une tuile normale avec la soupe complète.
+- Sans JavaScript : aucune boucle, aucun déplacement, la scène devient une tuile normale avec la soupe complète.
+- Mouvement réduit (souvent activé sans le savoir sous Windows ou sur iPhone) : aucune boucle, aucun déplacement ni rotation, mais des fondus. Le nom apparaît mot après mot, les tuiles et les plats de la carte en entrant à l'écran, la soupe se garnit en fondu pendant que le bol entre dans l'écran. « Réduire » ne veut pas dire « figer » (demande du 06/11/2026 : « les animations ne marchent pas »).
 
 ## Unresolved
 - Photos réelles des plats : les dessins sont prévus pour être remplacés.

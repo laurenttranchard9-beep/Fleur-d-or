@@ -196,8 +196,9 @@
 
   /* ---------- Les tuiles se révèlent en entrant dans l'écran ---------- */
 
+  // Avec « réduire les animations », la feuille de style en fait un simple fondu.
   const aReveler = [...document.querySelectorAll('[data-reveler]')].filter(sousLaLigne);
-  if (aReveler.length && !reduit.matches && 'IntersectionObserver' in window) {
+  if (aReveler.length && 'IntersectionObserver' in window) {
     const observateur = new IntersectionObserver(
       (entrees) =>
         entrees.forEach((entree) => {
@@ -334,45 +335,88 @@
       });
     }
 
-    // La scène « fait maison » : pendant qu'on fait défiler, le bouillon se verse, les nouilles tournent,
-    // le porc, les crevettes et les herbes tombent dans le bol, et les trois phrases s'allument.
-    const scene = document.querySelector('[data-scene]');
-    if (scene) {
-      const etapes = [...scene.querySelectorAll('[data-de]')].map((el) => ({ el, de: Number(el.dataset.de), a: Number(el.dataset.a), t: -1 }));
-      const adoucir = (x) => 1 - (1 - x) ** 3;
-      let enVue = false;
-      let prevue = false;
-      const majScene = () => {
-        prevue = false;
-        const r = scene.getBoundingClientRect();
-        const course = r.height - window.innerHeight;
-        const p = course > 0 ? Math.min(1, Math.max(0, -r.top / course)) : 1;
-        scene.style.setProperty('--p', p.toFixed(4));
-        for (const etape of etapes) {
-          const t = adoucir(Math.min(1, Math.max(0, (p - etape.de) / (etape.a - etape.de))));
-          if (Math.abs(t - etape.t) < 0.002) continue;
-          etape.t = t;
-          etape.el.style.setProperty('--t', t.toFixed(3));
-        }
-        scene.classList.toggle('est-chaud', enVue && p > 0.94);
+    // Là où le navigateur ne lie pas encore une animation au défilement (Firefox, Safari d'avant 26),
+    // le script fait tourner lui-même les plats des tuiles pendant qu'ils traversent l'écran.
+    const tournants = [...document.querySelectorAll('[data-reveler] .tuile__image')];
+    const lieAuDefilement = Boolean(window.CSS && CSS.supports && CSS.supports('animation-timeline: view()'));
+    if (tournants.length && !lieAuDefilement && 'IntersectionObserver' in window) {
+      const visibles = new Set();
+      let tourPrevu = false;
+      // Mesures d'abord (sur le cadre, que la rotation ne déforme pas), écritures ensuite.
+      const tourner = () => {
+        tourPrevu = false;
+        const h = window.innerHeight;
+        const valeurs = [...visibles].map((img) => {
+          const r = img.parentElement.getBoundingClientRect();
+          return [img, Math.min(1, Math.max(0, (h - r.top) / (h + r.height)))];
+        });
+        valeurs.forEach(([img, v]) => img.style.setProperty('--vue', v.toFixed(3)));
       };
-      const planifierScene = () => {
-        if (prevue) return;
-        prevue = true;
-        requestAnimationFrame(majScene);
+      const planifierTour = () => {
+        if (tourPrevu) return;
+        tourPrevu = true;
+        requestAnimationFrame(tourner);
       };
-      if ('IntersectionObserver' in window) {
-        new IntersectionObserver(([e]) => {
-          enVue = e.isIntersecting;
-          planifierScene();
-        }).observe(scene);
-      } else {
-        enVue = true;
-      }
-      window.addEventListener('scroll', () => enVue && planifierScene(), { passive: true });
-      window.addEventListener('resize', planifierScene);
-      majScene();
+      const vigie = new IntersectionObserver((entrees) => {
+        entrees.forEach((e) => (e.isIntersecting ? visibles.add(e.target) : visibles.delete(e.target)));
+        planifierTour();
+      });
+      tournants.forEach((img) => vigie.observe(img));
+      window.addEventListener('scroll', planifierTour, { passive: true });
+      window.addEventListener('resize', planifierTour);
     }
+  }
+
+  // La scène « fait maison » : pendant qu'on fait défiler, le bouillon se verse, les nouilles tournent,
+  // le porc, les crevettes et les herbes tombent dans le bol, et les trois phrases s'allument.
+  // Avec « réduire les animations », elle ne s'épingle pas : les ingrédients apparaissent en fondu
+  // pendant que le bol entre dans l'écran.
+  const scene = document.querySelector('[data-scene]');
+  if (scene) {
+    const bol = scene.querySelector('.scene__bol') || scene;
+    const etapes = [...scene.querySelectorAll('[data-de]')].map((el) => ({ el, de: Number(el.dataset.de), a: Number(el.dataset.a), t: -1 }));
+    const adoucir = (x) => 1 - (1 - x) ** 3;
+    let enVue = false;
+    let prevue = false;
+    const avancement = () => {
+      const h = window.innerHeight;
+      if (reduit.matches) {
+        const r = bol.getBoundingClientRect();
+        return Math.min(1, Math.max(0, (h - r.top) / (0.45 * h + r.height / 2)));
+      }
+      const r = scene.getBoundingClientRect();
+      const course = r.height - h;
+      return course > 0 ? Math.min(1, Math.max(0, -r.top / course)) : 1;
+    };
+    const majScene = () => {
+      prevue = false;
+      const p = avancement();
+      scene.style.setProperty('--p', p.toFixed(4));
+      for (const etape of etapes) {
+        const t = adoucir(Math.min(1, Math.max(0, (p - etape.de) / (etape.a - etape.de))));
+        if (Math.abs(t - etape.t) < 0.002) continue;
+        etape.t = t;
+        etape.el.style.setProperty('--t', t.toFixed(3));
+      }
+      scene.classList.toggle('est-chaud', enVue && p > 0.94);
+    };
+    const planifierScene = () => {
+      if (prevue) return;
+      prevue = true;
+      requestAnimationFrame(majScene);
+    };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => {
+        enVue = e.isIntersecting;
+        planifierScene();
+      }).observe(scene);
+    } else {
+      enVue = true;
+    }
+    window.addEventListener('scroll', () => enVue && planifierScene(), { passive: true });
+    window.addEventListener('resize', planifierScene);
+    if (reduit.addEventListener) reduit.addEventListener('change', planifierScene);
+    majScene();
   }
 
   /* ---------- La carte ---------- */
@@ -441,8 +485,8 @@
     }, 1500);
   });
 
-  // Les plats d'une rubrique arrivent à la file en entrant à l'écran.
-  if (!reduit.matches && 'IntersectionObserver' in window) {
+  // Les plats d'une rubrique arrivent à la file en entrant à l'écran (en simple fondu si les animations sont réduites).
+  if ('IntersectionObserver' in window) {
     rubriques.forEach((r) => r.querySelectorAll('.plat').forEach((p, i) => p.style.setProperty('--i', String(Math.min(i, 10)))));
     const aMontrer = rubriques.filter(sousLaLigne);
     const montrer = new IntersectionObserver(

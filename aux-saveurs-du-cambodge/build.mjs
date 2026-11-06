@@ -352,7 +352,7 @@ ${groupesHoraires()
     </nav>
     <div class="pied__bas">
       <p>Copyright © ${new Date().getFullYear()} ${esc(resto.name)}. Tous droits réservés.</p>
-      <ul><li><a href="${r}mentions-legales/">Mentions légales</a></li></ul>
+      <ul><li><a href="${r}mentions-legales/">Mentions légales</a></li><li><a href="${r}admin/" rel="nofollow">Espace gestion</a></li></ul>
     </div>
   </div>
 </footer>`;
@@ -852,7 +852,9 @@ const inventaire = (dossier, prefixe = '') =>
       e.isDirectory() ? [`${prefixe}${e.name}/`, ...inventaire(join(dossier, e.name), `${prefixe}${e.name}/`)] : [`${prefixe}${e.name}`],
     );
 
-// ZIP reproductible : ordre trié et date fixe (celle de la carte), donc la même archive tant que le site ne change pas.
+// ZIP reproductible : ordre trié, date de la carte, et pour chaque fichier une heure tirée de son contenu.
+// La même archive tant que le site ne change pas ; mais un fichier modifié change d'heure, si bien qu'un serveur
+// où l'on décompresse une mise à jour (cache OPcache de PHP, qui se fie à la date) sert bien la nouvelle version.
 // Les fichiers sont à la racine de l'archive : on la décompresse directement dans le dossier du site chez l'hébergeur.
 const archiver = (source, cible, garder) => {
   const [an, mois, jour] = carte.updated.split('-').map(Number);
@@ -869,12 +871,15 @@ const archiver = (source, cible, garder) => {
     const donnees = stocke ? brut : compresse;
     const nomOctets = Buffer.from(nom, 'utf8');
     const crc = crc32(brut);
+    // Heure du jour à 2 secondes près, comme le veut le format : 43 200 heures possibles.
+    const pas = dossier ? 0 : crc % 43200;
+    const heureDos = (Math.floor(pas / 1800) << 11) | (Math.floor((pas % 1800) / 30) << 5) | pas % 30;
     const local = Buffer.alloc(30);
     local.writeUInt32LE(0x04034b50, 0);
     local.writeUInt16LE(20, 4);
     local.writeUInt16LE(0x0800, 6);
     local.writeUInt16LE(stocke ? 0 : 8, 8);
-    local.writeUInt16LE(0, 10);
+    local.writeUInt16LE(heureDos, 10);
     local.writeUInt16LE(dateDos, 12);
     local.writeUInt32LE(crc, 14);
     local.writeUInt32LE(donnees.length, 18);
@@ -887,7 +892,7 @@ const archiver = (source, cible, garder) => {
     fiche.writeUInt16LE(20, 6);
     fiche.writeUInt16LE(0x0800, 8);
     fiche.writeUInt16LE(stocke ? 0 : 8, 10);
-    fiche.writeUInt16LE(0, 12);
+    fiche.writeUInt16LE(heureDos, 12);
     fiche.writeUInt16LE(dateDos, 14);
     fiche.writeUInt32LE(crc, 16);
     fiche.writeUInt32LE(donnees.length, 20);
