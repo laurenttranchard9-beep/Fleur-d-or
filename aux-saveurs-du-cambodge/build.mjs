@@ -87,8 +87,10 @@ const plat = (nom) => tousLesPlats.find((p) => p.name === nom);
 const idPlat = (item, section) => `${section.id}--${slug(item.name)}`;
 const ID_SUPPLEMENT = 'supplement-riz-cantonais';
 const jeton = (genre, ...ids) => `{{${genre}:${ids.join(',')}}}`;
-const ID_MENU = tousLesPlats.filter((p) => p.section.id === 'menu-bon-et-pas-cher').slice(0, 2).map((p) => idPlat(p, p.section));
-const descriptionResto = resto.description.replace('{prix-menu}', jeton('rond', ID_MENU[0]));
+// La box anti-crise, en tête de la carte et en grand sur l'accueil.
+const BOX = tousLesPlats.find((p) => p.section.id === 'box-anti-crise' && p.name === 'Box anti-crise');
+const ID_BOX = idPlat(BOX, BOX.section);
+const descriptionResto = resto.description.replace('{prix-box}', jeton('rond', ID_BOX));
 const noteRiz = `Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + ${jeton('prix', ID_SUPPLEMENT)}.`;
 
 /* ---------- Icônes : un trait fin, des bouts ronds ---------- */
@@ -136,6 +138,9 @@ const groupesHoraires = () => {
   });
 };
 const horairesResume = () => groupesHoraires().join(' · ');
+
+// Un midi « sur commande passée la veille » (data/restaurant.json, preorderLunch) : rien à dire s'il n'y en a pas.
+const regleMidi = () => (resto.preorderLunch.days.length && resto.preorderLunch.rule) || '';
 
 const tableHoraires = () => `<table class="semaine">
         <caption class="visuellement-cache">Horaires d’ouverture, du lundi au dimanche</caption>
@@ -345,8 +350,8 @@ const pied = (r) => `<footer class="pied">
         <ul>
 ${groupesHoraires()
   .map((g) => `          <li>${esc(g)}</li>`)
-  .join('')}
-          <li>${esc(resto.preorderLunch.rule)}</li>
+  .join('')}${regleMidi() ? `
+          <li>${esc(regleMidi())}</li>` : ''}
         </ul>
       </div>
     </nav>
@@ -358,12 +363,6 @@ ${groupesHoraires()
 </footer>`;
 
 /* ---------- Accueil ---------- */
-
-const bonEtPasCher = carte.sections.find((s) => s.id === 'menu-bon-et-pas-cher');
-const variantesMenu = bonEtPasCher.items
-  .slice(0, 2)
-  .map((i) => i.name.replace('Menu bon et pas cher ', ''))
-  .join(' ou ');
 
 const image = (r, nom, alt, classe, { taille = 660, charge = 'lazy' } = {}) =>
   `<img class="${classe}" src="${r}assets/img/plats/${nom}.svg" width="${taille}" height="${taille}" alt="${esc(alt)}"${
@@ -427,17 +426,17 @@ const accueil = () =>
     ${cadrePlat(`${image(r, 'soupe', 'Soupe Phnom Penh vue du dessus (illustration)', 'tuile__image', { taille: 660, charge: 'eager' })}${vapeur()}`, 'tuile__plat--chaud')}
   </section>
 
-  <section class="tuile tuile--claire" id="menu" aria-labelledby="menu-titre" data-reveler>
+  <section class="tuile tuile--claire" id="box" aria-labelledby="box-titre" data-reveler>
     <div class="tuile__texte">
-      <h2 class="tuile__titre" id="menu-titre">${esc(bonEtPasCher.title)}</h2>
-      <p class="tuile__accroche">Un plat mariné, du riz thaï et sa salade composée.</p>
-      <p class="tuile__detail">${jeton('des', ...ID_MENU)}, ${esc(variantesMenu)}.</p>
+      <h2 class="tuile__titre" id="box-titre">${esc(BOX.name)}</h2>
+      <p class="tuile__accroche">Deux nems, du poulet mariné et son riz, une boisson.</p>
+      <p class="tuile__detail">${jeton('rond', ID_BOX)}, boisson comprise.</p>
       <div class="tuile__actions">
         <a class="bouton" href="${tel}">Commander</a>
-        <a class="bouton bouton--contour" href="${r}carte/#menu-bon-et-pas-cher">En savoir plus</a>
+        <a class="bouton bouton--contour" href="${r}carte/#${BOX.section.id}">En savoir plus</a>
       </div>
     </div>
-    ${cadrePlat(image(r, 'menu', 'Menu bon et pas cher vu du dessus : porc mariné, riz thaï et salade (illustration)', 'tuile__image'))}
+    ${cadrePlat(image(r, BOX.image, 'Box anti-crise vue du dessus : deux nems, poulet mariné sur son riz et une canette (illustration)', 'tuile__image'))}
   </section>
 
   <div class="grille">
@@ -475,8 +474,8 @@ const accueil = () =>
       <p class="tuile__detail tuile__conseil" data-conseil hidden></p>
     </div>
     ${tableHoraires()}
-    <p class="tuile__note">${esc(resto.preorderLunch.rule)}</p>
-    <div class="tuile__actions"><a class="bouton" href="${tel}">Appeler</a></div>
+${regleMidi() ? `    <p class="tuile__note">${esc(regleMidi())}</p>
+` : ''}    <div class="tuile__actions"><a class="bouton" href="${tel}">Appeler</a></div>
   </section>
 
   <section class="tuile tuile--blanche tuile--acces" id="acces" aria-labelledby="acces-titre" data-reveler>
@@ -539,7 +538,7 @@ const lacarte = () =>
     cle: 'carte',
     php: true,
     titre: `La carte — ${resto.name}, ${resto.town}`,
-    description: `Toute la carte d’${resto.name} à ${resto.town} : ${nbPlats} plats faits maison, du menu bon et pas cher à ${jeton('rond', ID_MENU[0])} au lok lac, avec les prix. Commande par téléphone au ${resto.phone.display}.`,
+    description: `Toute la carte d’${resto.name} à ${resto.town} : ${nbPlats} plats faits maison, de la box anti-crise à ${jeton('rond', ID_BOX)} au lok lac, avec les prix. Commande par téléphone au ${resto.phone.display}.`,
     classe: 'page-carte',
     schema: schemaMenu(),
     apres: `<nav class="barre-bon" aria-label="Actions rapides" data-barre-bon>

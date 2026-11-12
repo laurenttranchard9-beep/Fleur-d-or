@@ -162,7 +162,7 @@ components:
 
 Chaque plat est présenté comme Apple présente un produit : seul, centré, vu du dessus, sur une tuile pleine largeur noire ou gris perle, avec un nom court, une phrase et un prix. L'interface se retire : trois fonds (blanc, perle, noir), une police, un bleu. Toute la couleur de la page vient des plats dessinés ; le reste est de l'air, du texte demi-gras serré et des pilules bleues.
 
-La page se lit comme une suite de tuiles : le nom du restaurant et le bol de soupe sur noir, le menu à 10 € sur perle, quatre plats en grille de deux, une phrase manifeste sur blanc, les horaires, l'adresse et son plan. La carte reprend la même retenue pour lire 86 plats : une barre locale collante en verre dépoli, des lignes séparées par des filets, un cercle bleu pour ajouter, une fiche « Votre commande » gris perle.
+La page se lit comme une suite de tuiles : le nom du restaurant et le bol de soupe sur noir, la box anti-crise à 10 € sur perle, quatre plats en grille de deux, une phrase manifeste sur blanc, les horaires, l'adresse et son plan. La carte reprend la même retenue pour lire 85 plats : une barre locale collante en verre dépoli, des lignes séparées par des filets, un cercle bleu pour ajouter, une fiche « Votre commande » gris perle.
 
 **Key Characteristics:**
 - Tuiles pleine largeur noires (#000000) et gris perle (#F5F5F7), séparées par 12 px de blanc
@@ -269,7 +269,7 @@ Ce qui agit est une pilule (980 px) ou un cercle ; ce qui contient est arrondi �
 - Sans JavaScript, il affiche le résumé des horaires ; avec, le texte statique ne s'affiche pas avant l'état en direct, pour que rien ne bouge.
 
 ### Tuiles
-- **Pleine largeur** (héros, menu à 10 €, horaires, accès) et **demi** (grille de plats), noires ou perle, contenu centré selon The Centered Tile Rule.
+- **Pleine largeur** (héros, box anti-crise à 10 €, horaires, accès) et **demi** (grille de plats), noires ou perle, contenu centré selon The Centered Tile Rule.
 - Le plat dessiné mesure 520 px (380 px dans la grille, 360 px sur mobile) et sort de 16 à 20 % par le bas.
 
 ### Inputs / Fields

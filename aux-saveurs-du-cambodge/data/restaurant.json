@@ -4,7 +4,7 @@
   "tagline": "Cuisine cambodgienne faite maison",
   "promise": "Chez nous, tout est fait maison, avec des produits frais… et beaucoup d’amour !",
   "invite": "On vous garde une petite place ?",
-  "description": "Restaurant cambodgien à Saint-Alban, au nord de Toulouse : lok lac, soupe Phnom Penh, porc au caramel, nems et vapeurs faits maison, menu complet à {prix-menu}. Commande et réservation par téléphone au 07 59 52 53 41.",
+  "description": "Restaurant cambodgien à Saint-Alban, au nord de Toulouse : lok lac, soupe Phnom Penh, porc au caramel, nems et vapeurs faits maison, box anti-crise à {prix-box}, boisson comprise. Commande et réservation par téléphone au 07 59 52 53 41.",
   "url": "https://www.auxsaveursducambodge-saintalban.com",
   "phone": {
     "display": "07 59 52 53 41",
@@ -24,18 +24,18 @@
   },
   "timezone": "Europe/Paris",
   "hours": {
-    "1": [["12:00", "14:00"], ["18:00", "21:45"]],
-    "2": [["12:00", "14:00"], ["18:00", "21:45"]],
-    "3": [["12:00", "14:00"], ["18:00", "21:45"]],
-    "4": [["12:00", "14:00"], ["18:00", "21:45"]],
-    "5": [["12:00", "14:00"], ["18:00", "21:45"]],
-    "6": [["18:00", "21:45"]],
-    "0": [["18:00", "21:45"]]
+    "1": [["11:30", "14:00"], ["18:00", "21:00"]],
+    "2": [["11:30", "14:00"], ["18:00", "21:00"]],
+    "3": [["11:30", "14:00"], ["18:00", "21:00"]],
+    "4": [["11:30", "14:00"], ["18:00", "21:00"]],
+    "5": [["11:30", "14:00"], ["18:00", "21:30"]],
+    "6": [["11:30", "14:00"], ["18:00", "21:30"]],
+    "0": [["18:00", "21:00"]]
   },
   "preorderLunch": {
-    "days": [6, 0],
+    "days": [],
     "label": "Midi sur commande",
-    "rule": "Le samedi et le dimanche midi, uniquement sur commande passée la veille."
+    "rule": ""
   },
   "closures": [],
   "notice": null,

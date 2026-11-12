@@ -1,15 +1,14 @@
 {
-  "updated": "2026-10-17",
+  "updated": "2026-11-12",
   "riceNote": "Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + 4,50 €.",
   "riceUpgrade": { "name": "Supplément riz cantonais (porc ou crevettes)", "price": 4.5 },
   "sections": [
     {
-      "id": "menu-bon-et-pas-cher",
-      "title": "Menu bon et pas cher",
+      "id": "box-anti-crise",
+      "title": "Box anti-crise",
       "items": [
-        { "name": "Menu bon et pas cher au porc", "desc": "Échine de porc marinée, riz thaï et sa salade composée", "price": 10.0, "image": "menu" },
-        { "name": "Menu bon et pas cher au poulet", "desc": "Cuisse de poulet marinée, riz thaï et sa salade composée", "price": 10.0 },
-        { "name": "Perles de coco", "desc": "2 pièces, uniquement avec le menu bon et pas cher", "price": 2.5 },
+        { "name": "Box anti-crise", "desc": "2 nems (porc ou poulet), un haut de cuisse de poulet mariné ou deux pilons marinés avec leur riz, et une boisson au choix : Coca, Coca zéro, Oasis ou Fuze Tea", "price": 10.0, "image": "box" },
+        { "name": "Supplément jus de coco", "desc": "Dans la box, à la place de la boisson comprise", "price": 1.0 },
         { "name": "Riz crousty", "desc": "Riz blanc, sauce blanche, poulet frit, sauce aigre-douce, oignons frits", "price": 11.0 }
       ]
     },

@@ -458,34 +458,101 @@ const caramel = () => {
 `;
 };
 
-// --- Menu bon et pas cher : viande marinée, riz thaï et salade composée --------------------------------
-const menu = () => {
-  const r = hasard(53);
-  const id = 'menu';
-  const tranches = Array.from({ length: 6 }, (_, i) => {
-    const x = -20 + i * 26;
-    const y = -60 + i * 12;
-    return `<g transform="translate(${x} ${y}) rotate(${-28 + i * 3})">
-      <rect x="-50" y="-22" width="100" height="44" rx="18" fill="#000" opacity=".18" transform="translate(3 5)"/>
-      <rect x="-50" y="-22" width="100" height="44" rx="18" fill="#9b4d22"/>
-      <rect x="-44" y="-16" width="88" height="32" rx="14" fill="#c06a32"/>
-      <path d="M-34 -10 l 12 20 M-12 -12 l 12 22 M10 -12 l 12 22 M30 -10 l 10 18" stroke="#6b2f12" stroke-width="5" stroke-linecap="round" opacity=".55"/>
-    </g>`;
+// --- Box anti-crise : deux nems, poulet mariné sur son riz, une boisson ------------------------------
+
+// Pilon de poulet laqué : chair dorée en massue, os clair au bout, marques de grill.
+const CHAIR = 'M48 -11 C 28 -15 8 -42 -30 -42 C -68 -42 -84 -16 -82 4 C -80 28 -58 44 -26 42 C 6 40 28 16 48 11 Z';
+const pilon = (id, x, y, rot, s = 1) => `<g transform="translate(${f(x)} ${f(y)}) rotate(${f(rot)}) scale(${s})">
+    <path d="${CHAIR}" fill="#000" opacity=".24" filter="url(#${id}-doux)" transform="translate(6 9)"/>
+    <rect x="42" y="-9" width="50" height="18" rx="9" fill="#000" opacity=".16" filter="url(#${id}-doux)" transform="translate(6 9)"/>
+    <rect x="42" y="-8" width="48" height="16" rx="8" fill="#eadfca"/>
+    <circle cx="91" cy="-8" r="11" fill="#f5eee1"/><circle cx="91" cy="8" r="11" fill="#f5eee1"/>
+    <path d="${CHAIR}" fill="url(#${id}-laque)"/>
+    <path d="M-50 4 l 14 -17 M-28 16 l 17 -22 M-4 18 l 15 -19 M18 12 l 10 -12" stroke="#6b2a0d" stroke-width="5" stroke-linecap="round" opacity=".42"/>
+    <path d="M-62 -18 C -46 -32 -14 -34 12 -24" stroke="#f7b779" stroke-width="7" stroke-linecap="round" fill="none" opacity=".55"/>
+  </g>`;
+
+// Lit de riz dans un compartiment : riz blanc tassé, grains clairs.
+const rizBac = (id, x, y, w, h, r) => {
+  const grains = Array.from({ length: Math.round((w * h) / 230) }, () => {
+    const gx = (r() - 0.5) * (w - 26);
+    const gy = (r() - 0.5) * (h - 26);
+    return `<ellipse cx="${f(gx)}" cy="${f(gy)}" rx="5" ry="2.2" fill="#ffffff" transform="rotate(${f(r() * 180)} ${f(gx)} ${f(gy)})"/>`;
   }).join('');
+  return `<g transform="translate(${f(x)} ${f(y)})">
+    <rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="16" fill="url(#${id}-riz)"/>
+    ${grains}
+  </g>`;
+};
+
+// Boîte en carton ouverte, vue du dessus : bord clair, fond des compartiments plus sombre, ombre des parois.
+const compartiment = (id, x, y, w, h) => `<g transform="translate(${f(x)} ${f(y)})">
+    <rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="18" fill="url(#${id}-fond)"/>
+    <rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="18" fill="url(#${id}-paroi)"/>
+  </g>`;
+
+// Canette vue du dessus, sans marque : couvercle d'aluminium, ouverture, languette.
+const canette = (id, x, y, rr) => `<g transform="translate(${f(x)} ${f(y)})">
+    <circle r="${rr}" fill="#000" opacity=".26" filter="url(#${id}-doux)" transform="translate(7 11)"/>
+    <circle r="${rr}" fill="url(#${id}-alu)"/>
+    <circle r="${f(rr * 0.84)}" fill="#cfd4db"/>
+    <circle r="${f(rr * 0.84)}" fill="none" stroke="#f4f6f9" stroke-width="3"/>
+    <circle r="${f(rr * 0.78)}" fill="url(#${id}-couvercle)"/>
+    <path d="M${f(-rr * 0.3)} ${f(-rr * 0.5)} Q 0 ${f(-rr * 0.74)} ${f(rr * 0.3)} ${f(-rr * 0.5)} Q ${f(rr * 0.22)} ${f(-rr * 0.3)} 0 ${f(-rr * 0.28)} Q ${f(-rr * 0.22)} ${f(-rr * 0.3)} ${f(-rr * 0.3)} ${f(-rr * 0.5)} Z" fill="#7f868f"/>
+    <rect x="${f(-rr * 0.17)}" y="${f(-rr * 0.36)}" width="${f(rr * 0.34)}" height="${f(rr * 0.66)}" rx="${f(rr * 0.17)}" fill="#e6e9ee" stroke="#a7aeb7" stroke-width="2"/>
+    <ellipse cx="0" cy="${f(rr * 0.12)}" rx="${f(rr * 0.08)}" ry="${f(rr * 0.11)}" fill="#9aa1aa"/>
+    <circle r="${f(rr * 0.06)}" cy="${f(-rr * 0.16)}" fill="#b4bac2"/>
+    <path d="M${f(-rr * 0.62)} ${f(rr * 0.38)} A ${f(rr * 0.74)} ${f(rr * 0.74)} 0 0 1 ${f(-rr * 0.5)} ${f(-rr * 0.52)}" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".55"/>
+  </g>`;
+
+const box = () => {
+  const r = hasard(67);
+  const id = 'box';
+  const W = 452;
+  const H = 318;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-330 -330 660 660">
-  <title>Menu bon et pas cher vu du dessus : porc mariné grillé, riz thaï et salade composée (illustration)</title>
-  <defs>${defs(id)}${rizDefs(id)}</defs>
-  ${assiette(id, 260)}
-  ${riz(id, -95, 70, 92, r)}
-  ${laitue(95, 110, 20, 1.05, 0)}${tomate(70, 150, 0.85)}${concombre(130, 160, 0.85)}${carottes(r, 8, 26, 120, 80)}
-  ${tranches}
-  ${coriandre(-140, -40, 40, 1.3)}${coriandre(-60, -150, -20, 1.2)}
+  <title>Box anti-crise vue du dessus : deux nems, poulet mariné sur son riz et une boisson (illustration)</title>
+  <defs>${defs(id)}${rizDefs(id)}${dore(id)}
+    <linearGradient id="${id}-carton" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ddb789"/><stop offset=".6" stop-color="#cfa472"/><stop offset="1" stop-color="#bf915e"/>
+    </linearGradient>
+    <linearGradient id="${id}-fond" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a87a49"/><stop offset="1" stop-color="#b98a57"/>
+    </linearGradient>
+    <linearGradient id="${id}-paroi" x1="0" y1="0" x2=".35" y2=".55">
+      <stop offset="0" stop-color="#6b4521" stop-opacity=".45"/><stop offset=".22" stop-color="#6b4521" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="${id}-laque" cx="38%" cy="34%" r="75%">
+      <stop offset="0" stop-color="#e08a45"/><stop offset=".55" stop-color="#b8571f"/><stop offset="1" stop-color="#7c3311"/>
+    </radialGradient>
+    <radialGradient id="${id}-alu" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".6" stop-color="#dfe3e8"/><stop offset="1" stop-color="#a9b0b9"/>
+    </radialGradient>
+    <radialGradient id="${id}-couvercle" cx="42%" cy="38%" r="70%">
+      <stop offset="0" stop-color="#eef1f4"/><stop offset="1" stop-color="#bfc5cd"/>
+    </radialGradient>
+  </defs>
+  <g transform="translate(-34 38) rotate(-7)">
+    <rect x="${-W / 2 + 10}" y="${-H / 2 + 22}" width="${W}" height="${H}" rx="30" fill="#000" opacity=".28" filter="url(#${id}-ombre)"/>
+    <rect x="${-W / 2}" y="${-H / 2}" width="${W}" height="${H}" rx="30" fill="url(#${id}-carton)"/>
+    <rect x="${-W / 2 + 3}" y="${-H / 2 + 3}" width="${W - 6}" height="${H - 6}" rx="27" fill="none" stroke="#efd6b2" stroke-width="3" opacity=".9"/>
+    ${compartiment(id, -64, 0, 290, 286)}
+    ${compartiment(id, 150, 0, 120, 286)}
+    ${rizBac(id, -64, 0, 282, 278, r)}
+    ${pilon(id, -96, -58, -24, 1.08)}
+    ${pilon(id, -52, 62, 14, 1.08)}
+    ${ciboule(-150, 20, 1)}${ciboule(-10, -10, 0.9)}${ciboule(-138, 96, 0.9)}${ciboule(34, 104, 1)}${ciboule(26, -96, 0.85)}
+    ${laitue(150, 40, 96, 0.92, 0)}
+    ${nem(id, 126, -12, 90, 166, 1.18, r)}${nem(id, 172, 6, 90, 166, 1.18, r)}
+    ${menthe(148, 112, -20, 1)}
+  </g>
+  ${canette(id, 228, -218, 68)}
 </svg>
 `;
 };
 
 mkdirSync(OUT, { recursive: true });
-const plats = { soupe, loklac, nems, bobun, caramel, menu, 'soupe-bol': () => soupe('bol'), 'soupe-garniture': () => soupe('garniture') };
+const plats = { soupe, loklac, nems, bobun, caramel, box, 'soupe-bol': () => soupe('bol'), 'soupe-garniture': () => soupe('garniture') };
 for (const [nom, dessin] of Object.entries(plats)) {
   writeFileSync(`${OUT}/${nom}.svg`, dessin());
 }

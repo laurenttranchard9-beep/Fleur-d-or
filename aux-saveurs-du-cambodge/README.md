@@ -25,7 +25,7 @@ Page d'accueil entière : [apercus/accueil-page-entiere.jpg](apercus/accueil-pag
 |---|---|
 | Fond gris, aucune image, aucune identité | Des tuiles noires et gris perle comme sur apple.com : chaque plat présenté comme un produit, dessiné vu du dessus, une seule police (celle d'Apple sur iPhone et Mac), un seul bleu pour agir |
 | Bouton « Cammandez dès maintenant » qui renvoyait vers l'accueil | Bouton **Appeler** dans chaque tuile, téléphone toujours présent dans la navigation, barre « Votre commande · Appeler » en bas de la carte sur mobile |
-| Horaires en texte brut, avec fautes | **État ouvert/fermé en direct** (heure de Paris) dans le bandeau sous la navigation, horaires en tableau avec le jour courant mis en avant, rappel « commandez la veille » pour le midi du week-end |
+| Horaires en texte brut, avec fautes | **État ouvert/fermé en direct** (heure de Paris) dans le bandeau sous la navigation, horaires en tableau avec le jour courant mis en avant |
 | Carte à l'adresse `/nouvelle-page`, 35 répétitions de la mention riz, prix « €7,5 € » | Carte à `/carte/` (l'ancienne adresse redirige), recherche instantanée, rubriques dans une barre collante, prix au format « 7,50 € » alignés |
 | — | **Votre commande** : on ajoute ses plats, on voit le total, on appelle et on la dicte |
 | Prix modifiables seulement en refaisant le site | **Espace gestion** (`/admin/`) : on change un prix, l'accueil, la carte et les informations lues par Google suivent aussitôt |
@@ -173,13 +173,14 @@ aux-saveurs-du-cambodge/
 │   ├── inc/               code commun et carte pour le serveur, jamais servis
 │   ├── donnees/           prix saisis, statistiques, mot de passe chiffré : créés sur le serveur, jamais servis
 │   └── assets/            css, js, police Inter (OFL), plats dessinés, plan du quartier
-├── livraison/             public/ en une archive ZIP, à déposer chez IONOS ou un autre hébergeur
+├── livraison/             public/ en une archive ZIP, à déposer chez IONOS ou un autre hébergeur ;
+│                          carte-des-prix.xlsx, tous les prix de la carte pour Excel
 ├── tools/                 régénération ponctuelle des dessins, de la police, du plan et des images
 ├── PRODUCT.md, DESIGN.md  contexte produit et système visuel (couleurs, typographie, mouvement, règles)
 └── CORRECTIONS.md         corrections de contenu et points à vérifier
 ```
 
-Les outils de `tools/` ne servent que pour changer les dessins, la police, le plan ou l'image de partage :
+Les outils de `tools/` ne servent que pour changer les dessins, la police, le plan, l'image de partage ou le fichier Excel des prix :
 
 | Outil | Rôle | Prérequis |
 |---|---|---|
@@ -187,6 +188,7 @@ Les outils de `tools/` ne servent que pour changer les dessins, la police, le pl
 | `python tools/fonts.py` | sous-ensemble latin de la police Inter | `pip install fonttools brotli` |
 | `python tools/plan.py` | plan du quartier depuis la BD TOPO de l'IGN | `pip install fonttools brotli` |
 | `node tools/images.mjs` | favicon, icônes, image de partage `og.jpg` | Playwright + Chromium |
+| `python tools/excel-prix.py` | refait `livraison/carte-des-prix.xlsx` (tous les prix de `data/carte.json`) après un changement de carte | `pip install openpyxl` |
 
 ## Crédits
 

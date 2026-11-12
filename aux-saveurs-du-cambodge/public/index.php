@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Aux Saveurs du Cambodge — restaurant cambodgien à Saint-Alban</title>
-<meta name="description" content="Restaurant cambodgien à Saint-Alban, au nord de Toulouse : lok lac, soupe Phnom Penh, porc au caramel, nems et vapeurs faits maison, menu complet à {{rond:menu-bon-et-pas-cher--menu-bon-et-pas-cher-au-porc}}. Commande et réservation par téléphone au 07 59 52 53 41.">
+<meta name="description" content="Restaurant cambodgien à Saint-Alban, au nord de Toulouse : lok lac, soupe Phnom Penh, porc au caramel, nems et vapeurs faits maison, box anti-crise à {{rond:box-anti-crise--box-anti-crise}}, boisson comprise. Commande et réservation par téléphone au 07 59 52 53 41.">
 <link rel="canonical" href="https://www.auxsaveursducambodge-saintalban.com/">
 <meta name="theme-color" content="#fafafc">
 <meta name="format-detection" content="telephone=no">
@@ -13,7 +13,7 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Aux Saveurs du Cambodge">
 <meta property="og:title" content="Aux Saveurs du Cambodge — restaurant cambodgien à Saint-Alban">
-<meta property="og:description" content="Restaurant cambodgien à Saint-Alban, au nord de Toulouse : lok lac, soupe Phnom Penh, porc au caramel, nems et vapeurs faits maison, menu complet à {{rond:menu-bon-et-pas-cher--menu-bon-et-pas-cher-au-porc}}. Commande et réservation par téléphone au 07 59 52 53 41.">
+<meta property="og:description" content="Restaurant cambodgien à Saint-Alban, au nord de Toulouse : lok lac, soupe Phnom Penh, porc au caramel, nems et vapeurs faits maison, box anti-crise à {{rond:box-anti-crise--box-anti-crise}}, boisson comprise. Commande et réservation par téléphone au 07 59 52 53 41.">
 <meta property="og:url" content="https://www.auxsaveursducambodge-saintalban.com/">
 <meta property="og:image" content="https://www.auxsaveursducambodge-saintalban.com/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -27,7 +27,7 @@
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="./assets/css/site.css?v=dcb60f39">
 <script src="./assets/js/site.js?v=68285b38" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","@id":"https://www.auxsaveursducambodge-saintalban.com/#restaurant","name":"Aux Saveurs du Cambodge","description":"Restaurant cambodgien à Saint-Alban, au nord de Toulouse : lok lac, soupe Phnom Penh, porc au caramel, nems et vapeurs faits maison, menu complet à {{rond:menu-bon-et-pas-cher--menu-bon-et-pas-cher-au-porc}}. Commande et réservation par téléphone au 07 59 52 53 41.","url":"https://www.auxsaveursducambodge-saintalban.com/","telephone":"+33759525341","image":"https://www.auxsaveursducambodge-saintalban.com/og.jpg","address":{"@type":"PostalAddress","streetAddress":"10 avenue Salvador Allende","postalCode":"31140","addressLocality":"Saint-Alban","addressRegion":"Occitanie","addressCountry":"FR"},"geo":{"@type":"GeoCoordinates","latitude":43.688048,"longitude":1.40842},"hasMap":"https://www.google.com/maps/search/?api=1&query=Aux%20Saveurs%20du%20Cambodge%2C%2010%20avenue%20Salvador%20Allende%2C%2031140%20Saint-Alban","servesCuisine":["Cambodgienne","Asiatique"],"priceRange":"€","currenciesAccepted":"EUR","hasMenu":"https://www.auxsaveursducambodge-saintalban.com/carte/","openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"12:00","closes":"14:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"18:00","closes":"21:45"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","@id":"https://www.auxsaveursducambodge-saintalban.com/#restaurant","name":"Aux Saveurs du Cambodge","description":"Restaurant cambodgien à Saint-Alban, au nord de Toulouse : lok lac, soupe Phnom Penh, porc au caramel, nems et vapeurs faits maison, box anti-crise à {{rond:box-anti-crise--box-anti-crise}}, boisson comprise. Commande et réservation par téléphone au 07 59 52 53 41.","url":"https://www.auxsaveursducambodge-saintalban.com/","telephone":"+33759525341","image":"https://www.auxsaveursducambodge-saintalban.com/og.jpg","address":{"@type":"PostalAddress","streetAddress":"10 avenue Salvador Allende","postalCode":"31140","addressLocality":"Saint-Alban","addressRegion":"Occitanie","addressCountry":"FR"},"geo":{"@type":"GeoCoordinates","latitude":43.688048,"longitude":1.40842},"hasMap":"https://www.google.com/maps/search/?api=1&query=Aux%20Saveurs%20du%20Cambodge%2C%2010%20avenue%20Salvador%20Allende%2C%2031140%20Saint-Alban","servesCuisine":["Cambodgienne","Asiatique"],"priceRange":"€","currenciesAccepted":"EUR","hasMenu":"https://www.auxsaveursducambodge-saintalban.com/carte/","openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"11:30","closes":"14:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Sunday"],"opens":"18:00","closes":"21:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"18:00","closes":"21:30"}]}</script>
 </head>
 <body class="page-accueil" data-page="accueil" data-collecte="./stats/collecte.php">
 <a class="evitement" href="#contenu">Aller au contenu</a>
@@ -45,7 +45,7 @@
   </nav>
 </header>
 <aside class="ruban" aria-label="Ouverture">
-  <p class="ruban__texte"><span class="etat" data-etat="ruban"><span class="etat__pastille" aria-hidden="true"></span><span class="etat__texte">Du lundi au vendredi : 12 h –⁠ 14 h et 18 h –⁠ 21 h 45 · Samedi et dimanche : 18 h –⁠ 21 h 45</span></span> <a class="lien" href="tel:+33759525341">Appeler<svg class="icone icone--chevron" aria-hidden="true" focusable="false"><use href="#i-chevron"/></svg></a></p>
+  <p class="ruban__texte"><span class="etat" data-etat="ruban"><span class="etat__pastille" aria-hidden="true"></span><span class="etat__texte">Du lundi au jeudi : 11 h 30 –⁠ 14 h et 18 h –⁠ 21 h · Vendredi et samedi : 11 h 30 –⁠ 14 h et 18 h –⁠ 21 h 30 · Dimanche : 18 h –⁠ 21 h</span></span> <a class="lien" href="tel:+33759525341">Appeler<svg class="icone icone--chevron" aria-hidden="true" focusable="false"><use href="#i-chevron"/></svg></a></p>
 </aside>
 <main id="contenu">
   <section class="tuile tuile--noire tuile--heros" aria-labelledby="heros-titre">
@@ -61,17 +61,17 @@
     <div class="tuile__plat tuile__plat--chaud"><img class="tuile__image" src="./assets/img/plats/soupe.svg" width="660" height="660" alt="Soupe Phnom Penh vue du dessus (illustration)" fetchpriority="high" decoding="async"><span class="vapeur" aria-hidden="true"><span></span><span></span><span></span></span></div>
   </section>
 
-  <section class="tuile tuile--claire" id="menu" aria-labelledby="menu-titre" data-reveler>
+  <section class="tuile tuile--claire" id="box" aria-labelledby="box-titre" data-reveler>
     <div class="tuile__texte">
-      <h2 class="tuile__titre" id="menu-titre">Menu bon et pas cher</h2>
-      <p class="tuile__accroche">Un plat mariné, du riz thaï et sa salade composée.</p>
-      <p class="tuile__detail">{{des:menu-bon-et-pas-cher--menu-bon-et-pas-cher-au-porc,menu-bon-et-pas-cher--menu-bon-et-pas-cher-au-poulet}}, au porc ou au poulet.</p>
+      <h2 class="tuile__titre" id="box-titre">Box anti-crise</h2>
+      <p class="tuile__accroche">Deux nems, du poulet mariné et son riz, une boisson.</p>
+      <p class="tuile__detail">{{rond:box-anti-crise--box-anti-crise}}, boisson comprise.</p>
       <div class="tuile__actions">
         <a class="bouton" href="tel:+33759525341">Commander</a>
-        <a class="bouton bouton--contour" href="./carte/#menu-bon-et-pas-cher">En savoir plus</a>
+        <a class="bouton bouton--contour" href="./carte/#box-anti-crise">En savoir plus</a>
       </div>
     </div>
-    <div class="tuile__plat"><img class="tuile__image" src="./assets/img/plats/menu.svg" width="660" height="660" alt="Menu bon et pas cher vu du dessus : porc mariné, riz thaï et salade (illustration)" loading="lazy" decoding="async"></div>
+    <div class="tuile__plat"><img class="tuile__image" src="./assets/img/plats/box.svg" width="660" height="660" alt="Box anti-crise vue du dessus : deux nems, poulet mariné sur son riz et une canette (illustration)" loading="lazy" decoding="async"></div>
   </section>
 
   <div class="grille">
@@ -134,7 +134,7 @@
           <span class="scene__ligne" data-de="0.72" data-a="0.82">Et beaucoup d’amour.</span>
         </h2>
         <p class="scene__suite" data-de="0.86" data-a="0.96">
-          <span class="scene__detail">Citronnelle, saté, caramel, lait de coco&#8239;: les saveurs du Cambodge, dans une carte de 86 plats.</span>
+          <span class="scene__detail">Citronnelle, saté, caramel, lait de coco&#8239;: les saveurs du Cambodge, dans une carte de 85 plats.</span>
           <a class="lien" href="./carte/">Découvrir la carte<svg class="icone icone--chevron" aria-hidden="true" focusable="false"><use href="#i-chevron"/></svg></a>
         </p>
       </div>
@@ -226,7 +226,7 @@
   <section class="tuile tuile--claire tuile--horaires" id="horaires" aria-labelledby="horaires-titre" data-reveler>
     <div class="tuile__texte">
       <h2 class="tuile__titre" id="horaires-titre">Horaires</h2>
-      <p class="tuile__accroche"><span class="etat" data-etat="grand"><span class="etat__pastille" aria-hidden="true"></span><span class="etat__texte">Du lundi au vendredi : 12 h –⁠ 14 h et 18 h –⁠ 21 h 45 · Samedi et dimanche : 18 h –⁠ 21 h 45</span></span></p>
+      <p class="tuile__accroche"><span class="etat" data-etat="grand"><span class="etat__pastille" aria-hidden="true"></span><span class="etat__texte">Du lundi au jeudi : 11 h 30 –⁠ 14 h et 18 h –⁠ 21 h · Vendredi et samedi : 11 h 30 –⁠ 14 h et 18 h –⁠ 21 h 30 · Dimanche : 18 h –⁠ 21 h</span></span></p>
       <p class="tuile__detail tuile__conseil" data-conseil hidden></p>
     </div>
     <table class="semaine">
@@ -235,36 +235,35 @@
         <tbody>
           <tr data-jour="1">
             <th scope="row">Lundi</th>
-            <td>12 h –⁠ 14 h</td>
-            <td>18 h –⁠ 21 h 45</td>
+            <td>11 h 30 –⁠ 14 h</td>
+            <td>18 h –⁠ 21 h</td>
           </tr>          <tr data-jour="2">
             <th scope="row">Mardi</th>
-            <td>12 h –⁠ 14 h</td>
-            <td>18 h –⁠ 21 h 45</td>
+            <td>11 h 30 –⁠ 14 h</td>
+            <td>18 h –⁠ 21 h</td>
           </tr>          <tr data-jour="3">
             <th scope="row">Mercredi</th>
-            <td>12 h –⁠ 14 h</td>
-            <td>18 h –⁠ 21 h 45</td>
+            <td>11 h 30 –⁠ 14 h</td>
+            <td>18 h –⁠ 21 h</td>
           </tr>          <tr data-jour="4">
             <th scope="row">Jeudi</th>
-            <td>12 h –⁠ 14 h</td>
-            <td>18 h –⁠ 21 h 45</td>
+            <td>11 h 30 –⁠ 14 h</td>
+            <td>18 h –⁠ 21 h</td>
           </tr>          <tr data-jour="5">
             <th scope="row">Vendredi</th>
-            <td>12 h –⁠ 14 h</td>
-            <td>18 h –⁠ 21 h 45</td>
+            <td>11 h 30 –⁠ 14 h</td>
+            <td>18 h –⁠ 21 h 30</td>
           </tr>          <tr data-jour="6">
             <th scope="row">Samedi</th>
-            <td class="semaine__commande">Sur commande</td>
-            <td>18 h –⁠ 21 h 45</td>
+            <td>11 h 30 –⁠ 14 h</td>
+            <td>18 h –⁠ 21 h 30</td>
           </tr>          <tr data-jour="0">
             <th scope="row">Dimanche</th>
-            <td class="semaine__commande">Sur commande</td>
-            <td>18 h –⁠ 21 h 45</td>
+            <td>Fermé</td>
+            <td>18 h –⁠ 21 h</td>
           </tr>
         </tbody>
       </table>
-    <p class="tuile__note">Le samedi et le dimanche midi, uniquement sur commande passée la veille.</p>
     <div class="tuile__actions"><a class="bouton" href="tel:+33759525341">Appeler</a></div>
   </section>
 
@@ -317,8 +316,7 @@
       <div>
         <h2>Horaires</h2>
         <ul>
-          <li>Du lundi au vendredi : 12 h –⁠ 14 h et 18 h –⁠ 21 h 45</li>          <li>Samedi et dimanche : 18 h –⁠ 21 h 45</li>
-          <li>Le samedi et le dimanche midi, uniquement sur commande passée la veille.</li>
+          <li>Du lundi au jeudi : 11 h 30 –⁠ 14 h et 18 h –⁠ 21 h</li>          <li>Vendredi et samedi : 11 h 30 –⁠ 14 h et 18 h –⁠ 21 h 30</li>          <li>Dimanche : 18 h –⁠ 21 h</li>
         </ul>
       </div>
     </nav>
@@ -328,6 +326,6 @@
     </div>
   </div>
 </footer>
-<script type="application/json" id="donnees-site">{"hours":{"0":[["18:00","21:45"]],"1":[["12:00","14:00"],["18:00","21:45"]],"2":[["12:00","14:00"],["18:00","21:45"]],"3":[["12:00","14:00"],["18:00","21:45"]],"4":[["12:00","14:00"],["18:00","21:45"]],"5":[["12:00","14:00"],["18:00","21:45"]],"6":[["18:00","21:45"]]},"preorderLunch":{"days":[6,0],"label":"Midi sur commande","rule":"Le samedi et le dimanche midi, uniquement sur commande passée la veille."},"closures":[],"timezone":"Europe/Paris"}</script>
+<script type="application/json" id="donnees-site">{"hours":{"0":[["18:00","21:00"]],"1":[["11:30","14:00"],["18:00","21:00"]],"2":[["11:30","14:00"],["18:00","21:00"]],"3":[["11:30","14:00"],["18:00","21:00"]],"4":[["11:30","14:00"],["18:00","21:00"]],"5":[["11:30","14:00"],["18:00","21:30"]],"6":[["11:30","14:00"],["18:00","21:30"]]},"preorderLunch":{"days":[],"label":"Midi sur commande","rule":""},"closures":[],"timezone":"Europe/Paris"}</script>
 </body>
 </html>

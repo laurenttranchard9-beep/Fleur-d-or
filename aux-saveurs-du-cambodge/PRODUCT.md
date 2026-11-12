@@ -23,7 +23,7 @@ la bascule du domaine reste à faire.
 
 - Voisins de Saint-Alban, Aucamville, Fenouillet, Launaguet et du nord toulousain qui cherchent « restaurant
   cambodgien / asiatique Saint-Alban » sur leur téléphone, souvent juste avant de commander.
-- Actifs en pause déjeuner du lundi au vendredi (12 h – 14 h) : le menu « bon et pas cher » à 10 € leur est destiné **[déduit]**.
+- Actifs en pause déjeuner du lundi au vendredi (11 h 30 – 14 h) : la box anti-crise à 10 €, boisson comprise, leur est destinée **[déduit]**.
 - Familles qui commandent le soir pour emporter, et clients qui veulent une table (« On vous garde une petite place ? ») **[déduit : sur place + à emporter]**.
 
 Leur tâche : savoir si c'est ouvert, voir la carte et les prix, appeler pour commander ou réserver, trouver l'adresse.
@@ -44,13 +44,13 @@ c'est la cuisine de la maison, servie comme chez soi.
 
 - Commande et réservation **par téléphone** : 07 59 52 53 41 (+33 7 59 52 53 41). Aucun système de commande en ligne n'existe.
 - Adresse : 10 avenue Salvador Allende, 31140 Saint-Alban (Haute-Garonne). Coordonnées BAN : 43.688048, 1.40842.
-- Horaires : lundi → vendredi 12 h – 14 h et 18 h – 21 h 45 ; samedi et dimanche 18 h – 21 h 45 ;
-  le midi du week-end **uniquement sur commande, la veille pour le lendemain**.
+- Horaires (donnés par le restaurant le 12/11/2026) : du lundi au jeudi 11 h 30 – 14 h et 18 h – 21 h ;
+  vendredi et samedi 11 h 30 – 14 h et 18 h – 21 h 30 ; dimanche 18 h – 21 h. Plus de midi « sur commande ».
 - Le site actuel contient un formulaire de contact générique (« Vous avez envie de travailler avec nous ? ») : texte de modèle Squarespace, pas une offre réelle.
 
 ## Capabilities and Constraints
 
-- Carte d'environ 90 plats en 16 rubriques (menu bon et pas cher, entrées, salades, vapeurs, soupes, porc, poulet, bœuf,
+- Carte d'environ 90 plats en 16 rubriques (box anti-crise, entrées, salades, vapeurs, soupes, porc, poulet, bœuf,
   canard, crevettes, seiches, spécialités du chef, brochettes, nouilles, accompagnements, desserts). Source : `data/carte.json`.
 - Les plats principaux sont servis avec du riz nature ; supplément riz cantonais (porc ou crevettes) : 4,50 €.
 - Prix publiés en euros TTC tels qu'affichés sur le site actuel ; aucun prix n'est inventé.
@@ -64,7 +64,7 @@ c'est la cuisine de la maison, servie comme chez soi.
 ## Brand Commitments
 
 - Nom : « Aux Saveurs du Cambodge » ; lieu : Saint-Alban.
-- Formules existantes à conserver : « On vous garde une petite place ? », « Chez nous, tout est fait maison, avec des produits frais… et beaucoup d'amour ! », « Commandez dès maintenant ! », « Menu bon et pas cher ».
+- Formules existantes à conserver : « On vous garde une petite place ? », « Chez nous, tout est fait maison, avec des produits frais… et beaucoup d'amour ! », « Commandez dès maintenant ! ». Le « Menu bon et pas cher » est remplacé par la « Box anti-crise » (demande du 12/11/2026) : 2 nems (porc ou poulet), un haut de cuisse de poulet mariné ou deux pilons marinés avec leur riz, une boisson (Coca, Coca zéro, Oasis, Fuze Tea ; jus de coco + 1 €), 10 €.
 - Aucun logo, aucune charte : l'identité visuelle de l'ancien site (gris Squarespace, Space Grotesk) n'est pas un engagement.
 - Direction visuelle demandée le 03/11/2026 : « minimaliste comme le site d'Apple ». Elle remplace la direction « étal de marché » de la première refonte.
 - Demande du 06/11/2026 : « plus d'animation, il faut que ce soit vivant », dans cette même direction.
@@ -81,7 +81,7 @@ c'est la cuisine de la maison, servie comme chez soi.
 
 1. Le téléphone est le bouton principal : chaque écran mène à un appel en un geste.
 2. La carte est le contenu : lisible au pouce, prix nets, rien à télécharger.
-3. Dire l'heure juste : ouvert / fermé / prochain service, y compris la règle du midi en week-end sur commande.
+3. Dire l'heure juste : ouvert / fermé / prochain service, et l'heure de fermeture du service en cours.
 4. Fait maison et prix de quartier : montrer la générosité, pas le luxe.
 5. Rien d'inventé : ni avis, ni livraison, ni photos présentées comme réelles.
 

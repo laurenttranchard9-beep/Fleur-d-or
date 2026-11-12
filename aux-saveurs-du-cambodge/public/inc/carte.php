@@ -1,38 +1,31 @@
 <?php http_response_code(404); exit; ?>
 {
- "maj": "2026-10-17",
+ "maj": "2026-11-12",
  "rubriques": [
   {
-   "id": "menu-bon-et-pas-cher",
-   "titre": "Menu bon et pas cher",
+   "id": "box-anti-crise",
+   "titre": "Box anti-crise",
    "plats": [
     {
-     "id": "menu-bon-et-pas-cher--menu-bon-et-pas-cher-au-porc",
-     "nom": "Menu bon et pas cher au porc",
-     "desc": "Échine de porc marinée, riz thaï et sa salade composée",
+     "id": "box-anti-crise--box-anti-crise",
+     "nom": "Box anti-crise",
+     "desc": "2 nems (porc ou poulet), un haut de cuisse de poulet mariné ou deux pilons marinés avec leur riz, et une boisson au choix : Coca, Coca zéro, Oasis ou Fuze Tea",
      "prix": 1000,
-     "recherche": "menu bon et pas cher au porc echine de porc marinee, riz thai et sa salade composee menu bon et pas cher"
+     "recherche": "box anti-crise 2 nems (porc ou poulet), un haut de cuisse de poulet marine ou deux pilons marines avec leur riz, et une boisson au choix : coca, coca zero, oasis ou fuze tea box anti-crise"
     },
     {
-     "id": "menu-bon-et-pas-cher--menu-bon-et-pas-cher-au-poulet",
-     "nom": "Menu bon et pas cher au poulet",
-     "desc": "Cuisse de poulet marinée, riz thaï et sa salade composée",
-     "prix": 1000,
-     "recherche": "menu bon et pas cher au poulet cuisse de poulet marinee, riz thai et sa salade composee menu bon et pas cher"
+     "id": "box-anti-crise--supplement-jus-de-coco",
+     "nom": "Supplément jus de coco",
+     "desc": "Dans la box, à la place de la boisson comprise",
+     "prix": 100,
+     "recherche": "supplement jus de coco dans la box, a la place de la boisson comprise box anti-crise"
     },
     {
-     "id": "menu-bon-et-pas-cher--perles-de-coco",
-     "nom": "Perles de coco",
-     "desc": "2 pièces, uniquement avec le menu bon et pas cher",
-     "prix": 250,
-     "recherche": "perles de coco 2 pieces, uniquement avec le menu bon et pas cher menu bon et pas cher"
-    },
-    {
-     "id": "menu-bon-et-pas-cher--riz-crousty",
+     "id": "box-anti-crise--riz-crousty",
      "nom": "Riz crousty",
      "desc": "Riz blanc, sauce blanche, poulet frit, sauce aigre-douce, oignons frits",
      "prix": 1100,
-     "recherche": "riz crousty riz blanc, sauce blanche, poulet frit, sauce aigre-douce, oignons frits menu bon et pas cher"
+     "recherche": "riz crousty riz blanc, sauce blanche, poulet frit, sauce aigre-douce, oignons frits box anti-crise"
     }
    ]
   },
