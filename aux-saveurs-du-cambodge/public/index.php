@@ -25,8 +25,8 @@
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="manifest" href="./site.webmanifest">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="./assets/css/site.css?v=dcb60f39">
-<script src="./assets/js/site.js?v=68285b38" defer></script>
+<link rel="stylesheet" href="./assets/css/site.css?v=3f4660f7">
+<script src="./assets/js/site.js?v=45929ea8" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","@id":"https://www.auxsaveursducambodge-saintalban.com/#restaurant","name":"Aux Saveurs du Cambodge","description":"Restaurant cambodgien à Saint-Alban, au nord de Toulouse : lok lac, soupe Phnom Penh, porc au caramel, nems et vapeurs faits maison, box anti-crise à {{rond:box-anti-crise--box-anti-crise}}, boisson comprise. Commande et réservation par téléphone au 07 59 52 53 41.","url":"https://www.auxsaveursducambodge-saintalban.com/","telephone":"+33759525341","image":"https://www.auxsaveursducambodge-saintalban.com/og.jpg","address":{"@type":"PostalAddress","streetAddress":"10 avenue Salvador Allende","postalCode":"31140","addressLocality":"Saint-Alban","addressRegion":"Occitanie","addressCountry":"FR"},"geo":{"@type":"GeoCoordinates","latitude":43.688048,"longitude":1.40842},"hasMap":"https://www.google.com/maps/search/?api=1&query=Aux%20Saveurs%20du%20Cambodge%2C%2010%20avenue%20Salvador%20Allende%2C%2031140%20Saint-Alban","servesCuisine":["Cambodgienne","Asiatique"],"priceRange":"€","currenciesAccepted":"EUR","hasMenu":"https://www.auxsaveursducambodge-saintalban.com/carte/","openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"11:30","closes":"14:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Sunday"],"opens":"18:00","closes":"21:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"18:00","closes":"21:30"}]}</script>
 </head>
 <body class="page-accueil" data-page="accueil" data-collecte="./stats/collecte.php">

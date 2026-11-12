@@ -19,6 +19,7 @@ colors:
   ouvert: "#34C759"
   commande: "#FF9F0A"
   ferme: "#FF3B30"
+  bordeaux: "#9B1B45"
   erreur: "#D70015"
   succes: "#1D7A35"
 typography:
@@ -194,11 +195,14 @@ Une palette sans teinte : blanc, gris perle, noir, deux gris de texte, et le ble
 ### Tertiary
 - **Pastilles d'état** : ouvert, midi sur commande, fermé — uniquement le point devant l'état d'ouverture, jamais du texte ni un fond.
 - **Erreur** et **succès** : espace gestion seulement — texte et fond pâle d'un message, contour d'un champ refusé, bouton « Effacer les statistiques ». Jamais sur le site public.
+- **Bordeaux** (#9B1B45, 8:1 sur blanc, 7,3:1 sur perle) : le riz, et lui seul — la mention « Servis avec du riz nature. Riz cantonais en supplément : + 4,50 € » des rubriques de la carte, et le choix du riz sous un plat dans « Votre commande » (demande du restaurant, 12/11/2026).
 
 ### Named Rules
 **The One Blue Rule.** Le bleu est la seule couleur d'action. Rien d'autre n'est cliquable en couleur ; les pastilles d'état sont des points, pas des boutons.
 
 **The Dish Is The Color Rule.** L'interface n'a pas de teinte : la couleur de la page vient des plats dessinés (bouillon, herbes, crevettes). Une nouvelle surface n'ajoute pas de couleur d'interface, elle ajoute un plat.
+
+**The Wine Rule.** Le bordeaux ne dit qu'une chose : le riz. Il ne colore ni bouton d'action (toujours bleu), ni titre, ni autre mention ; s'il apparaît ailleurs, c'est une faute.
 
 **The Three Grounds Rule.** Trois fonds seulement : blanc pour lire, perle et noir pour les tuiles. Deux tuiles de même fond ne se touchent jamais sans les 12 px de blanc qui les séparent.
 
@@ -296,6 +300,7 @@ Ce qui agit est une pilule (980 px) ou un cercle ; ce qui contient est arrondi �
 - Grand écran : fiche gris perle (rayon 18 px) collée dans la colonne de droite. Mobile et tablette : feuille blanche qui monte du bas sur un voile, ouverte depuis la barre « Votre commande ».
 - Chaque plat a son cercle bleu « + » ; dans la commande, la quantité s'affiche en pastille noire sur le cercle devenu plein.
 - Lignes : nom, montant, boutons − / + ; total en 600 ; « Appeler pour commander » en pilule pleine largeur ; « Tout retirer » en lien.
+- Sous un plat servi avec du riz : deux pastilles bordeaux de 32 px, « Riz nature » et « Riz cantonais + 4,50 € », celle choisie pleine (riz nature par défaut). Le montant de la ligne et le total suivent ; le même plat peut être deux fois, une fois par riz, et deux lignes au même riz se rejoignent à la place de celle qu'on vient de changer.
 - Mouvement : le cercle touché fait une onde bleue ; un jeton bleu « +1 » vole en parabole du cercle jusqu'au total (ou jusqu'au sac de la barre, qui remue), 620 ms ; le total défile jusqu'à sa nouvelle valeur (420 ms), total et compteur pulsent une fois.
 
 ### Pied de page

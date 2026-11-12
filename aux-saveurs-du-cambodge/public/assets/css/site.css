@@ -28,6 +28,8 @@
   --ouvert: #34c759;
   --commande: #ff9f0a;
   --ferme: #ff3b30;
+  /* Le riz, et lui seul : nature compris ou cantonais en supplément (demande du restaurant). */
+  --bordeaux: #9b1b45;
 
   /* SF Pro sur les appareils Apple (rien à télécharger), Inter ailleurs. */
   --police: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -1076,14 +1078,11 @@ main > .grille {
 
 .rubrique__riz {
   margin-top: 6px;
-  color: var(--gris);
-  font-size: 14px;
-  line-height: 1.42859;
+  color: var(--bordeaux);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
   letter-spacing: -0.016em;
-}
-
-.rubrique__riz-sup {
-  white-space: nowrap;
 }
 
 .plats {
@@ -1191,23 +1190,6 @@ main > .grille {
   box-sizing: content-box;
 }
 
-.plat__ajout--petit {
-  display: inline-grid;
-  width: 26px;
-  height: 26px;
-  margin-left: 6px;
-  vertical-align: middle;
-}
-
-.plat__ajout--petit::before {
-  inset: -9px;
-}
-
-.plat__ajout--petit .icone {
-  width: 13px;
-  height: 13px;
-}
-
 .carte__vide {
   padding: 56px 0 8px;
   color: var(--gris);
@@ -1307,6 +1289,7 @@ main > .grille {
   grid-template-columns: minmax(0, 1fr) auto;
   grid-template-areas:
     "nom montant"
+    "riz riz"
     "quantite quantite";
   column-gap: 12px;
   padding: 12px 0;
@@ -1324,6 +1307,62 @@ main > .grille {
 .bon__montant {
   grid-area: montant;
   font-variant-numeric: tabular-nums;
+}
+
+/* Le riz d'un plat : deux pastilles bordeaux, celle choisie est pleine. */
+.bon__riz {
+  grid-area: riz;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+  margin: 8px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.bon__riz-choix {
+  position: relative;
+  display: inline-flex;
+}
+
+.bon__riz-choix input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.bon__riz-choix span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 13px;
+  border: 1px solid var(--bordeaux);
+  border-radius: 980px;
+  background: var(--blanc);
+  color: var(--bordeaux);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.bon__riz-choix input:checked + span {
+  background: var(--bordeaux);
+  color: var(--blanc);
+}
+
+.bon__riz-choix input:focus-visible + span {
+  outline: 2px solid var(--bleu);
+  outline-offset: 2px;
 }
 
 .bon__quantite {

@@ -593,15 +593,25 @@
   const prix = (centimes) => euros.format(centimes / 100);
 
   const catalogue = new Map();
-  plats.forEach((p) => catalogue.set(p.dataset.plat, { nom: p.dataset.nom, prix: Number(p.dataset.prix) }));
+  plats.forEach((p) => catalogue.set(p.dataset.plat, { nom: p.dataset.nom, prix: Number(p.dataset.prix), riz: p.hasAttribute('data-riz') }));
   document
     .querySelectorAll('[data-ajouter][data-nom]')
-    .forEach((b) => catalogue.set(b.dataset.ajouter, { nom: b.dataset.nom, prix: Number(b.dataset.prix) }));
+    .forEach((b) => catalogue.set(b.dataset.ajouter, { nom: b.dataset.nom, prix: Number(b.dataset.prix), riz: false }));
+
+  // Un plat servi avec du riz a deux lignes possibles : « id » pour le riz nature (compris),
+  // « id|cantonais » pour le riz cantonais en supplément.
+  const CANTONAIS = '|cantonais';
+  const platDe = (cle) => cle.split('|')[0];
+  const enCantonais = (cle) => cle.endsWith(CANTONAIS);
+  const cleValide = (cle) => {
+    const plat = catalogue.get(platDe(cle));
+    return Boolean(plat) && (cle === platDe(cle) || (plat.riz && cle === platDe(cle) + CANTONAIS));
+  };
 
   const lire = () => {
     try {
       const brut = JSON.parse(localStorage.getItem(CLE) || '{}');
-      return Object.fromEntries(Object.entries(brut).filter(([id, q]) => catalogue.has(id) && Number.isInteger(q) && q > 0));
+      return Object.fromEntries(Object.entries(brut).filter(([cle, q]) => cleValide(cle) && Number.isInteger(q) && q > 0));
     } catch {
       return {};
     }
@@ -624,6 +634,13 @@
   const ouvrir = document.querySelector('[data-ouvrir-bon]');
   const vider = document.querySelector('[data-bon-vider]');
   const bureau = window.matchMedia('(min-width: 1069px)');
+  const prixRiz = Number(feuille.dataset.rizPrix) || 0;
+  const idRiz = feuille.dataset.rizId;
+  const prixLigne = (cle) => catalogue.get(platDe(cle)).prix + (enCantonais(cle) ? prixRiz : 0);
+  const nomLigne = (cle) => {
+    const plat = catalogue.get(platDe(cle));
+    return plat.riz ? `${plat.nom}, riz ${enCantonais(cle) ? 'cantonais' : 'nature'}` : plat.nom;
+  };
 
   const annonce = document.createElement('p');
   annonce.className = 'visuellement-cache';
@@ -633,7 +650,7 @@
   const icone = (nom) => `<svg class="icone" aria-hidden="true" focusable="false"><use href="#i-${nom}"/></svg>`;
   const echapper = (s) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 
-  const somme = () => Object.keys(bon).reduce((s, id) => s + catalogue.get(id).prix * bon[id], 0);
+  const somme = () => Object.keys(bon).reduce((s, cle) => s + prixLigne(cle) * bon[cle], 0);
 
   // Le total défile jusqu'à sa nouvelle valeur, comme un compteur ; il repart de ce qui est affiché.
   let roulement = 0;
@@ -658,20 +675,30 @@
 
   // Met la commande à jour et renvoie les éléments dont le changement mérite une pulsation.
   const rendre = (changement, modifie = null, avant = 0) => {
-    const ids = Object.keys(bon);
-    const nombre = ids.reduce((s, id) => s + bon[id], 0);
+    const cles = Object.keys(bon);
+    const nombre = cles.reduce((s, cle) => s + bon[cle], 0);
     const aSecouer = [];
 
-    lignes.innerHTML = ids
-      .map((id) => {
-        const nom = echapper(catalogue.get(id).nom);
-        return `<li class="bon__ligne" data-ligne="${id}">
+    // Sous un plat servi avec du riz : riz nature ou riz cantonais, en bordeaux.
+    const choixRiz = (cle, nom) => `<fieldset class="bon__riz">
+            <legend class="visuellement-cache">Riz pour ${nom}</legend>
+            <label class="bon__riz-choix"><input type="radio" name="riz-${cle}" value="nature" data-riz="${cle}"${enCantonais(cle) ? '' : ' checked'}><span>Riz nature</span></label>
+            <label class="bon__riz-choix"><input type="radio" name="riz-${cle}" value="cantonais" data-riz="${cle}"${enCantonais(cle) ? ' checked' : ''}><span>Riz cantonais + ${prix(prixRiz)}</span></label>
+          </fieldset>`;
+
+    lignes.innerHTML = cles
+      .map((cle) => {
+        const plat = catalogue.get(platDe(cle));
+        const nom = echapper(plat.nom);
+        const pour = echapper(nomLigne(cle));
+        return `<li class="bon__ligne" data-ligne="${cle}">
           <span class="bon__nom">${nom}</span>
-          <span class="bon__montant">${prix(catalogue.get(id).prix * bon[id])}</span>
+          <span class="bon__montant">${prix(prixLigne(cle) * bon[cle])}</span>
+          ${plat.riz ? choixRiz(cle, nom) : ''}
           <span class="bon__quantite">
-            <button type="button" data-moins="${id}" aria-label="Retirer un : ${nom}">${icone('moins')}</button>
-            <span class="bon__qte" aria-label="Quantité">${bon[id]}</span>
-            <button type="button" data-plus="${id}" aria-label="Ajouter un : ${nom}">${icone('plus')}</button>
+            <button type="button" data-moins="${cle}" aria-label="Retirer un : ${pour}">${icone('moins')}</button>
+            <span class="bon__qte" aria-label="Quantité">${bon[cle]}</span>
+            <button type="button" data-plus="${cle}" aria-label="Ajouter un : ${pour}">${icone('plus')}</button>
           </span>
         </li>`;
       })
@@ -701,7 +728,7 @@
     }
 
     document.querySelectorAll('[data-ajouter]').forEach((b) => {
-      const q = bon[b.dataset.ajouter] || 0;
+      const q = (bon[b.dataset.ajouter] || 0) + (bon[b.dataset.ajouter + CANTONAIS] || 0);
       b.classList.toggle('est-dans-bon', q > 0);
       if (q > 0) b.dataset.quantite = q;
       else delete b.dataset.quantite;
@@ -740,8 +767,8 @@
     };
   };
 
-  const annoncer = (id, q) => {
-    const { nom } = catalogue.get(id);
+  const annoncer = (cle, q) => {
+    const nom = nomLigne(cle);
     annonce.textContent = q ? `${nom} : ${q} dans votre commande. Total ${prix(somme())}.` : `${nom} retiré de votre commande.`;
   };
 
@@ -772,6 +799,32 @@
       remuer();
     });
   };
+
+  // Riz nature ou riz cantonais : la ligne garde sa place ; si l'autre version du plat est déjà là, les deux se rejoignent.
+  const changerRiz = (cle, choix) => {
+    const vers = choix === 'cantonais' ? platDe(cle) + CANTONAIS : platDe(cle);
+    if (vers === cle || !bon[cle]) return;
+    const neuf = {};
+    for (const [k, q] of Object.entries(bon)) {
+      if (k === vers) continue;
+      if (k === cle) neuf[vers] = q + (bon[vers] || 0);
+      else neuf[k] = q;
+    }
+    bon = neuf;
+    ecrire();
+    if (choix === 'cantonais' && idRiz) mesurer({ type: 'ajout', id: idRiz });
+    annoncer(vers, bon[vers]);
+    const aSecouer = rendre(true);
+    const ligne = lignes.querySelector(`[data-ligne="${vers}"]`);
+    if (ligne) aSecouer.push(ligne.querySelector('.bon__montant'));
+    secouer(aSecouer);
+    ligne?.querySelector(`input[value="${choix}"]`)?.focus();
+  };
+
+  lignes.addEventListener('change', (e) => {
+    const choix = e.target.closest('input[data-riz]');
+    if (choix) changerRiz(choix.dataset.riz, choix.value);
+  });
 
   // Le sac de la barre du bas remue quand un plat y arrive.
   const remuer = () => {

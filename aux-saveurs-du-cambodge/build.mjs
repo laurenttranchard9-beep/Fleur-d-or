@@ -506,7 +506,7 @@ ${regleMidi() ? `    <p class="tuile__note">${esc(regleMidi())}</p>
 // changés ou non dans l'espace gestion (public/inc/noyau.php).
 const ligne = (item, section) => {
   const id = idPlat(item, section);
-  return `          <li class="plat" data-plat="${id}" data-nom="${esc(item.name)}" data-prix="${jeton('cents', id)}" data-recherche="${jeton('recherche', id)}">
+  return `          <li class="plat" data-plat="${id}" data-nom="${esc(item.name)}" data-prix="${jeton('cents', id)}" data-recherche="${jeton('recherche', id)}"${section.withRice ? ' data-riz' : ''}>
             <span class="plat__nom">${esc(item.name)}</span>
             ${jeton('desc', id)}
             <span class="plat__prix">${jeton('prix', id)}</span>
@@ -517,15 +517,9 @@ const ligne = (item, section) => {
 const rubrique = (section) => `      <section class="rubrique" id="${section.id}" aria-labelledby="r-${section.id}" data-rubrique>
         <h2 id="r-${section.id}" class="rubrique__titre">${jeton('rubrique', section.id)}</h2>
         ${
+          // Le riz se voit en bordeaux : nature compris, cantonais en supplément (à choisir plat par plat dans « Votre commande »).
           section.withRice
-            ? `<p class="rubrique__riz"><span>Servis avec du riz nature.</span> <span class="rubrique__riz-sup">Riz cantonais (porc ou crevettes)&nbsp;: + ${jeton(
-                'prix',
-                ID_SUPPLEMENT,
-              )} <button type="button" class="plat__ajout plat__ajout--petit" data-ajouter="${ID_SUPPLEMENT}" data-nom="${esc(
-                carte.riceUpgrade.name,
-              )}" data-prix="${jeton('cents', ID_SUPPLEMENT)}" hidden aria-label="Ajouter à la commande : ${esc(
-                carte.riceUpgrade.name,
-              )}">${icone('plus')}</button></span></p>`
+            ? `<p class="rubrique__riz">Servis avec du riz nature. Riz cantonais (porc ou crevettes) en supplément&nbsp;: + ${jeton('prix', ID_SUPPLEMENT)}</p>`
             : ''
         }
         <ul class="plats">
@@ -579,7 +573,7 @@ ${carte.sections.map(rubrique).join('')}
       })}. Prix TTC&#8239;; en cas de doute, le prix annoncé au téléphone fait foi.</p>
     </div>
 
-    <aside class="bon" id="bon" aria-labelledby="bon-titre" data-bon hidden>
+    <aside class="bon" id="bon" aria-labelledby="bon-titre" data-bon data-riz-id="${ID_SUPPLEMENT}" data-riz-prix="${jeton('cents', ID_SUPPLEMENT)}" hidden>
       <div class="bon__feuille">
         <div class="bon__tete">
           <h2 id="bon-titre">Votre commande</h2>
