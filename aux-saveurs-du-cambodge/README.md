@@ -50,16 +50,18 @@ Toutes les coquilles corrigées et les points à confirmer sont listés dans [CO
 À l'adresse `/admin/` du site (le lien « Espace gestion », en bas de chaque page, y mène), protégé par le mot de passe choisi à la première visite (enregistré chiffré, jamais en clair ;
 cinq essais ratés bloquent 15 minutes).
 
-- **Prix** : tous les plats de la carte, rubrique par rubrique, avec une recherche. On tape « 10,50 » ou « 10.5 », on enregistre :
-  l'accueil, la carte, le total de « Votre commande » et les données structurées pour Google affichent aussitôt le nouveau prix.
-  Le prix d'origine reste rappelé sous un prix changé.
+- **Carte** : tous les plats, rubrique par rubrique, avec une recherche. Pour chaque plat, son prix et sa description ;
+  pour chaque rubrique, son nom. On tape « 10,50 » ou « 10.5 », on change un texte, on enregistre : l'accueil, la carte,
+  la recherche de la carte, le total de « Votre commande » et les données structurées pour Google suivent aussitôt.
+  Sous ce qui a changé, l'original reste rappelé, avec un bouton « Rétablir ». Une description vidée disparaît de la carte ;
+  un nom de rubrique ne peut pas être vide (descriptions : 300 caractères au plus, noms : 60).
 - **Statistiques** sur 7 jours, 30 jours ou 12 mois : visiteurs, visites et pages vues, visites par jour, appels lancés,
   commandes préparées et panier moyen, itinéraires demandés, plats ajoutés à la commande, recherches sur la carte,
   provenance (Google, Facebook, accès direct…) et appareils. Les visites de la personne connectée ne sont pas comptées.
 - **Réglages** : couper ou rétablir la mesure d'audience, effacer toutes les statistiques, changer le mot de passe.
 
 **Mot de passe oublié** : supprimer le fichier `donnees/config.php` sur le serveur (par SFTP, comme pour l'envoi du site),
-puis rouvrir aussitôt `/admin/` pour en choisir un nouveau. Les prix et les statistiques restent ; la mesure d'audience
+puis rouvrir aussitôt `/admin/` pour en choisir un nouveau. Les prix, les textes changés et les statistiques restent ; la mesure d'audience
 redevient active si elle avait été coupée.
 
 ### La mesure d'audience et les cookies

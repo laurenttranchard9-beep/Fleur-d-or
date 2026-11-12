@@ -275,3 +275,26 @@ function asdc_saisie_prix(int $centimes): string
 {
     return number_format($centimes / 100, 2, ',', '');
 }
+
+/* ---------- Descriptions et noms de rubriques ---------- */
+
+const ASDC_DESC_MAX = 300;
+const ASDC_TITRE_MAX = 60;
+
+// Un texte saisi devient une seule ligne : retours à la ligne et espaces spéciaux changés en espaces simples,
+// caractères de contrôle retirés. null si ce n'est pas du texte lisible (UTF-8 invalide, tableau…).
+function asdc_texte_saisi($saisie): ?string
+{
+    if (!is_string($saisie) || !preg_match('//u', $saisie)) {
+        return null;
+    }
+    $texte = str_replace([chr(13), chr(10), chr(9), ASDC_NBSP, ASDC_FINE], ' ', $saisie);
+    $texte = (string) preg_replace('/[[:cntrl:]]/', '', $texte);
+    $texte = (string) preg_replace('/ {2,}/', ' ', $texte);
+    return trim($texte);
+}
+
+function asdc_longueur(string $texte): int
+{
+    return (int) preg_match_all('/./su', $texte);
+}

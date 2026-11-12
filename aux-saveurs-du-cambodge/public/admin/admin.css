@@ -700,7 +700,7 @@ input {
   animation: etirer 0.8s var(--courbe) both;
 }
 
-/* ---------- Prix ---------- */
+/* ---------- La carte : prix, descriptions, rubriques ---------- */
 
 .g-filtre {
   max-width: 420px;
@@ -721,16 +721,76 @@ input {
   letter-spacing: 0.011em;
 }
 
+/* Le nom de la rubrique : un champ qui garde l'allure d'un titre. */
+.g-rubrique__tete {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.g-rubrique__etiquette {
+  color: var(--gris);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* Mêmes contours que les champs de prix : un gris assez marqué pour se voir sur le blanc. */
+.g-rubrique__champ,
+.g-plat__description {
+  width: 100%;
+  border: 1px solid var(--gris-nuit);
+  border-radius: 12px;
+  background: var(--blanc);
+  color: var(--encre);
+  font-family: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.g-rubrique__champ {
+  max-width: 440px;
+  height: 48px;
+  padding: 0 14px;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: 0.011em;
+}
+
+/* La description d'un plat : une ligne qui s'allonge avec le texte. */
+.g-plat__description {
+  grid-column: 1 / -1;
+  min-height: 44px;
+  padding: 10px 14px;
+  font-size: 15px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  resize: none;
+  field-sizing: content;
+}
+
+.g-plat__description::placeholder {
+  color: var(--gris);
+}
+
+.g-rubrique__champ:focus,
+.g-plat__description:focus {
+  outline: none;
+  border-color: var(--bleu);
+  box-shadow: 0 0 0 4px rgb(0 125 250 / 0.3);
+}
+
 .g-plat {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 132px;
   align-items: center;
-  gap: 4px 16px;
-  padding: 12px 0;
+  gap: 8px 16px;
+  padding: 14px 0;
   border-top: 1px solid var(--filet-doux);
 }
 
-.g-rubrique h2 + .g-plats .g-plat:first-child {
+.g-rubrique h2 + .g-plats .g-plat:first-child,
+.g-rubrique__tete + .g-plats .g-plat:first-child {
   border-top: 0;
 }
 
@@ -769,7 +829,10 @@ input {
   pointer-events: none;
 }
 
-.g-plat.est-change .g-plat__champ input {
+/* Un champ modifié passe au bleu pâle, quel qu'il soit. */
+.g-plat__champ input.est-change,
+.g-rubrique__champ.est-change,
+.g-plat__description.est-change {
   border-color: var(--bleu);
   background: #f2f8ff;
 }
@@ -786,11 +849,34 @@ input {
   color: var(--gris);
 }
 
+/* Sous une description ou un nom de rubrique, la note se lit à gauche, sous le texte. */
+.g-plat__origine--texte,
+.g-plat__erreur--texte {
+  text-align: left;
+}
+
+.g-retablir {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  margin-left: 6px;
+  padding: 0 2px;
+  border: 0;
+  background: none;
+  color: var(--lien);
+  font: inherit;
+  cursor: pointer;
+}
+
+.g-retablir:hover {
+  text-decoration: underline;
+}
+
 .g-plat__erreur {
   color: var(--erreur);
 }
 
-.g-plat--erreur .g-plat__champ input {
+.g-prix [aria-invalid="true"] {
   border-color: var(--erreur);
 }
 

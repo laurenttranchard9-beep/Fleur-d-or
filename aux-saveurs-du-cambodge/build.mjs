@@ -220,12 +220,12 @@ const schemaMenu = () => ({
   url: `${resto.url}/carte/`,
   hasMenuSection: carte.sections.map((section) => ({
     '@type': 'MenuSection',
-    name: section.title,
+    name: jeton('jrubrique', section.id),
     ...(section.withRice ? { description: noteRiz } : {}),
     hasMenuItem: section.items.map((item) => ({
       '@type': 'MenuItem',
       name: item.name,
-      ...(item.desc ? { description: item.desc } : {}),
+      ...(item.desc ? { description: jeton('jdesc', idPlat(item, section)) } : {}),
       offers: { '@type': 'Offer', price: jeton('json', idPlat(item, section)), priceCurrency: 'EUR' },
     })),
   })),
@@ -502,19 +502,20 @@ ${regleMidi() ? `    <p class="tuile__note">${esc(regleMidi())}</p>
 
 /* ---------- La carte ---------- */
 
+// La description et le texte de recherche sont des jetons, comme le prix : le serveur y met ceux du moment,
+// changés ou non dans l'espace gestion (public/inc/noyau.php).
 const ligne = (item, section) => {
   const id = idPlat(item, section);
-  const recherche = normaliser([item.name, item.desc, section.title, item.spicy ? 'piquant epice' : ''].filter(Boolean).join(' '));
-  return `          <li class="plat" data-plat="${id}" data-nom="${esc(item.name)}" data-prix="${jeton('cents', id)}" data-recherche="${esc(recherche)}">
+  return `          <li class="plat" data-plat="${id}" data-nom="${esc(item.name)}" data-prix="${jeton('cents', id)}" data-recherche="${jeton('recherche', id)}">
             <span class="plat__nom">${esc(item.name)}</span>
-            ${item.desc ? `<span class="plat__desc">${esc(item.desc)}</span>` : ''}
+            ${jeton('desc', id)}
             <span class="plat__prix">${jeton('prix', id)}</span>
             <button type="button" class="plat__ajout" data-ajouter="${id}" hidden aria-label="Ajouter à la commande : ${esc(item.name)}">${icone('plus')}</button>
           </li>`;
 };
 
 const rubrique = (section) => `      <section class="rubrique" id="${section.id}" aria-labelledby="r-${section.id}" data-rubrique>
-        <h2 id="r-${section.id}" class="rubrique__titre">${esc(section.title)}</h2>
+        <h2 id="r-${section.id}" class="rubrique__titre">${jeton('rubrique', section.id)}</h2>
         ${
           section.withRice
             ? `<p class="rubrique__riz"><span>Servis avec du riz nature.</span> <span class="rubrique__riz-sup">Riz cantonais (porc ou crevettes)&nbsp;: + ${jeton(
@@ -561,7 +562,7 @@ const lacarte = () =>
   <div class="carte">
     <nav class="rubriques" aria-label="Rubriques de la carte">
       <ul>
-${carte.sections.map((s) => `        <li><a href="#${s.id}" data-lien-rubrique="${s.id}">${esc(s.title)}</a></li>`).join('')}
+${carte.sections.map((s) => `        <li><a href="#${s.id}" data-lien-rubrique="${s.id}">${jeton('rubrique', s.id)}</a></li>`).join('')}
       </ul>
     </nav>
 
@@ -736,11 +737,14 @@ const annexes = () => {
         desc: item.desc || '',
         prix: Math.round(item.price * 100),
         recherche: normaliser([item.name, item.desc, section.title].filter(Boolean).join(' ')),
+        cles: item.spicy ? 'piquant epice' : '',
       })),
     })),
     {
       id: 'supplements',
       titre: 'Supplément',
+      // Rubrique propre à l'espace gestion : seul le prix s'y change.
+      fixe: true,
       plats: [
         {
           id: ID_SUPPLEMENT,

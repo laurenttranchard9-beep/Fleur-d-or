@@ -27,7 +27,7 @@
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="../assets/css/site.css?v=dcb60f39">
 <script src="../assets/js/site.js?v=68285b38" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Menu","@id":"https://www.auxsaveursducambodge-saintalban.com/carte/#menu","name":"La carte — Aux Saveurs du Cambodge","inLanguage":"fr","url":"https://www.auxsaveursducambodge-saintalban.com/carte/","hasMenuSection":[{"@type":"MenuSection","name":"Box anti-crise","hasMenuItem":[{"@type":"MenuItem","name":"Box anti-crise","description":"2 nems (porc ou poulet), un haut de cuisse de poulet mariné ou deux pilons marinés avec leur riz, et une boisson au choix : Coca, Coca zéro, Oasis ou Fuze Tea","offers":{"@type":"Offer","price":"{{json:box-anti-crise--box-anti-crise}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Supplément jus de coco","description":"Dans la box, à la place de la boisson comprise","offers":{"@type":"Offer","price":"{{json:box-anti-crise--supplement-jus-de-coco}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Riz crousty","description":"Riz blanc, sauce blanche, poulet frit, sauce aigre-douce, oignons frits","offers":{"@type":"Offer","price":"{{json:box-anti-crise--riz-crousty}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Entrées","hasMenuItem":[{"@type":"MenuItem","name":"Nems au porc","description":"5 pièces","offers":{"@type":"Offer","price":"{{json:entrees--nems-au-porc}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nems au poulet","description":"5 pièces","offers":{"@type":"Offer","price":"{{json:entrees--nems-au-poulet}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nems aux crevettes","description":"5 pièces","offers":{"@type":"Offer","price":"{{json:entrees--nems-aux-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Samoussas au bœuf","description":"5 pièces","offers":{"@type":"Offer","price":"{{json:entrees--samoussas-au-boeuf}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Raviolis frits porc et crevettes","description":"5 pièces","offers":{"@type":"Offer","price":"{{json:entrees--raviolis-frits-porc-et-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Raviolis croustillants aux crevettes","description":"5 pièces","offers":{"@type":"Offer","price":"{{json:entrees--raviolis-croustillants-aux-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Rouleau de printemps porc et crevettes","description":"1 pièce","offers":{"@type":"Offer","price":"{{json:entrees--rouleau-de-printemps-porc-et-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Rouleau de printemps porc ou crevettes","description":"1 pièce","offers":{"@type":"Offer","price":"{{json:entrees--rouleau-de-printemps-porc-ou-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Beignets de gambas","description":"5 pièces","offers":{"@type":"Offer","price":"{{json:entrees--beignets-de-gambas}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Beignets de poulet","description":"Blanc de poulet","offers":{"@type":"Offer","price":"{{json:entrees--beignets-de-poulet}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Brioche au porc","description":"1 pièce","offers":{"@type":"Offer","price":"{{json:entrees--brioche-au-porc}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nem nuong porc et crevettes","offers":{"@type":"Offer","price":"{{json:entrees--nem-nuong-porc-et-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Assiette composée","description":"1 rouleau de printemps, 1 nem, 1 nem au poulet, 1 croissant, 1 ravioli frit, 1 ravioli frit aux crevettes, 1 papillote, 1 beignet de calamar","offers":{"@type":"Offer","price":"{{json:entrees--assiette-composee}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Salades","hasMenuItem":[{"@type":"MenuItem","name":"Salade de nems","offers":{"@type":"Offer","price":"{{json:salades--salade-de-nems}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Bo bun","description":"Salade de bœuf et nems","offers":{"@type":"Offer","price":"{{json:salades--bo-bun}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Salade au poulet","offers":{"@type":"Offer","price":"{{json:salades--salade-au-poulet}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Salade thaïe au bœuf","offers":{"@type":"Offer","price":"{{json:salades--salade-thaie-au-boeuf}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Salade thaïe aux crevettes","offers":{"@type":"Offer","price":"{{json:salades--salade-thaie-aux-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Salade d’ananas","description":"Crabe et surimi, ou crevettes","offers":{"@type":"Offer","price":"{{json:salades--salade-d-ananas}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Lap thaï au bœuf","offers":{"@type":"Offer","price":"{{json:salades--lap-thai-au-boeuf}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Salade thaïe crevettes et seiches","offers":{"@type":"Offer","price":"{{json:salades--salade-thaie-crevettes-et-seiches}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Vapeurs","hasMenuItem":[{"@type":"MenuItem","name":"Bouchées au porc","description":"5 pièces","offers":{"@type":"Offer","price":"{{json:vapeurs--bouchees-au-porc}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Bouchées aux crevettes","description":"5 pièces","offers":{"@type":"Offer","price":"{{json:vapeurs--bouchees-aux-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Ha kao","description":"Raviolis aux crevettes","offers":{"@type":"Offer","price":"{{json:vapeurs--ha-kao}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Mélange de vapeurs","description":"5 pièces","offers":{"@type":"Offer","price":"{{json:vapeurs--melange-de-vapeurs}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Crêpes chinoises au porc","description":"3 pièces","offers":{"@type":"Offer","price":"{{json:vapeurs--crepes-chinoises-au-porc}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Soupes","hasMenuItem":[{"@type":"MenuItem","name":"Soupe pho","description":"Bœuf, poulet ou crevettes","offers":{"@type":"Offer","price":"{{json:soupes--soupe-pho}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Soupe de raviolis","description":"Porc et crevettes","offers":{"@type":"Offer","price":"{{json:soupes--soupe-de-raviolis}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Soupe Phnom Penh","description":"Porc et crevettes","offers":{"@type":"Offer","price":"{{json:soupes--soupe-phnom-penh}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Porc","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Porc au caramel","offers":{"@type":"Offer","price":"{{json:porc--porc-au-caramel}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Porc laqué","offers":{"@type":"Offer","price":"{{json:porc--porc-laque}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Brochettes de porc","offers":{"@type":"Offer","price":"{{json:porc--brochettes-de-porc}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Poulet","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Poulet frit sauce citron","offers":{"@type":"Offer","price":"{{json:poulet--poulet-frit-sauce-citron}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Poulet sauce curry","offers":{"@type":"Offer","price":"{{json:poulet--poulet-sauce-curry}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Poulet sauté sauce saté","offers":{"@type":"Offer","price":"{{json:poulet--poulet-saute-sauce-sate}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Poulet sauce ananas","offers":{"@type":"Offer","price":"{{json:poulet--poulet-sauce-ananas}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Poulet sauce citronnelle","offers":{"@type":"Offer","price":"{{json:poulet--poulet-sauce-citronnelle}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Poulet aux légumes","offers":{"@type":"Offer","price":"{{json:poulet--poulet-aux-legumes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Poulet sauce piquante","offers":{"@type":"Offer","price":"{{json:poulet--poulet-sauce-piquante}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Bœuf","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Lok lac","description":"Bœuf mariné sauté","offers":{"@type":"Offer","price":"{{json:boeuf--lok-lac}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Bœuf aux champignons noirs","offers":{"@type":"Offer","price":"{{json:boeuf--boeuf-aux-champignons-noirs}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Bœuf sauce saté","offers":{"@type":"Offer","price":"{{json:boeuf--boeuf-sauce-sate}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Bœuf sauce thaïe","offers":{"@type":"Offer","price":"{{json:boeuf--boeuf-sauce-thaie}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Bœuf sauce piquante","offers":{"@type":"Offer","price":"{{json:boeuf--boeuf-sauce-piquante}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Canard","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Canard sauce curry","offers":{"@type":"Offer","price":"{{json:canard--canard-sauce-curry}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Canard aux champignons noirs","offers":{"@type":"Offer","price":"{{json:canard--canard-aux-champignons-noirs}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Canard laqué","offers":{"@type":"Offer","price":"{{json:canard--canard-laque}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Crevettes","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Crevettes sauce curry","offers":{"@type":"Offer","price":"{{json:crevettes--crevettes-sauce-curry}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Crevettes sauce saté","offers":{"@type":"Offer","price":"{{json:crevettes--crevettes-sauce-sate}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Crevettes sauce citronnelle","offers":{"@type":"Offer","price":"{{json:crevettes--crevettes-sauce-citronnelle}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Brochettes de crevettes","offers":{"@type":"Offer","price":"{{json:crevettes--brochettes-de-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Crevettes sauce thaïe","offers":{"@type":"Offer","price":"{{json:crevettes--crevettes-sauce-thaie}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Seiches","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Seiche sauce curry","offers":{"@type":"Offer","price":"{{json:seiches--seiche-sauce-curry}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Seiche sauce saté","offers":{"@type":"Offer","price":"{{json:seiches--seiche-sauce-sate}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Seiche sauce citronnelle","offers":{"@type":"Offer","price":"{{json:seiches--seiche-sauce-citronnelle}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Seiche sauce piquante","offers":{"@type":"Offer","price":"{{json:seiches--seiche-sauce-piquante}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Spécialités du chef","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Bœuf du chef","offers":{"@type":"Offer","price":"{{json:specialites-du-chef--boeuf-du-chef}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Crevettes du chef","offers":{"@type":"Offer","price":"{{json:specialites-du-chef--crevettes-du-chef}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Trois délices","offers":{"@type":"Offer","price":"{{json:specialites-du-chef--trois-delices}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Canard à l’orange","offers":{"@type":"Offer","price":"{{json:specialites-du-chef--canard-a-l-orange}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Fruits de mer sauce thaïe","offers":{"@type":"Offer","price":"{{json:specialites-du-chef--fruits-de-mer-sauce-thaie}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Brochettes","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Brochettes de bœuf","offers":{"@type":"Offer","price":"{{json:brochettes--brochettes-de-boeuf}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Brochettes de crevettes","offers":{"@type":"Offer","price":"{{json:brochettes--brochettes-de-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Brochettes de canard","offers":{"@type":"Offer","price":"{{json:brochettes--brochettes-de-canard}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Nouilles et pâtes","hasMenuItem":[{"@type":"MenuItem","name":"Pad thaï","description":"Bœuf, poulet ou crevettes","offers":{"@type":"Offer","price":"{{json:nouilles--pad-thai}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Légumes sautés","offers":{"@type":"Offer","price":"{{json:nouilles--legumes-sautes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nouilles sautées au bœuf","offers":{"@type":"Offer","price":"{{json:nouilles--nouilles-sautees-au-boeuf}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nouilles sautées aux crevettes","offers":{"@type":"Offer","price":"{{json:nouilles--nouilles-sautees-aux-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nouilles sautées au poulet","offers":{"@type":"Offer","price":"{{json:nouilles--nouilles-sautees-au-poulet}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nouilles sautées aux légumes","offers":{"@type":"Offer","price":"{{json:nouilles--nouilles-sautees-aux-legumes}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Accompagnements","hasMenuItem":[{"@type":"MenuItem","name":"Riz blanc","offers":{"@type":"Offer","price":"{{json:accompagnements--riz-blanc}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Riz cantonais au porc","offers":{"@type":"Offer","price":"{{json:accompagnements--riz-cantonais-au-porc}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Riz cantonais aux crevettes","offers":{"@type":"Offer","price":"{{json:accompagnements--riz-cantonais-aux-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Riz piquant aux crevettes","offers":{"@type":"Offer","price":"{{json:accompagnements--riz-piquant-aux-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Riz piquant au poulet","offers":{"@type":"Offer","price":"{{json:accompagnements--riz-piquant-au-poulet}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Desserts","hasMenuItem":[{"@type":"MenuItem","name":"Beignets de pomme sauce caramel","offers":{"@type":"Offer","price":"{{json:desserts--beignets-de-pomme-sauce-caramel}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Beignets de banane sauce caramel","offers":{"@type":"Offer","price":"{{json:desserts--beignets-de-banane-sauce-caramel}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Beignets d’ananas sauce caramel","offers":{"@type":"Offer","price":"{{json:desserts--beignets-d-ananas-sauce-caramel}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Assortiment de beignets sauce caramel","offers":{"@type":"Offer","price":"{{json:desserts--assortiment-de-beignets-sauce-caramel}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Ananas frais","offers":{"@type":"Offer","price":"{{json:desserts--ananas-frais}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Perles de coco","description":"3 pièces","offers":{"@type":"Offer","price":"{{json:desserts--perles-de-coco}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Banane au lait de coco","offers":{"@type":"Offer","price":"{{json:desserts--banane-au-lait-de-coco}}","priceCurrency":"EUR"}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Menu","@id":"https://www.auxsaveursducambodge-saintalban.com/carte/#menu","name":"La carte — Aux Saveurs du Cambodge","inLanguage":"fr","url":"https://www.auxsaveursducambodge-saintalban.com/carte/","hasMenuSection":[{"@type":"MenuSection","name":"{{jrubrique:box-anti-crise}}","hasMenuItem":[{"@type":"MenuItem","name":"Box anti-crise","description":"{{jdesc:box-anti-crise--box-anti-crise}}","offers":{"@type":"Offer","price":"{{json:box-anti-crise--box-anti-crise}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Supplément jus de coco","description":"{{jdesc:box-anti-crise--supplement-jus-de-coco}}","offers":{"@type":"Offer","price":"{{json:box-anti-crise--supplement-jus-de-coco}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Riz crousty","description":"{{jdesc:box-anti-crise--riz-crousty}}","offers":{"@type":"Offer","price":"{{json:box-anti-crise--riz-crousty}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"{{jrubrique:entrees}}","hasMenuItem":[{"@type":"MenuItem","name":"Nems au porc","description":"{{jdesc:entrees--nems-au-porc}}","offers":{"@type":"Offer","price":"{{json:entrees--nems-au-porc}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nems au poulet","description":"{{jdesc:entrees--nems-au-poulet}}","offers":{"@type":"Offer","price":"{{json:entrees--nems-au-poulet}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nems aux crevettes","description":"{{jdesc:entrees--nems-aux-crevettes}}","offers":{"@type":"Offer","price":"{{json:entrees--nems-aux-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Samoussas au bœuf","description":"{{jdesc:entrees--samoussas-au-boeuf}}","offers":{"@type":"Offer","price":"{{json:entrees--samoussas-au-boeuf}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Raviolis frits porc et crevettes","description":"{{jdesc:entrees--raviolis-frits-porc-et-crevettes}}","offers":{"@type":"Offer","price":"{{json:entrees--raviolis-frits-porc-et-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Raviolis croustillants aux crevettes","description":"{{jdesc:entrees--raviolis-croustillants-aux-crevettes}}","offers":{"@type":"Offer","price":"{{json:entrees--raviolis-croustillants-aux-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Rouleau de printemps porc et crevettes","description":"{{jdesc:entrees--rouleau-de-printemps-porc-et-crevettes}}","offers":{"@type":"Offer","price":"{{json:entrees--rouleau-de-printemps-porc-et-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Rouleau de printemps porc ou crevettes","description":"{{jdesc:entrees--rouleau-de-printemps-porc-ou-crevettes}}","offers":{"@type":"Offer","price":"{{json:entrees--rouleau-de-printemps-porc-ou-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Beignets de gambas","description":"{{jdesc:entrees--beignets-de-gambas}}","offers":{"@type":"Offer","price":"{{json:entrees--beignets-de-gambas}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Beignets de poulet","description":"{{jdesc:entrees--beignets-de-poulet}}","offers":{"@type":"Offer","price":"{{json:entrees--beignets-de-poulet}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Brioche au porc","description":"{{jdesc:entrees--brioche-au-porc}}","offers":{"@type":"Offer","price":"{{json:entrees--brioche-au-porc}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nem nuong porc et crevettes","offers":{"@type":"Offer","price":"{{json:entrees--nem-nuong-porc-et-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Assiette composée","description":"{{jdesc:entrees--assiette-composee}}","offers":{"@type":"Offer","price":"{{json:entrees--assiette-composee}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"{{jrubrique:salades}}","hasMenuItem":[{"@type":"MenuItem","name":"Salade de nems","offers":{"@type":"Offer","price":"{{json:salades--salade-de-nems}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Bo bun","description":"{{jdesc:salades--bo-bun}}","offers":{"@type":"Offer","price":"{{json:salades--bo-bun}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Salade au poulet","offers":{"@type":"Offer","price":"{{json:salades--salade-au-poulet}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Salade thaïe au bœuf","offers":{"@type":"Offer","price":"{{json:salades--salade-thaie-au-boeuf}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Salade thaïe aux crevettes","offers":{"@type":"Offer","price":"{{json:salades--salade-thaie-aux-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Salade d’ananas","description":"{{jdesc:salades--salade-d-ananas}}","offers":{"@type":"Offer","price":"{{json:salades--salade-d-ananas}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Lap thaï au bœuf","offers":{"@type":"Offer","price":"{{json:salades--lap-thai-au-boeuf}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Salade thaïe crevettes et seiches","offers":{"@type":"Offer","price":"{{json:salades--salade-thaie-crevettes-et-seiches}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"{{jrubrique:vapeurs}}","hasMenuItem":[{"@type":"MenuItem","name":"Bouchées au porc","description":"{{jdesc:vapeurs--bouchees-au-porc}}","offers":{"@type":"Offer","price":"{{json:vapeurs--bouchees-au-porc}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Bouchées aux crevettes","description":"{{jdesc:vapeurs--bouchees-aux-crevettes}}","offers":{"@type":"Offer","price":"{{json:vapeurs--bouchees-aux-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Ha kao","description":"{{jdesc:vapeurs--ha-kao}}","offers":{"@type":"Offer","price":"{{json:vapeurs--ha-kao}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Mélange de vapeurs","description":"{{jdesc:vapeurs--melange-de-vapeurs}}","offers":{"@type":"Offer","price":"{{json:vapeurs--melange-de-vapeurs}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Crêpes chinoises au porc","description":"{{jdesc:vapeurs--crepes-chinoises-au-porc}}","offers":{"@type":"Offer","price":"{{json:vapeurs--crepes-chinoises-au-porc}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"{{jrubrique:soupes}}","hasMenuItem":[{"@type":"MenuItem","name":"Soupe pho","description":"{{jdesc:soupes--soupe-pho}}","offers":{"@type":"Offer","price":"{{json:soupes--soupe-pho}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Soupe de raviolis","description":"{{jdesc:soupes--soupe-de-raviolis}}","offers":{"@type":"Offer","price":"{{json:soupes--soupe-de-raviolis}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Soupe Phnom Penh","description":"{{jdesc:soupes--soupe-phnom-penh}}","offers":{"@type":"Offer","price":"{{json:soupes--soupe-phnom-penh}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"{{jrubrique:porc}}","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Porc au caramel","offers":{"@type":"Offer","price":"{{json:porc--porc-au-caramel}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Porc laqué","offers":{"@type":"Offer","price":"{{json:porc--porc-laque}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Brochettes de porc","offers":{"@type":"Offer","price":"{{json:porc--brochettes-de-porc}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"{{jrubrique:poulet}}","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Poulet frit sauce citron","offers":{"@type":"Offer","price":"{{json:poulet--poulet-frit-sauce-citron}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Poulet sauce curry","offers":{"@type":"Offer","price":"{{json:poulet--poulet-sauce-curry}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Poulet sauté sauce saté","offers":{"@type":"Offer","price":"{{json:poulet--poulet-saute-sauce-sate}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Poulet sauce ananas","offers":{"@type":"Offer","price":"{{json:poulet--poulet-sauce-ananas}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Poulet sauce citronnelle","offers":{"@type":"Offer","price":"{{json:poulet--poulet-sauce-citronnelle}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Poulet aux légumes","offers":{"@type":"Offer","price":"{{json:poulet--poulet-aux-legumes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Poulet sauce piquante","offers":{"@type":"Offer","price":"{{json:poulet--poulet-sauce-piquante}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"{{jrubrique:boeuf}}","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Lok lac","description":"{{jdesc:boeuf--lok-lac}}","offers":{"@type":"Offer","price":"{{json:boeuf--lok-lac}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Bœuf aux champignons noirs","offers":{"@type":"Offer","price":"{{json:boeuf--boeuf-aux-champignons-noirs}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Bœuf sauce saté","offers":{"@type":"Offer","price":"{{json:boeuf--boeuf-sauce-sate}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Bœuf sauce thaïe","offers":{"@type":"Offer","price":"{{json:boeuf--boeuf-sauce-thaie}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Bœuf sauce piquante","offers":{"@type":"Offer","price":"{{json:boeuf--boeuf-sauce-piquante}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"{{jrubrique:canard}}","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Canard sauce curry","offers":{"@type":"Offer","price":"{{json:canard--canard-sauce-curry}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Canard aux champignons noirs","offers":{"@type":"Offer","price":"{{json:canard--canard-aux-champignons-noirs}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Canard laqué","offers":{"@type":"Offer","price":"{{json:canard--canard-laque}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"{{jrubrique:crevettes}}","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Crevettes sauce curry","offers":{"@type":"Offer","price":"{{json:crevettes--crevettes-sauce-curry}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Crevettes sauce saté","offers":{"@type":"Offer","price":"{{json:crevettes--crevettes-sauce-sate}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Crevettes sauce citronnelle","offers":{"@type":"Offer","price":"{{json:crevettes--crevettes-sauce-citronnelle}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Brochettes de crevettes","offers":{"@type":"Offer","price":"{{json:crevettes--brochettes-de-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Crevettes sauce thaïe","offers":{"@type":"Offer","price":"{{json:crevettes--crevettes-sauce-thaie}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"{{jrubrique:seiches}}","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Seiche sauce curry","offers":{"@type":"Offer","price":"{{json:seiches--seiche-sauce-curry}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Seiche sauce saté","offers":{"@type":"Offer","price":"{{json:seiches--seiche-sauce-sate}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Seiche sauce citronnelle","offers":{"@type":"Offer","price":"{{json:seiches--seiche-sauce-citronnelle}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Seiche sauce piquante","offers":{"@type":"Offer","price":"{{json:seiches--seiche-sauce-piquante}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"{{jrubrique:specialites-du-chef}}","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Bœuf du chef","offers":{"@type":"Offer","price":"{{json:specialites-du-chef--boeuf-du-chef}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Crevettes du chef","offers":{"@type":"Offer","price":"{{json:specialites-du-chef--crevettes-du-chef}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Trois délices","offers":{"@type":"Offer","price":"{{json:specialites-du-chef--trois-delices}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Canard à l’orange","offers":{"@type":"Offer","price":"{{json:specialites-du-chef--canard-a-l-orange}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Fruits de mer sauce thaïe","offers":{"@type":"Offer","price":"{{json:specialites-du-chef--fruits-de-mer-sauce-thaie}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"{{jrubrique:brochettes}}","description":"Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + {{prix:supplement-riz-cantonais}}.","hasMenuItem":[{"@type":"MenuItem","name":"Brochettes de bœuf","offers":{"@type":"Offer","price":"{{json:brochettes--brochettes-de-boeuf}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Brochettes de crevettes","offers":{"@type":"Offer","price":"{{json:brochettes--brochettes-de-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Brochettes de canard","offers":{"@type":"Offer","price":"{{json:brochettes--brochettes-de-canard}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"{{jrubrique:nouilles}}","hasMenuItem":[{"@type":"MenuItem","name":"Pad thaï","description":"{{jdesc:nouilles--pad-thai}}","offers":{"@type":"Offer","price":"{{json:nouilles--pad-thai}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Légumes sautés","offers":{"@type":"Offer","price":"{{json:nouilles--legumes-sautes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nouilles sautées au bœuf","offers":{"@type":"Offer","price":"{{json:nouilles--nouilles-sautees-au-boeuf}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nouilles sautées aux crevettes","offers":{"@type":"Offer","price":"{{json:nouilles--nouilles-sautees-aux-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nouilles sautées au poulet","offers":{"@type":"Offer","price":"{{json:nouilles--nouilles-sautees-au-poulet}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nouilles sautées aux légumes","offers":{"@type":"Offer","price":"{{json:nouilles--nouilles-sautees-aux-legumes}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"{{jrubrique:accompagnements}}","hasMenuItem":[{"@type":"MenuItem","name":"Riz blanc","offers":{"@type":"Offer","price":"{{json:accompagnements--riz-blanc}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Riz cantonais au porc","offers":{"@type":"Offer","price":"{{json:accompagnements--riz-cantonais-au-porc}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Riz cantonais aux crevettes","offers":{"@type":"Offer","price":"{{json:accompagnements--riz-cantonais-aux-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Riz piquant aux crevettes","offers":{"@type":"Offer","price":"{{json:accompagnements--riz-piquant-aux-crevettes}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Riz piquant au poulet","offers":{"@type":"Offer","price":"{{json:accompagnements--riz-piquant-au-poulet}}","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"{{jrubrique:desserts}}","hasMenuItem":[{"@type":"MenuItem","name":"Beignets de pomme sauce caramel","offers":{"@type":"Offer","price":"{{json:desserts--beignets-de-pomme-sauce-caramel}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Beignets de banane sauce caramel","offers":{"@type":"Offer","price":"{{json:desserts--beignets-de-banane-sauce-caramel}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Beignets d’ananas sauce caramel","offers":{"@type":"Offer","price":"{{json:desserts--beignets-d-ananas-sauce-caramel}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Assortiment de beignets sauce caramel","offers":{"@type":"Offer","price":"{{json:desserts--assortiment-de-beignets-sauce-caramel}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Ananas frais","offers":{"@type":"Offer","price":"{{json:desserts--ananas-frais}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Perles de coco","description":"{{jdesc:desserts--perles-de-coco}}","offers":{"@type":"Offer","price":"{{json:desserts--perles-de-coco}}","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Banane au lait de coco","offers":{"@type":"Offer","price":"{{json:desserts--banane-au-lait-de-coco}}","priceCurrency":"EUR"}}]}]}</script>
 </head>
 <body class="page-carte" data-page="carte" data-collecte="../stats/collecte.php">
 <a class="evitement" href="#contenu">Aller au contenu</a>
@@ -63,7 +63,7 @@
   <div class="carte">
     <nav class="rubriques" aria-label="Rubriques de la carte">
       <ul>
-        <li><a href="#box-anti-crise" data-lien-rubrique="box-anti-crise">Box anti-crise</a></li>        <li><a href="#entrees" data-lien-rubrique="entrees">Entrées</a></li>        <li><a href="#salades" data-lien-rubrique="salades">Salades</a></li>        <li><a href="#vapeurs" data-lien-rubrique="vapeurs">Vapeurs</a></li>        <li><a href="#soupes" data-lien-rubrique="soupes">Soupes</a></li>        <li><a href="#porc" data-lien-rubrique="porc">Porc</a></li>        <li><a href="#poulet" data-lien-rubrique="poulet">Poulet</a></li>        <li><a href="#boeuf" data-lien-rubrique="boeuf">Bœuf</a></li>        <li><a href="#canard" data-lien-rubrique="canard">Canard</a></li>        <li><a href="#crevettes" data-lien-rubrique="crevettes">Crevettes</a></li>        <li><a href="#seiches" data-lien-rubrique="seiches">Seiches</a></li>        <li><a href="#specialites-du-chef" data-lien-rubrique="specialites-du-chef">Spécialités du chef</a></li>        <li><a href="#brochettes" data-lien-rubrique="brochettes">Brochettes</a></li>        <li><a href="#nouilles" data-lien-rubrique="nouilles">Nouilles et pâtes</a></li>        <li><a href="#accompagnements" data-lien-rubrique="accompagnements">Accompagnements</a></li>        <li><a href="#desserts" data-lien-rubrique="desserts">Desserts</a></li>
+        <li><a href="#box-anti-crise" data-lien-rubrique="box-anti-crise">{{rubrique:box-anti-crise}}</a></li>        <li><a href="#entrees" data-lien-rubrique="entrees">{{rubrique:entrees}}</a></li>        <li><a href="#salades" data-lien-rubrique="salades">{{rubrique:salades}}</a></li>        <li><a href="#vapeurs" data-lien-rubrique="vapeurs">{{rubrique:vapeurs}}</a></li>        <li><a href="#soupes" data-lien-rubrique="soupes">{{rubrique:soupes}}</a></li>        <li><a href="#porc" data-lien-rubrique="porc">{{rubrique:porc}}</a></li>        <li><a href="#poulet" data-lien-rubrique="poulet">{{rubrique:poulet}}</a></li>        <li><a href="#boeuf" data-lien-rubrique="boeuf">{{rubrique:boeuf}}</a></li>        <li><a href="#canard" data-lien-rubrique="canard">{{rubrique:canard}}</a></li>        <li><a href="#crevettes" data-lien-rubrique="crevettes">{{rubrique:crevettes}}</a></li>        <li><a href="#seiches" data-lien-rubrique="seiches">{{rubrique:seiches}}</a></li>        <li><a href="#specialites-du-chef" data-lien-rubrique="specialites-du-chef">{{rubrique:specialites-du-chef}}</a></li>        <li><a href="#brochettes" data-lien-rubrique="brochettes">{{rubrique:brochettes}}</a></li>        <li><a href="#nouilles" data-lien-rubrique="nouilles">{{rubrique:nouilles}}</a></li>        <li><a href="#accompagnements" data-lien-rubrique="accompagnements">{{rubrique:accompagnements}}</a></li>        <li><a href="#desserts" data-lien-rubrique="desserts">{{rubrique:desserts}}</a></li>
       </ul>
     </nav>
 
@@ -73,522 +73,522 @@
         <p>Essayez «&#8239;crevettes&#8239;», «&#8239;poulet&#8239;» ou «&#8239;soupe&#8239;», ou <button type="button" class="lien lien--bouton" data-effacer>effacez la recherche</button>.</p>
       </div>
       <section class="rubrique" id="box-anti-crise" aria-labelledby="r-box-anti-crise" data-rubrique>
-        <h2 id="r-box-anti-crise" class="rubrique__titre">Box anti-crise</h2>
+        <h2 id="r-box-anti-crise" class="rubrique__titre">{{rubrique:box-anti-crise}}</h2>
         
         <ul class="plats">
-          <li class="plat" data-plat="box-anti-crise--box-anti-crise" data-nom="Box anti-crise" data-prix="{{cents:box-anti-crise--box-anti-crise}}" data-recherche="box anti-crise 2 nems (porc ou poulet), un haut de cuisse de poulet marine ou deux pilons marines avec leur riz, et une boisson au choix : coca, coca zero, oasis ou fuze tea box anti-crise">
+          <li class="plat" data-plat="box-anti-crise--box-anti-crise" data-nom="Box anti-crise" data-prix="{{cents:box-anti-crise--box-anti-crise}}" data-recherche="{{recherche:box-anti-crise--box-anti-crise}}">
             <span class="plat__nom">Box anti-crise</span>
-            <span class="plat__desc">2 nems (porc ou poulet), un haut de cuisse de poulet mariné ou deux pilons marinés avec leur riz, et une boisson au choix : Coca, Coca zéro, Oasis ou Fuze Tea</span>
+            {{desc:box-anti-crise--box-anti-crise}}
             <span class="plat__prix">{{prix:box-anti-crise--box-anti-crise}}</span>
             <button type="button" class="plat__ajout" data-ajouter="box-anti-crise--box-anti-crise" hidden aria-label="Ajouter à la commande : Box anti-crise"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="box-anti-crise--supplement-jus-de-coco" data-nom="Supplément jus de coco" data-prix="{{cents:box-anti-crise--supplement-jus-de-coco}}" data-recherche="supplement jus de coco dans la box, a la place de la boisson comprise box anti-crise">
+          </li>          <li class="plat" data-plat="box-anti-crise--supplement-jus-de-coco" data-nom="Supplément jus de coco" data-prix="{{cents:box-anti-crise--supplement-jus-de-coco}}" data-recherche="{{recherche:box-anti-crise--supplement-jus-de-coco}}">
             <span class="plat__nom">Supplément jus de coco</span>
-            <span class="plat__desc">Dans la box, à la place de la boisson comprise</span>
+            {{desc:box-anti-crise--supplement-jus-de-coco}}
             <span class="plat__prix">{{prix:box-anti-crise--supplement-jus-de-coco}}</span>
             <button type="button" class="plat__ajout" data-ajouter="box-anti-crise--supplement-jus-de-coco" hidden aria-label="Ajouter à la commande : Supplément jus de coco"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="box-anti-crise--riz-crousty" data-nom="Riz crousty" data-prix="{{cents:box-anti-crise--riz-crousty}}" data-recherche="riz crousty riz blanc, sauce blanche, poulet frit, sauce aigre-douce, oignons frits box anti-crise">
+          </li>          <li class="plat" data-plat="box-anti-crise--riz-crousty" data-nom="Riz crousty" data-prix="{{cents:box-anti-crise--riz-crousty}}" data-recherche="{{recherche:box-anti-crise--riz-crousty}}">
             <span class="plat__nom">Riz crousty</span>
-            <span class="plat__desc">Riz blanc, sauce blanche, poulet frit, sauce aigre-douce, oignons frits</span>
+            {{desc:box-anti-crise--riz-crousty}}
             <span class="plat__prix">{{prix:box-anti-crise--riz-crousty}}</span>
             <button type="button" class="plat__ajout" data-ajouter="box-anti-crise--riz-crousty" hidden aria-label="Ajouter à la commande : Riz crousty"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>
         </ul>
       </section>      <section class="rubrique" id="entrees" aria-labelledby="r-entrees" data-rubrique>
-        <h2 id="r-entrees" class="rubrique__titre">Entrées</h2>
+        <h2 id="r-entrees" class="rubrique__titre">{{rubrique:entrees}}</h2>
         
         <ul class="plats">
-          <li class="plat" data-plat="entrees--nems-au-porc" data-nom="Nems au porc" data-prix="{{cents:entrees--nems-au-porc}}" data-recherche="nems au porc 5 pieces entrees">
+          <li class="plat" data-plat="entrees--nems-au-porc" data-nom="Nems au porc" data-prix="{{cents:entrees--nems-au-porc}}" data-recherche="{{recherche:entrees--nems-au-porc}}">
             <span class="plat__nom">Nems au porc</span>
-            <span class="plat__desc">5 pièces</span>
+            {{desc:entrees--nems-au-porc}}
             <span class="plat__prix">{{prix:entrees--nems-au-porc}}</span>
             <button type="button" class="plat__ajout" data-ajouter="entrees--nems-au-porc" hidden aria-label="Ajouter à la commande : Nems au porc"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="entrees--nems-au-poulet" data-nom="Nems au poulet" data-prix="{{cents:entrees--nems-au-poulet}}" data-recherche="nems au poulet 5 pieces entrees">
+          </li>          <li class="plat" data-plat="entrees--nems-au-poulet" data-nom="Nems au poulet" data-prix="{{cents:entrees--nems-au-poulet}}" data-recherche="{{recherche:entrees--nems-au-poulet}}">
             <span class="plat__nom">Nems au poulet</span>
-            <span class="plat__desc">5 pièces</span>
+            {{desc:entrees--nems-au-poulet}}
             <span class="plat__prix">{{prix:entrees--nems-au-poulet}}</span>
             <button type="button" class="plat__ajout" data-ajouter="entrees--nems-au-poulet" hidden aria-label="Ajouter à la commande : Nems au poulet"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="entrees--nems-aux-crevettes" data-nom="Nems aux crevettes" data-prix="{{cents:entrees--nems-aux-crevettes}}" data-recherche="nems aux crevettes 5 pieces entrees">
+          </li>          <li class="plat" data-plat="entrees--nems-aux-crevettes" data-nom="Nems aux crevettes" data-prix="{{cents:entrees--nems-aux-crevettes}}" data-recherche="{{recherche:entrees--nems-aux-crevettes}}">
             <span class="plat__nom">Nems aux crevettes</span>
-            <span class="plat__desc">5 pièces</span>
+            {{desc:entrees--nems-aux-crevettes}}
             <span class="plat__prix">{{prix:entrees--nems-aux-crevettes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="entrees--nems-aux-crevettes" hidden aria-label="Ajouter à la commande : Nems aux crevettes"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="entrees--samoussas-au-boeuf" data-nom="Samoussas au bœuf" data-prix="{{cents:entrees--samoussas-au-boeuf}}" data-recherche="samoussas au boeuf 5 pieces entrees">
+          </li>          <li class="plat" data-plat="entrees--samoussas-au-boeuf" data-nom="Samoussas au bœuf" data-prix="{{cents:entrees--samoussas-au-boeuf}}" data-recherche="{{recherche:entrees--samoussas-au-boeuf}}">
             <span class="plat__nom">Samoussas au bœuf</span>
-            <span class="plat__desc">5 pièces</span>
+            {{desc:entrees--samoussas-au-boeuf}}
             <span class="plat__prix">{{prix:entrees--samoussas-au-boeuf}}</span>
             <button type="button" class="plat__ajout" data-ajouter="entrees--samoussas-au-boeuf" hidden aria-label="Ajouter à la commande : Samoussas au bœuf"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="entrees--raviolis-frits-porc-et-crevettes" data-nom="Raviolis frits porc et crevettes" data-prix="{{cents:entrees--raviolis-frits-porc-et-crevettes}}" data-recherche="raviolis frits porc et crevettes 5 pieces entrees">
+          </li>          <li class="plat" data-plat="entrees--raviolis-frits-porc-et-crevettes" data-nom="Raviolis frits porc et crevettes" data-prix="{{cents:entrees--raviolis-frits-porc-et-crevettes}}" data-recherche="{{recherche:entrees--raviolis-frits-porc-et-crevettes}}">
             <span class="plat__nom">Raviolis frits porc et crevettes</span>
-            <span class="plat__desc">5 pièces</span>
+            {{desc:entrees--raviolis-frits-porc-et-crevettes}}
             <span class="plat__prix">{{prix:entrees--raviolis-frits-porc-et-crevettes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="entrees--raviolis-frits-porc-et-crevettes" hidden aria-label="Ajouter à la commande : Raviolis frits porc et crevettes"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="entrees--raviolis-croustillants-aux-crevettes" data-nom="Raviolis croustillants aux crevettes" data-prix="{{cents:entrees--raviolis-croustillants-aux-crevettes}}" data-recherche="raviolis croustillants aux crevettes 5 pieces entrees">
+          </li>          <li class="plat" data-plat="entrees--raviolis-croustillants-aux-crevettes" data-nom="Raviolis croustillants aux crevettes" data-prix="{{cents:entrees--raviolis-croustillants-aux-crevettes}}" data-recherche="{{recherche:entrees--raviolis-croustillants-aux-crevettes}}">
             <span class="plat__nom">Raviolis croustillants aux crevettes</span>
-            <span class="plat__desc">5 pièces</span>
+            {{desc:entrees--raviolis-croustillants-aux-crevettes}}
             <span class="plat__prix">{{prix:entrees--raviolis-croustillants-aux-crevettes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="entrees--raviolis-croustillants-aux-crevettes" hidden aria-label="Ajouter à la commande : Raviolis croustillants aux crevettes"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="entrees--rouleau-de-printemps-porc-et-crevettes" data-nom="Rouleau de printemps porc et crevettes" data-prix="{{cents:entrees--rouleau-de-printemps-porc-et-crevettes}}" data-recherche="rouleau de printemps porc et crevettes 1 piece entrees">
+          </li>          <li class="plat" data-plat="entrees--rouleau-de-printemps-porc-et-crevettes" data-nom="Rouleau de printemps porc et crevettes" data-prix="{{cents:entrees--rouleau-de-printemps-porc-et-crevettes}}" data-recherche="{{recherche:entrees--rouleau-de-printemps-porc-et-crevettes}}">
             <span class="plat__nom">Rouleau de printemps porc et crevettes</span>
-            <span class="plat__desc">1 pièce</span>
+            {{desc:entrees--rouleau-de-printemps-porc-et-crevettes}}
             <span class="plat__prix">{{prix:entrees--rouleau-de-printemps-porc-et-crevettes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="entrees--rouleau-de-printemps-porc-et-crevettes" hidden aria-label="Ajouter à la commande : Rouleau de printemps porc et crevettes"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="entrees--rouleau-de-printemps-porc-ou-crevettes" data-nom="Rouleau de printemps porc ou crevettes" data-prix="{{cents:entrees--rouleau-de-printemps-porc-ou-crevettes}}" data-recherche="rouleau de printemps porc ou crevettes 1 piece entrees">
+          </li>          <li class="plat" data-plat="entrees--rouleau-de-printemps-porc-ou-crevettes" data-nom="Rouleau de printemps porc ou crevettes" data-prix="{{cents:entrees--rouleau-de-printemps-porc-ou-crevettes}}" data-recherche="{{recherche:entrees--rouleau-de-printemps-porc-ou-crevettes}}">
             <span class="plat__nom">Rouleau de printemps porc ou crevettes</span>
-            <span class="plat__desc">1 pièce</span>
+            {{desc:entrees--rouleau-de-printemps-porc-ou-crevettes}}
             <span class="plat__prix">{{prix:entrees--rouleau-de-printemps-porc-ou-crevettes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="entrees--rouleau-de-printemps-porc-ou-crevettes" hidden aria-label="Ajouter à la commande : Rouleau de printemps porc ou crevettes"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="entrees--beignets-de-gambas" data-nom="Beignets de gambas" data-prix="{{cents:entrees--beignets-de-gambas}}" data-recherche="beignets de gambas 5 pieces entrees">
+          </li>          <li class="plat" data-plat="entrees--beignets-de-gambas" data-nom="Beignets de gambas" data-prix="{{cents:entrees--beignets-de-gambas}}" data-recherche="{{recherche:entrees--beignets-de-gambas}}">
             <span class="plat__nom">Beignets de gambas</span>
-            <span class="plat__desc">5 pièces</span>
+            {{desc:entrees--beignets-de-gambas}}
             <span class="plat__prix">{{prix:entrees--beignets-de-gambas}}</span>
             <button type="button" class="plat__ajout" data-ajouter="entrees--beignets-de-gambas" hidden aria-label="Ajouter à la commande : Beignets de gambas"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="entrees--beignets-de-poulet" data-nom="Beignets de poulet" data-prix="{{cents:entrees--beignets-de-poulet}}" data-recherche="beignets de poulet blanc de poulet entrees">
+          </li>          <li class="plat" data-plat="entrees--beignets-de-poulet" data-nom="Beignets de poulet" data-prix="{{cents:entrees--beignets-de-poulet}}" data-recherche="{{recherche:entrees--beignets-de-poulet}}">
             <span class="plat__nom">Beignets de poulet</span>
-            <span class="plat__desc">Blanc de poulet</span>
+            {{desc:entrees--beignets-de-poulet}}
             <span class="plat__prix">{{prix:entrees--beignets-de-poulet}}</span>
             <button type="button" class="plat__ajout" data-ajouter="entrees--beignets-de-poulet" hidden aria-label="Ajouter à la commande : Beignets de poulet"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="entrees--brioche-au-porc" data-nom="Brioche au porc" data-prix="{{cents:entrees--brioche-au-porc}}" data-recherche="brioche au porc 1 piece entrees">
+          </li>          <li class="plat" data-plat="entrees--brioche-au-porc" data-nom="Brioche au porc" data-prix="{{cents:entrees--brioche-au-porc}}" data-recherche="{{recherche:entrees--brioche-au-porc}}">
             <span class="plat__nom">Brioche au porc</span>
-            <span class="plat__desc">1 pièce</span>
+            {{desc:entrees--brioche-au-porc}}
             <span class="plat__prix">{{prix:entrees--brioche-au-porc}}</span>
             <button type="button" class="plat__ajout" data-ajouter="entrees--brioche-au-porc" hidden aria-label="Ajouter à la commande : Brioche au porc"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="entrees--nem-nuong-porc-et-crevettes" data-nom="Nem nuong porc et crevettes" data-prix="{{cents:entrees--nem-nuong-porc-et-crevettes}}" data-recherche="nem nuong porc et crevettes entrees">
+          </li>          <li class="plat" data-plat="entrees--nem-nuong-porc-et-crevettes" data-nom="Nem nuong porc et crevettes" data-prix="{{cents:entrees--nem-nuong-porc-et-crevettes}}" data-recherche="{{recherche:entrees--nem-nuong-porc-et-crevettes}}">
             <span class="plat__nom">Nem nuong porc et crevettes</span>
-            
+            {{desc:entrees--nem-nuong-porc-et-crevettes}}
             <span class="plat__prix">{{prix:entrees--nem-nuong-porc-et-crevettes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="entrees--nem-nuong-porc-et-crevettes" hidden aria-label="Ajouter à la commande : Nem nuong porc et crevettes"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="entrees--assiette-composee" data-nom="Assiette composée" data-prix="{{cents:entrees--assiette-composee}}" data-recherche="assiette composee 1 rouleau de printemps, 1 nem, 1 nem au poulet, 1 croissant, 1 ravioli frit, 1 ravioli frit aux crevettes, 1 papillote, 1 beignet de calamar entrees">
+          </li>          <li class="plat" data-plat="entrees--assiette-composee" data-nom="Assiette composée" data-prix="{{cents:entrees--assiette-composee}}" data-recherche="{{recherche:entrees--assiette-composee}}">
             <span class="plat__nom">Assiette composée</span>
-            <span class="plat__desc">1 rouleau de printemps, 1 nem, 1 nem au poulet, 1 croissant, 1 ravioli frit, 1 ravioli frit aux crevettes, 1 papillote, 1 beignet de calamar</span>
+            {{desc:entrees--assiette-composee}}
             <span class="plat__prix">{{prix:entrees--assiette-composee}}</span>
             <button type="button" class="plat__ajout" data-ajouter="entrees--assiette-composee" hidden aria-label="Ajouter à la commande : Assiette composée"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>
         </ul>
       </section>      <section class="rubrique" id="salades" aria-labelledby="r-salades" data-rubrique>
-        <h2 id="r-salades" class="rubrique__titre">Salades</h2>
+        <h2 id="r-salades" class="rubrique__titre">{{rubrique:salades}}</h2>
         
         <ul class="plats">
-          <li class="plat" data-plat="salades--salade-de-nems" data-nom="Salade de nems" data-prix="{{cents:salades--salade-de-nems}}" data-recherche="salade de nems salades">
+          <li class="plat" data-plat="salades--salade-de-nems" data-nom="Salade de nems" data-prix="{{cents:salades--salade-de-nems}}" data-recherche="{{recherche:salades--salade-de-nems}}">
             <span class="plat__nom">Salade de nems</span>
-            
+            {{desc:salades--salade-de-nems}}
             <span class="plat__prix">{{prix:salades--salade-de-nems}}</span>
             <button type="button" class="plat__ajout" data-ajouter="salades--salade-de-nems" hidden aria-label="Ajouter à la commande : Salade de nems"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="salades--bo-bun" data-nom="Bo bun" data-prix="{{cents:salades--bo-bun}}" data-recherche="bo bun salade de boeuf et nems salades">
+          </li>          <li class="plat" data-plat="salades--bo-bun" data-nom="Bo bun" data-prix="{{cents:salades--bo-bun}}" data-recherche="{{recherche:salades--bo-bun}}">
             <span class="plat__nom">Bo bun</span>
-            <span class="plat__desc">Salade de bœuf et nems</span>
+            {{desc:salades--bo-bun}}
             <span class="plat__prix">{{prix:salades--bo-bun}}</span>
             <button type="button" class="plat__ajout" data-ajouter="salades--bo-bun" hidden aria-label="Ajouter à la commande : Bo bun"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="salades--salade-au-poulet" data-nom="Salade au poulet" data-prix="{{cents:salades--salade-au-poulet}}" data-recherche="salade au poulet salades">
+          </li>          <li class="plat" data-plat="salades--salade-au-poulet" data-nom="Salade au poulet" data-prix="{{cents:salades--salade-au-poulet}}" data-recherche="{{recherche:salades--salade-au-poulet}}">
             <span class="plat__nom">Salade au poulet</span>
-            
+            {{desc:salades--salade-au-poulet}}
             <span class="plat__prix">{{prix:salades--salade-au-poulet}}</span>
             <button type="button" class="plat__ajout" data-ajouter="salades--salade-au-poulet" hidden aria-label="Ajouter à la commande : Salade au poulet"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="salades--salade-thaie-au-boeuf" data-nom="Salade thaïe au bœuf" data-prix="{{cents:salades--salade-thaie-au-boeuf}}" data-recherche="salade thaie au boeuf salades">
+          </li>          <li class="plat" data-plat="salades--salade-thaie-au-boeuf" data-nom="Salade thaïe au bœuf" data-prix="{{cents:salades--salade-thaie-au-boeuf}}" data-recherche="{{recherche:salades--salade-thaie-au-boeuf}}">
             <span class="plat__nom">Salade thaïe au bœuf</span>
-            
+            {{desc:salades--salade-thaie-au-boeuf}}
             <span class="plat__prix">{{prix:salades--salade-thaie-au-boeuf}}</span>
             <button type="button" class="plat__ajout" data-ajouter="salades--salade-thaie-au-boeuf" hidden aria-label="Ajouter à la commande : Salade thaïe au bœuf"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="salades--salade-thaie-aux-crevettes" data-nom="Salade thaïe aux crevettes" data-prix="{{cents:salades--salade-thaie-aux-crevettes}}" data-recherche="salade thaie aux crevettes salades">
+          </li>          <li class="plat" data-plat="salades--salade-thaie-aux-crevettes" data-nom="Salade thaïe aux crevettes" data-prix="{{cents:salades--salade-thaie-aux-crevettes}}" data-recherche="{{recherche:salades--salade-thaie-aux-crevettes}}">
             <span class="plat__nom">Salade thaïe aux crevettes</span>
-            
+            {{desc:salades--salade-thaie-aux-crevettes}}
             <span class="plat__prix">{{prix:salades--salade-thaie-aux-crevettes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="salades--salade-thaie-aux-crevettes" hidden aria-label="Ajouter à la commande : Salade thaïe aux crevettes"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="salades--salade-d-ananas" data-nom="Salade d’ananas" data-prix="{{cents:salades--salade-d-ananas}}" data-recherche="salade d ananas crabe et surimi, ou crevettes salades">
+          </li>          <li class="plat" data-plat="salades--salade-d-ananas" data-nom="Salade d’ananas" data-prix="{{cents:salades--salade-d-ananas}}" data-recherche="{{recherche:salades--salade-d-ananas}}">
             <span class="plat__nom">Salade d’ananas</span>
-            <span class="plat__desc">Crabe et surimi, ou crevettes</span>
+            {{desc:salades--salade-d-ananas}}
             <span class="plat__prix">{{prix:salades--salade-d-ananas}}</span>
             <button type="button" class="plat__ajout" data-ajouter="salades--salade-d-ananas" hidden aria-label="Ajouter à la commande : Salade d’ananas"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="salades--lap-thai-au-boeuf" data-nom="Lap thaï au bœuf" data-prix="{{cents:salades--lap-thai-au-boeuf}}" data-recherche="lap thai au boeuf salades">
+          </li>          <li class="plat" data-plat="salades--lap-thai-au-boeuf" data-nom="Lap thaï au bœuf" data-prix="{{cents:salades--lap-thai-au-boeuf}}" data-recherche="{{recherche:salades--lap-thai-au-boeuf}}">
             <span class="plat__nom">Lap thaï au bœuf</span>
-            
+            {{desc:salades--lap-thai-au-boeuf}}
             <span class="plat__prix">{{prix:salades--lap-thai-au-boeuf}}</span>
             <button type="button" class="plat__ajout" data-ajouter="salades--lap-thai-au-boeuf" hidden aria-label="Ajouter à la commande : Lap thaï au bœuf"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="salades--salade-thaie-crevettes-et-seiches" data-nom="Salade thaïe crevettes et seiches" data-prix="{{cents:salades--salade-thaie-crevettes-et-seiches}}" data-recherche="salade thaie crevettes et seiches salades">
+          </li>          <li class="plat" data-plat="salades--salade-thaie-crevettes-et-seiches" data-nom="Salade thaïe crevettes et seiches" data-prix="{{cents:salades--salade-thaie-crevettes-et-seiches}}" data-recherche="{{recherche:salades--salade-thaie-crevettes-et-seiches}}">
             <span class="plat__nom">Salade thaïe crevettes et seiches</span>
-            
+            {{desc:salades--salade-thaie-crevettes-et-seiches}}
             <span class="plat__prix">{{prix:salades--salade-thaie-crevettes-et-seiches}}</span>
             <button type="button" class="plat__ajout" data-ajouter="salades--salade-thaie-crevettes-et-seiches" hidden aria-label="Ajouter à la commande : Salade thaïe crevettes et seiches"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>
         </ul>
       </section>      <section class="rubrique" id="vapeurs" aria-labelledby="r-vapeurs" data-rubrique>
-        <h2 id="r-vapeurs" class="rubrique__titre">Vapeurs</h2>
+        <h2 id="r-vapeurs" class="rubrique__titre">{{rubrique:vapeurs}}</h2>
         
         <ul class="plats">
-          <li class="plat" data-plat="vapeurs--bouchees-au-porc" data-nom="Bouchées au porc" data-prix="{{cents:vapeurs--bouchees-au-porc}}" data-recherche="bouchees au porc 5 pieces vapeurs">
+          <li class="plat" data-plat="vapeurs--bouchees-au-porc" data-nom="Bouchées au porc" data-prix="{{cents:vapeurs--bouchees-au-porc}}" data-recherche="{{recherche:vapeurs--bouchees-au-porc}}">
             <span class="plat__nom">Bouchées au porc</span>
-            <span class="plat__desc">5 pièces</span>
+            {{desc:vapeurs--bouchees-au-porc}}
             <span class="plat__prix">{{prix:vapeurs--bouchees-au-porc}}</span>
             <button type="button" class="plat__ajout" data-ajouter="vapeurs--bouchees-au-porc" hidden aria-label="Ajouter à la commande : Bouchées au porc"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="vapeurs--bouchees-aux-crevettes" data-nom="Bouchées aux crevettes" data-prix="{{cents:vapeurs--bouchees-aux-crevettes}}" data-recherche="bouchees aux crevettes 5 pieces vapeurs">
+          </li>          <li class="plat" data-plat="vapeurs--bouchees-aux-crevettes" data-nom="Bouchées aux crevettes" data-prix="{{cents:vapeurs--bouchees-aux-crevettes}}" data-recherche="{{recherche:vapeurs--bouchees-aux-crevettes}}">
             <span class="plat__nom">Bouchées aux crevettes</span>
-            <span class="plat__desc">5 pièces</span>
+            {{desc:vapeurs--bouchees-aux-crevettes}}
             <span class="plat__prix">{{prix:vapeurs--bouchees-aux-crevettes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="vapeurs--bouchees-aux-crevettes" hidden aria-label="Ajouter à la commande : Bouchées aux crevettes"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="vapeurs--ha-kao" data-nom="Ha kao" data-prix="{{cents:vapeurs--ha-kao}}" data-recherche="ha kao raviolis aux crevettes vapeurs">
+          </li>          <li class="plat" data-plat="vapeurs--ha-kao" data-nom="Ha kao" data-prix="{{cents:vapeurs--ha-kao}}" data-recherche="{{recherche:vapeurs--ha-kao}}">
             <span class="plat__nom">Ha kao</span>
-            <span class="plat__desc">Raviolis aux crevettes</span>
+            {{desc:vapeurs--ha-kao}}
             <span class="plat__prix">{{prix:vapeurs--ha-kao}}</span>
             <button type="button" class="plat__ajout" data-ajouter="vapeurs--ha-kao" hidden aria-label="Ajouter à la commande : Ha kao"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="vapeurs--melange-de-vapeurs" data-nom="Mélange de vapeurs" data-prix="{{cents:vapeurs--melange-de-vapeurs}}" data-recherche="melange de vapeurs 5 pieces vapeurs">
+          </li>          <li class="plat" data-plat="vapeurs--melange-de-vapeurs" data-nom="Mélange de vapeurs" data-prix="{{cents:vapeurs--melange-de-vapeurs}}" data-recherche="{{recherche:vapeurs--melange-de-vapeurs}}">
             <span class="plat__nom">Mélange de vapeurs</span>
-            <span class="plat__desc">5 pièces</span>
+            {{desc:vapeurs--melange-de-vapeurs}}
             <span class="plat__prix">{{prix:vapeurs--melange-de-vapeurs}}</span>
             <button type="button" class="plat__ajout" data-ajouter="vapeurs--melange-de-vapeurs" hidden aria-label="Ajouter à la commande : Mélange de vapeurs"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="vapeurs--crepes-chinoises-au-porc" data-nom="Crêpes chinoises au porc" data-prix="{{cents:vapeurs--crepes-chinoises-au-porc}}" data-recherche="crepes chinoises au porc 3 pieces vapeurs">
+          </li>          <li class="plat" data-plat="vapeurs--crepes-chinoises-au-porc" data-nom="Crêpes chinoises au porc" data-prix="{{cents:vapeurs--crepes-chinoises-au-porc}}" data-recherche="{{recherche:vapeurs--crepes-chinoises-au-porc}}">
             <span class="plat__nom">Crêpes chinoises au porc</span>
-            <span class="plat__desc">3 pièces</span>
+            {{desc:vapeurs--crepes-chinoises-au-porc}}
             <span class="plat__prix">{{prix:vapeurs--crepes-chinoises-au-porc}}</span>
             <button type="button" class="plat__ajout" data-ajouter="vapeurs--crepes-chinoises-au-porc" hidden aria-label="Ajouter à la commande : Crêpes chinoises au porc"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>
         </ul>
       </section>      <section class="rubrique" id="soupes" aria-labelledby="r-soupes" data-rubrique>
-        <h2 id="r-soupes" class="rubrique__titre">Soupes</h2>
+        <h2 id="r-soupes" class="rubrique__titre">{{rubrique:soupes}}</h2>
         
         <ul class="plats">
-          <li class="plat" data-plat="soupes--soupe-pho" data-nom="Soupe pho" data-prix="{{cents:soupes--soupe-pho}}" data-recherche="soupe pho boeuf, poulet ou crevettes soupes">
+          <li class="plat" data-plat="soupes--soupe-pho" data-nom="Soupe pho" data-prix="{{cents:soupes--soupe-pho}}" data-recherche="{{recherche:soupes--soupe-pho}}">
             <span class="plat__nom">Soupe pho</span>
-            <span class="plat__desc">Bœuf, poulet ou crevettes</span>
+            {{desc:soupes--soupe-pho}}
             <span class="plat__prix">{{prix:soupes--soupe-pho}}</span>
             <button type="button" class="plat__ajout" data-ajouter="soupes--soupe-pho" hidden aria-label="Ajouter à la commande : Soupe pho"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="soupes--soupe-de-raviolis" data-nom="Soupe de raviolis" data-prix="{{cents:soupes--soupe-de-raviolis}}" data-recherche="soupe de raviolis porc et crevettes soupes">
+          </li>          <li class="plat" data-plat="soupes--soupe-de-raviolis" data-nom="Soupe de raviolis" data-prix="{{cents:soupes--soupe-de-raviolis}}" data-recherche="{{recherche:soupes--soupe-de-raviolis}}">
             <span class="plat__nom">Soupe de raviolis</span>
-            <span class="plat__desc">Porc et crevettes</span>
+            {{desc:soupes--soupe-de-raviolis}}
             <span class="plat__prix">{{prix:soupes--soupe-de-raviolis}}</span>
             <button type="button" class="plat__ajout" data-ajouter="soupes--soupe-de-raviolis" hidden aria-label="Ajouter à la commande : Soupe de raviolis"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="soupes--soupe-phnom-penh" data-nom="Soupe Phnom Penh" data-prix="{{cents:soupes--soupe-phnom-penh}}" data-recherche="soupe phnom penh porc et crevettes soupes">
+          </li>          <li class="plat" data-plat="soupes--soupe-phnom-penh" data-nom="Soupe Phnom Penh" data-prix="{{cents:soupes--soupe-phnom-penh}}" data-recherche="{{recherche:soupes--soupe-phnom-penh}}">
             <span class="plat__nom">Soupe Phnom Penh</span>
-            <span class="plat__desc">Porc et crevettes</span>
+            {{desc:soupes--soupe-phnom-penh}}
             <span class="plat__prix">{{prix:soupes--soupe-phnom-penh}}</span>
             <button type="button" class="plat__ajout" data-ajouter="soupes--soupe-phnom-penh" hidden aria-label="Ajouter à la commande : Soupe Phnom Penh"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>
         </ul>
       </section>      <section class="rubrique" id="porc" aria-labelledby="r-porc" data-rubrique>
-        <h2 id="r-porc" class="rubrique__titre">Porc</h2>
+        <h2 id="r-porc" class="rubrique__titre">{{rubrique:porc}}</h2>
         <p class="rubrique__riz"><span>Servis avec du riz nature.</span> <span class="rubrique__riz-sup">Riz cantonais (porc ou crevettes)&nbsp;: + {{prix:supplement-riz-cantonais}} <button type="button" class="plat__ajout plat__ajout--petit" data-ajouter="supplement-riz-cantonais" data-nom="Supplément riz cantonais (porc ou crevettes)" data-prix="{{cents:supplement-riz-cantonais}}" hidden aria-label="Ajouter à la commande : Supplément riz cantonais (porc ou crevettes)"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button></span></p>
         <ul class="plats">
-          <li class="plat" data-plat="porc--porc-au-caramel" data-nom="Porc au caramel" data-prix="{{cents:porc--porc-au-caramel}}" data-recherche="porc au caramel porc">
+          <li class="plat" data-plat="porc--porc-au-caramel" data-nom="Porc au caramel" data-prix="{{cents:porc--porc-au-caramel}}" data-recherche="{{recherche:porc--porc-au-caramel}}">
             <span class="plat__nom">Porc au caramel</span>
-            
+            {{desc:porc--porc-au-caramel}}
             <span class="plat__prix">{{prix:porc--porc-au-caramel}}</span>
             <button type="button" class="plat__ajout" data-ajouter="porc--porc-au-caramel" hidden aria-label="Ajouter à la commande : Porc au caramel"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="porc--porc-laque" data-nom="Porc laqué" data-prix="{{cents:porc--porc-laque}}" data-recherche="porc laque porc">
+          </li>          <li class="plat" data-plat="porc--porc-laque" data-nom="Porc laqué" data-prix="{{cents:porc--porc-laque}}" data-recherche="{{recherche:porc--porc-laque}}">
             <span class="plat__nom">Porc laqué</span>
-            
+            {{desc:porc--porc-laque}}
             <span class="plat__prix">{{prix:porc--porc-laque}}</span>
             <button type="button" class="plat__ajout" data-ajouter="porc--porc-laque" hidden aria-label="Ajouter à la commande : Porc laqué"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="porc--brochettes-de-porc" data-nom="Brochettes de porc" data-prix="{{cents:porc--brochettes-de-porc}}" data-recherche="brochettes de porc porc">
+          </li>          <li class="plat" data-plat="porc--brochettes-de-porc" data-nom="Brochettes de porc" data-prix="{{cents:porc--brochettes-de-porc}}" data-recherche="{{recherche:porc--brochettes-de-porc}}">
             <span class="plat__nom">Brochettes de porc</span>
-            
+            {{desc:porc--brochettes-de-porc}}
             <span class="plat__prix">{{prix:porc--brochettes-de-porc}}</span>
             <button type="button" class="plat__ajout" data-ajouter="porc--brochettes-de-porc" hidden aria-label="Ajouter à la commande : Brochettes de porc"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>
         </ul>
       </section>      <section class="rubrique" id="poulet" aria-labelledby="r-poulet" data-rubrique>
-        <h2 id="r-poulet" class="rubrique__titre">Poulet</h2>
+        <h2 id="r-poulet" class="rubrique__titre">{{rubrique:poulet}}</h2>
         <p class="rubrique__riz"><span>Servis avec du riz nature.</span> <span class="rubrique__riz-sup">Riz cantonais (porc ou crevettes)&nbsp;: + {{prix:supplement-riz-cantonais}} <button type="button" class="plat__ajout plat__ajout--petit" data-ajouter="supplement-riz-cantonais" data-nom="Supplément riz cantonais (porc ou crevettes)" data-prix="{{cents:supplement-riz-cantonais}}" hidden aria-label="Ajouter à la commande : Supplément riz cantonais (porc ou crevettes)"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button></span></p>
         <ul class="plats">
-          <li class="plat" data-plat="poulet--poulet-frit-sauce-citron" data-nom="Poulet frit sauce citron" data-prix="{{cents:poulet--poulet-frit-sauce-citron}}" data-recherche="poulet frit sauce citron poulet">
+          <li class="plat" data-plat="poulet--poulet-frit-sauce-citron" data-nom="Poulet frit sauce citron" data-prix="{{cents:poulet--poulet-frit-sauce-citron}}" data-recherche="{{recherche:poulet--poulet-frit-sauce-citron}}">
             <span class="plat__nom">Poulet frit sauce citron</span>
-            
+            {{desc:poulet--poulet-frit-sauce-citron}}
             <span class="plat__prix">{{prix:poulet--poulet-frit-sauce-citron}}</span>
             <button type="button" class="plat__ajout" data-ajouter="poulet--poulet-frit-sauce-citron" hidden aria-label="Ajouter à la commande : Poulet frit sauce citron"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="poulet--poulet-sauce-curry" data-nom="Poulet sauce curry" data-prix="{{cents:poulet--poulet-sauce-curry}}" data-recherche="poulet sauce curry poulet">
+          </li>          <li class="plat" data-plat="poulet--poulet-sauce-curry" data-nom="Poulet sauce curry" data-prix="{{cents:poulet--poulet-sauce-curry}}" data-recherche="{{recherche:poulet--poulet-sauce-curry}}">
             <span class="plat__nom">Poulet sauce curry</span>
-            
+            {{desc:poulet--poulet-sauce-curry}}
             <span class="plat__prix">{{prix:poulet--poulet-sauce-curry}}</span>
             <button type="button" class="plat__ajout" data-ajouter="poulet--poulet-sauce-curry" hidden aria-label="Ajouter à la commande : Poulet sauce curry"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="poulet--poulet-saute-sauce-sate" data-nom="Poulet sauté sauce saté" data-prix="{{cents:poulet--poulet-saute-sauce-sate}}" data-recherche="poulet saute sauce sate poulet">
+          </li>          <li class="plat" data-plat="poulet--poulet-saute-sauce-sate" data-nom="Poulet sauté sauce saté" data-prix="{{cents:poulet--poulet-saute-sauce-sate}}" data-recherche="{{recherche:poulet--poulet-saute-sauce-sate}}">
             <span class="plat__nom">Poulet sauté sauce saté</span>
-            
+            {{desc:poulet--poulet-saute-sauce-sate}}
             <span class="plat__prix">{{prix:poulet--poulet-saute-sauce-sate}}</span>
             <button type="button" class="plat__ajout" data-ajouter="poulet--poulet-saute-sauce-sate" hidden aria-label="Ajouter à la commande : Poulet sauté sauce saté"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="poulet--poulet-sauce-ananas" data-nom="Poulet sauce ananas" data-prix="{{cents:poulet--poulet-sauce-ananas}}" data-recherche="poulet sauce ananas poulet">
+          </li>          <li class="plat" data-plat="poulet--poulet-sauce-ananas" data-nom="Poulet sauce ananas" data-prix="{{cents:poulet--poulet-sauce-ananas}}" data-recherche="{{recherche:poulet--poulet-sauce-ananas}}">
             <span class="plat__nom">Poulet sauce ananas</span>
-            
+            {{desc:poulet--poulet-sauce-ananas}}
             <span class="plat__prix">{{prix:poulet--poulet-sauce-ananas}}</span>
             <button type="button" class="plat__ajout" data-ajouter="poulet--poulet-sauce-ananas" hidden aria-label="Ajouter à la commande : Poulet sauce ananas"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="poulet--poulet-sauce-citronnelle" data-nom="Poulet sauce citronnelle" data-prix="{{cents:poulet--poulet-sauce-citronnelle}}" data-recherche="poulet sauce citronnelle poulet">
+          </li>          <li class="plat" data-plat="poulet--poulet-sauce-citronnelle" data-nom="Poulet sauce citronnelle" data-prix="{{cents:poulet--poulet-sauce-citronnelle}}" data-recherche="{{recherche:poulet--poulet-sauce-citronnelle}}">
             <span class="plat__nom">Poulet sauce citronnelle</span>
-            
+            {{desc:poulet--poulet-sauce-citronnelle}}
             <span class="plat__prix">{{prix:poulet--poulet-sauce-citronnelle}}</span>
             <button type="button" class="plat__ajout" data-ajouter="poulet--poulet-sauce-citronnelle" hidden aria-label="Ajouter à la commande : Poulet sauce citronnelle"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="poulet--poulet-aux-legumes" data-nom="Poulet aux légumes" data-prix="{{cents:poulet--poulet-aux-legumes}}" data-recherche="poulet aux legumes poulet">
+          </li>          <li class="plat" data-plat="poulet--poulet-aux-legumes" data-nom="Poulet aux légumes" data-prix="{{cents:poulet--poulet-aux-legumes}}" data-recherche="{{recherche:poulet--poulet-aux-legumes}}">
             <span class="plat__nom">Poulet aux légumes</span>
-            
+            {{desc:poulet--poulet-aux-legumes}}
             <span class="plat__prix">{{prix:poulet--poulet-aux-legumes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="poulet--poulet-aux-legumes" hidden aria-label="Ajouter à la commande : Poulet aux légumes"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="poulet--poulet-sauce-piquante" data-nom="Poulet sauce piquante" data-prix="{{cents:poulet--poulet-sauce-piquante}}" data-recherche="poulet sauce piquante poulet piquant epice">
+          </li>          <li class="plat" data-plat="poulet--poulet-sauce-piquante" data-nom="Poulet sauce piquante" data-prix="{{cents:poulet--poulet-sauce-piquante}}" data-recherche="{{recherche:poulet--poulet-sauce-piquante}}">
             <span class="plat__nom">Poulet sauce piquante</span>
-            
+            {{desc:poulet--poulet-sauce-piquante}}
             <span class="plat__prix">{{prix:poulet--poulet-sauce-piquante}}</span>
             <button type="button" class="plat__ajout" data-ajouter="poulet--poulet-sauce-piquante" hidden aria-label="Ajouter à la commande : Poulet sauce piquante"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>
         </ul>
       </section>      <section class="rubrique" id="boeuf" aria-labelledby="r-boeuf" data-rubrique>
-        <h2 id="r-boeuf" class="rubrique__titre">Bœuf</h2>
+        <h2 id="r-boeuf" class="rubrique__titre">{{rubrique:boeuf}}</h2>
         <p class="rubrique__riz"><span>Servis avec du riz nature.</span> <span class="rubrique__riz-sup">Riz cantonais (porc ou crevettes)&nbsp;: + {{prix:supplement-riz-cantonais}} <button type="button" class="plat__ajout plat__ajout--petit" data-ajouter="supplement-riz-cantonais" data-nom="Supplément riz cantonais (porc ou crevettes)" data-prix="{{cents:supplement-riz-cantonais}}" hidden aria-label="Ajouter à la commande : Supplément riz cantonais (porc ou crevettes)"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button></span></p>
         <ul class="plats">
-          <li class="plat" data-plat="boeuf--lok-lac" data-nom="Lok lac" data-prix="{{cents:boeuf--lok-lac}}" data-recherche="lok lac boeuf marine saute boeuf">
+          <li class="plat" data-plat="boeuf--lok-lac" data-nom="Lok lac" data-prix="{{cents:boeuf--lok-lac}}" data-recherche="{{recherche:boeuf--lok-lac}}">
             <span class="plat__nom">Lok lac</span>
-            <span class="plat__desc">Bœuf mariné sauté</span>
+            {{desc:boeuf--lok-lac}}
             <span class="plat__prix">{{prix:boeuf--lok-lac}}</span>
             <button type="button" class="plat__ajout" data-ajouter="boeuf--lok-lac" hidden aria-label="Ajouter à la commande : Lok lac"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="boeuf--boeuf-aux-champignons-noirs" data-nom="Bœuf aux champignons noirs" data-prix="{{cents:boeuf--boeuf-aux-champignons-noirs}}" data-recherche="boeuf aux champignons noirs boeuf">
+          </li>          <li class="plat" data-plat="boeuf--boeuf-aux-champignons-noirs" data-nom="Bœuf aux champignons noirs" data-prix="{{cents:boeuf--boeuf-aux-champignons-noirs}}" data-recherche="{{recherche:boeuf--boeuf-aux-champignons-noirs}}">
             <span class="plat__nom">Bœuf aux champignons noirs</span>
-            
+            {{desc:boeuf--boeuf-aux-champignons-noirs}}
             <span class="plat__prix">{{prix:boeuf--boeuf-aux-champignons-noirs}}</span>
             <button type="button" class="plat__ajout" data-ajouter="boeuf--boeuf-aux-champignons-noirs" hidden aria-label="Ajouter à la commande : Bœuf aux champignons noirs"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="boeuf--boeuf-sauce-sate" data-nom="Bœuf sauce saté" data-prix="{{cents:boeuf--boeuf-sauce-sate}}" data-recherche="boeuf sauce sate boeuf">
+          </li>          <li class="plat" data-plat="boeuf--boeuf-sauce-sate" data-nom="Bœuf sauce saté" data-prix="{{cents:boeuf--boeuf-sauce-sate}}" data-recherche="{{recherche:boeuf--boeuf-sauce-sate}}">
             <span class="plat__nom">Bœuf sauce saté</span>
-            
+            {{desc:boeuf--boeuf-sauce-sate}}
             <span class="plat__prix">{{prix:boeuf--boeuf-sauce-sate}}</span>
             <button type="button" class="plat__ajout" data-ajouter="boeuf--boeuf-sauce-sate" hidden aria-label="Ajouter à la commande : Bœuf sauce saté"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="boeuf--boeuf-sauce-thaie" data-nom="Bœuf sauce thaïe" data-prix="{{cents:boeuf--boeuf-sauce-thaie}}" data-recherche="boeuf sauce thaie boeuf">
+          </li>          <li class="plat" data-plat="boeuf--boeuf-sauce-thaie" data-nom="Bœuf sauce thaïe" data-prix="{{cents:boeuf--boeuf-sauce-thaie}}" data-recherche="{{recherche:boeuf--boeuf-sauce-thaie}}">
             <span class="plat__nom">Bœuf sauce thaïe</span>
-            
+            {{desc:boeuf--boeuf-sauce-thaie}}
             <span class="plat__prix">{{prix:boeuf--boeuf-sauce-thaie}}</span>
             <button type="button" class="plat__ajout" data-ajouter="boeuf--boeuf-sauce-thaie" hidden aria-label="Ajouter à la commande : Bœuf sauce thaïe"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="boeuf--boeuf-sauce-piquante" data-nom="Bœuf sauce piquante" data-prix="{{cents:boeuf--boeuf-sauce-piquante}}" data-recherche="boeuf sauce piquante boeuf piquant epice">
+          </li>          <li class="plat" data-plat="boeuf--boeuf-sauce-piquante" data-nom="Bœuf sauce piquante" data-prix="{{cents:boeuf--boeuf-sauce-piquante}}" data-recherche="{{recherche:boeuf--boeuf-sauce-piquante}}">
             <span class="plat__nom">Bœuf sauce piquante</span>
-            
+            {{desc:boeuf--boeuf-sauce-piquante}}
             <span class="plat__prix">{{prix:boeuf--boeuf-sauce-piquante}}</span>
             <button type="button" class="plat__ajout" data-ajouter="boeuf--boeuf-sauce-piquante" hidden aria-label="Ajouter à la commande : Bœuf sauce piquante"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>
         </ul>
       </section>      <section class="rubrique" id="canard" aria-labelledby="r-canard" data-rubrique>
-        <h2 id="r-canard" class="rubrique__titre">Canard</h2>
+        <h2 id="r-canard" class="rubrique__titre">{{rubrique:canard}}</h2>
         <p class="rubrique__riz"><span>Servis avec du riz nature.</span> <span class="rubrique__riz-sup">Riz cantonais (porc ou crevettes)&nbsp;: + {{prix:supplement-riz-cantonais}} <button type="button" class="plat__ajout plat__ajout--petit" data-ajouter="supplement-riz-cantonais" data-nom="Supplément riz cantonais (porc ou crevettes)" data-prix="{{cents:supplement-riz-cantonais}}" hidden aria-label="Ajouter à la commande : Supplément riz cantonais (porc ou crevettes)"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button></span></p>
         <ul class="plats">
-          <li class="plat" data-plat="canard--canard-sauce-curry" data-nom="Canard sauce curry" data-prix="{{cents:canard--canard-sauce-curry}}" data-recherche="canard sauce curry canard">
+          <li class="plat" data-plat="canard--canard-sauce-curry" data-nom="Canard sauce curry" data-prix="{{cents:canard--canard-sauce-curry}}" data-recherche="{{recherche:canard--canard-sauce-curry}}">
             <span class="plat__nom">Canard sauce curry</span>
-            
+            {{desc:canard--canard-sauce-curry}}
             <span class="plat__prix">{{prix:canard--canard-sauce-curry}}</span>
             <button type="button" class="plat__ajout" data-ajouter="canard--canard-sauce-curry" hidden aria-label="Ajouter à la commande : Canard sauce curry"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="canard--canard-aux-champignons-noirs" data-nom="Canard aux champignons noirs" data-prix="{{cents:canard--canard-aux-champignons-noirs}}" data-recherche="canard aux champignons noirs canard">
+          </li>          <li class="plat" data-plat="canard--canard-aux-champignons-noirs" data-nom="Canard aux champignons noirs" data-prix="{{cents:canard--canard-aux-champignons-noirs}}" data-recherche="{{recherche:canard--canard-aux-champignons-noirs}}">
             <span class="plat__nom">Canard aux champignons noirs</span>
-            
+            {{desc:canard--canard-aux-champignons-noirs}}
             <span class="plat__prix">{{prix:canard--canard-aux-champignons-noirs}}</span>
             <button type="button" class="plat__ajout" data-ajouter="canard--canard-aux-champignons-noirs" hidden aria-label="Ajouter à la commande : Canard aux champignons noirs"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="canard--canard-laque" data-nom="Canard laqué" data-prix="{{cents:canard--canard-laque}}" data-recherche="canard laque canard">
+          </li>          <li class="plat" data-plat="canard--canard-laque" data-nom="Canard laqué" data-prix="{{cents:canard--canard-laque}}" data-recherche="{{recherche:canard--canard-laque}}">
             <span class="plat__nom">Canard laqué</span>
-            
+            {{desc:canard--canard-laque}}
             <span class="plat__prix">{{prix:canard--canard-laque}}</span>
             <button type="button" class="plat__ajout" data-ajouter="canard--canard-laque" hidden aria-label="Ajouter à la commande : Canard laqué"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>
         </ul>
       </section>      <section class="rubrique" id="crevettes" aria-labelledby="r-crevettes" data-rubrique>
-        <h2 id="r-crevettes" class="rubrique__titre">Crevettes</h2>
+        <h2 id="r-crevettes" class="rubrique__titre">{{rubrique:crevettes}}</h2>
         <p class="rubrique__riz"><span>Servis avec du riz nature.</span> <span class="rubrique__riz-sup">Riz cantonais (porc ou crevettes)&nbsp;: + {{prix:supplement-riz-cantonais}} <button type="button" class="plat__ajout plat__ajout--petit" data-ajouter="supplement-riz-cantonais" data-nom="Supplément riz cantonais (porc ou crevettes)" data-prix="{{cents:supplement-riz-cantonais}}" hidden aria-label="Ajouter à la commande : Supplément riz cantonais (porc ou crevettes)"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button></span></p>
         <ul class="plats">
-          <li class="plat" data-plat="crevettes--crevettes-sauce-curry" data-nom="Crevettes sauce curry" data-prix="{{cents:crevettes--crevettes-sauce-curry}}" data-recherche="crevettes sauce curry crevettes">
+          <li class="plat" data-plat="crevettes--crevettes-sauce-curry" data-nom="Crevettes sauce curry" data-prix="{{cents:crevettes--crevettes-sauce-curry}}" data-recherche="{{recherche:crevettes--crevettes-sauce-curry}}">
             <span class="plat__nom">Crevettes sauce curry</span>
-            
+            {{desc:crevettes--crevettes-sauce-curry}}
             <span class="plat__prix">{{prix:crevettes--crevettes-sauce-curry}}</span>
             <button type="button" class="plat__ajout" data-ajouter="crevettes--crevettes-sauce-curry" hidden aria-label="Ajouter à la commande : Crevettes sauce curry"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="crevettes--crevettes-sauce-sate" data-nom="Crevettes sauce saté" data-prix="{{cents:crevettes--crevettes-sauce-sate}}" data-recherche="crevettes sauce sate crevettes">
+          </li>          <li class="plat" data-plat="crevettes--crevettes-sauce-sate" data-nom="Crevettes sauce saté" data-prix="{{cents:crevettes--crevettes-sauce-sate}}" data-recherche="{{recherche:crevettes--crevettes-sauce-sate}}">
             <span class="plat__nom">Crevettes sauce saté</span>
-            
+            {{desc:crevettes--crevettes-sauce-sate}}
             <span class="plat__prix">{{prix:crevettes--crevettes-sauce-sate}}</span>
             <button type="button" class="plat__ajout" data-ajouter="crevettes--crevettes-sauce-sate" hidden aria-label="Ajouter à la commande : Crevettes sauce saté"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="crevettes--crevettes-sauce-citronnelle" data-nom="Crevettes sauce citronnelle" data-prix="{{cents:crevettes--crevettes-sauce-citronnelle}}" data-recherche="crevettes sauce citronnelle crevettes">
+          </li>          <li class="plat" data-plat="crevettes--crevettes-sauce-citronnelle" data-nom="Crevettes sauce citronnelle" data-prix="{{cents:crevettes--crevettes-sauce-citronnelle}}" data-recherche="{{recherche:crevettes--crevettes-sauce-citronnelle}}">
             <span class="plat__nom">Crevettes sauce citronnelle</span>
-            
+            {{desc:crevettes--crevettes-sauce-citronnelle}}
             <span class="plat__prix">{{prix:crevettes--crevettes-sauce-citronnelle}}</span>
             <button type="button" class="plat__ajout" data-ajouter="crevettes--crevettes-sauce-citronnelle" hidden aria-label="Ajouter à la commande : Crevettes sauce citronnelle"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="crevettes--brochettes-de-crevettes" data-nom="Brochettes de crevettes" data-prix="{{cents:crevettes--brochettes-de-crevettes}}" data-recherche="brochettes de crevettes crevettes">
+          </li>          <li class="plat" data-plat="crevettes--brochettes-de-crevettes" data-nom="Brochettes de crevettes" data-prix="{{cents:crevettes--brochettes-de-crevettes}}" data-recherche="{{recherche:crevettes--brochettes-de-crevettes}}">
             <span class="plat__nom">Brochettes de crevettes</span>
-            
+            {{desc:crevettes--brochettes-de-crevettes}}
             <span class="plat__prix">{{prix:crevettes--brochettes-de-crevettes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="crevettes--brochettes-de-crevettes" hidden aria-label="Ajouter à la commande : Brochettes de crevettes"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="crevettes--crevettes-sauce-thaie" data-nom="Crevettes sauce thaïe" data-prix="{{cents:crevettes--crevettes-sauce-thaie}}" data-recherche="crevettes sauce thaie crevettes">
+          </li>          <li class="plat" data-plat="crevettes--crevettes-sauce-thaie" data-nom="Crevettes sauce thaïe" data-prix="{{cents:crevettes--crevettes-sauce-thaie}}" data-recherche="{{recherche:crevettes--crevettes-sauce-thaie}}">
             <span class="plat__nom">Crevettes sauce thaïe</span>
-            
+            {{desc:crevettes--crevettes-sauce-thaie}}
             <span class="plat__prix">{{prix:crevettes--crevettes-sauce-thaie}}</span>
             <button type="button" class="plat__ajout" data-ajouter="crevettes--crevettes-sauce-thaie" hidden aria-label="Ajouter à la commande : Crevettes sauce thaïe"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>
         </ul>
       </section>      <section class="rubrique" id="seiches" aria-labelledby="r-seiches" data-rubrique>
-        <h2 id="r-seiches" class="rubrique__titre">Seiches</h2>
+        <h2 id="r-seiches" class="rubrique__titre">{{rubrique:seiches}}</h2>
         <p class="rubrique__riz"><span>Servis avec du riz nature.</span> <span class="rubrique__riz-sup">Riz cantonais (porc ou crevettes)&nbsp;: + {{prix:supplement-riz-cantonais}} <button type="button" class="plat__ajout plat__ajout--petit" data-ajouter="supplement-riz-cantonais" data-nom="Supplément riz cantonais (porc ou crevettes)" data-prix="{{cents:supplement-riz-cantonais}}" hidden aria-label="Ajouter à la commande : Supplément riz cantonais (porc ou crevettes)"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button></span></p>
         <ul class="plats">
-          <li class="plat" data-plat="seiches--seiche-sauce-curry" data-nom="Seiche sauce curry" data-prix="{{cents:seiches--seiche-sauce-curry}}" data-recherche="seiche sauce curry seiches">
+          <li class="plat" data-plat="seiches--seiche-sauce-curry" data-nom="Seiche sauce curry" data-prix="{{cents:seiches--seiche-sauce-curry}}" data-recherche="{{recherche:seiches--seiche-sauce-curry}}">
             <span class="plat__nom">Seiche sauce curry</span>
-            
+            {{desc:seiches--seiche-sauce-curry}}
             <span class="plat__prix">{{prix:seiches--seiche-sauce-curry}}</span>
             <button type="button" class="plat__ajout" data-ajouter="seiches--seiche-sauce-curry" hidden aria-label="Ajouter à la commande : Seiche sauce curry"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="seiches--seiche-sauce-sate" data-nom="Seiche sauce saté" data-prix="{{cents:seiches--seiche-sauce-sate}}" data-recherche="seiche sauce sate seiches">
+          </li>          <li class="plat" data-plat="seiches--seiche-sauce-sate" data-nom="Seiche sauce saté" data-prix="{{cents:seiches--seiche-sauce-sate}}" data-recherche="{{recherche:seiches--seiche-sauce-sate}}">
             <span class="plat__nom">Seiche sauce saté</span>
-            
+            {{desc:seiches--seiche-sauce-sate}}
             <span class="plat__prix">{{prix:seiches--seiche-sauce-sate}}</span>
             <button type="button" class="plat__ajout" data-ajouter="seiches--seiche-sauce-sate" hidden aria-label="Ajouter à la commande : Seiche sauce saté"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="seiches--seiche-sauce-citronnelle" data-nom="Seiche sauce citronnelle" data-prix="{{cents:seiches--seiche-sauce-citronnelle}}" data-recherche="seiche sauce citronnelle seiches">
+          </li>          <li class="plat" data-plat="seiches--seiche-sauce-citronnelle" data-nom="Seiche sauce citronnelle" data-prix="{{cents:seiches--seiche-sauce-citronnelle}}" data-recherche="{{recherche:seiches--seiche-sauce-citronnelle}}">
             <span class="plat__nom">Seiche sauce citronnelle</span>
-            
+            {{desc:seiches--seiche-sauce-citronnelle}}
             <span class="plat__prix">{{prix:seiches--seiche-sauce-citronnelle}}</span>
             <button type="button" class="plat__ajout" data-ajouter="seiches--seiche-sauce-citronnelle" hidden aria-label="Ajouter à la commande : Seiche sauce citronnelle"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="seiches--seiche-sauce-piquante" data-nom="Seiche sauce piquante" data-prix="{{cents:seiches--seiche-sauce-piquante}}" data-recherche="seiche sauce piquante seiches piquant epice">
+          </li>          <li class="plat" data-plat="seiches--seiche-sauce-piquante" data-nom="Seiche sauce piquante" data-prix="{{cents:seiches--seiche-sauce-piquante}}" data-recherche="{{recherche:seiches--seiche-sauce-piquante}}">
             <span class="plat__nom">Seiche sauce piquante</span>
-            
+            {{desc:seiches--seiche-sauce-piquante}}
             <span class="plat__prix">{{prix:seiches--seiche-sauce-piquante}}</span>
             <button type="button" class="plat__ajout" data-ajouter="seiches--seiche-sauce-piquante" hidden aria-label="Ajouter à la commande : Seiche sauce piquante"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>
         </ul>
       </section>      <section class="rubrique" id="specialites-du-chef" aria-labelledby="r-specialites-du-chef" data-rubrique>
-        <h2 id="r-specialites-du-chef" class="rubrique__titre">Spécialités du chef</h2>
+        <h2 id="r-specialites-du-chef" class="rubrique__titre">{{rubrique:specialites-du-chef}}</h2>
         <p class="rubrique__riz"><span>Servis avec du riz nature.</span> <span class="rubrique__riz-sup">Riz cantonais (porc ou crevettes)&nbsp;: + {{prix:supplement-riz-cantonais}} <button type="button" class="plat__ajout plat__ajout--petit" data-ajouter="supplement-riz-cantonais" data-nom="Supplément riz cantonais (porc ou crevettes)" data-prix="{{cents:supplement-riz-cantonais}}" hidden aria-label="Ajouter à la commande : Supplément riz cantonais (porc ou crevettes)"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button></span></p>
         <ul class="plats">
-          <li class="plat" data-plat="specialites-du-chef--boeuf-du-chef" data-nom="Bœuf du chef" data-prix="{{cents:specialites-du-chef--boeuf-du-chef}}" data-recherche="boeuf du chef specialites du chef">
+          <li class="plat" data-plat="specialites-du-chef--boeuf-du-chef" data-nom="Bœuf du chef" data-prix="{{cents:specialites-du-chef--boeuf-du-chef}}" data-recherche="{{recherche:specialites-du-chef--boeuf-du-chef}}">
             <span class="plat__nom">Bœuf du chef</span>
-            
+            {{desc:specialites-du-chef--boeuf-du-chef}}
             <span class="plat__prix">{{prix:specialites-du-chef--boeuf-du-chef}}</span>
             <button type="button" class="plat__ajout" data-ajouter="specialites-du-chef--boeuf-du-chef" hidden aria-label="Ajouter à la commande : Bœuf du chef"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="specialites-du-chef--crevettes-du-chef" data-nom="Crevettes du chef" data-prix="{{cents:specialites-du-chef--crevettes-du-chef}}" data-recherche="crevettes du chef specialites du chef">
+          </li>          <li class="plat" data-plat="specialites-du-chef--crevettes-du-chef" data-nom="Crevettes du chef" data-prix="{{cents:specialites-du-chef--crevettes-du-chef}}" data-recherche="{{recherche:specialites-du-chef--crevettes-du-chef}}">
             <span class="plat__nom">Crevettes du chef</span>
-            
+            {{desc:specialites-du-chef--crevettes-du-chef}}
             <span class="plat__prix">{{prix:specialites-du-chef--crevettes-du-chef}}</span>
             <button type="button" class="plat__ajout" data-ajouter="specialites-du-chef--crevettes-du-chef" hidden aria-label="Ajouter à la commande : Crevettes du chef"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="specialites-du-chef--trois-delices" data-nom="Trois délices" data-prix="{{cents:specialites-du-chef--trois-delices}}" data-recherche="trois delices specialites du chef">
+          </li>          <li class="plat" data-plat="specialites-du-chef--trois-delices" data-nom="Trois délices" data-prix="{{cents:specialites-du-chef--trois-delices}}" data-recherche="{{recherche:specialites-du-chef--trois-delices}}">
             <span class="plat__nom">Trois délices</span>
-            
+            {{desc:specialites-du-chef--trois-delices}}
             <span class="plat__prix">{{prix:specialites-du-chef--trois-delices}}</span>
             <button type="button" class="plat__ajout" data-ajouter="specialites-du-chef--trois-delices" hidden aria-label="Ajouter à la commande : Trois délices"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="specialites-du-chef--canard-a-l-orange" data-nom="Canard à l’orange" data-prix="{{cents:specialites-du-chef--canard-a-l-orange}}" data-recherche="canard a l orange specialites du chef">
+          </li>          <li class="plat" data-plat="specialites-du-chef--canard-a-l-orange" data-nom="Canard à l’orange" data-prix="{{cents:specialites-du-chef--canard-a-l-orange}}" data-recherche="{{recherche:specialites-du-chef--canard-a-l-orange}}">
             <span class="plat__nom">Canard à l’orange</span>
-            
+            {{desc:specialites-du-chef--canard-a-l-orange}}
             <span class="plat__prix">{{prix:specialites-du-chef--canard-a-l-orange}}</span>
             <button type="button" class="plat__ajout" data-ajouter="specialites-du-chef--canard-a-l-orange" hidden aria-label="Ajouter à la commande : Canard à l’orange"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="specialites-du-chef--fruits-de-mer-sauce-thaie" data-nom="Fruits de mer sauce thaïe" data-prix="{{cents:specialites-du-chef--fruits-de-mer-sauce-thaie}}" data-recherche="fruits de mer sauce thaie specialites du chef">
+          </li>          <li class="plat" data-plat="specialites-du-chef--fruits-de-mer-sauce-thaie" data-nom="Fruits de mer sauce thaïe" data-prix="{{cents:specialites-du-chef--fruits-de-mer-sauce-thaie}}" data-recherche="{{recherche:specialites-du-chef--fruits-de-mer-sauce-thaie}}">
             <span class="plat__nom">Fruits de mer sauce thaïe</span>
-            
+            {{desc:specialites-du-chef--fruits-de-mer-sauce-thaie}}
             <span class="plat__prix">{{prix:specialites-du-chef--fruits-de-mer-sauce-thaie}}</span>
             <button type="button" class="plat__ajout" data-ajouter="specialites-du-chef--fruits-de-mer-sauce-thaie" hidden aria-label="Ajouter à la commande : Fruits de mer sauce thaïe"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>
         </ul>
       </section>      <section class="rubrique" id="brochettes" aria-labelledby="r-brochettes" data-rubrique>
-        <h2 id="r-brochettes" class="rubrique__titre">Brochettes</h2>
+        <h2 id="r-brochettes" class="rubrique__titre">{{rubrique:brochettes}}</h2>
         <p class="rubrique__riz"><span>Servis avec du riz nature.</span> <span class="rubrique__riz-sup">Riz cantonais (porc ou crevettes)&nbsp;: + {{prix:supplement-riz-cantonais}} <button type="button" class="plat__ajout plat__ajout--petit" data-ajouter="supplement-riz-cantonais" data-nom="Supplément riz cantonais (porc ou crevettes)" data-prix="{{cents:supplement-riz-cantonais}}" hidden aria-label="Ajouter à la commande : Supplément riz cantonais (porc ou crevettes)"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button></span></p>
         <ul class="plats">
-          <li class="plat" data-plat="brochettes--brochettes-de-boeuf" data-nom="Brochettes de bœuf" data-prix="{{cents:brochettes--brochettes-de-boeuf}}" data-recherche="brochettes de boeuf brochettes">
+          <li class="plat" data-plat="brochettes--brochettes-de-boeuf" data-nom="Brochettes de bœuf" data-prix="{{cents:brochettes--brochettes-de-boeuf}}" data-recherche="{{recherche:brochettes--brochettes-de-boeuf}}">
             <span class="plat__nom">Brochettes de bœuf</span>
-            
+            {{desc:brochettes--brochettes-de-boeuf}}
             <span class="plat__prix">{{prix:brochettes--brochettes-de-boeuf}}</span>
             <button type="button" class="plat__ajout" data-ajouter="brochettes--brochettes-de-boeuf" hidden aria-label="Ajouter à la commande : Brochettes de bœuf"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="brochettes--brochettes-de-crevettes" data-nom="Brochettes de crevettes" data-prix="{{cents:brochettes--brochettes-de-crevettes}}" data-recherche="brochettes de crevettes brochettes">
+          </li>          <li class="plat" data-plat="brochettes--brochettes-de-crevettes" data-nom="Brochettes de crevettes" data-prix="{{cents:brochettes--brochettes-de-crevettes}}" data-recherche="{{recherche:brochettes--brochettes-de-crevettes}}">
             <span class="plat__nom">Brochettes de crevettes</span>
-            
+            {{desc:brochettes--brochettes-de-crevettes}}
             <span class="plat__prix">{{prix:brochettes--brochettes-de-crevettes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="brochettes--brochettes-de-crevettes" hidden aria-label="Ajouter à la commande : Brochettes de crevettes"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="brochettes--brochettes-de-canard" data-nom="Brochettes de canard" data-prix="{{cents:brochettes--brochettes-de-canard}}" data-recherche="brochettes de canard brochettes">
+          </li>          <li class="plat" data-plat="brochettes--brochettes-de-canard" data-nom="Brochettes de canard" data-prix="{{cents:brochettes--brochettes-de-canard}}" data-recherche="{{recherche:brochettes--brochettes-de-canard}}">
             <span class="plat__nom">Brochettes de canard</span>
-            
+            {{desc:brochettes--brochettes-de-canard}}
             <span class="plat__prix">{{prix:brochettes--brochettes-de-canard}}</span>
             <button type="button" class="plat__ajout" data-ajouter="brochettes--brochettes-de-canard" hidden aria-label="Ajouter à la commande : Brochettes de canard"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>
         </ul>
       </section>      <section class="rubrique" id="nouilles" aria-labelledby="r-nouilles" data-rubrique>
-        <h2 id="r-nouilles" class="rubrique__titre">Nouilles et pâtes</h2>
+        <h2 id="r-nouilles" class="rubrique__titre">{{rubrique:nouilles}}</h2>
         
         <ul class="plats">
-          <li class="plat" data-plat="nouilles--pad-thai" data-nom="Pad thaï" data-prix="{{cents:nouilles--pad-thai}}" data-recherche="pad thai boeuf, poulet ou crevettes nouilles et pates">
+          <li class="plat" data-plat="nouilles--pad-thai" data-nom="Pad thaï" data-prix="{{cents:nouilles--pad-thai}}" data-recherche="{{recherche:nouilles--pad-thai}}">
             <span class="plat__nom">Pad thaï</span>
-            <span class="plat__desc">Bœuf, poulet ou crevettes</span>
+            {{desc:nouilles--pad-thai}}
             <span class="plat__prix">{{prix:nouilles--pad-thai}}</span>
             <button type="button" class="plat__ajout" data-ajouter="nouilles--pad-thai" hidden aria-label="Ajouter à la commande : Pad thaï"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="nouilles--legumes-sautes" data-nom="Légumes sautés" data-prix="{{cents:nouilles--legumes-sautes}}" data-recherche="legumes sautes nouilles et pates">
+          </li>          <li class="plat" data-plat="nouilles--legumes-sautes" data-nom="Légumes sautés" data-prix="{{cents:nouilles--legumes-sautes}}" data-recherche="{{recherche:nouilles--legumes-sautes}}">
             <span class="plat__nom">Légumes sautés</span>
-            
+            {{desc:nouilles--legumes-sautes}}
             <span class="plat__prix">{{prix:nouilles--legumes-sautes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="nouilles--legumes-sautes" hidden aria-label="Ajouter à la commande : Légumes sautés"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="nouilles--nouilles-sautees-au-boeuf" data-nom="Nouilles sautées au bœuf" data-prix="{{cents:nouilles--nouilles-sautees-au-boeuf}}" data-recherche="nouilles sautees au boeuf nouilles et pates">
+          </li>          <li class="plat" data-plat="nouilles--nouilles-sautees-au-boeuf" data-nom="Nouilles sautées au bœuf" data-prix="{{cents:nouilles--nouilles-sautees-au-boeuf}}" data-recherche="{{recherche:nouilles--nouilles-sautees-au-boeuf}}">
             <span class="plat__nom">Nouilles sautées au bœuf</span>
-            
+            {{desc:nouilles--nouilles-sautees-au-boeuf}}
             <span class="plat__prix">{{prix:nouilles--nouilles-sautees-au-boeuf}}</span>
             <button type="button" class="plat__ajout" data-ajouter="nouilles--nouilles-sautees-au-boeuf" hidden aria-label="Ajouter à la commande : Nouilles sautées au bœuf"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="nouilles--nouilles-sautees-aux-crevettes" data-nom="Nouilles sautées aux crevettes" data-prix="{{cents:nouilles--nouilles-sautees-aux-crevettes}}" data-recherche="nouilles sautees aux crevettes nouilles et pates">
+          </li>          <li class="plat" data-plat="nouilles--nouilles-sautees-aux-crevettes" data-nom="Nouilles sautées aux crevettes" data-prix="{{cents:nouilles--nouilles-sautees-aux-crevettes}}" data-recherche="{{recherche:nouilles--nouilles-sautees-aux-crevettes}}">
             <span class="plat__nom">Nouilles sautées aux crevettes</span>
-            
+            {{desc:nouilles--nouilles-sautees-aux-crevettes}}
             <span class="plat__prix">{{prix:nouilles--nouilles-sautees-aux-crevettes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="nouilles--nouilles-sautees-aux-crevettes" hidden aria-label="Ajouter à la commande : Nouilles sautées aux crevettes"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="nouilles--nouilles-sautees-au-poulet" data-nom="Nouilles sautées au poulet" data-prix="{{cents:nouilles--nouilles-sautees-au-poulet}}" data-recherche="nouilles sautees au poulet nouilles et pates">
+          </li>          <li class="plat" data-plat="nouilles--nouilles-sautees-au-poulet" data-nom="Nouilles sautées au poulet" data-prix="{{cents:nouilles--nouilles-sautees-au-poulet}}" data-recherche="{{recherche:nouilles--nouilles-sautees-au-poulet}}">
             <span class="plat__nom">Nouilles sautées au poulet</span>
-            
+            {{desc:nouilles--nouilles-sautees-au-poulet}}
             <span class="plat__prix">{{prix:nouilles--nouilles-sautees-au-poulet}}</span>
             <button type="button" class="plat__ajout" data-ajouter="nouilles--nouilles-sautees-au-poulet" hidden aria-label="Ajouter à la commande : Nouilles sautées au poulet"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="nouilles--nouilles-sautees-aux-legumes" data-nom="Nouilles sautées aux légumes" data-prix="{{cents:nouilles--nouilles-sautees-aux-legumes}}" data-recherche="nouilles sautees aux legumes nouilles et pates">
+          </li>          <li class="plat" data-plat="nouilles--nouilles-sautees-aux-legumes" data-nom="Nouilles sautées aux légumes" data-prix="{{cents:nouilles--nouilles-sautees-aux-legumes}}" data-recherche="{{recherche:nouilles--nouilles-sautees-aux-legumes}}">
             <span class="plat__nom">Nouilles sautées aux légumes</span>
-            
+            {{desc:nouilles--nouilles-sautees-aux-legumes}}
             <span class="plat__prix">{{prix:nouilles--nouilles-sautees-aux-legumes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="nouilles--nouilles-sautees-aux-legumes" hidden aria-label="Ajouter à la commande : Nouilles sautées aux légumes"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>
         </ul>
       </section>      <section class="rubrique" id="accompagnements" aria-labelledby="r-accompagnements" data-rubrique>
-        <h2 id="r-accompagnements" class="rubrique__titre">Accompagnements</h2>
+        <h2 id="r-accompagnements" class="rubrique__titre">{{rubrique:accompagnements}}</h2>
         
         <ul class="plats">
-          <li class="plat" data-plat="accompagnements--riz-blanc" data-nom="Riz blanc" data-prix="{{cents:accompagnements--riz-blanc}}" data-recherche="riz blanc accompagnements">
+          <li class="plat" data-plat="accompagnements--riz-blanc" data-nom="Riz blanc" data-prix="{{cents:accompagnements--riz-blanc}}" data-recherche="{{recherche:accompagnements--riz-blanc}}">
             <span class="plat__nom">Riz blanc</span>
-            
+            {{desc:accompagnements--riz-blanc}}
             <span class="plat__prix">{{prix:accompagnements--riz-blanc}}</span>
             <button type="button" class="plat__ajout" data-ajouter="accompagnements--riz-blanc" hidden aria-label="Ajouter à la commande : Riz blanc"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="accompagnements--riz-cantonais-au-porc" data-nom="Riz cantonais au porc" data-prix="{{cents:accompagnements--riz-cantonais-au-porc}}" data-recherche="riz cantonais au porc accompagnements">
+          </li>          <li class="plat" data-plat="accompagnements--riz-cantonais-au-porc" data-nom="Riz cantonais au porc" data-prix="{{cents:accompagnements--riz-cantonais-au-porc}}" data-recherche="{{recherche:accompagnements--riz-cantonais-au-porc}}">
             <span class="plat__nom">Riz cantonais au porc</span>
-            
+            {{desc:accompagnements--riz-cantonais-au-porc}}
             <span class="plat__prix">{{prix:accompagnements--riz-cantonais-au-porc}}</span>
             <button type="button" class="plat__ajout" data-ajouter="accompagnements--riz-cantonais-au-porc" hidden aria-label="Ajouter à la commande : Riz cantonais au porc"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="accompagnements--riz-cantonais-aux-crevettes" data-nom="Riz cantonais aux crevettes" data-prix="{{cents:accompagnements--riz-cantonais-aux-crevettes}}" data-recherche="riz cantonais aux crevettes accompagnements">
+          </li>          <li class="plat" data-plat="accompagnements--riz-cantonais-aux-crevettes" data-nom="Riz cantonais aux crevettes" data-prix="{{cents:accompagnements--riz-cantonais-aux-crevettes}}" data-recherche="{{recherche:accompagnements--riz-cantonais-aux-crevettes}}">
             <span class="plat__nom">Riz cantonais aux crevettes</span>
-            
+            {{desc:accompagnements--riz-cantonais-aux-crevettes}}
             <span class="plat__prix">{{prix:accompagnements--riz-cantonais-aux-crevettes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="accompagnements--riz-cantonais-aux-crevettes" hidden aria-label="Ajouter à la commande : Riz cantonais aux crevettes"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="accompagnements--riz-piquant-aux-crevettes" data-nom="Riz piquant aux crevettes" data-prix="{{cents:accompagnements--riz-piquant-aux-crevettes}}" data-recherche="riz piquant aux crevettes accompagnements piquant epice">
+          </li>          <li class="plat" data-plat="accompagnements--riz-piquant-aux-crevettes" data-nom="Riz piquant aux crevettes" data-prix="{{cents:accompagnements--riz-piquant-aux-crevettes}}" data-recherche="{{recherche:accompagnements--riz-piquant-aux-crevettes}}">
             <span class="plat__nom">Riz piquant aux crevettes</span>
-            
+            {{desc:accompagnements--riz-piquant-aux-crevettes}}
             <span class="plat__prix">{{prix:accompagnements--riz-piquant-aux-crevettes}}</span>
             <button type="button" class="plat__ajout" data-ajouter="accompagnements--riz-piquant-aux-crevettes" hidden aria-label="Ajouter à la commande : Riz piquant aux crevettes"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="accompagnements--riz-piquant-au-poulet" data-nom="Riz piquant au poulet" data-prix="{{cents:accompagnements--riz-piquant-au-poulet}}" data-recherche="riz piquant au poulet accompagnements piquant epice">
+          </li>          <li class="plat" data-plat="accompagnements--riz-piquant-au-poulet" data-nom="Riz piquant au poulet" data-prix="{{cents:accompagnements--riz-piquant-au-poulet}}" data-recherche="{{recherche:accompagnements--riz-piquant-au-poulet}}">
             <span class="plat__nom">Riz piquant au poulet</span>
-            
+            {{desc:accompagnements--riz-piquant-au-poulet}}
             <span class="plat__prix">{{prix:accompagnements--riz-piquant-au-poulet}}</span>
             <button type="button" class="plat__ajout" data-ajouter="accompagnements--riz-piquant-au-poulet" hidden aria-label="Ajouter à la commande : Riz piquant au poulet"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>
         </ul>
       </section>      <section class="rubrique" id="desserts" aria-labelledby="r-desserts" data-rubrique>
-        <h2 id="r-desserts" class="rubrique__titre">Desserts</h2>
+        <h2 id="r-desserts" class="rubrique__titre">{{rubrique:desserts}}</h2>
         
         <ul class="plats">
-          <li class="plat" data-plat="desserts--beignets-de-pomme-sauce-caramel" data-nom="Beignets de pomme sauce caramel" data-prix="{{cents:desserts--beignets-de-pomme-sauce-caramel}}" data-recherche="beignets de pomme sauce caramel desserts">
+          <li class="plat" data-plat="desserts--beignets-de-pomme-sauce-caramel" data-nom="Beignets de pomme sauce caramel" data-prix="{{cents:desserts--beignets-de-pomme-sauce-caramel}}" data-recherche="{{recherche:desserts--beignets-de-pomme-sauce-caramel}}">
             <span class="plat__nom">Beignets de pomme sauce caramel</span>
-            
+            {{desc:desserts--beignets-de-pomme-sauce-caramel}}
             <span class="plat__prix">{{prix:desserts--beignets-de-pomme-sauce-caramel}}</span>
             <button type="button" class="plat__ajout" data-ajouter="desserts--beignets-de-pomme-sauce-caramel" hidden aria-label="Ajouter à la commande : Beignets de pomme sauce caramel"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="desserts--beignets-de-banane-sauce-caramel" data-nom="Beignets de banane sauce caramel" data-prix="{{cents:desserts--beignets-de-banane-sauce-caramel}}" data-recherche="beignets de banane sauce caramel desserts">
+          </li>          <li class="plat" data-plat="desserts--beignets-de-banane-sauce-caramel" data-nom="Beignets de banane sauce caramel" data-prix="{{cents:desserts--beignets-de-banane-sauce-caramel}}" data-recherche="{{recherche:desserts--beignets-de-banane-sauce-caramel}}">
             <span class="plat__nom">Beignets de banane sauce caramel</span>
-            
+            {{desc:desserts--beignets-de-banane-sauce-caramel}}
             <span class="plat__prix">{{prix:desserts--beignets-de-banane-sauce-caramel}}</span>
             <button type="button" class="plat__ajout" data-ajouter="desserts--beignets-de-banane-sauce-caramel" hidden aria-label="Ajouter à la commande : Beignets de banane sauce caramel"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="desserts--beignets-d-ananas-sauce-caramel" data-nom="Beignets d’ananas sauce caramel" data-prix="{{cents:desserts--beignets-d-ananas-sauce-caramel}}" data-recherche="beignets d ananas sauce caramel desserts">
+          </li>          <li class="plat" data-plat="desserts--beignets-d-ananas-sauce-caramel" data-nom="Beignets d’ananas sauce caramel" data-prix="{{cents:desserts--beignets-d-ananas-sauce-caramel}}" data-recherche="{{recherche:desserts--beignets-d-ananas-sauce-caramel}}">
             <span class="plat__nom">Beignets d’ananas sauce caramel</span>
-            
+            {{desc:desserts--beignets-d-ananas-sauce-caramel}}
             <span class="plat__prix">{{prix:desserts--beignets-d-ananas-sauce-caramel}}</span>
             <button type="button" class="plat__ajout" data-ajouter="desserts--beignets-d-ananas-sauce-caramel" hidden aria-label="Ajouter à la commande : Beignets d’ananas sauce caramel"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="desserts--assortiment-de-beignets-sauce-caramel" data-nom="Assortiment de beignets sauce caramel" data-prix="{{cents:desserts--assortiment-de-beignets-sauce-caramel}}" data-recherche="assortiment de beignets sauce caramel desserts">
+          </li>          <li class="plat" data-plat="desserts--assortiment-de-beignets-sauce-caramel" data-nom="Assortiment de beignets sauce caramel" data-prix="{{cents:desserts--assortiment-de-beignets-sauce-caramel}}" data-recherche="{{recherche:desserts--assortiment-de-beignets-sauce-caramel}}">
             <span class="plat__nom">Assortiment de beignets sauce caramel</span>
-            
+            {{desc:desserts--assortiment-de-beignets-sauce-caramel}}
             <span class="plat__prix">{{prix:desserts--assortiment-de-beignets-sauce-caramel}}</span>
             <button type="button" class="plat__ajout" data-ajouter="desserts--assortiment-de-beignets-sauce-caramel" hidden aria-label="Ajouter à la commande : Assortiment de beignets sauce caramel"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="desserts--ananas-frais" data-nom="Ananas frais" data-prix="{{cents:desserts--ananas-frais}}" data-recherche="ananas frais desserts">
+          </li>          <li class="plat" data-plat="desserts--ananas-frais" data-nom="Ananas frais" data-prix="{{cents:desserts--ananas-frais}}" data-recherche="{{recherche:desserts--ananas-frais}}">
             <span class="plat__nom">Ananas frais</span>
-            
+            {{desc:desserts--ananas-frais}}
             <span class="plat__prix">{{prix:desserts--ananas-frais}}</span>
             <button type="button" class="plat__ajout" data-ajouter="desserts--ananas-frais" hidden aria-label="Ajouter à la commande : Ananas frais"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="desserts--perles-de-coco" data-nom="Perles de coco" data-prix="{{cents:desserts--perles-de-coco}}" data-recherche="perles de coco 3 pieces desserts">
+          </li>          <li class="plat" data-plat="desserts--perles-de-coco" data-nom="Perles de coco" data-prix="{{cents:desserts--perles-de-coco}}" data-recherche="{{recherche:desserts--perles-de-coco}}">
             <span class="plat__nom">Perles de coco</span>
-            <span class="plat__desc">3 pièces</span>
+            {{desc:desserts--perles-de-coco}}
             <span class="plat__prix">{{prix:desserts--perles-de-coco}}</span>
             <button type="button" class="plat__ajout" data-ajouter="desserts--perles-de-coco" hidden aria-label="Ajouter à la commande : Perles de coco"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
-          </li>          <li class="plat" data-plat="desserts--banane-au-lait-de-coco" data-nom="Banane au lait de coco" data-prix="{{cents:desserts--banane-au-lait-de-coco}}" data-recherche="banane au lait de coco desserts">
+          </li>          <li class="plat" data-plat="desserts--banane-au-lait-de-coco" data-nom="Banane au lait de coco" data-prix="{{cents:desserts--banane-au-lait-de-coco}}" data-recherche="{{recherche:desserts--banane-au-lait-de-coco}}">
             <span class="plat__nom">Banane au lait de coco</span>
-            
+            {{desc:desserts--banane-au-lait-de-coco}}
             <span class="plat__prix">{{prix:desserts--banane-au-lait-de-coco}}</span>
             <button type="button" class="plat__ajout" data-ajouter="desserts--banane-au-lait-de-coco" hidden aria-label="Ajouter à la commande : Banane au lait de coco"><svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></button>
           </li>

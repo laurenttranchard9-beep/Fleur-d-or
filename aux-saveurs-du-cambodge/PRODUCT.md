@@ -56,7 +56,7 @@ c'est la cuisine de la maison, servie comme chez soi.
 - Prix publiés en euros TTC tels qu'affichés sur le site actuel ; aucun prix n'est inventé.
 - Identité légale (06/11/2026) : raison sociale TRANCHARD, SIRET 517 803 433 00039, directeur de la publication
   Laurent Tranchard, hébergeur IONOS SARL.
-- Les prix se changent dans l'espace gestion ; ceux de `data/carte.json` restent les prix d'origine.
+- Les prix, les descriptions des plats et les noms des rubriques se changent dans l'espace gestion ; ceux de `data/carte.json` restent l'original.
 - Mesure d'audience demandée par le restaurant (« des stats avec des cookies ») : faite par le site, dans les conditions
   d'exemption de consentement de la CNIL (cookie de 13 mois, données 25 mois, aucun tiers), refus possible.
 - Non décidé / inconnu : livraison (ne pas l'annoncer), paiement accepté, nombre de couverts, e-mail, réseaux sociaux.

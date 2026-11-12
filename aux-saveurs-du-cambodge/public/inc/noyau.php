@@ -159,6 +159,114 @@ function asdc_prix(): array
     return $prix;
 }
 
+/* ---------- Descriptions des plats et noms des rubriques ---------- */
+
+// Les plats de la carte par identifiant : nom, description d'origine, rubrique, mots de recherche en plus.
+function asdc_plats(): array
+{
+    static $plats = null;
+    if ($plats === null) {
+        $plats = [];
+        foreach (asdc_carte()['rubriques'] as $rubrique) {
+            foreach ($rubrique['plats'] as $plat) {
+                $plats[$plat['id']] = [
+                    'nom' => (string) $plat['nom'],
+                    'desc' => (string) ($plat['desc'] ?? ''),
+                    'rubrique' => (string) $rubrique['id'],
+                    'cles' => (string) ($plat['cles'] ?? ''),
+                ];
+            }
+        }
+    }
+    return $plats;
+}
+
+function asdc_titres_origine(): array
+{
+    $titres = [];
+    foreach (asdc_carte()['rubriques'] as $rubrique) {
+        $titres[$rubrique['id']] = (string) $rubrique['titre'];
+    }
+    return $titres;
+}
+
+// Textes changés dans l'espace gestion : une description peut devenir vide, un nom de rubrique jamais.
+function asdc_textes(): array
+{
+    static $textes = null;
+    if ($textes === null) {
+        $lu = asdc_lire(ASDC_DONNEES . '/textes.php');
+        $plats = asdc_plats();
+        $titres = asdc_titres_origine();
+        $textes = ['desc' => [], 'rubriques' => []];
+        foreach ((array) ($lu['desc'] ?? []) as $id => $texte) {
+            if (isset($plats[$id]) && is_string($texte)) {
+                $textes['desc'][$id] = $texte;
+            }
+        }
+        foreach ((array) ($lu['rubriques'] ?? []) as $id => $titre) {
+            if (isset($titres[$id]) && is_string($titre) && $titre !== '') {
+                $textes['rubriques'][$id] = $titre;
+            }
+        }
+    }
+    return $textes;
+}
+
+function asdc_desc(string $id): string
+{
+    $changees = asdc_textes()['desc'];
+    return array_key_exists($id, $changees) ? $changees[$id] : (asdc_plats()[$id]['desc'] ?? '');
+}
+
+function asdc_titre_rubrique(string $id): string
+{
+    return asdc_textes()['rubriques'][$id] ?? (asdc_titres_origine()[$id] ?? '');
+}
+
+// Comme le générateur des pages : espace fine insécable avant « ? ! : ; » et après « », dans un texte déjà échappé.
+function asdc_typo(string $html): string
+{
+    return str_replace('« ', '«' . ASDC_FINE, (string) preg_replace('/ ([?!:;»])/u', ASDC_FINE . '$1', $html));
+}
+
+// Comme la recherche de la carte (site.js) : minuscules, sans accents, apostrophes changées en espaces.
+function asdc_normaliser(string $texte): string
+{
+    static $table = null;
+    if ($table === null) {
+        $table = ['œ' => 'oe', 'Œ' => 'oe', 'æ' => 'ae', 'Æ' => 'ae', '’' => ' ', "'" => ' '];
+        $variantes = ['a' => 'àáâãäåÀÁÂÃÄÅ', 'c' => 'çÇ', 'e' => 'èéêëÈÉÊË', 'i' => 'ìíîïÌÍÎÏ', 'n' => 'ñÑ', 'o' => 'òóôõöÒÓÔÕÖ', 'u' => 'ùúûüÙÚÛÜ', 'y' => 'ýÿÝŸ'];
+        foreach ($variantes as $lettre => $liste) {
+            preg_match_all('/./u', $liste, $lettres);
+            foreach ($lettres[0] as $accentuee) {
+                $table[$accentuee] = $lettre;
+            }
+        }
+    }
+    $mots = explode(' ', strtolower(strtr($texte, $table)));
+    return implode(' ', array_filter($mots, function (string $mot): bool {
+        return $mot !== '';
+    }));
+}
+
+function asdc_recherche_plat(string $id): string
+{
+    $plat = asdc_plats()[$id] ?? null;
+    if (!$plat) {
+        return '';
+    }
+    $morceaux = [$plat['nom'], asdc_desc($id), asdc_titre_rubrique($plat['rubrique']), $plat['cles']];
+    return asdc_normaliser(implode(' ', array_filter($morceaux, 'strlen')));
+}
+
+// Un texte à placer entre les guillemets d'une chaîne JSON (données pour Google), sans « < » brut.
+function asdc_json_texte(string $texte): string
+{
+    $json = json_encode($texte, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG);
+    return is_string($json) ? substr($json, 1, -1) : '';
+}
+
 // « 10,50 € », comme Intl en fr-FR : virgule décimale, espace insécable avant l'euro.
 function asdc_euros(int $centimes): string
 {
@@ -170,11 +278,26 @@ function asdc_euros_rond(int $centimes): string
     return $centimes % 100 === 0 ? intdiv($centimes, 100) . ASDC_NBSP . '€' : asdc_euros($centimes);
 }
 
-// Les pages portent des jetons {{prix:id}} : on les remplace par le prix du moment, au dernier instant.
+// Les pages portent des jetons {{prix:id}}, {{desc:id}}, {{rubrique:id}}… : on les remplace au dernier instant
+// par le prix, la description ou le nom de rubrique du moment (ceux de la carte, ou ceux changés dans l'espace gestion).
 function asdc_remplir(string $html): string
 {
     $prix = asdc_prix();
-    $rempli = preg_replace_callback('/[{][{](prix|cents|json|rond|des):([a-z0-9,-]+)[}][}]/', function (array $m) use ($prix): string {
+    $motif = '/[{][{](prix|cents|json|rond|des|desc|jdesc|rubrique|jrubrique|recherche):([a-z0-9,-]+)[}][}]/';
+    $rempli = preg_replace_callback($motif, function (array $m) use ($prix): string {
+        switch ($m[1]) {
+            case 'desc':
+                $desc = asdc_desc($m[2]);
+                return $desc === '' ? '' : '<span class="plat__desc">' . asdc_typo(asdc_h($desc)) . '</span>';
+            case 'jdesc':
+                return asdc_json_texte(asdc_desc($m[2]));
+            case 'rubrique':
+                return asdc_typo(asdc_h(asdc_titre_rubrique($m[2])));
+            case 'jrubrique':
+                return asdc_json_texte(asdc_titre_rubrique($m[2]));
+            case 'recherche':
+                return asdc_h(asdc_recherche_plat($m[2]));
+        }
         $valeurs = [];
         foreach (explode(',', $m[2]) as $id) {
             if (isset($prix[$id])) {
