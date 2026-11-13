@@ -67,7 +67,20 @@ function asdc_modifier(string $fichier, callable $modification): bool
     if (!$verrou) {
         return false;
     }
-    flock($verrou, LOCK_EX);
+    // Jamais plus d'une seconde et demie d'attente : sur un hébergement partagé (disque en réseau), mieux vaut
+    // perdre une visite comptée que garder le serveur occupé. Si le disque ne sait pas verrouiller, on écrit quand même.
+    $limite = microtime(true) + 1.5;
+    $occupe = false;
+    while (!flock($verrou, LOCK_EX | LOCK_NB, $occupe)) {
+        if (!$occupe) {
+            break;
+        }
+        if (microtime(true) > $limite) {
+            fclose($verrou);
+            return false;
+        }
+        usleep(50000);
+    }
     $ok = asdc_ecrire($fichier, $modification(asdc_lire($fichier)));
     flock($verrou, LOCK_UN);
     fclose($verrou);
