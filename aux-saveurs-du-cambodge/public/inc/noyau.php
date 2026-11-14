@@ -170,7 +170,7 @@ function asdc_structure(): array
     static $structure = null;
     if ($structure === null) {
         $lu = asdc_lire(ASDC_DONNEES . '/structure.php');
-        $structure = ['rubriques' => [], 'plats' => [], 'places' => []];
+        $structure = ['rubriques' => [], 'plats' => [], 'places' => [], 'retires' => []];
         foreach ((array) ($lu['rubriques'] ?? []) as $r) {
             if (is_array($r) && asdc_id_valide($r['id'] ?? null) && is_string($r['titre'] ?? null) && $r['titre'] !== '') {
                 $structure['rubriques'][] = [
@@ -194,6 +194,12 @@ function asdc_structure(): array
         foreach ((array) ($lu['places'] ?? []) as $id => $rubrique) {
             if (asdc_id_valide((string) $id) && asdc_id_valide($rubrique)) {
                 $structure['places'][(string) $id] = $rubrique;
+            }
+        }
+        // Les noms des plats ajoutés puis supprimés, pour que les statistiques les nomment encore.
+        foreach ((array) ($lu['retires'] ?? []) as $id => $nom) {
+            if (asdc_id_valide((string) $id) && is_string($nom) && $nom !== '') {
+                $structure['retires'][(string) $id] = $nom;
             }
         }
     }

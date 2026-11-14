@@ -334,11 +334,23 @@ function asdc_classement(array $table, string $vide, int $limite = 8, ?callable 
     return $html . '</ol>';
 }
 
-// Le nom du moment (renommé ou ajouté dans l'espace gestion) ; l'identifiant si le plat n'existe plus.
+// Le nom du moment (renommé ou ajouté dans l'espace gestion). Un plat qui n'est plus sur la carte garde le nom
+// qu'il avait, ou, à défaut, son identifiant rendu lisible (« plats-cambodgiens--lok-lac » : « Lok lac »).
 function asdc_nom_plat(string $id): string
 {
     $nom = asdc_nom($id);
-    return $nom !== '' ? $nom : $id;
+    if ($nom !== '') {
+        return $nom;
+    }
+    $nom = asdc_structure()['retires'][$id] ?? '';
+    if ($nom === '') {
+        // Plat d'origine : « rubrique--plat » ; plat ajouté : « nom-3f9a ».
+        $nom = strpos($id, '--') === false
+            ? (string) preg_replace('/-[a-f0-9]{4}$/', '', $id)
+            : substr($id, strrpos($id, '--') + 2);
+        $nom = ucfirst(trim(str_replace('-', ' ', $nom)));
+    }
+    return ($nom !== '' ? $nom : $id) . ' · retiré de la carte';
 }
 
 /* ---------- Prix ---------- */
@@ -546,6 +558,7 @@ function asdc_enregistrer_carte(array $envoi): array
         }
         if ($ajoute && (isset($supprimees[$entree['rubrique']]) || !empty($supprimerPlats[$id]))) {
             unset($prix[$id]);
+            $structure['retires'][$id] = $entree['nom'];
             if (!isset($supprimees[$entree['rubrique']])) {
                 $changes++;
             }
@@ -626,6 +639,7 @@ function asdc_enregistrer_carte(array $envoi): array
         }
     }
     $structure['plats'] = $gardes;
+    $structure['retires'] = array_slice($structure['retires'], -300, null, true);
     foreach ($structure['places'] as $id => $ou) {
         if (!isset($destinations[$ou])) {
             unset($structure['places'][$id]);

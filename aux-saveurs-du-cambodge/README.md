@@ -56,7 +56,7 @@ cinq essais ratés bloquent 15 minutes).
   crée en même temps). On enregistre : l'accueil, la carte, sa recherche, « Votre commande » et les données pour Google
   suivent aussitôt. Sous ce qui a changé, l'original reste rappelé, avec un bouton « Rétablir ». Une rubrique ou un plat
   ajouté peut être supprimé (une rubrique supprimée emporte ses plats ajoutés ; les plats d'origine retournent dans leur
-  rubrique). Une rubrique vide n'apparaît pas sur le site. Une description vidée disparaît de la carte ; un nom ne peut pas
+  rubrique ; un plat supprimé garde son nom dans les statistiques). Une rubrique vide n'apparaît pas sur le site. Une description vidée disparaît de la carte ; un nom ne peut pas
   être vide (noms de plats : 80 caractères au plus, de rubriques : 60, descriptions : 300).
 - **Statistiques** sur 7 jours, 30 jours ou 12 mois : visiteurs, visites et pages vues, visites par jour, **heures de visite**
   (l'heure d'arrivée, de 0 h à 23 h), **temps passé sur le site** (durée habituelle d'une visite, moyenne, répartition de
