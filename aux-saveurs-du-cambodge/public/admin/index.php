@@ -20,11 +20,6 @@ $periodes = asdc_periodes();
 $periode = isset($periodes[$_GET['periode'] ?? '']) ? (string) $_GET['periode'] : '30j';
 $erreur = '';
 $erreurs = [];
-$erreursDesc = [];
-$erreursTitres = [];
-$saisies = [];
-$saisiesDesc = [];
-$saisiesTitres = [];
 $message = (string) ($_SESSION['message'] ?? '');
 unset($_SESSION['message']);
 
@@ -75,83 +70,22 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
         header('Location: ./', true, 303);
         exit;
     } elseif ($action === 'prix') {
-        // La carte : prix, descriptions des plats, noms des rubriques. On ne garde que ce qui diffère de la carte d'origine.
+        // La carte : prix, noms, descriptions, rubriques ; plats et rubriques ajoutés (public/inc/gestion.php).
         $vue = 'prix';
-        $origine = asdc_prix_origine();
-        $avant = asdc_prix();
-        $saisies = is_array($_POST['prix'] ?? null) ? $_POST['prix'] : [];
-        $saisiesDesc = is_array($_POST['desc'] ?? null) ? $_POST['desc'] : [];
-        $saisiesTitres = is_array($_POST['rubrique'] ?? null) ? $_POST['rubrique'] : [];
-        $remplacements = asdc_lire(ASDC_DONNEES . '/prix.php');
-        foreach ($origine as $id => $centimesOrigine) {
-            if (!array_key_exists($id, $saisies)) {
-                continue;
-            }
-            $centimes = asdc_lire_prix($saisies[$id]);
-            if ($centimes === null) {
-                $erreurs[$id] = 'Écrivez un prix comme 10,50 (entre 0,10 et 9 999 €).';
-            } elseif ($centimes === $centimesOrigine) {
-                unset($remplacements[$id]);
-            } else {
-                $remplacements[$id] = $centimes;
-            }
-        }
-        $remplacements = array_intersect_key($remplacements, $origine);
-
-        $avantTextes = asdc_textes();
-        $textes = $avantTextes;
-        foreach (asdc_plats() as $id => $plat) {
-            if (!array_key_exists($id, $saisiesDesc)) {
-                continue;
-            }
-            $texte = asdc_texte_saisi($saisiesDesc[$id]);
-            if ($texte === null) {
-                $erreursDesc[$id] = 'Ce texte contient des caractères illisibles : retapez-le.';
-            } elseif (asdc_longueur($texte) > ASDC_DESC_MAX) {
-                $erreursDesc[$id] = 'Pas plus de ' . ASDC_DESC_MAX . ' caractères (' . asdc_longueur($texte) . ' pour l’instant).';
-            } elseif ($texte === $plat['desc']) {
-                unset($textes['desc'][$id]);
-            } else {
-                $textes['desc'][$id] = $texte;
-            }
-        }
-        foreach (asdc_titres_origine() as $id => $titreOrigine) {
-            if (!array_key_exists($id, $saisiesTitres)) {
-                continue;
-            }
-            $titre = asdc_texte_saisi($saisiesTitres[$id]);
-            if ($titre === null || $titre === '') {
-                $erreursTitres[$id] = 'Donnez un nom à cette rubrique.';
-            } elseif (asdc_longueur($titre) > ASDC_TITRE_MAX) {
-                $erreursTitres[$id] = 'Pas plus de ' . ASDC_TITRE_MAX . ' caractères (' . asdc_longueur($titre) . ' pour l’instant).';
-            } elseif ($titre === $titreOrigine) {
-                unset($textes['rubriques'][$id]);
-            } else {
-                $textes['rubriques'][$id] = $titre;
-            }
-        }
-
-        $nbErreurs = count($erreurs) + count($erreursDesc) + count($erreursTitres);
-        if ($nbErreurs) {
+        $resultat = asdc_enregistrer_carte($_POST);
+        $erreurs = $resultat['erreurs'];
+        if ($erreurs) {
             http_response_code(422);
-            $erreur = $nbErreurs === 1
+            $erreur = count($erreurs) === 1
                 ? 'Un champ n’est pas valide : corrigez-le, puis enregistrez de nouveau.'
-                : $nbErreurs . ' champs ne sont pas valides : corrigez-les, puis enregistrez de nouveau.';
-        } elseif (!asdc_ecrire(ASDC_DONNEES . '/prix.php', $remplacements) || !asdc_ecrire(ASDC_DONNEES . '/textes.php', $textes)) {
+                : count($erreurs) . ' champs ne sont pas valides : corrigez-les, puis enregistrez de nouveau.';
+        } elseif (!$resultat['ecrit']) {
             $erreur = 'Impossible d’enregistrer : le dossier « donnees » du site n’est pas modifiable par le serveur.';
         } else {
-            $apres = $origine;
-            foreach ($remplacements as $id => $centimes) {
-                $apres[$id] = $centimes;
-            }
-            $changes = count(array_diff_assoc($apres, $avant));
-            foreach (['desc', 'rubriques'] as $genre) {
-                $changes += count(array_diff_assoc($textes[$genre], $avantTextes[$genre]))
-                    + count(array_diff_key($avantTextes[$genre], $textes[$genre]));
-            }
-            asdc_rediriger('prix', $changes === 0
+            $n = $resultat['changes'];
+            asdc_rediriger('prix', $n === 0
                 ? 'Aucune modification.'
-                : ($changes === 1 ? '1 modification enregistrée' : $changes . ' modifications enregistrées') . ' : la carte en ligne est à jour.');
+                : ($n === 1 ? '1 modification enregistrée' : $n . ' modifications enregistrées') . ' : la carte en ligne est à jour.');
         }
     } elseif ($action === 'mesure') {
         $active = isset($_POST['mesure']);
@@ -274,6 +208,7 @@ $version = static function (string $fichier): string {
     $pagesVues = array_sum($s['vues']);
     $noms = ['accueil' => 'Accueil', 'carte' => 'La carte', 'mentions' => 'Mentions légales', 'introuvable' => 'Page introuvable'];
     $paniers = $s['paniers']['nombre'];
+    $durees = asdc_resume_durees($s['durees']);
 ?>
   <div class="g-entete-vue">
     <h1>Statistiques</h1>
@@ -306,6 +241,16 @@ $version = static function (string $fichier): string {
     <?= asdc_histogramme($s['serie'], $s['par_mois']) ?>
   </section>
 
+  <section class="g-section" aria-labelledby="titre-heures">
+    <h2 id="titre-heures">Heures de visite</h2>
+    <?php if (array_sum($s['heures'])): ?>
+    <p class="g-aide g-aide--haut">L’heure d’arrivée sur le site, heure de Paris, toutes les visites de la période additionnées.</p>
+    <?= asdc_histogramme_heures($s['heures']) ?>
+    <?php else: ?>
+    <p class="g-vide">Les heures sont comptées depuis la mise à jour du 14 novembre : elles apparaîtront ici avec les prochaines visites.</p>
+    <?php endif ?>
+  </section>
+
   <section class="g-section" aria-labelledby="titre-actions">
     <h2 id="titre-actions">Ce que font les visiteurs</h2>
     <dl class="g-actions">
@@ -318,6 +263,16 @@ $version = static function (string $fichier): string {
   </section>
 
   <div class="g-grille">
+    <section class="g-section" aria-labelledby="titre-duree">
+      <h2 id="titre-duree">Temps passé sur le site</h2>
+      <?php if ($durees['nombre']): ?>
+      <p class="g-duree"><?= asdc_h(asdc_duree($durees['mediane'])) ?></p>
+      <p class="g-duree__legende">par visite en général (médiane), <?= asdc_h(asdc_duree($durees['moyenne'])) ?> en moyenne, sur <?= asdc_nombre($durees['nombre']) ?> visite<?= $durees['nombre'] > 1 ? 's' : '' ?> mesurée<?= $durees['nombre'] > 1 ? 's' : '' ?>.</p>
+      <?= asdc_classement($durees['tranches'], '', 6, null, $durees['nombre']) ?>
+      <?php else: ?>
+      <p class="g-vide">Le temps passé est mesuré depuis la mise à jour du 14 novembre : il apparaîtra ici avec les prochaines visites.</p>
+      <?php endif ?>
+    </section>
     <section class="g-section" aria-labelledby="titre-plats">
       <h2 id="titre-plats">Plats ajoutés à la commande</h2>
       <?= asdc_classement($s['plats'], 'Aucun plat ajouté pour l’instant.', 8, 'asdc_nom_plat') ?>
@@ -342,23 +297,71 @@ $version = static function (string $fichier): string {
     </section>
   </div>
   <?php endif ?>
-  <p class="g-note">Mesure faite par le site lui-même, sans service extérieur ni publicité : un cookie de 13 mois, des chiffres gardés 25 mois. Vos visites depuis ce navigateur ne sont pas comptées.</p>
+  <p class="g-note">Mesure faite par le site lui-même, sans service extérieur ni publicité : un cookie de 13 mois, des chiffres gardés 25 mois. Le temps passé ne compte que les moments où une page est affichée à l’écran. Vos visites depuis ce navigateur ne sont pas comptées.</p>
 
 <?php elseif ($vue === 'prix'): ?>
 <?php
+    $carteDuMoment = asdc_carte_du_moment();
     $actuels = asdc_prix();
     $origine = asdc_prix_origine();
     $plats = asdc_plats();
     $titresOrigine = asdc_titres_origine();
-    // Un bouton « Rétablir » remet le texte ou le prix d'origine dans son champ (masqué sans JavaScript).
-    $retablir = static function (string $champ, string $valeur): string {
+    $fixes = array_values(array_filter(asdc_carte()['rubriques'], function (array $r): bool {
+        return !empty($r['fixe']);
+    }));
+    // Après un envoi refusé, chaque champ garde ce qui avait été tapé.
+    $saisie = function (string $groupe, string $cle, string $defaut): string {
+        $valeur = $_POST[$groupe][$cle] ?? null;
+        return is_string($valeur) ? $valeur : $defaut;
+    };
+    $coche = function (string $groupe, string $cle, bool $defaut): bool {
+        if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+            return $defaut;
+        }
+        return (string) ($_POST[$groupe][$cle] ?? '') === '1';
+    };
+    // Aide sous un champ : l'original (avec « Rétablir »), l'erreur.
+    $decrit = function (string $champ, bool $origine) use ($erreurs): string {
+        $ids = [];
+        if ($origine) {
+            $ids[] = 'o-' . $champ;
+        }
+        if (isset($erreurs[$champ])) {
+            $ids[] = 'e-' . $champ;
+        }
+        return ($ids ? ' aria-describedby="' . asdc_h(implode(' ', $ids)) . '"' : '') . (isset($erreurs[$champ]) ? ' aria-invalid="true"' : '');
+    };
+    $erreurDe = function (string $champ, string $classe = 'g-plat__erreur g-plat__erreur--texte') use ($erreurs): string {
+        return isset($erreurs[$champ]) ? '<p class="' . $classe . '" id="e-' . asdc_h($champ) . '">' . asdc_h($erreurs[$champ]) . '</p>' : '';
+    };
+    $retablir = function (string $champ, string $valeur): string {
         return '<button type="button" class="g-retablir" data-retablir="' . asdc_h($champ) . '" data-valeur="' . asdc_h($valeur) . '" hidden>Rétablir</button>';
+    };
+    // Les rubriques où ranger un plat, et les places possibles d'une rubrique ajoutée.
+    $optionsRubriques = function (string $choisi, bool $avecNouvelle) use ($carteDuMoment): string {
+        $html = '';
+        foreach ($carteDuMoment as $r) {
+            $html .= '<option value="' . asdc_h($r['id']) . '"' . ($r['id'] === $choisi ? ' selected' : '') . '>' . asdc_h($r['titre']) . '</option>';
+        }
+        if ($avecNouvelle) {
+            $html .= '<option value="__nouvelle__"' . ($choisi === '__nouvelle__' ? ' selected' : '') . '>La nouvelle rubrique (ci-dessus)</option>';
+        }
+        return $html;
+    };
+    $optionsPlaces = function (string $choisi, string $sauf) use ($carteDuMoment): string {
+        $html = '<option value=""' . ($choisi === '' ? ' selected' : '') . '>En tête de la carte</option>';
+        foreach ($carteDuMoment as $r) {
+            if ($r['id'] !== $sauf) {
+                $html .= '<option value="' . asdc_h($r['id']) . '"' . ($r['id'] === $choisi ? ' selected' : '') . '>Après « ' . asdc_h($r['titre']) . ' »</option>';
+            }
+        }
+        return $html;
     };
 ?>
   <div class="g-entete-vue">
     <h1>La carte</h1>
   </div>
-  <p class="g-intro">Changez un prix, une description ou le nom d’une rubrique, puis enregistrez : le site et les informations lues par Google suivent aussitôt.</p>
+  <p class="g-intro">Changez un prix, un nom, une description, rangez un plat dans une autre rubrique, ajoutez une rubrique ou un plat, puis enregistrez : le site et les informations lues par Google suivent aussitôt.</p>
   <p class="g-filtre" data-filtre-zone hidden>
     <label class="visuellement-cache" for="filtre">Chercher un plat</label>
     <input id="filtre" type="search" placeholder="Chercher un plat" autocomplete="off" data-filtre>
@@ -366,58 +369,150 @@ $version = static function (string $fichier): string {
   <form class="g-prix" method="post" data-formulaire-prix novalidate>
     <input type="hidden" name="jeton" value="<?= $jeton ?>">
     <input type="hidden" name="action" value="prix">
-    <?php foreach (asdc_carte()['rubriques'] as $rubrique):
-        $rid = (string) $rubrique['id'];
-        $fixe = !empty($rubrique['fixe']);
-        $titreActuel = asdc_titre_rubrique($rid);
-        $titreValeur = array_key_exists($rid, $saisiesTitres) && is_string($saisiesTitres[$rid]) ? $saisiesTitres[$rid] : $titreActuel;
-        $titreChange = $titreActuel !== $titresOrigine[$rid];
-        $decritTitre = array_merge($titreChange ? ['ot-' . $rid] : [], isset($erreursTitres[$rid]) ? ['et-' . $rid] : []);
-    ?>
-    <section class="g-rubrique" aria-labelledby="r-<?= asdc_h($rid) ?>" data-rubrique-prix>
-      <?php if ($fixe): ?>
-      <h2 id="r-<?= asdc_h($rid) ?>"><?= asdc_h($titreActuel) ?></h2>
-      <?php else: ?>
-      <h2 class="visuellement-cache" id="r-<?= asdc_h($rid) ?>"><?= asdc_h($titreActuel) ?></h2>
-      <div class="g-rubrique__tete">
-        <label class="g-rubrique__etiquette" for="t-<?= asdc_h($rid) ?>">Nom de la rubrique</label>
-        <input class="g-rubrique__champ" id="t-<?= asdc_h($rid) ?>" name="rubrique[<?= asdc_h($rid) ?>]" type="text" maxlength="<?= ASDC_TITRE_MAX ?>" required autocomplete="off"
-          value="<?= asdc_h($titreValeur) ?>" data-actuel="<?= asdc_h($titreActuel) ?>"<?= $decritTitre ? ' aria-describedby="' . asdc_h(implode(' ', $decritTitre)) . '"' : '' ?><?= isset($erreursTitres[$rid]) ? ' aria-invalid="true"' : '' ?>>
-        <?php if ($titreChange): ?><p class="g-plat__origine g-plat__origine--texte" id="ot-<?= asdc_h($rid) ?>">Nom d’origine : « <?= asdc_h($titresOrigine[$rid]) ?> » <?= $retablir('t-' . $rid, $titresOrigine[$rid]) ?></p><?php endif ?>
-        <?php if (isset($erreursTitres[$rid])): ?><p class="g-plat__erreur g-plat__erreur--texte" id="et-<?= asdc_h($rid) ?>"><?= asdc_h($erreursTitres[$rid]) ?></p><?php endif ?>
+
+    <section class="g-rubrique g-ajout" aria-labelledby="titre-ajout">
+      <h2 id="titre-ajout">Ajouter</h2>
+      <div class="g-ajout__blocs">
+        <fieldset class="g-ajout__bloc">
+          <legend>Une rubrique</legend>
+          <label class="g-mini" for="nr-titre">Nom</label>
+          <input class="g-texte" id="nr-titre" name="nouvelle_rubrique[titre]" type="text" maxlength="<?= ASDC_TITRE_MAX ?>" autocomplete="off" placeholder="Par exemple : Plats du jour"
+            value="<?= asdc_h($saisie('nouvelle_rubrique', 'titre', '')) ?>" data-actuel=""<?= $decrit('nr-titre', false) ?>>
+          <?= $erreurDe('nr-titre') ?>
+          <label class="g-mini" for="nr-apres">Place sur la carte</label>
+          <select class="g-choix" id="nr-apres" name="nouvelle_rubrique[apres]" data-actuel="<?= asdc_h($saisie('nouvelle_rubrique', 'apres', '')) ?>"<?= $decrit('nr-apres', false) ?>><?= $optionsPlaces($saisie('nouvelle_rubrique', 'apres', ''), '') ?></select>
+          <?= $erreurDe('nr-apres') ?>
+          <label class="g-case"><input type="checkbox" name="nouvelle_rubrique[riz]" value="1" data-actuel="0"<?= $coche('nouvelle_rubrique', 'riz', false) ? ' checked' : '' ?>> <span>Plats servis avec du riz nature</span></label>
+        </fieldset>
+        <fieldset class="g-ajout__bloc">
+          <legend>Un plat</legend>
+          <div class="g-ajout__ligne">
+            <span class="g-ajout__nom">
+              <label class="g-mini" for="np-nom">Nom</label>
+              <input class="g-texte" id="np-nom" name="nouveau_plat[nom]" type="text" maxlength="<?= ASDC_NOM_MAX ?>" autocomplete="off" placeholder="Par exemple : Curry de légumes"
+                value="<?= asdc_h($saisie('nouveau_plat', 'nom', '')) ?>" data-actuel=""<?= $decrit('np-nom', false) ?>>
+            </span>
+            <span class="g-ajout__prix">
+              <label class="g-mini" for="np-prix">Prix</label>
+              <span class="g-plat__champ">
+                <input id="np-prix" name="nouveau_plat[prix]" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="10,50"
+                  value="<?= asdc_h($saisie('nouveau_plat', 'prix', '')) ?>" data-actuel="" data-genre="prix"<?= $decrit('np-prix', false) ?>>
+                <span class="g-plat__euro" aria-hidden="true">€</span>
+              </span>
+            </span>
+          </div>
+          <?= $erreurDe('np-nom') ?><?= $erreurDe('np-prix') ?>
+          <label class="g-mini" for="np-desc">Description</label>
+          <textarea class="g-plat__description" id="np-desc" name="nouveau_plat[desc]" rows="1" maxlength="<?= ASDC_DESC_MAX ?>" placeholder="Facultative"
+            data-actuel=""<?= $decrit('np-desc', false) ?>><?= asdc_h($saisie('nouveau_plat', 'desc', '')) ?></textarea>
+          <?= $erreurDe('np-desc') ?>
+          <label class="g-mini" for="np-rubrique">Rubrique</label>
+          <select class="g-choix" id="np-rubrique" name="nouveau_plat[rubrique]" data-actuel="<?= asdc_h($saisie('nouveau_plat', 'rubrique', $carteDuMoment[0]['id'] ?? '')) ?>"<?= $decrit('np-rubrique', false) ?>><?= $optionsRubriques($saisie('nouveau_plat', 'rubrique', $carteDuMoment[0]['id'] ?? ''), true) ?></select>
+          <?= $erreurDe('np-rubrique') ?>
+        </fieldset>
       </div>
+      <p class="g-aide">Rempli, chaque bloc crée sa rubrique ou son plat quand vous enregistrez ; laissé vide, il ne change rien.</p>
+    </section>
+
+    <?php foreach ($carteDuMoment as $rubrique):
+        $rid = (string) $rubrique['id'];
+        $ajoutee = $rubrique['ajoutee'];
+        $titreValeur = $saisie('rubrique', $rid, $rubrique['titre']);
+        $titreChange = !$ajoutee && $rubrique['titre'] !== ($titresOrigine[$rid] ?? $rubrique['titre']);
+    ?>
+    <section class="g-rubrique<?= $ajoutee ? ' g-rubrique--ajoutee' : '' ?>" aria-labelledby="r-<?= asdc_h($rid) ?>" data-rubrique-prix>
+      <h2 class="visuellement-cache" id="r-<?= asdc_h($rid) ?>"><?= asdc_h($rubrique['titre']) ?></h2>
+      <div class="g-rubrique__tete">
+        <label class="g-rubrique__etiquette" for="t-<?= asdc_h($rid) ?>">Nom de la rubrique<?= $ajoutee ? ' · ajoutée' : '' ?></label>
+        <input class="g-rubrique__champ" id="t-<?= asdc_h($rid) ?>" name="rubrique[<?= asdc_h($rid) ?>]" type="text" maxlength="<?= ASDC_TITRE_MAX ?>" required autocomplete="off"
+          value="<?= asdc_h($titreValeur) ?>" data-actuel="<?= asdc_h($rubrique['titre']) ?>"<?= $decrit('t-' . $rid, $titreChange) ?>>
+        <?php if ($titreChange): ?><p class="g-plat__origine g-plat__origine--texte" id="o-t-<?= asdc_h($rid) ?>">Nom d’origine : « <?= asdc_h($titresOrigine[$rid]) ?> » <?= $retablir('t-' . $rid, $titresOrigine[$rid]) ?></p><?php endif ?>
+        <?= $erreurDe('t-' . $rid) ?>
+        <?php if ($ajoutee): ?>
+        <div class="g-rubrique__options">
+          <input type="hidden" name="riz[<?= asdc_h($rid) ?>]" value="0">
+          <label class="g-case"><input type="checkbox" id="z-<?= asdc_h($rid) ?>" name="riz[<?= asdc_h($rid) ?>]" value="1" data-actuel="<?= $rubrique['riz'] ? '1' : '0' ?>"<?= $coche('riz', $rid, $rubrique['riz']) ? ' checked' : '' ?>> <span>Plats servis avec du riz nature</span></label>
+          <span class="g-ligne-choix">
+            <label class="g-mini" for="a-<?= asdc_h($rid) ?>">Place</label>
+            <select class="g-choix" id="a-<?= asdc_h($rid) ?>" name="apres[<?= asdc_h($rid) ?>]" data-actuel="<?= asdc_h($rubrique['apres']) ?>"<?= $decrit('a-' . $rid, false) ?>><?= $optionsPlaces($saisie('apres', $rid, $rubrique['apres']), $rid) ?></select>
+          </span>
+          <?= $erreurDe('a-' . $rid) ?>
+          <label class="g-case g-case--danger"><input type="checkbox" id="sr-<?= asdc_h($rid) ?>" name="supprimer_rubrique[<?= asdc_h($rid) ?>]" value="1" data-actuel="0" data-supprimer<?= $coche('supprimer_rubrique', $rid, false) ? ' checked' : '' ?>> <span>Supprimer cette rubrique (ses plats ajoutés aussi ; les autres retournent dans leur rubrique)</span></label>
+        </div>
+        <?php endif ?>
+      </div>
+      <?php if (!$rubrique['plats']): ?>
+      <p class="g-vide g-rubrique__vide">Aucun plat pour l’instant : ajoutez-en un, ou rangez-y un plat existant. Tant qu’elle est vide, la rubrique n’apparaît pas sur le site.</p>
       <?php endif ?>
       <ul class="g-plats">
         <?php foreach ($rubrique['plats'] as $plat):
             $id = (string) $plat['id'];
-            $valeur = array_key_exists($id, $saisies) && is_string($saisies[$id]) ? $saisies[$id] : asdc_saisie_prix($actuels[$id]);
-            $change = $actuels[$id] !== $origine[$id];
-            $decrit = array_merge($change ? ['o-' . $id] : [], isset($erreurs[$id]) ? ['e-' . $id] : []);
-            $descActuelle = asdc_desc($id);
-            $descValeur = array_key_exists($id, $saisiesDesc) && is_string($saisiesDesc[$id]) ? $saisiesDesc[$id] : $descActuelle;
-            $descChange = $descActuelle !== $plats[$id]['desc'];
-            $decritDesc = array_merge($descChange ? ['od-' . $id] : [], isset($erreursDesc[$id]) ? ['ed-' . $id] : []);
-            $enErreur = isset($erreurs[$id]) || isset($erreursDesc[$id]);
+            $ajoute = $plat['ajoute'];
+            $nomBase = $plats[$id]['nom'];
+            $descBase = $plats[$id]['desc'];
+            $prixChange = !$ajoute && $actuels[$id] !== $origine[$id];
+            $nomChange = !$ajoute && $plat['nom'] !== $nomBase;
+            $descChange = !$ajoute && $plat['desc'] !== $descBase;
+            $deplace = !$ajoute && $rid !== $plat['origine'];
         ?>
-        <li class="g-plat<?= $enErreur ? ' g-plat--erreur' : '' ?>" data-plat-prix="<?= asdc_h(asdc_normaliser($plat['nom'] . ' ' . $descActuelle)) ?>">
+        <li class="g-plat<?= $ajoute ? ' g-plat--ajoute' : '' ?>" data-plat-prix="<?= asdc_h(asdc_normaliser($plat['nom'] . ' ' . $plat['desc'])) ?>">
+          <span class="g-plat__nom-zone">
+            <label class="visuellement-cache" for="n-<?= asdc_h($id) ?>">Nom du plat</label>
+            <input class="g-plat__nom-champ" id="n-<?= asdc_h($id) ?>" name="nom[<?= asdc_h($id) ?>]" type="text" maxlength="<?= ASDC_NOM_MAX ?>" required autocomplete="off"
+              value="<?= asdc_h($saisie('nom', $id, $plat['nom'])) ?>" data-actuel="<?= asdc_h($plat['nom']) ?>"<?= $decrit('n-' . $id, $nomChange) ?>>
+          </span>
+          <span class="g-plat__champ">
+            <label class="visuellement-cache" for="p-<?= asdc_h($id) ?>">Prix de « <?= asdc_h($plat['nom']) ?> »</label>
+            <input id="p-<?= asdc_h($id) ?>" name="prix[<?= asdc_h($id) ?>]" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"
+              value="<?= asdc_h($saisie('prix', $id, asdc_saisie_prix($actuels[$id]))) ?>" data-actuel="<?= asdc_h(asdc_saisie_prix($actuels[$id])) ?>" data-genre="prix"<?= $decrit('p-' . $id, $prixChange) ?>>
+            <span class="g-plat__euro" aria-hidden="true">€</span>
+          </span>
+          <?php if ($nomChange): ?><p class="g-plat__origine g-plat__origine--texte" id="o-n-<?= asdc_h($id) ?>">Nom d’origine : « <?= asdc_h($nomBase) ?> » <?= $retablir('n-' . $id, $nomBase) ?></p><?php endif ?>
+          <?= $erreurDe('n-' . $id) ?>
+          <?php if ($prixChange): ?><p class="g-plat__origine" id="o-p-<?= asdc_h($id) ?>">Prix d’origine : <?= asdc_h(asdc_euros($origine[$id])) ?> <?= $retablir('p-' . $id, asdc_saisie_prix($origine[$id])) ?></p><?php endif ?>
+          <?= $erreurDe('p-' . $id, 'g-plat__erreur') ?>
+          <label class="visuellement-cache" for="d-<?= asdc_h($id) ?>">Description de « <?= asdc_h($plat['nom']) ?> »</label>
+          <textarea class="g-plat__description" id="d-<?= asdc_h($id) ?>" name="desc[<?= asdc_h($id) ?>]" rows="1" maxlength="<?= ASDC_DESC_MAX ?>" placeholder="Ajouter une description"
+            data-actuel="<?= asdc_h($plat['desc']) ?>"<?= $decrit('d-' . $id, $descChange) ?>><?= asdc_h($saisie('desc', $id, $plat['desc'])) ?></textarea>
+          <?php if ($descChange): ?><p class="g-plat__origine g-plat__origine--texte" id="o-d-<?= asdc_h($id) ?>"><?= $descBase === '' ? 'Pas de description à l’origine.' : 'Description d’origine : « ' . asdc_h($descBase) . ' »' ?> <?= $retablir('d-' . $id, $descBase) ?></p><?php endif ?>
+          <?= $erreurDe('d-' . $id) ?>
+          <div class="g-plat__bas">
+            <span class="g-ligne-choix">
+              <label class="g-mini" for="pl-<?= asdc_h($id) ?>">Rubrique</label>
+              <select class="g-choix" id="pl-<?= asdc_h($id) ?>" name="place[<?= asdc_h($id) ?>]" data-actuel="<?= asdc_h($rid) ?>"<?= $decrit('pl-' . $id, $deplace) ?>><?= $optionsRubriques($saisie('place', $id, $rid), true) ?></select>
+            </span>
+            <?php if ($ajoute): ?>
+            <label class="g-case g-case--danger"><input type="checkbox" id="sp-<?= asdc_h($id) ?>" name="supprimer_plat[<?= asdc_h($id) ?>]" value="1" data-actuel="0" data-supprimer<?= $coche('supprimer_plat', $id, false) ? ' checked' : '' ?>> <span>Supprimer ce plat</span></label>
+            <?php endif ?>
+          </div>
+          <?php if ($deplace): ?><p class="g-plat__origine g-plat__origine--texte" id="o-pl-<?= asdc_h($id) ?>">Rubrique d’origine : « <?= asdc_h(asdc_titre_rubrique($plat['origine'])) ?> » <?= $retablir('pl-' . $id, $plat['origine']) ?></p><?php endif ?>
+          <?= $erreurDe('pl-' . $id) ?>
+        </li>
+        <?php endforeach ?>
+      </ul>
+    </section>
+    <?php endforeach ?>
+
+    <?php foreach ($fixes as $rubrique): ?>
+    <section class="g-rubrique" aria-labelledby="r-<?= asdc_h($rubrique['id']) ?>" data-rubrique-prix>
+      <h2 id="r-<?= asdc_h($rubrique['id']) ?>"><?= asdc_h($rubrique['titre']) ?></h2>
+      <ul class="g-plats">
+        <?php foreach ($rubrique['plats'] as $plat):
+            $id = (string) $plat['id'];
+            $prixChange = $actuels[$id] !== $origine[$id];
+        ?>
+        <li class="g-plat" data-plat-prix="<?= asdc_h(asdc_normaliser($plat['nom'] . ' ' . ($plat['desc'] ?? ''))) ?>">
           <label class="g-plat__texte" for="p-<?= asdc_h($id) ?>">
             <span class="g-plat__nom"><?= asdc_h($plat['nom']) ?></span>
-            <?php if ($fixe && $descActuelle !== ''): ?><span class="g-plat__desc"><?= asdc_h($descActuelle) ?></span><?php endif ?>
+            <?php if (!empty($plat['desc'])): ?><span class="g-plat__desc"><?= asdc_h($plat['desc']) ?></span><?php endif ?>
           </label>
           <span class="g-plat__champ">
             <input id="p-<?= asdc_h($id) ?>" name="prix[<?= asdc_h($id) ?>]" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"
-              value="<?= asdc_h($valeur) ?>" data-actuel="<?= asdc_h(asdc_saisie_prix($actuels[$id])) ?>" data-genre="prix"<?= $decrit ? ' aria-describedby="' . asdc_h(implode(' ', $decrit)) . '"' : '' ?><?= isset($erreurs[$id]) ? ' aria-invalid="true"' : '' ?>>
+              value="<?= asdc_h($saisie('prix', $id, asdc_saisie_prix($actuels[$id]))) ?>" data-actuel="<?= asdc_h(asdc_saisie_prix($actuels[$id])) ?>" data-genre="prix"<?= $decrit('p-' . $id, $prixChange) ?>>
             <span class="g-plat__euro" aria-hidden="true">€</span>
           </span>
-          <?php if ($change): ?><p class="g-plat__origine" id="o-<?= asdc_h($id) ?>">Prix d’origine : <?= asdc_h(asdc_euros($origine[$id])) ?> <?= $retablir('p-' . $id, asdc_saisie_prix($origine[$id])) ?></p><?php endif ?>
-          <?php if (isset($erreurs[$id])): ?><p class="g-plat__erreur" id="e-<?= asdc_h($id) ?>"><?= asdc_h($erreurs[$id]) ?></p><?php endif ?>
-          <?php if (!$fixe): ?>
-          <label class="visuellement-cache" for="d-<?= asdc_h($id) ?>">Description de « <?= asdc_h($plat['nom']) ?> »</label>
-          <textarea class="g-plat__description" id="d-<?= asdc_h($id) ?>" name="desc[<?= asdc_h($id) ?>]" rows="1" maxlength="<?= ASDC_DESC_MAX ?>" placeholder="Ajouter une description"
-            data-actuel="<?= asdc_h($descActuelle) ?>"<?= $decritDesc ? ' aria-describedby="' . asdc_h(implode(' ', $decritDesc)) . '"' : '' ?><?= isset($erreursDesc[$id]) ? ' aria-invalid="true"' : '' ?>><?= asdc_h($descValeur) ?></textarea>
-          <?php if ($descChange): ?><p class="g-plat__origine g-plat__origine--texte" id="od-<?= asdc_h($id) ?>"><?= $plats[$id]['desc'] === '' ? 'Pas de description à l’origine.' : 'Description d’origine : « ' . asdc_h($plats[$id]['desc']) . ' »' ?> <?= $retablir('d-' . $id, $plats[$id]['desc']) ?></p><?php endif ?>
-          <?php if (isset($erreursDesc[$id])): ?><p class="g-plat__erreur g-plat__erreur--texte" id="ed-<?= asdc_h($id) ?>"><?= asdc_h($erreursDesc[$id]) ?></p><?php endif ?>
-          <?php endif ?>
+          <?php if ($prixChange): ?><p class="g-plat__origine" id="o-p-<?= asdc_h($id) ?>">Prix d’origine : <?= asdc_h(asdc_euros($origine[$id])) ?> <?= $retablir('p-' . $id, asdc_saisie_prix($origine[$id])) ?></p><?php endif ?>
+          <?= $erreurDe('p-' . $id, 'g-plat__erreur') ?>
         </li>
         <?php endforeach ?>
       </ul>

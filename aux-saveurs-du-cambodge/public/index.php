@@ -26,7 +26,7 @@
 <link rel="manifest" href="./site.webmanifest">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="./assets/css/site.css?v=3f4660f7">
-<script src="./assets/js/site.js?v=45929ea8" defer></script>
+<script src="./assets/js/site.js?v=af38420d" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","@id":"https://www.auxsaveursducambodge-saintalban.com/#restaurant","name":"Aux Saveurs du Cambodge","description":"Restaurant cambodgien à Saint-Alban, au nord de Toulouse : lok lac, soupe Phnom Penh, porc au caramel, nems et vapeurs faits maison, box anti-crise à {{rond:box-anti-crise--box-anti-crise}}, boisson comprise. Commande et réservation par téléphone au 07 59 52 53 41.","url":"https://www.auxsaveursducambodge-saintalban.com/","telephone":"+33759525341","image":"https://www.auxsaveursducambodge-saintalban.com/og.jpg","address":{"@type":"PostalAddress","streetAddress":"10 avenue Salvador Allende","postalCode":"31140","addressLocality":"Saint-Alban","addressRegion":"Occitanie","addressCountry":"FR"},"geo":{"@type":"GeoCoordinates","latitude":43.688048,"longitude":1.40842},"hasMap":"https://www.google.com/maps/search/?api=1&query=Aux%20Saveurs%20du%20Cambodge%2C%2010%20avenue%20Salvador%20Allende%2C%2031140%20Saint-Alban","servesCuisine":["Cambodgienne","Asiatique"],"priceRange":"€","currenciesAccepted":"EUR","hasMenu":"https://www.auxsaveursducambodge-saintalban.com/carte/","openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"11:30","closes":"14:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Sunday"],"opens":"18:00","closes":"21:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"18:00","closes":"21:30"}]}</script>
 </head>
 <body class="page-accueil" data-page="accueil" data-collecte="./stats/collecte.php">
@@ -63,12 +63,12 @@
 
   <section class="tuile tuile--claire" id="box" aria-labelledby="box-titre" data-reveler>
     <div class="tuile__texte">
-      <h2 class="tuile__titre" id="box-titre">Box anti-crise</h2>
+      <h2 class="tuile__titre" id="box-titre">{{nom:box-anti-crise--box-anti-crise}}</h2>
       <p class="tuile__accroche">Deux nems, du poulet mariné et son riz, une boisson.</p>
       <p class="tuile__detail">{{rond:box-anti-crise--box-anti-crise}}, boisson comprise.</p>
       <div class="tuile__actions">
         <a class="bouton" href="tel:+33759525341">Commander</a>
-        <a class="bouton bouton--contour" href="./carte/#box-anti-crise">En savoir plus</a>
+        <a class="bouton bouton--contour" href="./carte/#{{ancre:box-anti-crise--box-anti-crise}}">En savoir plus</a>
       </div>
     </div>
     <div class="tuile__plat"><img class="tuile__image" src="./assets/img/plats/box.svg" width="660" height="660" alt="Box anti-crise vue du dessus : deux nems, poulet mariné sur son riz et une canette (illustration)" loading="lazy" decoding="async"></div>
@@ -77,51 +77,51 @@
   <div class="grille">
     <section class="tuile tuile--claire tuile--demi" aria-labelledby="tuile-lok-lac" data-reveler>
       <div class="tuile__texte">
-        <h2 class="tuile__titre" id="tuile-lok-lac">Lok lac</h2>
+        <h2 class="tuile__titre" id="tuile-lok-lac">{{nom:boeuf--lok-lac}}</h2>
         <p class="tuile__accroche">Le grand classique cambodgien.</p>
         <p class="tuile__detail">{{prix:boeuf--lok-lac}}, servi avec du riz nature.</p>
         <div class="tuile__actions">
           <a class="bouton" href="tel:+33759525341">Commander</a>
-          <a class="bouton bouton--contour" href="./carte/#boeuf">Voir à la carte</a>
+          <a class="bouton bouton--contour" href="./carte/#{{ancre:boeuf--lok-lac}}">Voir à la carte</a>
         </div>
       </div>
-      <div class="tuile__plat"><img class="tuile__image" src="./assets/img/plats/loklac.svg" width="660" height="660" alt="Lok lac vu du dessus (illustration)" loading="lazy" decoding="async"></div>
+      <div class="tuile__plat"><img class="tuile__image" src="./assets/img/plats/loklac.svg" width="660" height="660" alt="{{nom:boeuf--lok-lac}} vu du dessus (illustration)" loading="lazy" decoding="async"></div>
     </section>
     <section class="tuile tuile--noire tuile--demi" aria-labelledby="tuile-bo-bun" data-reveler>
       <div class="tuile__texte">
-        <h2 class="tuile__titre" id="tuile-bo-bun">Bo bun</h2>
+        <h2 class="tuile__titre" id="tuile-bo-bun">{{nom:salades--bo-bun}}</h2>
         <p class="tuile__accroche">La salade qui fait un repas.</p>
         <p class="tuile__detail">{{prix:salades--bo-bun}}.</p>
         <div class="tuile__actions">
           <a class="bouton" href="tel:+33759525341">Commander</a>
-          <a class="bouton bouton--contour" href="./carte/#salades">Voir à la carte</a>
+          <a class="bouton bouton--contour" href="./carte/#{{ancre:salades--bo-bun}}">Voir à la carte</a>
         </div>
       </div>
-      <div class="tuile__plat"><img class="tuile__image" src="./assets/img/plats/bobun.svg" width="660" height="660" alt="Bo bun vu du dessus (illustration)" loading="lazy" decoding="async"></div>
+      <div class="tuile__plat"><img class="tuile__image" src="./assets/img/plats/bobun.svg" width="660" height="660" alt="{{nom:salades--bo-bun}} vu du dessus (illustration)" loading="lazy" decoding="async"></div>
     </section>
     <section class="tuile tuile--noire tuile--demi" aria-labelledby="tuile-nems-au-porc" data-reveler>
       <div class="tuile__texte">
-        <h2 class="tuile__titre" id="tuile-nems-au-porc">Nems au porc</h2>
+        <h2 class="tuile__titre" id="tuile-nems-au-porc">{{nom:entrees--nems-au-porc}}</h2>
         <p class="tuile__accroche">Le classique croustillant.</p>
         <p class="tuile__detail">{{prix:entrees--nems-au-porc}}.</p>
         <div class="tuile__actions">
           <a class="bouton" href="tel:+33759525341">Commander</a>
-          <a class="bouton bouton--contour" href="./carte/#entrees">Voir à la carte</a>
+          <a class="bouton bouton--contour" href="./carte/#{{ancre:entrees--nems-au-porc}}">Voir à la carte</a>
         </div>
       </div>
-      <div class="tuile__plat"><img class="tuile__image" src="./assets/img/plats/nems.svg" width="660" height="660" alt="Nems au porc vu du dessus (illustration)" loading="lazy" decoding="async"></div>
+      <div class="tuile__plat"><img class="tuile__image" src="./assets/img/plats/nems.svg" width="660" height="660" alt="{{nom:entrees--nems-au-porc}} vu du dessus (illustration)" loading="lazy" decoding="async"></div>
     </section>
     <section class="tuile tuile--claire tuile--demi" aria-labelledby="tuile-porc-au-caramel" data-reveler>
       <div class="tuile__texte">
-        <h2 class="tuile__titre" id="tuile-porc-au-caramel">Porc au caramel</h2>
+        <h2 class="tuile__titre" id="tuile-porc-au-caramel">{{nom:porc--porc-au-caramel}}</h2>
         <p class="tuile__accroche">Mijoté, laqué, sucré-salé.</p>
         <p class="tuile__detail">{{prix:porc--porc-au-caramel}}, servi avec du riz nature.</p>
         <div class="tuile__actions">
           <a class="bouton" href="tel:+33759525341">Commander</a>
-          <a class="bouton bouton--contour" href="./carte/#porc">Voir à la carte</a>
+          <a class="bouton bouton--contour" href="./carte/#{{ancre:porc--porc-au-caramel}}">Voir à la carte</a>
         </div>
       </div>
-      <div class="tuile__plat"><img class="tuile__image" src="./assets/img/plats/caramel.svg" width="660" height="660" alt="Porc au caramel vu du dessus (illustration)" loading="lazy" decoding="async"></div>
+      <div class="tuile__plat"><img class="tuile__image" src="./assets/img/plats/caramel.svg" width="660" height="660" alt="{{nom:porc--porc-au-caramel}} vu du dessus (illustration)" loading="lazy" decoding="async"></div>
     </section>
   </div>
 
@@ -134,7 +134,7 @@
           <span class="scene__ligne" data-de="0.72" data-a="0.82">Et beaucoup d’amour.</span>
         </h2>
         <p class="scene__suite" data-de="0.86" data-a="0.96">
-          <span class="scene__detail">Citronnelle, saté, caramel, lait de coco&#8239;: les saveurs du Cambodge, dans une carte de 85 plats.</span>
+          <span class="scene__detail">Citronnelle, saté, caramel, lait de coco&#8239;: les saveurs du Cambodge, dans une carte de {{nombre:plats}} plats.</span>
           <a class="lien" href="./carte/">Découvrir la carte<svg class="icone icone--chevron" aria-hidden="true" focusable="false"><use href="#i-chevron"/></svg></a>
         </p>
       </div>

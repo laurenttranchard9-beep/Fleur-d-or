@@ -1,5 +1,5 @@
-/* Espace gestion, la carte : compteur des modifications, « Rétablir », descriptions sur une ligne qui s'allongent,
-   filtre des plats, alerte avant de quitter sans enregistrer. */
+/* Espace gestion, la carte : compteur des modifications (textes, prix, rubriques, cases), « Rétablir »,
+   descriptions sur une ligne qui s'allongent, suppressions estompées, filtre des plats, alerte avant de quitter. */
 (() => {
   'use strict';
 
@@ -17,19 +17,27 @@
       .split(' ')
       .filter(Boolean)
       .join(' ');
-  const pareil = (champ) =>
-    champ.dataset.genre === 'prix'
-      ? normaliserPrix(champ.value) === normaliserPrix(champ.dataset.actuel)
-      : normaliserTexte(champ.value) === normaliserTexte(champ.dataset.actuel);
+  const pareil = (champ) => {
+    if (champ.type === 'checkbox') return (champ.checked ? '1' : '0') === champ.dataset.actuel;
+    if (champ.tagName === 'SELECT') return champ.value === champ.dataset.actuel;
+    if (champ.dataset.genre === 'prix') return normaliserPrix(champ.value) === normaliserPrix(champ.dataset.actuel);
+    return normaliserTexte(champ.value) === normaliserTexte(champ.dataset.actuel);
+  };
   let envoi = false;
 
+  // Chaque champ changé compte pour une modification ; un bloc « Ajouter » rempli, pour une seule (une rubrique, un plat).
   const actualiser = () => {
     let n = 0;
+    const blocs = new Set();
     for (const champ of champs) {
       const change = !pareil(champ);
       champ.classList.toggle('est-change', change);
-      if (change) n += 1;
+      if (!change) continue;
+      const bloc = champ.closest('.g-ajout__bloc');
+      if (bloc) blocs.add(bloc);
+      else n += 1;
     }
+    n += blocs.size;
     compte.textContent = n === 0 ? 'Aucune modification' : n === 1 ? '1 modification' : `${n} modifications`;
     bouton.disabled = n === 0 && !formulaire.querySelector('[aria-invalid="true"]');
     return n;
@@ -64,6 +72,13 @@
     });
   });
 
+  // Un plat ou une rubrique à supprimer s'estompe dès que la case est cochée.
+  const estomper = (caseSupprimer) => caseSupprimer.closest('.g-plat, .g-rubrique')?.classList.toggle('est-supprime', caseSupprimer.checked);
+  formulaire.querySelectorAll('[data-supprimer]').forEach(estomper);
+  formulaire.addEventListener('change', (e) => {
+    if (e.target.matches('[data-supprimer]')) estomper(e.target);
+    actualiser();
+  });
   formulaire.addEventListener('input', actualiser);
   formulaire.addEventListener('submit', () => {
     envoi = true;

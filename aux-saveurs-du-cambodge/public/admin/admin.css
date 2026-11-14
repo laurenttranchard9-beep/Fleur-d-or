@@ -469,6 +469,27 @@ input {
   letter-spacing: 0.011em;
 }
 
+/* Temps passé : une durée en tête de fiche, plus petite que le grand nombre de la page. */
+.g-duree {
+  margin-top: 2px;
+  font-size: 34px;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.g-duree__legende {
+  margin: 6px 0 14px;
+  color: var(--gris);
+  font-size: 14px;
+  line-height: 1.42859;
+  letter-spacing: -0.016em;
+}
+
+.g-aide--haut {
+  margin-top: -2px;
+}
+
 .g-histogramme {
   position: relative;
   height: 240px;
@@ -872,6 +893,173 @@ input {
   text-decoration: underline;
 }
 
+/* Ajouter une rubrique ou un plat : deux blocs côte à côte, en tête de la carte. */
+.g-ajout h2 {
+  margin-bottom: 14px;
+}
+
+.g-ajout__blocs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 36px;
+}
+
+.g-ajout__bloc {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.g-ajout__bloc legend {
+  margin-bottom: 6px;
+  padding: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.g-ajout__ligne {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 132px;
+  gap: 12px;
+}
+
+.g-ajout__nom,
+.g-ajout__prix {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.g-ajout__bloc .g-mini:not(:first-of-type) {
+  margin-top: 6px;
+}
+
+.g-ajout__bloc .g-case {
+  margin-top: 8px;
+}
+
+.g-ajout .g-aide {
+  margin-top: 16px;
+}
+
+/* Petite étiquette d'un champ. */
+.g-mini {
+  color: var(--gris);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* Nom d'un plat, champs d'ajout, listes de choix : les mêmes contours que tous les champs. */
+.g-texte,
+.g-plat__nom-champ,
+.g-choix {
+  width: 100%;
+  border: 1px solid var(--gris-nuit);
+  border-radius: 12px;
+  background-color: var(--blanc);
+  color: var(--encre);
+  font-family: inherit;
+}
+
+.g-texte,
+.g-plat__nom-champ {
+  height: 44px;
+  padding: 0 14px;
+  font-size: 17px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.g-plat__nom-champ {
+  font-weight: 600;
+}
+
+.g-choix {
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.g-texte:focus,
+.g-plat__nom-champ:focus,
+.g-choix:focus {
+  outline: none;
+  border-color: var(--bleu);
+  box-shadow: 0 0 0 4px rgb(0 125 250 / 0.3);
+}
+
+.g-texte.est-change,
+.g-plat__nom-champ.est-change,
+.g-choix.est-change {
+  border-color: var(--bleu);
+  background-color: #f2f8ff;
+}
+
+.g-plat__nom-zone {
+  display: grid;
+  min-width: 0;
+}
+
+/* Sous chaque plat : sa rubrique, et pour un plat ajouté, la case pour le supprimer. */
+.g-plat__bas {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 20px;
+}
+
+/* La liste de choix rétrécit avec l'écran (le texte choisi se coupe) au lieu de déborder. */
+.g-ligne-choix {
+  display: flex;
+  flex: 0 1 auto;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.g-ligne-choix .g-mini {
+  flex: none;
+}
+
+.g-ligne-choix .g-choix {
+  flex: 0 1 auto;
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.g-rubrique__options {
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.g-rubrique__vide {
+  margin: 4px 0 8px;
+  font-size: 14px;
+}
+
+.g-case--danger span {
+  color: var(--erreur);
+}
+
+/* Ce qui va être supprimé s'estompe ; la case reste nette pour pouvoir changer d'avis. */
+.g-plat.est-supprime > :not(.g-plat__bas),
+.g-rubrique.est-supprime .g-plats,
+.g-rubrique.est-supprime .g-rubrique__champ {
+  opacity: 0.45;
+}
+
 .g-plat__erreur {
   color: var(--erreur);
 }
@@ -1041,6 +1229,10 @@ input {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .g-ajout__blocs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .g-enregistrer {
     margin: 24px -16px 0;
     padding-inline: 16px;
@@ -1062,6 +1254,10 @@ input {
   }
 
   .g-plat {
+    grid-template-columns: minmax(0, 1fr) 112px;
+  }
+
+  .g-ajout__ligne {
     grid-template-columns: minmax(0, 1fr) 112px;
   }
 

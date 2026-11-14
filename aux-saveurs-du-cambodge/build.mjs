@@ -91,7 +91,6 @@ const jeton = (genre, ...ids) => `{{${genre}:${ids.join(',')}}}`;
 const BOX = tousLesPlats.find((p) => p.section.id === 'box-anti-crise' && p.name === 'Box anti-crise');
 const ID_BOX = idPlat(BOX, BOX.section);
 const descriptionResto = resto.description.replace('{prix-box}', jeton('rond', ID_BOX));
-const noteRiz = `Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + ${jeton('prix', ID_SUPPLEMENT)}.`;
 
 /* ---------- Icônes : un trait fin, des bouts ronds ---------- */
 
@@ -211,24 +210,15 @@ const schemaRestaurant = () => ({
   openingHoursSpecification: schemaHoraires(),
 });
 
-const schemaMenu = () => ({
+// Les données structurées « Menu » : cette base, plus les rubriques et les plats du moment, que le serveur ajoute
+// (public/inc/noyau.php, asdc_jsonld_menu) puisque l'espace gestion peut en créer, en renommer, en déplacer.
+const baseMenu = () => ({
   '@context': 'https://schema.org',
   '@type': 'Menu',
   '@id': `${resto.url}/carte/#menu`,
   name: `La carte — ${resto.name}`,
   inLanguage: 'fr',
   url: `${resto.url}/carte/`,
-  hasMenuSection: carte.sections.map((section) => ({
-    '@type': 'MenuSection',
-    name: jeton('jrubrique', section.id),
-    ...(section.withRice ? { description: noteRiz } : {}),
-    hasMenuItem: section.items.map((item) => ({
-      '@type': 'MenuItem',
-      name: item.name,
-      ...(item.desc ? { description: jeton('jdesc', idPlat(item, section)) } : {}),
-      offers: { '@type': 'Offer', price: jeton('json', idPlat(item, section)), priceCurrency: 'EUR' },
-    })),
-  })),
 });
 
 const jsonld = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).replaceAll('<', `${BARRE}u003c`)}</script>`;
@@ -276,7 +266,7 @@ ${indexable ? `<link rel="canonical" href="${url}">` : '<meta name="robots" cont
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="${r}${asset('assets/css/site.css')}">
 <script src="${r}${asset('assets/js/site.js')}" defer></script>
-${schema ? jsonld(schema) : ''}
+${typeof schema === 'string' ? schema : schema ? jsonld(schema) : ''}
 </head>
 <body class="${classe}" data-page="${cle}" data-collecte="${r}stats/collecte.php">
 <a class="evitement" href="#contenu">Aller au contenu</a>
@@ -383,20 +373,22 @@ const motsLeves = (texte) =>
     .join(' ');
 
 // Une tuile « produit » : nom, phrase, prix, deux actions, le plat dessiné.
+// Le nom du plat et sa rubrique sur la carte sont des jetons : l'espace gestion peut renommer ou déplacer le plat.
 const tuile = (r, p, teinte) => {
-  const prix = jeton('prix', idPlat(p, p.section));
+  const id = idPlat(p, p.section);
+  const prix = jeton('prix', id);
   const detail = p.section.withRice ? `${prix}, servi avec du riz nature.` : `${prix}.`;
   return `<section class="tuile tuile--${teinte} tuile--demi" aria-labelledby="tuile-${slug(p.name)}" data-reveler>
       <div class="tuile__texte">
-        <h2 class="tuile__titre" id="tuile-${slug(p.name)}">${esc(p.name)}</h2>
+        <h2 class="tuile__titre" id="tuile-${slug(p.name)}">${jeton('nom', id)}</h2>
         <p class="tuile__accroche">${esc(p.accroche)}</p>
         <p class="tuile__detail">${esc(detail)}</p>
         <div class="tuile__actions">
           <a class="bouton" href="${tel}">Commander</a>
-          <a class="bouton bouton--contour" href="${r}carte/#${p.section.id}">Voir à la carte</a>
+          <a class="bouton bouton--contour" href="${r}carte/#${jeton('ancre', id)}">Voir à la carte</a>
         </div>
       </div>
-      ${cadrePlat(image(r, p.image, `${p.name} vu du dessus (illustration)`, 'tuile__image', { taille: 660 }))}
+      ${cadrePlat(image(r, p.image, `${jeton('nom', id)} vu du dessus (illustration)`, 'tuile__image', { taille: 660 }))}
     </section>`;
 };
 
@@ -428,12 +420,12 @@ const accueil = () =>
 
   <section class="tuile tuile--claire" id="box" aria-labelledby="box-titre" data-reveler>
     <div class="tuile__texte">
-      <h2 class="tuile__titre" id="box-titre">${esc(BOX.name)}</h2>
+      <h2 class="tuile__titre" id="box-titre">${jeton('nom', ID_BOX)}</h2>
       <p class="tuile__accroche">Deux nems, du poulet mariné et son riz, une boisson.</p>
       <p class="tuile__detail">${jeton('rond', ID_BOX)}, boisson comprise.</p>
       <div class="tuile__actions">
         <a class="bouton" href="${tel}">Commander</a>
-        <a class="bouton bouton--contour" href="${r}carte/#${BOX.section.id}">En savoir plus</a>
+        <a class="bouton bouton--contour" href="${r}carte/#${jeton('ancre', ID_BOX)}">En savoir plus</a>
       </div>
     </div>
     ${cadrePlat(image(r, BOX.image, 'Box anti-crise vue du dessus : deux nems, poulet mariné sur son riz et une canette (illustration)', 'tuile__image'))}
@@ -455,7 +447,7 @@ const accueil = () =>
           <span class="scene__ligne" data-de="0.72" data-a="0.82">Et beaucoup d’amour.</span>
         </h2>
         <p class="scene__suite" data-de="0.86" data-a="0.96">
-          <span class="scene__detail">Citronnelle, saté, caramel, lait de coco&#8239;: les saveurs du Cambodge, dans une carte de ${nbPlats} plats.</span>
+          <span class="scene__detail">Citronnelle, saté, caramel, lait de coco&#8239;: les saveurs du Cambodge, dans une carte de ${jeton('nombre', 'plats')} plats.</span>
           ${lien(`${r}carte/`, 'Découvrir la carte')}
         </p>
       </div>
@@ -502,40 +494,17 @@ ${regleMidi() ? `    <p class="tuile__note">${esc(regleMidi())}</p>
 
 /* ---------- La carte ---------- */
 
-// La description et le texte de recherche sont des jetons, comme le prix : le serveur y met ceux du moment,
-// changés ou non dans l'espace gestion (public/inc/noyau.php).
-const ligne = (item, section) => {
-  const id = idPlat(item, section);
-  return `          <li class="plat" data-plat="${id}" data-nom="${esc(item.name)}" data-prix="${jeton('cents', id)}" data-recherche="${jeton('recherche', id)}"${section.withRice ? ' data-riz' : ''}>
-            <span class="plat__nom">${esc(item.name)}</span>
-            ${jeton('desc', id)}
-            <span class="plat__prix">${jeton('prix', id)}</span>
-            <button type="button" class="plat__ajout" data-ajouter="${id}" hidden aria-label="Ajouter à la commande : ${esc(item.name)}">${icone('plus')}</button>
-          </li>`;
-};
-
-const rubrique = (section) => `      <section class="rubrique" id="${section.id}" aria-labelledby="r-${section.id}" data-rubrique>
-        <h2 id="r-${section.id}" class="rubrique__titre">${jeton('rubrique', section.id)}</h2>
-        ${
-          // Le riz se voit en bordeaux : nature compris, cantonais en supplément (à choisir plat par plat dans « Votre commande »).
-          section.withRice
-            ? `<p class="rubrique__riz">Servis avec du riz nature. Riz cantonais (porc ou crevettes) en supplément&nbsp;: + ${jeton('prix', ID_SUPPLEMENT)}</p>`
-            : ''
-        }
-        <ul class="plats">
-${section.items.map((item) => ligne(item, section)).join('')}
-        </ul>
-      </section>`;
-
+// Les rubriques, leurs plats et l'index sont rendus par le serveur à chaque visite (public/inc/noyau.php) : l'espace
+// gestion peut ajouter des rubriques et des plats, renommer et déplacer les plats. Ici, la page autour.
 const lacarte = () =>
   page({
     chemin: 'carte/',
     cle: 'carte',
     php: true,
     titre: `La carte — ${resto.name}, ${resto.town}`,
-    description: `Toute la carte d’${resto.name} à ${resto.town} : ${nbPlats} plats faits maison, de la box anti-crise à ${jeton('rond', ID_BOX)} au lok lac, avec les prix. Commande par téléphone au ${resto.phone.display}.`,
+    description: `Toute la carte d’${resto.name} à ${resto.town} : ${jeton('nombre', 'plats')} plats faits maison, de la box anti-crise à ${jeton('rond', ID_BOX)} au lok lac, avec les prix. Commande par téléphone au ${resto.phone.display}.`,
     classe: 'page-carte',
-    schema: schemaMenu(),
+    schema: jeton('carte', 'jsonld'),
     apres: `<nav class="barre-bon" aria-label="Actions rapides" data-barre-bon>
   <button type="button" class="barre-bon__ouvrir" data-ouvrir-bon aria-controls="bon" aria-expanded="false" hidden>${icone('sac')}<span>Votre commande</span><span class="barre-bon__compte" data-bon-compte hidden>0</span></button>
   <a class="bouton bouton--petit" href="${tel}">Appeler</a>
@@ -543,7 +512,7 @@ const lacarte = () =>
     corps: () => `<main id="contenu">
   <header class="carte-tete">
     <h1 class="carte-tete__titre">La carte</h1>
-    <p class="carte-tete__accroche">${nbPlats} plats faits maison.</p>
+    <p class="carte-tete__accroche">${jeton('nombre', 'plats')} plats faits maison.</p>
     <p class="carte-tete__detail">${esc('Commandez dès maintenant !')} Par téléphone, au <a href="${tel}">${resto.phone.display}</a>.</p>
     <div class="recherche" role="search">
       <label class="visuellement-cache" for="recherche">Chercher un plat</label>
@@ -556,7 +525,7 @@ const lacarte = () =>
   <div class="carte">
     <nav class="rubriques" aria-label="Rubriques de la carte">
       <ul>
-${carte.sections.map((s) => `        <li><a href="#${s.id}" data-lien-rubrique="${s.id}">${jeton('rubrique', s.id)}</a></li>`).join('')}
+${jeton('carte', 'index')}
       </ul>
     </nav>
 
@@ -565,7 +534,7 @@ ${carte.sections.map((s) => `        <li><a href="#${s.id}" data-lien-rubrique="
         <p>Aucun plat ne correspond à «&#8239;<span data-vide-terme></span>&#8239;».</p>
         <p>Essayez «&#8239;crevettes&#8239;», «&#8239;poulet&#8239;» ou «&#8239;soupe&#8239;», ou <button type="button" class="lien lien--bouton" data-effacer>effacez la recherche</button>.</p>
       </div>
-${carte.sections.map(rubrique).join('')}
+${jeton('carte', 'rubriques')}
       <p class="carte__maj">Carte mise à jour le ${new Date(`${carte.updated}T12:00:00`).toLocaleDateString('fr-FR', {
         day: 'numeric',
         month: 'long',
@@ -617,8 +586,8 @@ const mentions = () =>
     resto.legal.hostPhone ? `<br>Téléphone : ${esc(resto.legal.hostPhone)}` : ''
   }</p>
   <h2 id="cookies">Données personnelles et cookies</h2>
-  <p>Le site mesure lui-même sa fréquentation, pour savoir combien de personnes le consultent et ce qui leur sert. Il dépose pour cela un cookie, «&#8239;asdc_mesure&#8239;», qui ne sert qu’à ces statistiques&#8239;: pas de publicité, aucun partage, aucun service extérieur. Il dure 13 mois au plus et n’est jamais prolongé&#8239;; les chiffres sont conservés 25 mois.</p>
-  <p>Sont comptés, sans rien qui vous identifie&#8239;: les pages vues, la provenance (moteur de recherche, réseau social…), le type d’appareil, les boutons «&#8239;Appeler&#8239;» et «&#8239;Itinéraire&#8239;» touchés, les plats ajoutés à la commande et les mots cherchés dans la carte. Ce fonctionnement dispense le site de bandeau de consentement selon les règles de la CNIL, mais vous pouvez refuser à tout moment.</p>
+  <p>Le site mesure lui-même sa fréquentation, pour savoir combien de personnes le consultent et ce qui leur sert. Il dépose pour cela un cookie, «&#8239;asdc_mesure&#8239;», qui ne sert qu’à ces statistiques&#8239;: pas de publicité, aucun partage, aucun service extérieur. Il dure 13 mois au plus et n’est jamais prolongé&#8239;; les chiffres sont conservés 25 mois. Un second cookie, «&#8239;asdc_visite&#8239;», distingue une visite de la suivante et s’efface après 30 minutes sans activité.</p>
+  <p>Sont comptés, sans rien qui vous identifie&#8239;: les pages vues, l’heure d’arrivée et le temps passé sur le site (seulement quand une page est affichée), la provenance (moteur de recherche, réseau social…), le type d’appareil, les boutons «&#8239;Appeler&#8239;» et «&#8239;Itinéraire&#8239;» touchés, les plats ajoutés à la commande et les mots cherchés dans la carte. Ce fonctionnement dispense le site de bandeau de consentement selon les règles de la CNIL, mais vous pouvez refuser à tout moment.</p>
   <div class="refus" data-refus>
     <p class="refus__etat" data-refus-etat>Sans JavaScript, rien n’est mesuré.</p>
     <button type="button" class="bouton bouton--contour" data-refus-bouton hidden>Refuser la mesure d’audience</button>
@@ -725,6 +694,7 @@ const annexes = () => {
     ...carte.sections.map((section) => ({
       id: section.id,
       titre: section.title,
+      riz: Boolean(section.withRice),
       plats: section.items.map((item) => ({
         id: idPlat(item, section),
         nom: item.name,
@@ -758,7 +728,7 @@ const annexes = () => {
   rmSync(join(PUBLIC, 'inc/carte.json'), { force: true });
   writeFileSync(
     join(PUBLIC, 'inc/carte.php'),
-    `<?php http_response_code(404); exit; ?>${String.fromCharCode(10)}${JSON.stringify({ maj: carte.updated, rubriques: rubriquesServeur }, null, 1)}${String.fromCharCode(10)}`,
+    `<?php http_response_code(404); exit; ?>${String.fromCharCode(10)}${JSON.stringify({ maj: carte.updated, menu: baseMenu(), rubriques: rubriquesServeur }, null, 1)}${String.fromCharCode(10)}`,
   );
 
   // Hébergement Apache (IONOS, OVH, o2switch…) : les règles de _redirects et _headers, plus le passage en HTTPS.

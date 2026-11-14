@@ -157,14 +157,58 @@ function asdc_prix_valide($centimes): bool
     return is_int($centimes) && $centimes >= 10 && $centimes <= 999999;
 }
 
-// Prix en centimes : ceux de la carte, sauf ceux changés dans l'espace gestion.
+function asdc_id_valide($id): bool
+{
+    return is_string($id) && preg_match('/^[a-z0-9][a-z0-9-]{0,99}$/', $id) === 1;
+}
+
+/* ---------- Ce que l'espace gestion a changé dans la carte ---------- */
+
+// Rubriques et plats créés dans l'espace gestion, plats d'origine rangés dans une autre rubrique (donnees/structure.php).
+function asdc_structure(): array
+{
+    static $structure = null;
+    if ($structure === null) {
+        $lu = asdc_lire(ASDC_DONNEES . '/structure.php');
+        $structure = ['rubriques' => [], 'plats' => [], 'places' => []];
+        foreach ((array) ($lu['rubriques'] ?? []) as $r) {
+            if (is_array($r) && asdc_id_valide($r['id'] ?? null) && is_string($r['titre'] ?? null) && $r['titre'] !== '') {
+                $structure['rubriques'][] = [
+                    'id' => $r['id'],
+                    'titre' => $r['titre'],
+                    'riz' => !empty($r['riz']),
+                    'apres' => asdc_id_valide($r['apres'] ?? null) ? $r['apres'] : '',
+                ];
+            }
+        }
+        foreach ((array) ($lu['plats'] ?? []) as $p) {
+            if (is_array($p) && asdc_id_valide($p['id'] ?? null) && asdc_id_valide($p['rubrique'] ?? null) && is_string($p['nom'] ?? null) && $p['nom'] !== '') {
+                $structure['plats'][] = [
+                    'id' => $p['id'],
+                    'rubrique' => $p['rubrique'],
+                    'nom' => $p['nom'],
+                    'desc' => is_string($p['desc'] ?? null) ? $p['desc'] : '',
+                ];
+            }
+        }
+        foreach ((array) ($lu['places'] ?? []) as $id => $rubrique) {
+            if (asdc_id_valide((string) $id) && asdc_id_valide($rubrique)) {
+                $structure['places'][(string) $id] = $rubrique;
+            }
+        }
+    }
+    return $structure;
+}
+
+// Prix en centimes : ceux de la carte, sauf ceux changés dans l'espace gestion, et ceux des plats ajoutés.
 function asdc_prix(): array
 {
     static $prix = null;
     if ($prix === null) {
         $prix = asdc_prix_origine();
+        $ajoutes = array_column(asdc_structure()['plats'], 'id', 'id');
         foreach (asdc_lire(ASDC_DONNEES . '/prix.php') as $id => $centimes) {
-            if (isset($prix[$id]) && asdc_prix_valide($centimes)) {
+            if ((isset($prix[$id]) || isset($ajoutes[$id])) && asdc_prix_valide($centimes)) {
                 $prix[$id] = $centimes;
             }
         }
@@ -172,9 +216,10 @@ function asdc_prix(): array
     return $prix;
 }
 
-/* ---------- Descriptions des plats et noms des rubriques ---------- */
+/* ---------- Noms, descriptions et rubriques du moment ---------- */
 
-// Les plats de la carte par identifiant : nom, description d'origine, rubrique, mots de recherche en plus.
+// Tous les plats, ceux de la carte d'origine puis ceux ajoutés : nom et description de base, rubrique de départ,
+// mots de recherche en plus. Le nom et la description du moment passent par asdc_nom() et asdc_desc().
 function asdc_plats(): array
 {
     static $plats = null;
@@ -187,6 +232,20 @@ function asdc_plats(): array
                     'desc' => (string) ($plat['desc'] ?? ''),
                     'rubrique' => (string) $rubrique['id'],
                     'cles' => (string) ($plat['cles'] ?? ''),
+                    'ajoute' => false,
+                    'fixe' => !empty($rubrique['fixe']),
+                ];
+            }
+        }
+        foreach (asdc_structure()['plats'] as $plat) {
+            if (!isset($plats[$plat['id']])) {
+                $plats[$plat['id']] = [
+                    'nom' => $plat['nom'],
+                    'desc' => $plat['desc'],
+                    'rubrique' => $plat['rubrique'],
+                    'cles' => '',
+                    'ajoute' => true,
+                    'fixe' => false,
                 ];
             }
         }
@@ -203,7 +262,8 @@ function asdc_titres_origine(): array
     return $titres;
 }
 
-// Textes changés dans l'espace gestion : une description peut devenir vide, un nom de rubrique jamais.
+// Textes changés dans l'espace gestion pour la carte d'origine : une description peut devenir vide,
+// un nom de plat ou de rubrique jamais. Les plats et rubriques ajoutés portent leurs textes eux-mêmes.
 function asdc_textes(): array
 {
     static $textes = null;
@@ -211,10 +271,15 @@ function asdc_textes(): array
         $lu = asdc_lire(ASDC_DONNEES . '/textes.php');
         $plats = asdc_plats();
         $titres = asdc_titres_origine();
-        $textes = ['desc' => [], 'rubriques' => []];
+        $textes = ['desc' => [], 'rubriques' => [], 'noms' => []];
         foreach ((array) ($lu['desc'] ?? []) as $id => $texte) {
-            if (isset($plats[$id]) && is_string($texte)) {
+            if (isset($plats[$id]) && !$plats[$id]['ajoute'] && is_string($texte)) {
                 $textes['desc'][$id] = $texte;
+            }
+        }
+        foreach ((array) ($lu['noms'] ?? []) as $id => $nom) {
+            if (isset($plats[$id]) && !$plats[$id]['ajoute'] && is_string($nom) && $nom !== '') {
+                $textes['noms'][$id] = $nom;
             }
         }
         foreach ((array) ($lu['rubriques'] ?? []) as $id => $titre) {
@@ -226,6 +291,11 @@ function asdc_textes(): array
     return $textes;
 }
 
+function asdc_nom(string $id): string
+{
+    return asdc_textes()['noms'][$id] ?? (asdc_plats()[$id]['nom'] ?? '');
+}
+
 function asdc_desc(string $id): string
 {
     $changees = asdc_textes()['desc'];
@@ -234,7 +304,128 @@ function asdc_desc(string $id): string
 
 function asdc_titre_rubrique(string $id): string
 {
-    return asdc_textes()['rubriques'][$id] ?? (asdc_titres_origine()[$id] ?? '');
+    if (isset(asdc_textes()['rubriques'][$id])) {
+        return asdc_textes()['rubriques'][$id];
+    }
+    $origine = asdc_titres_origine();
+    if (isset($origine[$id])) {
+        return $origine[$id];
+    }
+    foreach (asdc_structure()['rubriques'] as $r) {
+        if ($r['id'] === $id) {
+            return $r['titre'];
+        }
+    }
+    return '';
+}
+
+// Le supplément de riz cantonais : le plat de la rubrique « fixe » de la carte d'origine.
+function asdc_id_riz(): string
+{
+    foreach (asdc_carte()['rubriques'] as $r) {
+        if (!empty($r['fixe']) && !empty($r['plats'][0]['id'])) {
+            return (string) $r['plats'][0]['id'];
+        }
+    }
+    return '';
+}
+
+/* ---------- La carte du moment ---------- */
+
+// La carte telle que le site l'affiche : les rubriques dans l'ordre (les nouvelles à la place choisie), et dans
+// chacune ses plats : ceux d'origine restés là, puis ceux qu'on y a rangés, puis les nouveaux. La rubrique « fixe »
+// (le supplément de riz cantonais, propre à l'espace gestion) n'en fait pas partie.
+function asdc_carte_du_moment(): array
+{
+    static $carte = null;
+    if ($carte !== null) {
+        return $carte;
+    }
+    $structure = asdc_structure();
+    $suivantes = [];
+    foreach ($structure['rubriques'] as $r) {
+        $suivantes[$r['apres']][] = $r;
+    }
+    $rubriques = [];
+    $poser = function (string $id, string $titre, bool $riz, bool $ajoutee, string $apres) use (&$poser, &$rubriques, $suivantes): void {
+        if (isset($rubriques[$id])) {
+            return;
+        }
+        $rubriques[$id] = ['id' => $id, 'titre' => $titre, 'riz' => $riz, 'ajoutee' => $ajoutee, 'apres' => $apres, 'plats' => []];
+        foreach ($suivantes[$id] ?? [] as $r) {
+            $poser($r['id'], $r['titre'], $r['riz'], true, $r['apres']);
+        }
+    };
+    foreach ($suivantes[''] ?? [] as $r) {
+        $poser($r['id'], $r['titre'], $r['riz'], true, '');
+    }
+    foreach (asdc_carte()['rubriques'] as $r) {
+        if (empty($r['fixe'])) {
+            $poser((string) $r['id'], asdc_titre_rubrique((string) $r['id']), !empty($r['riz']), false, '');
+        }
+    }
+    // Une rubrique dont la voisine a disparu se range en fin de carte.
+    foreach ($structure['rubriques'] as $r) {
+        $poser($r['id'], $r['titre'], $r['riz'], true, $r['apres']);
+    }
+
+    $prix = asdc_prix();
+    $plats = asdc_plats();
+    $places = $structure['places'];
+    $poserPlat = function (string $id, string $rubrique) use (&$rubriques, $prix, $plats): void {
+        if (!isset($rubriques[$rubrique]) || !isset($prix[$id])) {
+            return;
+        }
+        $rubriques[$rubrique]['plats'][] = [
+            'id' => $id,
+            'nom' => asdc_nom($id),
+            'desc' => asdc_desc($id),
+            'prix' => $prix[$id],
+            'cles' => $plats[$id]['cles'],
+            'ajoute' => $plats[$id]['ajoute'],
+            'origine' => $plats[$id]['rubrique'],
+        ];
+    };
+    foreach ($plats as $id => $p) {
+        if (!$p['ajoute'] && !$p['fixe'] && !isset($places[$id])) {
+            $poserPlat((string) $id, $p['rubrique']);
+        }
+    }
+    foreach ($plats as $id => $p) {
+        if (!$p['ajoute'] && !$p['fixe'] && isset($places[$id])) {
+            $poserPlat((string) $id, isset($rubriques[$places[$id]]) ? $places[$id] : $p['rubrique']);
+        }
+    }
+    foreach ($plats as $id => $p) {
+        if ($p['ajoute']) {
+            $poserPlat((string) $id, $p['rubrique']);
+        }
+    }
+    $carte = array_values($rubriques);
+    return $carte;
+}
+
+function asdc_rubrique_du_plat(string $id): string
+{
+    static $ou = null;
+    if ($ou === null) {
+        $ou = [];
+        foreach (asdc_carte_du_moment() as $r) {
+            foreach ($r['plats'] as $p) {
+                $ou[$p['id']] = $r['id'];
+            }
+        }
+    }
+    return $ou[$id] ?? (asdc_plats()[$id]['rubrique'] ?? '');
+}
+
+function asdc_nombre_plats(): int
+{
+    $n = 0;
+    foreach (asdc_carte_du_moment() as $r) {
+        $n += count($r['plats']);
+    }
+    return $n;
 }
 
 // Comme le générateur des pages : espace fine insécable avant « ? ! : ; » et après « », dans un texte déjà échappé.
@@ -269,8 +460,93 @@ function asdc_recherche_plat(string $id): string
     if (!$plat) {
         return '';
     }
-    $morceaux = [$plat['nom'], asdc_desc($id), asdc_titre_rubrique($plat['rubrique']), $plat['cles']];
+    $morceaux = [asdc_nom($id), asdc_desc($id), asdc_titre_rubrique(asdc_rubrique_du_plat($id)), $plat['cles']];
     return asdc_normaliser(implode(' ', array_filter($morceaux, 'strlen')));
+}
+
+/* ---------- La carte en HTML et pour Google ---------- */
+
+// Les rubriques de la page « La carte », plat par plat ; une rubrique encore vide ne s'affiche pas.
+function asdc_html_carte(): string
+{
+    $prix = asdc_prix();
+    $idRiz = asdc_id_riz();
+    $plus = '<svg class="icone icone--plus" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg>';
+    $nl = chr(10);
+    $html = '';
+    foreach (asdc_carte_du_moment() as $r) {
+        if (!$r['plats']) {
+            continue;
+        }
+        $id = asdc_h($r['id']);
+        $html .= '      <section class="rubrique" id="' . $id . '" aria-labelledby="r-' . $id . '" data-rubrique>' . $nl
+            . '        <h2 id="r-' . $id . '" class="rubrique__titre">' . asdc_typo(asdc_h($r['titre'])) . '</h2>' . $nl;
+        if ($r['riz'] && isset($prix[$idRiz])) {
+            $html .= '        <p class="rubrique__riz">Servis avec du riz nature. Riz cantonais (porc ou crevettes) en supplément'
+                . ASDC_NBSP . ': + ' . asdc_euros($prix[$idRiz]) . '</p>' . $nl;
+        }
+        $html .= '        <ul class="plats">' . $nl;
+        foreach ($r['plats'] as $p) {
+            $pid = asdc_h($p['id']);
+            $nom = asdc_typo(asdc_h($p['nom']));
+            $html .= '          <li class="plat" data-plat="' . $pid . '" data-nom="' . $nom . '" data-prix="' . $p['prix']
+                . '" data-recherche="' . asdc_h(asdc_recherche_plat($p['id'])) . '"' . ($r['riz'] ? ' data-riz' : '') . '>' . $nl
+                . '            <span class="plat__nom">' . $nom . '</span>' . $nl
+                . ($p['desc'] !== '' ? '            <span class="plat__desc">' . asdc_typo(asdc_h($p['desc'])) . '</span>' . $nl : '')
+                . '            <span class="plat__prix">' . asdc_euros($p['prix']) . '</span>' . $nl
+                . '            <button type="button" class="plat__ajout" data-ajouter="' . $pid . '" hidden aria-label="Ajouter à la commande : '
+                . $nom . '">' . $plus . '</button>' . $nl
+                . '          </li>' . $nl;
+        }
+        $html .= '        </ul>' . $nl . '      </section>' . $nl;
+    }
+    return $html;
+}
+
+// L'index des rubriques (barre collante sur mobile, colonne sur grand écran).
+function asdc_html_index(): string
+{
+    $html = '';
+    foreach (asdc_carte_du_moment() as $r) {
+        if ($r['plats']) {
+            $html .= '        <li><a href="#' . asdc_h($r['id']) . '" data-lien-rubrique="' . asdc_h($r['id']) . '">'
+                . asdc_typo(asdc_h($r['titre'])) . '</a></li>' . chr(10);
+        }
+    }
+    return $html;
+}
+
+// Les données structurées « Menu » pour Google : la base vient du générateur, les rubriques et plats du moment d'ici.
+function asdc_jsonld_menu(): string
+{
+    $base = asdc_carte()['menu'] ?? null;
+    if (!is_array($base)) {
+        return '';
+    }
+    $prix = asdc_prix();
+    $idRiz = asdc_id_riz();
+    $sections = [];
+    foreach (asdc_carte_du_moment() as $r) {
+        if (!$r['plats']) {
+            continue;
+        }
+        $section = ['@type' => 'MenuSection', 'name' => $r['titre']];
+        if ($r['riz'] && isset($prix[$idRiz])) {
+            $section['description'] = 'Servis avec du riz nature. Riz cantonais (porc ou crevettes) : + ' . asdc_euros($prix[$idRiz]) . '.';
+        }
+        $section['hasMenuItem'] = array_map(function (array $p): array {
+            $item = ['@type' => 'MenuItem', 'name' => $p['nom']];
+            if ($p['desc'] !== '') {
+                $item['description'] = $p['desc'];
+            }
+            $item['offers'] = ['@type' => 'Offer', 'price' => number_format($p['prix'] / 100, 2, '.', ''), 'priceCurrency' => 'EUR'];
+            return $item;
+        }, $r['plats']);
+        $sections[] = $section;
+    }
+    $base['hasMenuSection'] = $sections;
+    $json = json_encode($base, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG);
+    return is_string($json) ? '<script type="application/ld+json">' . $json . '</script>' : '';
 }
 
 // Un texte à placer entre les guillemets d'une chaîne JSON (données pour Google), sans « < » brut.
@@ -291,14 +567,28 @@ function asdc_euros_rond(int $centimes): string
     return $centimes % 100 === 0 ? intdiv($centimes, 100) . ASDC_NBSP . '€' : asdc_euros($centimes);
 }
 
-// Les pages portent des jetons {{prix:id}}, {{desc:id}}, {{rubrique:id}}… : on les remplace au dernier instant
-// par le prix, la description ou le nom de rubrique du moment (ceux de la carte, ou ceux changés dans l'espace gestion).
+// Les pages portent des jetons {{prix:id}}, {{nom:id}}, {{carte:rubriques}}… : on les remplace au dernier instant
+// par le prix, le nom, la description, ou la carte entière du moment (celle d'origine, plus l'espace gestion).
 function asdc_remplir(string $html): string
 {
     $prix = asdc_prix();
-    $motif = '/[{][{](prix|cents|json|rond|des|desc|jdesc|rubrique|jrubrique|recherche):([a-z0-9,-]+)[}][}]/';
+    $motif = '/[{][{](prix|cents|json|rond|des|desc|jdesc|rubrique|jrubrique|recherche|carte|nombre|nom|ancre):([a-z0-9,-]+)[}][}]/';
     $rempli = preg_replace_callback($motif, function (array $m) use ($prix): string {
         switch ($m[1]) {
+            case 'carte':
+                if ($m[2] === 'rubriques') {
+                    return asdc_html_carte();
+                }
+                if ($m[2] === 'index') {
+                    return asdc_html_index();
+                }
+                return $m[2] === 'jsonld' ? asdc_jsonld_menu() : '';
+            case 'nombre':
+                return (string) asdc_nombre_plats();
+            case 'nom':
+                return asdc_typo(asdc_h(asdc_nom($m[2])));
+            case 'ancre':
+                return asdc_h(asdc_rubrique_du_plat($m[2]));
             case 'desc':
                 $desc = asdc_desc($m[2]);
                 return $desc === '' ? '' : '<span class="plat__desc">' . asdc_typo(asdc_h($desc)) . '</span>';

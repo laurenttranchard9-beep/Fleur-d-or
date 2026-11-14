@@ -239,6 +239,25 @@
   };
   mesurer({ type: 'vue', p: document.body.dataset.page, l: window.innerWidth, r: document.referrer });
 
+  // Temps passé : les secondes où la page reste affichée, envoyées quand elle se cache (autre onglet, autre page,
+  // fermeture) ; le serveur les additionne pour la visite.
+  let affichee = document.visibilityState === 'visible' ? performance.now() : null;
+  let cumul = 0;
+  const envoyerDuree = () => {
+    if (affichee !== null) {
+      cumul += performance.now() - affichee;
+      affichee = null;
+    }
+    const secondes = Math.round(cumul / 1000);
+    cumul = 0;
+    if (secondes >= 1) mesurer({ type: 'duree', s: Math.min(secondes, 1800) });
+  };
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') envoyerDuree();
+    else if (affichee === null) affichee = performance.now();
+  });
+  window.addEventListener('pagehide', envoyerDuree);
+
   // Un bouton « Appeler » ou un lien d'itinéraire touché ; l'appel depuis « Votre commande » est compté à part.
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href]');

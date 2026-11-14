@@ -55,9 +55,18 @@ if (!preg_match('/^[a-f0-9]{32}$/', $identifiant)) {
 }
 $cle = substr(hash('sha256', $sel . $identifiant), 0, 16);
 
-// Visite : elle dure tant que le visiteur revient dans les 30 minutes.
-$debutVisite = !isset($_COOKIE[ASDC_COOKIE_VISITE]);
-asdc_cookie(ASDC_COOKIE_VISITE, '1', time() + ASDC_DUREE_VISITE);
+// Visite : elle dure tant que le visiteur revient dans les 30 minutes. Son identifiant, tiré au hasard et jamais
+// enregistré tel quel, ne sert qu'à additionner le temps passé pendant une même visite.
+$visite = (string) ($_COOKIE[ASDC_COOKIE_VISITE] ?? '');
+$debutVisite = $visite === '';
+if (!preg_match('/^[a-f0-9]{16}$/', $visite)) {
+    $visite = bin2hex(random_bytes(8));
+}
+$cleVisite = substr(hash('sha256', $sel . 'visite' . $visite), 0, 12);
+// Le temps passé n'ouvre pas de visite : il ne fait que compléter celle en cours.
+if (!($message['type'] === 'duree' && $debutVisite)) {
+    asdc_cookie(ASDC_COOKIE_VISITE, $visite, time() + ASDC_DUREE_VISITE);
+}
 
 function asdc_appareil($largeur): string
 {
@@ -130,7 +139,8 @@ if ($type === 'vue' && in_array($message['p'] ?? '', $pages, true)) {
     $page = $message['p'];
     $appareil = asdc_appareil($message['l'] ?? 0);
     $source = asdc_source($message['r'] ?? '');
-    $modification = function (array $j) use ($page, $cle, $nouveau, $debutVisite, $appareil, $source): array {
+    $heure = (string) (int) date('G');
+    $modification = function (array $j) use ($page, $cle, $nouveau, $debutVisite, $appareil, $source, $heure): array {
         $j['vues'] = $j['vues'] ?? [];
         asdc_ajouter($j['vues'], $page);
         $j['visiteurs'] = $j['visiteurs'] ?? [];
@@ -144,9 +154,25 @@ if ($type === 'vue' && in_array($message['p'] ?? '', $pages, true)) {
             asdc_ajouter($j['appareils'], $appareil);
             $j['sources'] = $j['sources'] ?? [];
             asdc_ajouter($j['sources'], $source, 1, 100);
+            // L'heure d'arrivée (heure de Paris), pour voir quand les clients viennent sur le site.
+            $j['heures'] = $j['heures'] ?? [];
+            asdc_ajouter($j['heures'], $heure, 1, 24);
         }
         return $j;
     };
+} elseif ($type === 'duree' && !$debutVisite) {
+    // Temps passé : les secondes où une page est restée affichée, envoyées quand elle se cache ;
+    // elles s'additionnent pour la visite (30 minutes au plus par envoi, 4 heures au plus par visite).
+    $secondes = (int) ($message['s'] ?? 0);
+    if ($secondes >= 1 && $secondes <= 1800) {
+        $modification = function (array $j) use ($cleVisite, $secondes): array {
+            $j['durees'] = $j['durees'] ?? [];
+            if (isset($j['durees'][$cleVisite]) || count($j['durees']) < 5000) {
+                $j['durees'][$cleVisite] = min(14400, (int) ($j['durees'][$cleVisite] ?? 0) + $secondes);
+            }
+            return $j;
+        };
+    }
 } elseif ($type === 'appel' || $type === 'itineraire') {
     $modification = function (array $j) use ($type): array {
         $j['actions'] = $j['actions'] ?? [];

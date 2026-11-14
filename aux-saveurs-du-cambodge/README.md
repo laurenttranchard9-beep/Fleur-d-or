@@ -50,18 +50,23 @@ Toutes les coquilles corrigées et les points à confirmer sont listés dans [CO
 À l'adresse `/admin/` du site (le lien « Espace gestion », en bas de chaque page, y mène), protégé par le mot de passe choisi à la première visite (enregistré chiffré, jamais en clair ;
 cinq essais ratés bloquent 15 minutes).
 
-- **Carte** : tous les plats, rubrique par rubrique, avec une recherche. Pour chaque plat, son prix et sa description ;
-  pour chaque rubrique, son nom. On tape « 10,50 » ou « 10.5 », on change un texte, on enregistre : l'accueil, la carte,
-  la recherche de la carte, le total de « Votre commande » et les données structurées pour Google suivent aussitôt.
-  Sous ce qui a changé, l'original reste rappelé, avec un bouton « Rétablir ». Une description vidée disparaît de la carte ;
-  un nom de rubrique ne peut pas être vide (descriptions : 300 caractères au plus, noms : 60).
-- **Statistiques** sur 7 jours, 30 jours ou 12 mois : visiteurs, visites et pages vues, visites par jour, appels lancés,
+- **Carte** : tous les plats, rubrique par rubrique, avec une recherche. Pour chaque plat, son nom, son prix, sa description
+  et sa rubrique (pour le ranger ailleurs) ; pour chaque rubrique, son nom. En tête, un bloc **Ajouter** crée une rubrique
+  (à la place choisie, avec ou sans riz nature) ou un plat (nom, prix, description, rubrique — y compris la rubrique qu'on
+  crée en même temps). On enregistre : l'accueil, la carte, sa recherche, « Votre commande » et les données pour Google
+  suivent aussitôt. Sous ce qui a changé, l'original reste rappelé, avec un bouton « Rétablir ». Une rubrique ou un plat
+  ajouté peut être supprimé (une rubrique supprimée emporte ses plats ajoutés ; les plats d'origine retournent dans leur
+  rubrique). Une rubrique vide n'apparaît pas sur le site. Une description vidée disparaît de la carte ; un nom ne peut pas
+  être vide (noms de plats : 80 caractères au plus, de rubriques : 60, descriptions : 300).
+- **Statistiques** sur 7 jours, 30 jours ou 12 mois : visiteurs, visites et pages vues, visites par jour, **heures de visite**
+  (l'heure d'arrivée, de 0 h à 23 h), **temps passé sur le site** (durée habituelle d'une visite, moyenne, répartition de
+  « moins de 10 secondes » à « plus de 10 minutes » ; seuls comptent les moments où une page est affichée), appels lancés,
   commandes préparées et panier moyen, itinéraires demandés, plats ajoutés à la commande, recherches sur la carte,
   provenance (Google, Facebook, accès direct…) et appareils. Les visites de la personne connectée ne sont pas comptées.
 - **Réglages** : couper ou rétablir la mesure d'audience, effacer toutes les statistiques, changer le mot de passe.
 
 **Mot de passe oublié** : supprimer le fichier `donnees/config.php` sur le serveur (par SFTP, comme pour l'envoi du site),
-puis rouvrir aussitôt `/admin/` pour en choisir un nouveau. Les prix, les textes changés et les statistiques restent ; la mesure d'audience
+puis rouvrir aussitôt `/admin/` pour en choisir un nouveau. Les prix, les textes changés, les rubriques et plats ajoutés et les statistiques restent ; la mesure d'audience
 redevient active si elle avait été coupée.
 
 ### La mesure d'audience et les cookies
@@ -173,7 +178,7 @@ aux-saveurs-du-cambodge/
 │   ├── admin/             espace gestion : prix, statistiques, réglages
 │   ├── stats/             réception des visites (collecte.php)
 │   ├── inc/               code commun et carte pour le serveur, jamais servis
-│   ├── donnees/           prix saisis, statistiques, mot de passe chiffré : créés sur le serveur, jamais servis
+│   ├── donnees/           prix, textes, rubriques et plats ajoutés, statistiques, mot de passe chiffré : créés sur le serveur, jamais servis
 │   └── assets/            css, js, police Inter (OFL), plats dessinés, plan du quartier
 ├── livraison/             public/ en une archive ZIP, à déposer chez IONOS ou un autre hébergeur ;
 │                          carte-des-prix.xlsx, tous les prix de la carte pour Excel

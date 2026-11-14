@@ -1,10 +1,19 @@
 <?php http_response_code(404); exit; ?>
 {
  "maj": "2026-11-12",
+ "menu": {
+  "@context": "https://schema.org",
+  "@type": "Menu",
+  "@id": "https://www.auxsaveursducambodge-saintalban.com/carte/#menu",
+  "name": "La carte — Aux Saveurs du Cambodge",
+  "inLanguage": "fr",
+  "url": "https://www.auxsaveursducambodge-saintalban.com/carte/"
+ },
  "rubriques": [
   {
    "id": "box-anti-crise",
    "titre": "Box anti-crise",
+   "riz": false,
    "plats": [
     {
      "id": "box-anti-crise--box-anti-crise",
@@ -35,6 +44,7 @@
   {
    "id": "entrees",
    "titre": "Entrées",
+   "riz": false,
    "plats": [
     {
      "id": "entrees--nems-au-porc",
@@ -145,6 +155,7 @@
   {
    "id": "salades",
    "titre": "Salades",
+   "riz": false,
    "plats": [
     {
      "id": "salades--salade-de-nems",
@@ -215,6 +226,7 @@
   {
    "id": "vapeurs",
    "titre": "Vapeurs",
+   "riz": false,
    "plats": [
     {
      "id": "vapeurs--bouchees-au-porc",
@@ -261,6 +273,7 @@
   {
    "id": "soupes",
    "titre": "Soupes",
+   "riz": false,
    "plats": [
     {
      "id": "soupes--soupe-pho",
@@ -291,6 +304,7 @@
   {
    "id": "porc",
    "titre": "Porc",
+   "riz": true,
    "plats": [
     {
      "id": "porc--porc-au-caramel",
@@ -321,6 +335,7 @@
   {
    "id": "poulet",
    "titre": "Poulet",
+   "riz": true,
    "plats": [
     {
      "id": "poulet--poulet-frit-sauce-citron",
@@ -383,6 +398,7 @@
   {
    "id": "boeuf",
    "titre": "Bœuf",
+   "riz": true,
    "plats": [
     {
      "id": "boeuf--lok-lac",
@@ -429,6 +445,7 @@
   {
    "id": "canard",
    "titre": "Canard",
+   "riz": true,
    "plats": [
     {
      "id": "canard--canard-sauce-curry",
@@ -459,6 +476,7 @@
   {
    "id": "crevettes",
    "titre": "Crevettes",
+   "riz": true,
    "plats": [
     {
      "id": "crevettes--crevettes-sauce-curry",
@@ -505,6 +523,7 @@
   {
    "id": "seiches",
    "titre": "Seiches",
+   "riz": true,
    "plats": [
     {
      "id": "seiches--seiche-sauce-curry",
@@ -543,6 +562,7 @@
   {
    "id": "specialites-du-chef",
    "titre": "Spécialités du chef",
+   "riz": true,
    "plats": [
     {
      "id": "specialites-du-chef--boeuf-du-chef",
@@ -589,6 +609,7 @@
   {
    "id": "brochettes",
    "titre": "Brochettes",
+   "riz": true,
    "plats": [
     {
      "id": "brochettes--brochettes-de-boeuf",
@@ -619,6 +640,7 @@
   {
    "id": "nouilles",
    "titre": "Nouilles et pâtes",
+   "riz": false,
    "plats": [
     {
      "id": "nouilles--pad-thai",
@@ -673,6 +695,7 @@
   {
    "id": "accompagnements",
    "titre": "Accompagnements",
+   "riz": false,
    "plats": [
     {
      "id": "accompagnements--riz-blanc",
@@ -719,6 +742,7 @@
   {
    "id": "desserts",
    "titre": "Desserts",
+   "riz": false,
    "plats": [
     {
      "id": "desserts--beignets-de-pomme-sauce-caramel",
